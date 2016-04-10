@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:with="lang=${#locale.language}" th:lang="${lang}">
+
+<head>
+<title>Spring Boot and Thymeleaf example</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h3>Spring Boot and Thymeleaf</h3>
+	<p>Hello World!</p>
+	<p th:text="${nombre}"></p>
+	<h1 th:text="#{hello.world}">FooBar</h1>
+	<h3>El lore de riven es:</h3>
+	<p th:utext="${lore}"></p>
+	
+	
+</body>
+</html>
