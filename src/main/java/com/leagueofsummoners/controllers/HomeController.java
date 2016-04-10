@@ -23,8 +23,12 @@ public class HomeController {
 	public String index(ModelMap valores, HttpSession session) {
 		valores.put("nombre", "Juanjo");
 		ChampionDTO champ = this.servicioChampions.findByChampionName("Riven");
-		Object obj = DetermineLanguageExport.getProperLanguage(champ,LocaleContextHolder.getLocale().getLanguage(), "getChampionLore");
-		valores.put("lore", obj);
+		Object lore = DetermineLanguageExport.getProperLanguage(champ,LocaleContextHolder.getLocale().getLanguage(), "getChampionLore");
+		Object title = DetermineLanguageExport.getProperLanguage(champ,LocaleContextHolder.getLocale().getLanguage(), "getChampionTitle");
+		valores.put("lore", lore);
+		valores.put("title", title);
+		valores.put("championName", champ.getChampionName());
+		
 		return "index";
 	}
 }

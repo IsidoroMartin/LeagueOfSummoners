@@ -7,13 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h3>Spring Boot and Thymeleaf</h3>
-	<p>Hello World!</p>
-	<p th:text="${nombre}"></p>
-	<h1 th:text="#{hello.world}">FooBar</h1>
-	<h3>El lore de riven es:</h3>
+	<h1 th:utext="#{champion.lore(${championName})}"></h1>
+	<h3 th:utext="${title}"></h3>
 	<p th:utext="${lore}"></p>
-	
-	
+	<div style="background-color:gray;width:1023px;height:120px;" th:include="footer :: copy"></div>
 </body>
 </html>
