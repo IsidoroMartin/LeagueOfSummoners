@@ -1,0 +1,18 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="menu">
+	<div class="container">
+		<form role="form" method="POST" action="/login">
+			<div class="form-group">
+				<label for="username">username</label> <input type="text"
+					class="form-control" name="username" id="username"></input>
+			</div>
+			<div class="form-group">
+				<label for="pwd">Password:</label> <input type="password"
+					class="form-control" name="password" id="pwd"></input>
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form>
+	</div>
+</body>
+</html>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.leagueofsummoners.interceptors.LoginRequired;
 import com.leagueofsummoners.model.dto.ChampionDTO;
 import com.leagueofsummoners.model.dto.UserDTO;
 import com.leagueofsummoners.services.interfaces.IServicesChampions;
@@ -42,6 +43,7 @@ public class UserRestService {
 		return this.servicioUsers.checkIfUsernameAvailable(username);
 	}
 	
+	@LoginRequired
 	@RequestMapping(value = "/userlist", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
 	public List<UserDTO> getListOfUsers(){
 		return this.servicioUsers.getUserList();

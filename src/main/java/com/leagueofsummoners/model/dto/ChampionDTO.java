@@ -9,49 +9,51 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import static com.leagueofsummoners.persistence.tables.TableNames.*;
+
 /**
  * Este bean representa el objeto Champion de la base de datos
  * 
  * @author Juanjors
  */
 @Entity(name = "champion")
-@Table(name = "CHAMPIONS")
+@Table(name = TABLE_CHAMPIONS)
 public class ChampionDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "ID_CHAMPION")
+	@Column(name = COLUMN_CHAMPIONS_ID_CHAMPION)
 	private Long idChampion;
 
-	@Column(nullable = false, name = "CHAMPION_NAME")
+	@Column(nullable = false, name = COLUMN_CHAMPIONS_CHAMPION_NAME)
 	private String championName;
 
-	@Column(nullable = false, name = "CHAMPION_TITLE_ES")
+	@Column(nullable = false, name = COLUMN_CHAMPIONS_CHAMPION_TITLE_ES)
 	private String championTitleES;
 
-	@Column(nullable = false, name = "CHAMPION_TITLE_EN")
+	@Column(nullable = false, name = COLUMN_CHAMPIONS_CHAMPION_TITLE_EN)
 	private String championTitleEN;
 
-	@Column(name = "CHAMPION_ICON_NAME")
+	@Column(name = COLUMN_CHAMPIONS_CHAMPION_ICON_NAME)
 	private String championIconName;
 
-	@Column(nullable = false, name = "ID_PASSIVE")
+	@Column(nullable = false, name = COLUMN_CHAMPIONS_ID_PASSIVE)
 	private Long idPassive;
 
-	@Column(nullable = false, name = "CHAMPION_LORE_ES")
+	@Column(nullable = false, name = COLUMN_CHAMPIONS_CHAMPION_LORE_ES)
 	private String championLoreES;
 
-	@Column(nullable = false, name = "CHAMPION_LORE_EN")
+	@Column(nullable = false, name = COLUMN_CHAMPIONS_CHAMPION_LORE_EN)
 	private String championLoreEN;
 
-	@Column(nullable = false, name = "CHAMPION_INFO")
+	@Column(nullable = false, name = COLUMN_CHAMPIONS_CHAMPION_INFO)
 	private String championInfo;
 
-	@Transient 
+	@Transient
 	private List<ChampionsSpellsDTO> spellsList;
 
-	@Transient 
+	@Transient
 	private ChampionsPassivesDTO passive;
 
 	public ChampionDTO() {

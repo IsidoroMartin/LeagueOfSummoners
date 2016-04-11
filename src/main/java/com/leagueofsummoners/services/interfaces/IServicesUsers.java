@@ -2,6 +2,8 @@ package com.leagueofsummoners.services.interfaces;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.leagueofsummoners.model.dto.GuideDTO;
 import com.leagueofsummoners.model.dto.UserDTO;
 
@@ -63,5 +65,7 @@ public interface IServicesUsers {
 	List<GuideDTO> listGuidesFromUser(int userId);
 
 	List<UserDTO> getUserList();
+
+	boolean checkValidLogin(String username, String password, HttpSession session);
 
 }

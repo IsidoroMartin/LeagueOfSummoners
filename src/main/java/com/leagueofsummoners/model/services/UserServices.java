@@ -3,6 +3,8 @@ package com.leagueofsummoners.model.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -19,10 +21,9 @@ public class UserServices implements IServicesUsers {
 	@Autowired
 	private UserDAO userdao;
 
-	
 	public UserServices() {
 	}
-	
+
 	@Override
 	public boolean checkIfUsernameAvailable(String username) {
 		return this.userdao.findByUsernameIgnoringCase(username).getUsername().equals(username);
@@ -67,6 +68,14 @@ public class UserServices implements IServicesUsers {
 	@Override
 	public List<UserDTO> getUserList() {
 		return this.userdao.getUserList();
+	}
+
+	@Override
+	public boolean checkValidLogin(String username, String password, HttpSession session) {
+		UserDTO user = this.userdao.checkValidLogin(username, password);
+		boolean userNull = user != null;
+		if (userNull) session.setAttribute("userlogged", user);
+		return user != null;
 	}
 
 }

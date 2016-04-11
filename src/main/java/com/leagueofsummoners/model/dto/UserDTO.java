@@ -22,13 +22,14 @@ public class UserDTO implements Serializable {
 	@Column(name = "id_user")
 	private Long idUser;
 
-	@Column(nullable = false, name = "summoner_name")
+	@Column(nullable = false, name = "summoner_name", unique = true)
 	private String summonerName;
-	@Column(nullable = false)
+	
+	@Column(nullable = false, unique = true)
 	private String username;
 	@Column(nullable = false)
 	private String password;
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String email;
 	@Column(nullable = false)
 	private String avatar;
@@ -38,6 +39,17 @@ public class UserDTO implements Serializable {
 	private String permissionLevel;
 
 	public UserDTO() {
+	}
+	
+	public UserDTO(UserDTO user) {
+		this.idUser = user.idUser;
+		this.summonerName = user.summonerName;
+		this.username = user.username;
+		this.password = user.password;
+		this.email = user.email;
+		this.avatar = user.avatar;
+		this.firma = user.firma;
+		this.permissionLevel = user.permissionLevel;
 	}
 	
 	public boolean isAdmin(){

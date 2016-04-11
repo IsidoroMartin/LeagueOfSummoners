@@ -19,6 +19,7 @@ public interface UserRepository extends Repository<UserDTO, Long> {
 
 	UserDTO findByUsernameIgnoringCase(String username);
 	
+	
 	UserDTO findByIdUser(Long idUser);
 
 }

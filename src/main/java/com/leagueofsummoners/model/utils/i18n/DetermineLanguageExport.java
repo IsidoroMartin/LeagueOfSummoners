@@ -2,6 +2,7 @@ package com.leagueofsummoners.model.utils.i18n;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Locale;
 
 public class DetermineLanguageExport {
 
@@ -9,14 +10,15 @@ public class DetermineLanguageExport {
 	 * Recibe el objeto del que se quiere invocar el método, el locale (el idioma en el que se quiere obtener), 
 	 * y el nombre del método (Si en el idioma de las dos últimas letras)
 	 * @param obj
-	 * @param locale
+	 * @param lang
 	 * @param nombreMetodoMultiLang
 	 * @return La ejecución del método
 	 */
-	public static Object getProperLanguage(Object obj, String locale, String nombreMetodoMultiLang) {
-		locale = (locale == null) ? "ES" : locale.toUpperCase();
-		locale = (isValidLocale(locale)) ? locale : "ES";
-		return executeMethod(obj, nombreMetodoMultiLang + locale);
+	public static Object getProperLanguage(Object obj, Locale locale, String nombreMetodoMultiLang) {
+		String lang = locale.getLanguage();
+		lang = (lang == null) ? "ES" : lang.toUpperCase();
+		lang = (isValidLocale(lang)) ? lang : "ES";
+		return executeMethod(obj, nombreMetodoMultiLang + lang);
 	}
 
 	/**
