@@ -4,7 +4,10 @@
 
 <head th:replace="fragments/header :: header"></head>
 <body>
-	<div style="margin-top:70px;" th:include="fragments/menu :: menu"></div>
+	<a style="float:right;" href="./?champName=Leblanc&amp;locale=en">English</a><br></br>
+	<a style="float:right;" href="./?champName=Leblanc&amp;locale=es">Spanish</a>
+
+	<div style="clear:left;margin-top:70px;" th:include="fragments/menu :: menu"></div>
 	
 	<div class="container col-md-offset-3 col-md-6 centred">
 		<h1 th:utext="#{champion.lore(${championName})}"></h1>
