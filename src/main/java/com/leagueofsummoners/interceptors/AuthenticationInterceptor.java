@@ -7,6 +7,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.leagueofsummoners.model.dto.UserDTO;
+import com.leagueofsummoners.security.annotations.LoginRequired;
 
 @Component
 public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
@@ -22,7 +23,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 		}
 		
 		if(null == user){
-			httpServletResponse.sendRedirect("/notlogged");
+			httpServletResponse.sendRedirect("/?champName=Amumu&locale=en&error=notlogged");
 			return false;
 		}
 		

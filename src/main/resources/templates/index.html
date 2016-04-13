@@ -1,21 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	th:with="lang=${#locale.language}" th:lang="${lang}">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
 
 <head th:replace="fragments/header :: header"></head>
 <body>
-	<a style="float:right;" href="./?champName=Leblanc&amp;locale=en">English</a><br></br>
-	<a style="float:right;" href="./?champName=Leblanc&amp;locale=es">Spanish</a>
+	<a style="float: right;" href="./?champName=Leblanc&amp;locale=en">English</a>
+	<br></br>
+	<a style="float: right;" href="./?champName=Leblanc&amp;locale=es">Spanish</a>
 
-	<div style="clear:left;margin-top:70px;" th:include="fragments/menu :: menu"></div>
-	
+	<div style="clear: left; margin-top: 70px;"
+		th:include="fragments/menu :: menu"></div>
+
 	<div class="container col-md-offset-3 col-md-6 centred">
 		<h1 th:utext="#{champion.lore(${championName})}"></h1>
 		<h3 th:utext="${title}"></h3>
-		<p th:utext="${lore}"></p>
+		<p id="lore" th:utext="${lore}"></p>
+
+		<div th:if="${session.logged}"
+			th:switch="${session.userlogged.permissionLevel}">
+			<button style="float: left;" th:case="'Admin'"
+				th:utext="#{message.delete.lore}"
+				onclick="document.getElementById('lore').innerHTML = ''"></button>
+		</div>
+		<div th:if="${session.admin == false}">
+			<h5>Esto solo sale si el usuario esta loggeado y no es admin . óóó</h5> <!--  No tiene mucho sentido pero como ejemplo... -->
+		</div>óóó
 	</div>
-
-
-	<div style="clear:both;float:right;" th:include="fragments/footer :: footer"></div>
+	<div style="clear: both; float: right;"
+		th:include="fragments/footer :: footer"></div>
 </body>
 </html>

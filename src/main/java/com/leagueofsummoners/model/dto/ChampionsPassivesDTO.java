@@ -10,8 +10,10 @@ import com.mysema.query.sql.Column;
 
 @Entity(name = "championPassives")
 @Table(name = "CHAMPION_PASSIVES")
-public class ChampionsPassivesDTO implements Serializable{
+public class ChampionsPassivesDTO implements Serializable {
 
+	private static final long serialVersionUID = -8937457657957212292L;
+	
 	@Id
 	@Column("ID_PASSIVE")
 	private Long idPassive;
@@ -25,8 +27,9 @@ public class ChampionsPassivesDTO implements Serializable{
 	private String passiveDescriptionEs;
 	@Column("PASSIVE_ICON")
 	private String passiveIcon;
-	
-	public ChampionsPassivesDTO(){}
+
+	public ChampionsPassivesDTO() {
+	}
 
 	public Long getIdPassive() {
 		return idPassive;

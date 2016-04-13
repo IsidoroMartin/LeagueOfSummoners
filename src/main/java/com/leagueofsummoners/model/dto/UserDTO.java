@@ -24,7 +24,7 @@ public class UserDTO implements Serializable {
 
 	@Column(nullable = false, name = "summoner_name", unique = true)
 	private String summonerName;
-	
+
 	@Column(nullable = false, unique = true)
 	private String username;
 	@Column(nullable = false)
@@ -33,14 +33,14 @@ public class UserDTO implements Serializable {
 	private String email;
 	@Column(nullable = false)
 	private String avatar;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String firma;
-	@Column(nullable = false, name = "permission_level")
+	@Column(nullable = true, name = "permission_level")
 	private String permissionLevel;
 
 	public UserDTO() {
 	}
-	
+
 	public UserDTO(UserDTO user) {
 		this.idUser = user.idUser;
 		this.summonerName = user.summonerName;
@@ -51,14 +51,16 @@ public class UserDTO implements Serializable {
 		this.firma = user.firma;
 		this.permissionLevel = user.permissionLevel;
 	}
-	
-	public boolean isAdmin(){
-		return (this.permissionLevel == "Admin");
+
+	public boolean isAdmin() {
+		return (this.permissionLevel.equals("Admin"));
 	}
 
 	@Override
 	public String toString() {
-		return this.username;
+		return "UserDTO [idUser=" + idUser + ", summonerName=" + summonerName + ", username=" + username + ", password="
+				+ password + ", email=" + email + ", avatar=" + avatar + ", firma=" + firma + ", permissionLevel="
+				+ permissionLevel + "]";
 	}
 
 	public Long getIdUser() {

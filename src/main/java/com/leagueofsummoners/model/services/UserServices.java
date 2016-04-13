@@ -1,19 +1,16 @@
 package com.leagueofsummoners.model.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import com.leagueofsummoners.interfaces.services.IServicesUsers;
 import com.leagueofsummoners.model.dto.GuideDTO;
 import com.leagueofsummoners.model.dto.UserDTO;
 import com.leagueofsummoners.persistence.dao.UserDAO;
-import com.leagueofsummoners.persistence.interfaces.UserRepository;
-import com.leagueofsummoners.services.interfaces.IServicesUsers;
 
 @Service
 public class UserServices implements IServicesUsers {
@@ -31,8 +28,7 @@ public class UserServices implements IServicesUsers {
 
 	@Override
 	public boolean checkIfEmailAvailable(String email) {
-		// TODO Auto-generated method stub
-		return false;
+		return this.userdao.checkIfEmailAvailable(email);
 	}
 
 	@Override
@@ -71,10 +67,15 @@ public class UserServices implements IServicesUsers {
 	}
 
 	@Override
-	public boolean checkValidLogin(String username, String password, HttpSession session) {
+	public boolean checkValidLoginSetSessionStatus(String username, String password, HttpSession session) {
 		UserDTO user = this.userdao.checkValidLogin(username, password);
 		boolean userNull = user != null;
-		if (userNull) session.setAttribute("userlogged", user);
+		if (userNull){
+			session.setMaxInactiveInterval(60*60); //La session expirará en 1h
+			session.setAttribute("userlogged", user); //El atributo userlogged contiene el usuario con todos sus atributos
+			session.setAttribute("logged", true); //Un atributo logged para saber si esta logged o no
+			session.setAttribute("admin", user.isAdmin()); //Un atributo admin para saber si el usuario es admin
+		}
 		return user != null;
 	}
 

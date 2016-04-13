@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.leagueofsummoners.interceptors.LoginRequired;
+import com.leagueofsummoners.interfaces.services.IServicesChampions;
+import com.leagueofsummoners.interfaces.services.IServicesUsers;
 import com.leagueofsummoners.model.dto.ChampionDTO;
 import com.leagueofsummoners.model.dto.UserDTO;
-import com.leagueofsummoners.services.interfaces.IServicesChampions;
-import com.leagueofsummoners.services.interfaces.IServicesUsers;
+import com.leagueofsummoners.security.annotations.LoginAdminRequired;
+import com.leagueofsummoners.security.annotations.LoginRequired;
 
 /**
  * En esta clase están todos los servicios REST relaccionadas con los usuarios
@@ -56,10 +57,10 @@ public class UserRestService {
 	 * @param email
 	 * @return si esta disponible devuelve true, si no false.
 	 */
-	@RequestMapping(value = "/email/{email}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
-	public ResponseEntity<UserDTO> checkIfEmailExists(@PathVariable String email) {
-
-		return new ResponseEntity<UserDTO>(new UserDTO(), HttpStatus.OK);
+	@LoginAdminRequired
+	@RequestMapping(value = "/email/{email:.+}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
+	public ResponseEntity<Boolean> checkIfEmailExists(@PathVariable String email) {
+		return new ResponseEntity<Boolean>(this.servicioUsers.checkIfEmailAvailable(email),HttpStatus.OK);
 	}
 
 	/**
@@ -69,8 +70,9 @@ public class UserRestService {
 	 * @param summonerName
 	 * @return si está disponible devuelve true, si no false.
 	 */
-	@RequestMapping(value = "/summonername/{summonerName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
-	public ResponseEntity<UserDTO> checkIfSummonerNameExists(@PathVariable String summonerName) {
-		return new ResponseEntity<UserDTO>(new UserDTO(), HttpStatus.OK);
+	@LoginRequired
+	@RequestMapping(value = "/summonername/{summonerName}", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN)
+	public String checkIfSummonerNameExists(@PathVariable String summonerName) {
+		return "hola";
 	}
 }

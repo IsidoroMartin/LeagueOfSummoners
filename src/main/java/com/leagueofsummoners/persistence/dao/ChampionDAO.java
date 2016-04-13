@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.leagueofsummoners.interfaces.persistence.ChampionRepository;
 import com.leagueofsummoners.model.dto.ChampionDTO;
-import com.leagueofsummoners.persistence.interfaces.ChampionRepository;
 
 @Component
 public class ChampionDAO {
@@ -26,4 +26,5 @@ public class ChampionDAO {
 	public ChampionDTO getChampionByName(String championName) {
 		return this.championRepository.findBychampionNameIgnoringCase(championName);
 	}
+
 }

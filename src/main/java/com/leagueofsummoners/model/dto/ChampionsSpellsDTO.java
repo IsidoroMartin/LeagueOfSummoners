@@ -12,6 +12,10 @@ import com.mysema.query.sql.Column;
 @Table(name = "CHAMPION_SPELLS")
 public class ChampionsSpellsDTO implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column("ID_SPELL")
 	private Long idSpell;

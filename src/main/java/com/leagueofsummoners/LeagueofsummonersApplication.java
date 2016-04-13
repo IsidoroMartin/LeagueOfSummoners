@@ -1,5 +1,7 @@
 package com.leagueofsummoners;
 
+import javax.servlet.http.HttpSessionListener;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
@@ -7,6 +9,8 @@ import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomi
 import org.springframework.boot.context.embedded.ErrorPage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
+
+import com.leagueofsummoners.interceptors.InterceptorSession;
 
 @SpringBootApplication
 public class LeagueofsummonersApplication {
@@ -23,6 +27,11 @@ public class LeagueofsummonersApplication {
 				container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404.html"));
 			}
 		};
+	}
+	
+	@Bean
+	public HttpSessionListener httpSessionListener(){
+	    return new InterceptorSession();
 	}
 
 }

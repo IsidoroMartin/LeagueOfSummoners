@@ -11,8 +11,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import com.google.common.collect.Lists;
+import com.leagueofsummoners.interfaces.persistence.UserRepository;
 import com.leagueofsummoners.model.dto.UserDTO;
-import com.leagueofsummoners.persistence.interfaces.UserRepository;
 
 @Component
 public class UserDAO {
@@ -34,5 +34,11 @@ public class UserDAO {
 			return user;
 		}
 		return null;
+	}
+
+	public boolean checkIfEmailAvailable(String email) {
+		UserDTO user = this.userRepository.findByEmailIgnoringCase(email);
+		System.out.println(email);
+		return user == null;
 	}
 }

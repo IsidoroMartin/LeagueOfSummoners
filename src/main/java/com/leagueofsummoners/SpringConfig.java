@@ -5,19 +5,13 @@ import java.util.Locale;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.i18n.CookieLocaleResolver;
-import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.leagueofsummoners.interceptors.AuthenticationAdminInterceptor;
 import com.leagueofsummoners.interceptors.AuthenticationInterceptor;
 import com.leagueofsummoners.model.services.LocaleChangeInterceptorAddSession;
 
@@ -45,8 +39,6 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
 		interceptor.setParamName("locale");
 		registry.addInterceptor(interceptor);
 		registry.addInterceptor(new AuthenticationInterceptor());
+		registry.addInterceptor(new AuthenticationAdminInterceptor());
 	}
-	
-	
-
 }
