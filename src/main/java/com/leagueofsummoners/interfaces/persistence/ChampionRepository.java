@@ -10,12 +10,11 @@ import org.springframework.data.repository.Repository;
 
 import com.leagueofsummoners.model.dto.ChampionDTO;
 import com.leagueofsummoners.model.dto.UserDTO;
-import com.robrua.orianna.type.core.staticdata.Champion;
 
 @org.springframework.stereotype.Repository
 public interface ChampionRepository extends Repository<ChampionDTO, Long> {
 
-	Page<Champion> findAll(Pageable pageable);
+	Page<ChampionDTO> findAll(Pageable pageable);
 	
 	List<ChampionDTO> findAll();
 

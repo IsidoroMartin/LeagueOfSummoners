@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.leagueofsummoners.interceptors.InterceptorSession;
-import com.robrua.orianna.type.dto.staticdata.MasteryTree;
 
 @SpringBootApplication
 public class LeagueofsummonersApplication {
