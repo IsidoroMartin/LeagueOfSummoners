@@ -22,7 +22,6 @@ public class LeagueofsummonersApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LeagueofsummonersApplication.class, args);
 		LOGGER.info("League Of Summoners app started...");
-		
 	}
 
 	@Bean
