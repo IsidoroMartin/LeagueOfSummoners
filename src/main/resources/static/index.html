@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>League Of Summoners</title>
+    <link rel="icon"
+          type="image/png"
+          href="img/logo.png">
+    <link rel="stylesheet" href="libraries/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="libraries/bootstrap/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="libraries/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="libraries/font-awesome-4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body id="bootstrap-overrides">
+<header class="container">
+    <div class="row ">
+        <div class="col-xs-6 col-xs-offset-3  col-sm-3 col-sm-offset-0 col-lg-2 ">
+            <a href="index.html"><img src="img/logo.png" class="img-responsive" alt="Logo league of summoners"></a>
+        </div>
+        <div class="col-xs-6 col-xs-offset-3 col-sm-4  col-sm-offset-5 col-md-3 col-md-offset-7 ">
+            <select id="language" class="selectpicker pull-right" data-show-icon="true">
+                <option data-content="<i class='flag-icon flag-icon-es'></i> ES" value="es_ES"></option>
+                <option data-content="<i class='flag-icon flag-icon-gb'></i> EN" value="en_US"></option>
+            </select><br>
+            <input type="button" class="btn btn-default pull-right" value="Iniciar sesión/Registrarse">
+        </div>
+    </div>
+</header>
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="row">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="index.html">Home</a>
+                    </li>
+                    <li><a href="#">Guías</a></li>
+                    <li><a href="#">Campeones</a></li>
+                    <li><a href="#">Pro Players</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<main class="container">
+    <article id="buscador-home">
+        <header class="row">
+            <img src="img/logo.png" class="col-xs-4 col-xs-offset-4 img-responsive" alt="Logo league of summoners">
+        </header>
+        <main class="row col-xs-6 col-xs-offset-3">
+            <form action="#" method="get" class="form-inline" role="form">
+                <div class="form-group">
+                    <label for="summoner-name">Buscar por nombre de invocador o campeón</label>
+                    <input class="form-control" type="text" name="summoner-name" id="summoner-name"
+                           placeholder="Introduzca nombre de invocador o campeon">
+                    <button type="submit" class="form-control">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </div>
+            </form>
+        </main>
+    </article>
+</main>
+<div class="container">
+    <footer>
+        <div class="row">
+            <div class="col-xs-12 col-md-3" id="redes-sociales-footer">
+                ¡Síguenos en las redes sociales!<br>
+                <a href="#"><span class="fa fa-facebook-square"></span></a>
+                <a href="#"><span class="fa fa-twitter"></span></a>
+                <a href="#"><span class="fa fa-google-plus"></span></a>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <a href="#">Mapa del sitio</a><br>
+                <a href="#">Contacta con nosotros</a>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <a href="#">Política de cookies</a><br>
+                <a href="#">Política de privacidad</a>
+            </div>
+            <div class="col-xs-12 col-md-2">
+                <a href="#">Ayuda</a><br>
+                <a href="#">Licencia</a>
+            </div>
+        </div>
+    </footer>
+</div>
+<script type="text/javascript" src="libraries/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="libraries/bootstrap/js/bootstrap-select.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+
+</body>
+</html>
