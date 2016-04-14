@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.leagueofsummoners.LeagueofsummonersApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.628 sec - in com.leagueofsummoners.LeagueofsummonersApplicationTests
