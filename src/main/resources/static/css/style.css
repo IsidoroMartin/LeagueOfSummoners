@@ -1,3 +1,167 @@
-body{
-	background-color:red;
+#bootstrap-overrides * {
+    border-radius: 0px;
 }
+
+html, body {
+    font-size: 16px;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+body > header {
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+body > header .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    width: 50%;
+}
+
+header input[type=button] {
+    margin-top: 3.5%;
+    width: 100%;
+}
+
+@media only screen and (min-width: 1025px) {
+    header .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+        width: 55%;
+    }
+}
+
+@media only screen and (max-width: 1025px) {
+    header .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+        width: 100%;
+        padding-top: 5%;
+    }
+
+    header input[type=button] {
+        margin-bottom: 5%;
+    }
+}
+
+#bootstrap-overrides nav {
+    background: rgba(28, 26, 52, 1);
+    background: linear-gradient(top bottom, rgba(28, 26, 52, 1) 0%, rgba(48, 43, 89, 1) 50%, rgba(28, 26, 52, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1c1a34', endColorstr='#1c1a34', GradientType=0);
+    border-bottom: 3px solid #c2914f;
+    border-top: 3px solid #c2914f;
+    color: white;
+}
+
+#bootstrap-overrides nav a, #bootstrap-overrides nav {
+    color: white;
+}
+
+#bootstrap-overrides nav a:hover, #bootstrap-overrides nav a:focus, #bootstrap-overrides nav li.active a {
+    color: white;
+    background-color: #29244C;
+    background: rgba(35, 32, 64, 1);
+    background: linear-gradient(top right, rgba(35, 32, 64, 1) 0%, rgba(60, 53, 110, 1) 25%, rgba(60, 53, 110, 1) 75%, rgba(35, 32, 64, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#232040', endColorstr='#232040', GradientType=1);
+    /*border-bottom: 2px solid #c2914f;*/
+}
+
+#bootstrap-overrides .collapse .navbar-collapse {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.navbar-nav li a {
+    text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+    #bootstrap-overrides .navbar .navbar-nav {
+        display: inline-block;
+        height: 44px;
+        float: none;
+    }
+
+    .navbar .navbar-collapse {
+        text-align: center;
+    }
+
+    .navbar-nav li a {
+        width: 143px;
+    }
+
+    #bootstrap-overrides nav a:hover, #bootstrap-overrides nav a:focus, #bootstrap-overrides nav li.active a {
+        background-image: url("../img/selected.png");
+        background-size: 100% 100%;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .navbar-nav li a {
+        width: 160px;
+    }
+}
+
+nav.navbar {
+    margin-bottom: 0px;
+}
+
+#buscador-home {
+    background-image: url("../img/fondo-buscador-home.png");
+    background-size: 100% auto;
+    padding-bottom: 37%;
+    width: 100%;
+}
+
+#buscador-home header img {
+    margin-top: 2%;
+}
+
+#buscador-home main {
+    background-color: white;
+    padding: 2% 3%;
+    border: rgba(28, 26, 52, 1) solid 2px;
+}
+
+#buscador-home main label {
+    font-size: 1.5rem;
+}
+
+#bootstrap-overrides form button {
+    background: rgba(28, 26, 52, 1);
+    background: linear-gradient(top bottom, rgba(28, 26, 52, 1) 0%, rgba(48, 43, 89, 1) 50%, rgba(28, 26, 52, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1c1a34', endColorstr='#1c1a34', GradientType=0);
+    color: white;
+}
+
+input[type=button], #bootstrap-overrides button, #bootstrap-overrides form button:hover, input[type=button]:hover {
+    background: white;
+    border: rgba(28, 26, 52, 1) inset 2px;
+    color: rgba(28, 26, 52, 1);
+}
+
+footer {
+    color: white;
+    border-top: 3px solid #c2914f;
+    background: rgba(28, 26, 52, 1);
+    padding-bottom: 2%;
+}
+
+footer .row {
+    margin-top: 2.5%;
+}
+
+footer #redes-sociales-footer {
+    margin-left: 5%;
+}
+footer div[class*=col]:not(#redes-sociales-footer){
+   text-align: center;
+}
+footer span[class*="fa"] {
+    margin-top: 1%;
+    margin-left: 3%;
+    font-size: 40px;
+}
+
+footer a, footer a:hover, footer a:focus, footer a:active, footer a:visited {
+    text-decoration: none;
+    color: white;
+}
+
