@@ -1,9 +1,9 @@
 package com.leagueofsummoners.ws.service;
 
-import java.util.List;
-
-import javax.ws.rs.core.MediaType;
-
+import com.leagueofsummoners.interfaces.services.IServicesUsers;
+import com.leagueofsummoners.model.dto.UserDTO;
+import com.leagueofsummoners.security.annotations.LoginAdminRequired;
+import com.leagueofsummoners.security.annotations.LoginRequired;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.leagueofsummoners.interfaces.services.IServicesChampions;
-import com.leagueofsummoners.interfaces.services.IServicesUsers;
-import com.leagueofsummoners.model.dto.ChampionDTO;
-import com.leagueofsummoners.model.dto.UserDTO;
-import com.leagueofsummoners.security.annotations.LoginAdminRequired;
-import com.leagueofsummoners.security.annotations.LoginRequired;
+import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 /**
  * En esta clase están todos los servicios REST relaccionadas con los usuarios

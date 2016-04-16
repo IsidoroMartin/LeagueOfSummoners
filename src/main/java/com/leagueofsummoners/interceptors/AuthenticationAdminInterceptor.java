@@ -1,13 +1,13 @@
 package com.leagueofsummoners.interceptors;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.leagueofsummoners.model.dto.UserDTO;
+import com.leagueofsummoners.security.annotations.LoginAdminRequired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.leagueofsummoners.model.dto.UserDTO;
-import com.leagueofsummoners.security.annotations.LoginAdminRequired;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class AuthenticationAdminInterceptor extends HandlerInterceptorAdapter {

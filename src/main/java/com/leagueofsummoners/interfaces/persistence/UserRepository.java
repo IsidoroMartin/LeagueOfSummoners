@@ -1,17 +1,17 @@
 package com.leagueofsummoners.interfaces.persistence;
 
 
-
-import java.util.List;
-
+import com.leagueofsummoners.model.dto.UserDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.Repository;
 
-import com.leagueofsummoners.model.dto.UserDTO;
+import java.util.List;
 
 @org.springframework.stereotype.Repository
 public interface UserRepository extends Repository<UserDTO, Long> {
+
+
 
 	Page<UserDTO> findAll(Pageable pageable);
 	
@@ -22,5 +22,7 @@ public interface UserRepository extends Repository<UserDTO, Long> {
 	UserDTO findByEmailIgnoringCase(String email);
 	
 	UserDTO findByIdUser(Long idUser);
+
+	UserDTO save(UserDTO user);
 
 }

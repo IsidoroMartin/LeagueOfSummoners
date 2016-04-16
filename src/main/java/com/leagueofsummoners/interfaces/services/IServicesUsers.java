@@ -1,11 +1,12 @@
 package com.leagueofsummoners.interfaces.services;
 
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
 import com.leagueofsummoners.model.dto.GuideDTO;
 import com.leagueofsummoners.model.dto.UserDTO;
+import com.robrua.orianna.type.core.summoner.Summoner;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 public interface IServicesUsers {
 
@@ -20,7 +21,7 @@ public interface IServicesUsers {
 	/**
 	 * Mira si el email parametrizado esta disponible
 	 * 
-	 * @param username
+	 * @param email
 	 * @return true si está disponible, false si no lo esta
 	 */
 	boolean checkIfEmailAvailable(String email);
@@ -28,7 +29,7 @@ public interface IServicesUsers {
 	/**
 	 * Mira si el nombre de invocador parametrizado esta disponible
 	 * 
-	 * @param username
+	 * @param summonerName
 	 * @return true si está disponible, false si no lo esta
 	 */
 	boolean checkIfSummonerNameAvailable(String summonerName);
@@ -54,7 +55,7 @@ public interface IServicesUsers {
 	 * @param usuario
 	 * @return Devuelve el usuario creado o null si hay algún error
 	 */
-	UserDTO createUser(UserDTO usuario);
+	UserDTO save(UserDTO usuario);
 
 	/**
 	 * Lista todos los posts de un usuario
@@ -67,5 +68,11 @@ public interface IServicesUsers {
 	List<UserDTO> getUserList();
 
 	boolean checkValidLoginSetSessionStatus(String username, String password, HttpSession session);
+
+	boolean checkIfUserExists(String username);
+
+	boolean registrarUser(UserDTO user, MultipartFile file, String galeriaIcon);
+
+	Summoner getSummonerData(String summonerName);
 
 }

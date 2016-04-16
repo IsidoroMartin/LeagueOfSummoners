@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}" th:lang="${lang}">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+<head th:replace="fragments/header :: header"></head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <tr>
+                    <th>Imagen</th>
+                    <th>Username</th>
+                    <th>Summoner name</th>
+                    <th>Email</th>
+                    <th>Firma</th>
+                    <th>Permission level</th>
+                </tr>
+                <tr>
+                    <td><img th:attr="src=@{|${session.userlogged.avatar}|}" th:width="100px" height="100px"/></td>
+                    <td th:utext="${session.userlogged.username}"></td>
+                    <td th:utext="${session.userlogged.summonerName}"></td>
+                    <td th:utext="${session.userlogged.email}"></td>
+                    <td th:utext="${session.userlogged.firma}"></td>
+                    <td th:utext="${session.userlogged.permissionLevel}"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-12">
+            <table class="table">
+                <tr>
+                    <th>Summoner Icon</th>
+                    <th>SummonerName</th>
+                    <th>Summoner Level</th>
+                    <th>Playing at this moment</th>
+                    <th>Highest Tier</th>
+                </tr>
+                <tr>
+                    <td> <img th:attr="src=@{|/img/summonerProfileIcon/${summ_iconID}.png|},title=${summ_iconID},alt=${summ_iconID}"  th:width="100px" height="100px" /></td>
+                    <td th:utext="${summ_name}"></td>
+                    <td th:utext="${summ_level}"></td>
+                    <td th:utext="${summ_playing}"></td>
+                    <td th:utext="${summ_tier}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--<div style="clear: both; float: right;" th:include="fragments/footer :: footer"></div>-->
+</body>
+</html>

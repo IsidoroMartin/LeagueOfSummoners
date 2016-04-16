@@ -1,13 +1,12 @@
 package com.leagueofsummoners.persistence.dao;
 
 
-import java.util.List;
-
+import com.leagueofsummoners.interfaces.persistence.ChampionRepository;
+import com.leagueofsummoners.model.dto.ChampionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.leagueofsummoners.interfaces.persistence.ChampionRepository;
-import com.leagueofsummoners.model.dto.ChampionDTO;
+import java.util.List;
 
 @Component
 public class ChampionDAO {

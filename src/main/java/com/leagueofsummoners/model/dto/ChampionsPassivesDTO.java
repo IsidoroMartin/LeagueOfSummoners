@@ -1,12 +1,11 @@
 package com.leagueofsummoners.model.dto;
 
-import java.io.Serializable;
+import com.mysema.query.sql.Column;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import com.mysema.query.sql.Column;
+import java.io.Serializable;
 
 @Entity(name = "championPassives")
 @Table(name = "CHAMPION_PASSIVES")

@@ -1,8 +1,8 @@
 package com.leagueofsummoners.interfaces.services;
 
-import java.util.List;
-
 import com.leagueofsummoners.model.dto.ChampionDTO;
+
+import java.util.List;
 
 public interface IServicesChampions  {
 

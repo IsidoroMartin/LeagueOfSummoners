@@ -1,147 +1,168 @@
 package com.leagueofsummoners.model.dto;
 
-import java.io.Serializable;
+import com.leagueofsummoners.model.utils.ValidationRegEXP;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 
 /**
  * Este bean representa el objeto User de la base de datos
- * 
+ *
  * @author Juanjors
  */
 @Entity(name = "user")
 @Table(name = "users")
 public class UserDTO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "id_user")
-	private Long idUser;
+    @Id
+    @GeneratedValue
+    @Column(name = "id_user")
+    private Long idUser;
 
-	@Column(nullable = false, name = "summoner_name", unique = true)
-	private String summonerName;
+    @Column(nullable = false, name = "summoner_name", unique = true)
+    @Length(min = 4, max = 20)
+    private String summonerName;
 
-	@Column(nullable = false, unique = true)
-	private String username;
-	@Column(nullable = false)
-	private String password;
-	@Column(nullable = false, unique = true)
-	private String email;
-	@Column(nullable = false)
-	private String avatar;
-	@Column(nullable = true)
-	private String firma;
-	@Column(nullable = true, name = "permission_level")
-	private String permissionLevel;
+    @Column(nullable = false, unique = true)
+    @Length(min = 4, max = 12)
+    private String username;
 
-	public UserDTO() {
-	}
+    @Column(nullable = false)
+    @Length(min = 6, max = 300)
+    private String password;
 
-	public UserDTO(UserDTO user) {
-		this.idUser = user.idUser;
-		this.summonerName = user.summonerName;
-		this.username = user.username;
-		this.password = user.password;
-		this.email = user.email;
-		this.avatar = user.avatar;
-		this.firma = user.firma;
-		this.permissionLevel = user.permissionLevel;
-	}
+    @Email
+    @Column(nullable = false, unique = true)
+    private String email;
 
-	public boolean isAdmin() {
-		return (this.permissionLevel.equals("Admin"));
-	}
+    @Column(nullable = false)
+    private String avatar;
+    @Column(nullable = true)
+    private String firma;
+    @Column(nullable = true, name = "permission_level")
+    private String permissionLevel;
 
-	@Override
-	public String toString() {
-		return "UserDTO [idUser=" + idUser + ", summonerName=" + summonerName + ", username=" + username + ", password="
-				+ password + ", email=" + email + ", avatar=" + avatar + ", firma=" + firma + ", permissionLevel="
-				+ permissionLevel + "]";
-	}
+    public UserDTO() {
+        this.permissionLevel = "User";
+    }
 
-	public Long getIdUser() {
-		return idUser;
-	}
+    public UserDTO(UserDTO user) {
+        this.idUser = user.idUser;
+        this.summonerName = user.summonerName;
+        this.username = user.username;
+        this.password = user.password;
+        this.email = user.email;
+        this.avatar = user.avatar;
+        this.firma = user.firma;
+        this.permissionLevel = "User";
+    }
 
-	public void setIdUser(Long idUser) {
-		this.idUser = idUser;
-	}
+    public boolean isAdmin() {
+        return (this.permissionLevel.equals("Admin"));
+    }
 
-	public String getSummonerName() {
-		return summonerName;
-	}
+    @Override
+    public String toString() {
+        return "UserDTO [idUser=" + idUser + ", summonerName=" + summonerName + ", username=" + username + ", password="
+                + password + ", email=" + email + ", avatar=" + avatar + ", firma=" + firma + ", permissionLevel="
+                + permissionLevel + "]";
+    }
 
-	public void setSummonerName(String summonerName) {
-		this.summonerName = summonerName;
-	}
+    public Long getIdUser() {
+        return idUser;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public String getSummonerName() {
+        return summonerName;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setSummonerName(String summonerName) {
+        this.summonerName = summonerName;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getAvatar() {
-		return avatar;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getFirma() {
-		return firma;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setFirma(String firma) {
-		this.firma = firma;
-	}
+    public String getAvatar() {
+        return avatar;
+    }
 
-	public String getPermissionLevel() {
-		return permissionLevel;
-	}
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
-	public void setPermissionLevel(String permissionLevel) {
-		this.permissionLevel = permissionLevel;
-	}
+    public String getFirma() {
+        return firma;
+    }
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+    public void setFirma(String firma) {
+        this.firma = firma;
+    }
 
-	public UserDTO(Long idUser, String summonerName, String username, String password, String email, String avatar,
-			String firma, String permissionLevel) {
-		super();
-		this.idUser = idUser;
-		this.summonerName = summonerName;
-		this.username = username;
-		this.password = password;
-		this.email = email;
-		this.avatar = avatar;
-		this.firma = firma;
-		this.permissionLevel = permissionLevel;
-	}
+    public String getPermissionLevel() {
+        return permissionLevel;
+    }
+
+    public void setPermissionLevel(String permissionLevel) {
+        this.permissionLevel = permissionLevel;
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public UserDTO(Long idUser, String summonerName, String username, String password, String email, String avatar,
+                   String firma, String permissionLevel) {
+        super();
+        this.idUser = idUser;
+        this.summonerName = summonerName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.avatar = avatar;
+        this.firma = firma;
+        this.permissionLevel = permissionLevel;
+    }
+
+    public UserDTO(String summonerName, String username, String password, String email, String avatar,
+                   String firma, String permissionLevel) {
+        this.summonerName = summonerName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.avatar = avatar;
+        this.firma = firma;
+        this.permissionLevel = "User";
+    }
 
 }

@@ -1,9 +1,14 @@
 package com.leagueofsummoners.controllers;
 
-import java.util.Locale;
-
-import javax.servlet.http.HttpSession;
-
+import com.leagueofsummoners.LeagueofsummonersApplication;
+import com.leagueofsummoners.interfaces.services.IServicesChampions;
+import com.leagueofsummoners.interfaces.services.IServicesUsers;
+import com.leagueofsummoners.model.dto.ChampionDTO;
+import com.leagueofsummoners.model.dto.UserDTO;
+import com.leagueofsummoners.model.utils.DetermineLanguageExport;
+import com.leagueofsummoners.model.utils.UploadUtils;
+import com.leagueofsummoners.security.annotations.LoginRequired;
+import com.robrua.orianna.type.core.summoner.Summoner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,61 +19,92 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.leagueofsummoners.interfaces.services.IServicesChampions;
-import com.leagueofsummoners.interfaces.services.IServicesUsers;
-import com.leagueofsummoners.model.dto.ChampionDTO;
-import com.leagueofsummoners.model.dto.UserDTO;
-import com.leagueofsummoners.model.utils.i18n.DetermineLanguageExport;
-import com.leagueofsummoners.utils.FileUtils;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import java.util.Locale;
 
 @Controller
 public class UserController {
 
-	@Autowired
-	private IServicesChampions servicioChampions;
-	@Autowired
-	private IServicesUsers servicioUsers;
+    @Autowired
+    private IServicesChampions servicioChampions;
+    @Autowired
+    private IServicesUsers servicioUsers;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String index(ModelMap valores, HttpSession session, Locale locale,
-			@RequestParam(name = "champName", defaultValue = "Syndra", required = false) String championName) {
-		valores.put("nombre", "Juanjo");
-		ChampionDTO champ = this.servicioChampions.findByChampionName(championName);
-		Object lore = DetermineLanguageExport.getProperLanguage(champ, locale, "getChampionLore");
-		Object title = DetermineLanguageExport.getProperLanguage(champ, locale, "getChampionTitle");
-		valores.put("lore", lore);
-		valores.put("title", title);
-		valores.put("championName", champ.getChampionName());
-		return "index";
-	}
-	
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String register(UserDTO userdto,ModelMap valores) {
-		valores.put("listaNamesChamps", this.servicioChampions.getChampionsIconsNamesList());
-		return "register";
-	}
-	
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String registerToDb(UserDTO userdto, BindingResult bindingResult, Model model,
-			@RequestParam("img-avatar") MultipartFile[] file, @RequestParam("galeria") String galeriaIcon) {
-		System.out.println(userdto);
-		System.out.println(FileUtils.saveImg(file[0], userdto.getUsername()));
-		return "register";
-	}
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index(ModelMap valores, HttpSession session, Locale locale,
+                        @RequestParam(name = "champName", defaultValue = "Syndra", required = false) String championName) {
+        valores.put("nombre", "Juanjo");
+        ChampionDTO champ = this.servicioChampions.findByChampionName(championName);
+        Object lore = DetermineLanguageExport.getProperLanguage(champ, locale, "getChampionLore");
+        Object title = DetermineLanguageExport.getProperLanguage(champ, locale, "getChampionTitle");
+        valores.put("lore", lore);
+        valores.put("title", title);
+        valores.put("championName", champ.getChampionName());
+        return "index";
+    }
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(ModelMap valores, HttpSession session, @RequestParam(name = "username") String username,
-			@RequestParam(name = "password") String password) {
-		return (this.servicioUsers.checkValidLoginSetSessionStatus(username, password, session)) ? "logged" : "notlogged";
-	}
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String register(UserDTO userdto, ModelMap valores) {
+        valores.put("listaNamesChamps", this.servicioChampions.getChampionsIconsNamesList());
+        return "register";
+    }
 
-	@RequestMapping(value = "/notlogged", method = RequestMethod.GET)
-	public String notLogged() {
-		return "notlogged";
-	}
-	
-	@RequestMapping(value = "/forbbiden", method = RequestMethod.GET)
-	public String forbbiden() {
-		return "forbbiden";
-	}
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String registerUser(@Valid UserDTO userdto, BindingResult bindingResult, Model model,
+                               @RequestParam("img-avatar") MultipartFile[] file, @RequestParam("galeria") String galeriaIcon) {
+        String page = "redirect:index.html?action=form-error";
+        String avatar = "/img/champion_icons/" + galeriaIcon;
+        if (!bindingResult.hasErrors()) {
+            if (this.servicioUsers.registrarUser(userdto, file[0], galeriaIcon))
+                page = "login";
+        } else {
+            LeagueofsummonersApplication.LOGGER.warn("Error registrando usuario " + userdto.getUsername() + " due: " + bindingResult.getAllErrors());
+        }
+        return page;
+    }
+
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String loginPage(ModelMap valores, HttpSession session, Locale locale,
+                            @RequestParam(name = "champName", defaultValue = "Syndra", required = false) String championName) {
+        valores.put("nombre", "Juanjo");
+        ChampionDTO champ = this.servicioChampions.findByChampionName(championName);
+        Object lore = DetermineLanguageExport.getProperLanguage(champ, locale, "getChampionLore");
+        Object title = DetermineLanguageExport.getProperLanguage(champ, locale, "getChampionTitle");
+        valores.put("lore", lore);
+        valores.put("title", title);
+        valores.put("championName", champ.getChampionName());
+        return "login";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String loginProcess(ModelMap valores, HttpSession session, @RequestParam(name = "username") String username,
+                               @RequestParam(name = "password") String password) {
+        return (this.servicioUsers.checkValidLoginSetSessionStatus(username, password, session)) ? profile(valores,session): "login";
+    }
+
+    @LoginRequired
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String profile(ModelMap valores, HttpSession session) {
+        Summoner summ = this.servicioUsers.getSummonerData(((UserDTO) session.getAttribute("userlogged")).getSummonerName());
+        valores.put("summ_level",summ.getLevel());
+        valores.put("summ_name",summ.getName());
+        valores.put("summ_tier",summ.getLeagueEntries().get(0).getTier());
+        valores.put("summ_iconID",summ.getProfileIconID());
+        valores.put("summ_playing","Jugando durante: " + summ.getCurrentGame().getStartTime());
+
+        return "profile";
+    }
+
+
+    @RequestMapping(value = "/notlogged", method = RequestMethod.GET)
+    public String notLogged() {
+        return "notlogged";
+    }
+
+    @RequestMapping(value = "/forbbiden", method = RequestMethod.GET)
+    public String forbbiden() {
+        return "forbbiden";
+    }
 }
