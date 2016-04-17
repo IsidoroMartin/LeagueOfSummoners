@@ -1,13 +1,15 @@
 <html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
-<head th:fragment="header">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title th:utext="${title}"></title>
+<head th:fragment="head">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon"  type="image/png"  href="img/logo-icon.png"> <!-- Logo icon hay que hacerlo -->
+    <meta charset="UTF-8">
+    <title th:utext="${title}"></title>
+    <link rel="icon" type="image/png" href="img/logo.png">
     <link rel="stylesheet" href="libraries/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="libraries/bootstrap/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="libraries/flag-icon-css/css/flag-icon.min.css">
     <link rel="stylesheet" href="libraries/font-awesome-4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
 </head>
 </html>
+

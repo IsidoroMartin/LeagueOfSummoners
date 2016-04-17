@@ -1,18 +1,88 @@
+@font-face {
+    font-family: BeaufortLOL-Regular;
+    src: url(../fonts/BeaufortforLOL-Regular.woff) ;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: BeaufortLOL-Regular;
+    src: url(../fonts/BeaufortforLOL-Bold.woff) ;
+    font-weight: bold ;
+}
+
+@font-face {
+    font-family: BeaufortLOL-Regular;
+    src: url(../fonts/BeaufortforLOL-Italic.woff) ;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: Gill Sans;
+    src: url(../fonts/gill-sans-w04-book.woff) ;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Adobe Garamond Pro;
+    src: url(../fonts/adobe-garamond-pro.woff) ;
+    font-style: normal;
+}
+
 #bootstrap-overrides * {
     border-radius: 0px;
 }
 
 html, body {
+    font-family: BeaufortLOL-Regular;
     font-size: 16px;
     margin: 0px;
     padding: 0px;
     width: 100%;
     height: 100%;
+    background-image: url(../img/wallpaper.jpg);
+    background-repeat: no-repeat;
+}
+
+
+
+h2 {
+    padding: 0px;
+    margin: 0px;
 }
 
 body > header {
-    padding-top: 1%;
+    text-align: center;
+    padding-top: .5%;
     padding-bottom: 1%;
+}
+
+body > header h1 {
+    font-weight: bold;
+    color: #E9CE8B;
+    background: -webkit-linear-gradient(#E9CE8B, #BF8E4C, #E9CE8B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 46px;
+    margin-top: 0px;
+}
+
+#buscador-home.container {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 17%;
+}
+
+@media only screen and (max-width: 991px) {
+
+    #buscador-home.container {
+        padding-bottom: 30px;
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    #buscador-home.container {
+        padding-bottom: 200px;
+    }
 }
 
 body > header .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
@@ -24,27 +94,29 @@ header input[type=button] {
     width: 100%;
 }
 
-@media only screen and (min-width: 1025px) {
-    header .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
-        width: 55%;
-    }
-}
-
 @media only screen and (max-width: 1025px) {
-    header .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    /* Doy un tamaño al select de los idiomas en resoluciones pequeñas*/
+    body > header .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+        text-align: center;
         width: 100%;
         padding-top: 5%;
     }
 
-    header input[type=button] {
-        margin-bottom: 5%;
+    /* Centro el select de los idiomas */
+    body > header > .row {
+        text-align: center;
     }
 }
 
 #bootstrap-overrides nav {
+    /*background: linear-gradient(top bottom, rgba(28, 26, 52, 1) 0%, rgba(48, 43, 89, 1) 50%, rgba(28, 26, 52, 1) 100%);*/
+    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1c1a34', endColorstr='#1c1a34', GradientType=0);*/
     background: rgba(28, 26, 52, 1);
-    background: linear-gradient(top bottom, rgba(28, 26, 52, 1) 0%, rgba(48, 43, 89, 1) 50%, rgba(28, 26, 52, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1c1a34', endColorstr='#1c1a34', GradientType=0);
+    background: -moz-linear-gradient(top, rgba(28, 26, 52, 1) 0%, rgba(48, 43, 89, 1) 50%, rgba(28, 26, 52, 1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(28, 26, 52, 1) 0%, rgba(48, 43, 89, 1) 50%, rgba(28, 26, 52, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(28, 26, 52, 1) 0%, rgba(48, 43, 89, 1) 50%, rgba(28, 26, 52, 1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgba(28, 26, 52, 1)', endColorstr='rgba(28, 26, 52, 1)', GradientType=0); /* IE6-9 */
+
     border-bottom: 3px solid #c2914f;
     border-top: 3px solid #c2914f;
     color: white;
@@ -60,7 +132,12 @@ header input[type=button] {
     background: rgba(35, 32, 64, 1);
     background: linear-gradient(top right, rgba(35, 32, 64, 1) 0%, rgba(60, 53, 110, 1) 25%, rgba(60, 53, 110, 1) 75%, rgba(35, 32, 64, 1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#232040', endColorstr='#232040', GradientType=1);
+
     /*border-bottom: 2px solid #c2914f;*/
+}
+
+#bootstrap-overrides #menu{
+    padding-left:0px;
 }
 
 #bootstrap-overrides .collapse .navbar-collapse {
@@ -74,9 +151,10 @@ header input[type=button] {
 
 @media only screen and (min-width: 768px) {
     #bootstrap-overrides .navbar .navbar-nav {
-        display: inline-block;
-        height: 44px;
-        float: none;
+        /*display: inline-block;*/
+        /*height: 44px;*/
+        /*float: none;*/
+        /*margin-left:5% ;*/
     }
 
     .navbar .navbar-collapse {
@@ -87,7 +165,11 @@ header input[type=button] {
         width: 143px;
     }
 
-    #bootstrap-overrides nav a:hover, #bootstrap-overrides nav a:focus, #bootstrap-overrides nav li.active a {
+    .navbar-nav .navbar-right li a {
+        width: 300px;
+    }
+
+    #bootstrap-overrides nav .menu-left a:hover, #bootstrap-overrides nav a:focus, #bootstrap-overrides nav .menu-left li.active a {
         background-image: url("../img/selected.png");
         background-size: 100% 100%;
     }
@@ -95,7 +177,7 @@ header input[type=button] {
 
 @media only screen and (min-width: 1024px) {
     .navbar-nav li a {
-        width: 160px;
+        width: 150px;
     }
 }
 
@@ -103,11 +185,37 @@ nav.navbar {
     margin-bottom: 0px;
 }
 
-#buscador-home {
+#bootstrap-overrides nav a.iniciar-sesion-btn {
+    background-color: #194A4C;
+    background: linear-gradient(#215f62, #0a2021);
+    color: #baa27c;
+    border-color: #187277 #3a6668 #0e3f41 #3a6668;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
+}
+
+#bootstrap-overrides nav a.registrarse-btn {
+    background-color: #BF6904;
+    background: linear-gradient(#db8e01, #871e0a);
+    box-shadow: inset 1px 1px 9px rgba(135, 30, 10, .8), inset -1px -1px 5px rgba(181, 60, 2, .8);
+    color: #FFF;
+    border-color: #a29361 #928456 #5f5940 #928456;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
+}
+
+#bootstrap-overrides nav a.registrarse-btn:hover, #bootstrap-overrides nav a.iniciar-sesion-btn:hover {
+    /*background-color: rgba(255, 255, 255, .2);*/
+    background-color: red;
+}
+
+header.container, main .container {
+    background-color: white;
+}
+
+#buscador-home.container {
     background-image: url("../img/fondo-buscador-home.png");
     background-size: 100% auto;
-    padding-bottom: 37%;
-    width: 100%;
+    background-repeat: no-repeat;
+    height: 80%;
 }
 
 #buscador-home header img {
@@ -115,13 +223,24 @@ nav.navbar {
 }
 
 #buscador-home main {
-    background-color: white;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 2% 3%;
     border: rgba(28, 26, 52, 1) solid 2px;
 }
 
-#buscador-home main label {
+#buscador-home main form input[type=text] {
+    text-align: center;
+}
+
+#buscador-home main label h2 {
     font-size: 1.5rem;
+}
+
+@media only screen and (max-width: 768px) {
+    #buscador-home main label h2, input[type=text] {
+        font-size: 1rem;
+    }
 }
 
 #bootstrap-overrides form button {
@@ -131,50 +250,49 @@ nav.navbar {
     color: white;
 }
 
-input[type=button], #bootstrap-overrides button, #bootstrap-overrides form button:hover, input[type=button]:hover {
-    background: white;
-    border: rgba(28, 26, 52, 1) inset 2px;
-    color: rgba(28, 26, 52, 1);
+header button#idiomaSelect {
+    background: none;
+    border: none;
+}
+
+/*, #bootstrap-overrides button, #bootstrap-overrides form button:hover, input[type=button]:hover*/
+input[type=button] {
+    background-color: #194A4C;
+    background: linear-gradient(#215f62, #0a2021);
+    color: #baa27c;
+    border: 1px solid #a29361;
+    border-color: #187277 #3a6668 #0e3f41 #3a6668;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
+
 }
 
 footer {
     color: white;
     border-top: 3px solid #c2914f;
     background: rgba(28, 26, 52, 1);
-    padding-bottom: 2%;
+    padding-bottom: 1%;
 }
 
 footer .row {
     margin-top: 2.5%;
 }
 
-footer #redes-sociales-footer {
-    margin-left: 5%;
+@media only screen and (min-width: 1024px) {
+    footer #redes-sociales-footer {
+        margin-left: 5%;
+    }
 }
-footer div[class*=col]:not(#redes-sociales-footer){
-   text-align: center;
+
+footer div[class*=col] {
+    text-align: center;
 }
+
 footer span[class*="fa"] {
     margin-top: 1%;
     margin-left: 3%;
-    font-size: 40px;
 }
 
 footer a, footer a:hover, footer a:focus, footer a:active, footer a:visited {
     text-decoration: none;
     color: white;
-}
-
-label.valid {
-    width: 24px;
-    height: 24px;
-    background: url(../img/valid.png) center center no-repeat;
-    display: inline-block;
-    text-indent: -9999px;
-}
-label.error {
-    font-weight: bold;
-    color: red;
-    padding: 2px 8px;
-    margin-top: 2px;
 }

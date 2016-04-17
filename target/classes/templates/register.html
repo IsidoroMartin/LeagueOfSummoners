@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
 <head th:replace="fragments/head :: head">
 </head>
-<body id="bootstrap-overrides">
+<body id="bootstrap-overrides" >
 <header th:replace="fragments/header :: header"></header>
 <div th:replace="fragments/menu :: menu"></div>
 <main class="container">
@@ -16,7 +16,7 @@
         </div>
         <div class="form-group col-md-offset-3 col-md-6">
         <label for="summonerName" class="control-label" th:utext="#{register.summonerName}">#{register.summonerName}</label>
-        <input type="text" class="form-control" id="summonerName" name="summonerName"
+        <input type="text" class="form-control" id="summonerName" name="summonerName"  th:attr="data-error=#{register.summonername.error}"
                th:placeholder="#{register.summonerName}"
                required>
         </div>
@@ -83,7 +83,8 @@
         </div>
     </div>
 
-</main class="container">
+</main>
 <div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/scripts :: scripts"></div>
 </body>
 </html>
