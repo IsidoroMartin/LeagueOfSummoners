@@ -6,7 +6,6 @@ import com.leagueofsummoners.interfaces.services.IServicesUsers;
 import com.leagueofsummoners.model.dto.ChampionDTO;
 import com.leagueofsummoners.model.dto.UserDTO;
 import com.leagueofsummoners.model.utils.DetermineLanguageExport;
-import com.leagueofsummoners.model.utils.UploadUtils;
 import com.leagueofsummoners.security.annotations.LoginRequired;
 import com.robrua.orianna.type.core.summoner.Summoner;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,15 +31,8 @@ public class UserController {
     private IServicesUsers servicioUsers;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(ModelMap valores, HttpSession session, Locale locale,
-                        @RequestParam(name = "champName", defaultValue = "Syndra", required = false) String championName) {
-        valores.put("nombre", "Juanjo");
-        ChampionDTO champ = this.servicioChampions.findByChampionName(championName);
-        Object lore = DetermineLanguageExport.getProperLanguage(champ, locale, "getChampionLore");
-        Object title = DetermineLanguageExport.getProperLanguage(champ, locale, "getChampionTitle");
-        valores.put("lore", lore);
-        valores.put("title", title);
-        valores.put("championName", champ.getChampionName());
+    public String index(ModelMap valores, HttpSession session, Locale locale) {
+        //AQUI DEBERIA DE IR LA PETICION A LOS CHAMPIONS DE ROTATION
         return "index";
     }
 
@@ -66,33 +58,25 @@ public class UserController {
 
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage(ModelMap valores, HttpSession session, Locale locale,
-                            @RequestParam(name = "champName", defaultValue = "Syndra", required = false) String championName) {
-        valores.put("nombre", "Juanjo");
-        ChampionDTO champ = this.servicioChampions.findByChampionName(championName);
-        Object lore = DetermineLanguageExport.getProperLanguage(champ, locale, "getChampionLore");
-        Object title = DetermineLanguageExport.getProperLanguage(champ, locale, "getChampionTitle");
-        valores.put("lore", lore);
-        valores.put("title", title);
-        valores.put("championName", champ.getChampionName());
+    public String loginPage(ModelMap valores, HttpSession session, Locale locale) {
         return "login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginProcess(ModelMap valores, HttpSession session, @RequestParam(name = "username") String username,
                                @RequestParam(name = "password") String password) {
-        return (this.servicioUsers.checkValidLoginSetSessionStatus(username, password, session)) ? profile(valores,session): "login";
+        return (this.servicioUsers.checkValidLoginCreateSession(username, password, session)) ? profile(valores, session) : "login";
     }
 
     @LoginRequired
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String profile(ModelMap valores, HttpSession session) {
         Summoner summ = this.servicioUsers.getSummonerData(((UserDTO) session.getAttribute("userlogged")).getSummonerName());
-        valores.put("summ_level",summ.getLevel());
-        valores.put("summ_name",summ.getName());
-        valores.put("summ_tier",summ.getLeagueEntries().get(0).getTier());
-        valores.put("summ_iconID",summ.getProfileIconID());
-        valores.put("summ_playing","Jugando durante: " + summ.getCurrentGame().getStartTime());
+        valores.put("summ_level", summ.getLevel());
+        valores.put("summ_name", summ.getName());
+        valores.put("summ_tier", summ.getLeagueEntries().get(0).getTier());
+        valores.put("summ_iconID", summ.getProfileIconID());
+        valores.put("summ_playing", summ.getCurrentGame());
 
         return "profile";
     }
@@ -106,5 +90,10 @@ public class UserController {
     @RequestMapping(value = "/forbbiden", method = RequestMethod.GET)
     public String forbbiden() {
         return "forbbiden";
+    }
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public String test() {
+        return "test";
     }
 }

@@ -16,7 +16,7 @@ public interface IServicesChampions  {
 	/**
 	 * Encuentra a un usuario por id
 	 * 
-	 * @param id
+	 * @param championName
 	 * @return El usuario con la id o null.
 	 */
 	ChampionDTO findByChampionName(String championName);

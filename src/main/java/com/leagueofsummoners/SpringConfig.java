@@ -11,6 +11,7 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 
 import java.util.Locale;
 
@@ -24,6 +25,7 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
 		messageSource.setDefaultEncoding("UTF-8");
 		return messageSource;
 	}
+
 
 	@Bean
 	public LocaleResolver localeResolver() {

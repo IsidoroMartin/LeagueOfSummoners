@@ -10,20 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Esta es una clase que sobrescribe el listener de cambiar de idioma para añadir a una cookie el idioma de la 
+ * Esta es una clase que sobrescribe el listener de cambiar de idioma para añadir a una cookie el idioma de la
  * app
- * @author Juanjors
  *
+ * @author Juanjors
  */
 @Component
 public class LocaleService extends LocaleChangeInterceptor {
 
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws ServletException {
-		Cookie cookieLanguage = new Cookie("locale", LocaleContextHolder.getLocale().getLanguage());
-		cookieLanguage.setPath("/");
-		response.addCookie(cookieLanguage);
-		return super.preHandle(request, response, handler);
-	}
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+            throws ServletException {
+        boolean result = super.preHandle(request, response, handler);
+        Cookie cookieLanguage = new Cookie("locale", LocaleContextHolder.getLocale().getLanguage());
+        cookieLanguage.setPath("/");
+        response.addCookie(cookieLanguage);
+        return result;
+    }
 }

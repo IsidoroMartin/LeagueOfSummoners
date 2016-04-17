@@ -1,5 +1,6 @@
 package com.leagueofsummoners.model.services;
 
+import com.leagueofsummoners.LeagueofsummonersApplication;
 import com.leagueofsummoners.interfaces.services.IServicesUsers;
 import com.leagueofsummoners.model.dto.GuideDTO;
 import com.leagueofsummoners.model.dto.UserDTO;
@@ -73,16 +74,22 @@ public class UserServices implements IServicesUsers {
     }
 
     @Override
-    public boolean checkValidLoginSetSessionStatus(String username, String password, HttpSession session) {
+    public boolean checkValidLoginCreateSession(String username, String password, HttpSession session) {
         UserDTO user = this.userDAO.checkValidLogin(username, password);
-        boolean userNull = user != null;
-        if (userNull) {
-            session.setMaxInactiveInterval(60 * 60); //La session expirará en 1h
-            session.setAttribute("userlogged", user); //El atributo userlogged contiene el usuario con todos sus atributos
-            session.setAttribute("logged", true); //Un atributo logged para saber si esta logged o no
-            session.setAttribute("admin", user.isAdmin()); //Un atributo admin para saber si el usuario es admin
+        boolean userNotNull = user != null;
+        if (userNotNull) {
+            this.createUserSession(session, user);
         }
-        return user != null;
+        return userNotNull;
+    }
+
+
+    private void createUserSession(HttpSession session, UserDTO user) {
+        LeagueofsummonersApplication.LOGGER.debug("Usuario " + user.getUsername() + " logged");
+        session.setMaxInactiveInterval(60 * 60); //La session expirará en 1h
+        session.setAttribute("userlogged", user); //El atributo userlogged contiene el usuario con todos sus atributos
+        session.setAttribute("logged", true); //Un atributo logged para saber si esta logged o no
+        session.setAttribute("admin", user.isAdmin()); //Un atributo admin para saber si el usuario es admin
     }
 
     @Override

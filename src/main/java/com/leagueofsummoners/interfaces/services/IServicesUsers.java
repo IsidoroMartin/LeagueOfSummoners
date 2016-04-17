@@ -67,7 +67,7 @@ public interface IServicesUsers {
 
 	List<UserDTO> getUserList();
 
-	boolean checkValidLoginSetSessionStatus(String username, String password, HttpSession session);
+	boolean checkValidLoginCreateSession(String username, String password, HttpSession session);
 
 	boolean checkIfUserExists(String username);
 
