@@ -31,16 +31,22 @@ $(function (e) {
             }, summonerName: {
                 validators: {
                     notEmpty: {
-                        message: obtainProperLanguage('summonerName','data-notempty')
+                        message: obtainProperLanguage('summonerName', 'data-notempty')
                     },
                     stringLength: {
-                        min: 3,
-                        max: 30,
-                        message: 'El campo Primer Apellido debe tener entre 3 y 30 carácteres'
+                        min: 4,
+                        max: 24,
+                        message: obtainProperLanguage('summonerName', 'data-characterslength')
                     },
-                    regexp: {
-                        regexp: /^[a-zA-Z]+$/,
-                        message: 'El campo Primer Apellido sólo puede contener carácteres alfabéticos'
+                    remote: {
+                        url: '/api/user/summonername',
+                        data: function (validator) {
+                            return {
+                                summonerName: validator.getFieldElements('summonerName').val()
+                            }
+                        },
+                        message: obtainProperLanguage('summonerName','data-notsummavailable'),
+                        type: 'POST',
                     }
                 }
             }, segundo_apellido: {

@@ -8,7 +8,7 @@
 <div th:replace="fragments/languageSelect :: locale"></div>
 <main class="container">
     <form role="form" class="form-horizontal col-md-offset-3 col-md-6" id="form-register" method="post" action="/register"
-          enctype="multipart/form-data" data-toggle="validator" th:object="${userDTO}" novalidate th:with="summonerName=#{register.summonerName}" )>
+          enctype="multipart/form-data" data-toggle="validator" th:object="${userDTO}" novalidate)>
         <div class="form-group">
             <label class="control-label" for="username" th:utext="#{register.username}"></label>
             <input type="text" class="form-control" name="username" id="username" required="required"
@@ -18,7 +18,8 @@
         <div class="form-group">
             <label class="control-label" for="summonerName" th:utext="#{register.summonerName}"></label>
             <input type="text" class="form-control" name="summonerName" id="summonerName" required="required"
-                   th:placeholder="#{register.summonerName}" th:attr="data-error=#{register.summonername.error},data-notempty=#{register.notempty(#{register.summonerName})}">
+                   th:placeholder="#{register.summonerName}"
+                   th:attr="data-notempty=#{register.notempty(#{register.summonerName})},data-characterslength=#{register.characterslength(#{register.summonerName})},data-notsummavailable=#{register.summonername.error}">
             <i class="form-control-feedback" data-bv-field="summonerName" style="display: none;"></i>
         </div>
         <div class="form-group has-feedback">

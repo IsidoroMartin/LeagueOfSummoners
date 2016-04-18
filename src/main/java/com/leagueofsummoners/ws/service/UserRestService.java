@@ -1,6 +1,7 @@
 package com.leagueofsummoners.ws.service;
 
 import com.leagueofsummoners.interfaces.services.IServicesUsers;
+import com.leagueofsummoners.model.dto.GenericJSONValid;
 import com.leagueofsummoners.model.dto.UserDTO;
 import com.leagueofsummoners.security.annotations.LoginAdminRequired;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,12 +51,8 @@ public class UserRestService {
      */
     @LoginAdminRequired
     @RequestMapping(value = "/email/{email:.+}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
-    public ResponseEntity<String> checkIfEmailExists(@PathVariable String email) {
-        if(email.length() > 3 && this.servicioUsers.checkIfEmailAvailable(email)){
-            return new ResponseEntity<String>(HttpStatus.OK);
-        }
-
-        return new ResponseEntity<String>(HttpStatus.NOT_ACCEPTABLE);
+    public Boolean checkIfEmailExists(@PathVariable String email) {
+        return this.servicioUsers.checkIfEmailAvailable(email);
     }
 
     /**
@@ -65,11 +62,8 @@ public class UserRestService {
      * @param summonerName
      * @return si está disponible devuelve true, si no false.
      */
-    @RequestMapping(value = "/summonername", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN)
-    public ResponseEntity<String> checkSummonerExists(@RequestParam("summonerName") String summonerName) {
-        if (summonerName.length() > 3 && this.servicioUsers.checkIfSummonerNameExists(summonerName)) {
-            return new ResponseEntity<String>(HttpStatus.OK);
-        }
-        return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+    @RequestMapping(value = "/summonername", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
+    public GenericJSONValid checkSummonerExists(@RequestParam("summonerName") String summonerName) {
+        return new GenericJSONValid(summonerName.length() >= 4 && this.servicioUsers.checkIfSummonerNameExists(summonerName));
     }
 }
