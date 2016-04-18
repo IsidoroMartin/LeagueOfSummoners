@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="errors" th:remove="tag">
+    <p id="error-username" th:utext="#{register.username.exists}"></p>
+    <p id="error-summonerName" th:utext="#{register.summonername.error}"></p>
+    <p id="error-email" th:utext="#{register.wrong.email}"></p>
+    <p id="error-pass-notmatching" th:utext="#{register.password.notmatch}"></p>
+    <p id="error-pass-notcomplex" th:utext="#{register.password.complex}"></p>
+</div>
+</html>
+
+register.username=Nombre de usuario
+register.summonerName=Nombre de invocador
+register.wrong.email=El email introducido no es válido
+register.password.confirm=Confirmar password
+register.min.password.characters=Mínimo 6 caracteres
+register.password.notmatch=Las contraseñas no coinciden
+register.select.image=Seleccionar imagen
+register.change.image=Cambiar imagen
+register.remove.image=Quitar imagen
+register.upload=Subir avatar
+register.summonername.error=Este nombre de invocador no existe

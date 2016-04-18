@@ -1,0 +1,11 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="locale" th:remove="tag">
+    <form method="get">
+        <select id="language" class="selectpicker pull-right" data-show-icon="true"
+                onchange="this.form.submit()" name="locale">
+            <option class="locale" data-content="<i class='flag-icon flag-icon-es'></i> ES" value="es"></option>
+            <option class="locale" data-content="<i class='flag-icon flag-icon-gb'></i> EN" value="en"></option>
+        </select>
+    </form>
+</div>
+</html>

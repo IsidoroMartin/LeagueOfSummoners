@@ -32,7 +32,7 @@ public interface IServicesUsers {
 	 * @param summonerName
 	 * @return true si está disponible, false si no lo esta
 	 */
-	boolean checkIfSummonerNameAvailable(String summonerName);
+	boolean checkIfSummonerNameExists(String summonerName);
 
 	/**
 	 * Devuelve una lista de todos los usuarios

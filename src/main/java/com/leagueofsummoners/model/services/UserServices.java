@@ -39,9 +39,8 @@ public class UserServices implements IServicesUsers {
     }
 
     @Override
-    public boolean checkIfSummonerNameAvailable(String summonerName) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean checkIfSummonerNameExists(String summonerName) {
+        return this.summonerDAO.getSummonerData(summonerName) != null;
     }
 
     @Override

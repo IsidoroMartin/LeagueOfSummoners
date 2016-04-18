@@ -44,7 +44,6 @@ html, body {
 }
 
 
-
 h2 {
     padding: 0px;
     margin: 0px;
@@ -295,4 +294,13 @@ footer span[class*="fa"] {
 footer a, footer a:hover, footer a:focus, footer a:active, footer a:visited {
     text-decoration: none;
     color: white;
+}
+
+.container-full {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.has-feedback label~.form-control-feedback{
+    top:29px;
 }
