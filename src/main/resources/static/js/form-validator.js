@@ -16,16 +16,26 @@ $(function (e) {
             username: {
                 validators: {
                     notEmpty: {
-                        message: 'El campo nombre es obligatorio'
+                        message: obtainProperLanguage('username', 'data-notempty')
                     },
                     stringLength: {
-                        min: 3,
-                        max: 30,
-                        message: 'El campo nombre debe tener entre 3 y 30 carácteres'
+                        min: 4,
+                        max: 24,
+                        message: obtainProperLanguage('username', 'data-notempty')
                     },
                     regexp: {
-                        regexp: /^[a-zA-Z]+$/,
-                        message: 'El campo Nombre sólo puede contener carácteres alfabéticos'
+                        regexp: /^[a-z0-9]{4,24}$/i,
+                        message: obtainProperLanguage('username', 'data-regexpusername')
+                    },
+                    remote: {
+                        url: '/api/user/username',
+                        data: function (validator) {
+                            return {
+                                username: validator.getFieldElements('username').val()
+                            }
+                        },
+                        message: obtainProperLanguage('username', 'data-usernamexists'),
+                        type: 'POST'
                     }
                 }
             }, summonerName: {
@@ -45,47 +55,11 @@ $(function (e) {
                                 summonerName: validator.getFieldElements('summonerName').val()
                             }
                         },
-                        message: obtainProperLanguage('summonerName','data-notsummavailable'),
+                        message: obtainProperLanguage('summonerName', 'data-notsummavailable'),
                         type: 'POST',
                     }
                 }
-            }, segundo_apellido: {
-                validators: {
-                    notEmpty: {
-                        message: 'El campo Segundo Apellido es obligatorio'
-                    },
-                    stringLength: {
-                        min: 3,
-                        max: 30,
-                        message: 'El campo Segundo Apellido debe tener entre 3 y 30 carácteres'
-                    },
-                    regexp: {
-                        regexp: /^[a-zA-Z]+$/,
-                        message: 'El campo Segundo Apellido sólo puede contener carácteres alfabéticos'
-                    }
-                }
-            }, dni: {
-                validators: {
-                    notEmpty: {
-                        message: 'El campo DNI es obligatorio'
-                    },
-                    stringLength: {
-                        min: 9,
-                        max: 9,
-                        message: 'El campo DNI debe tener 9 carácteres'
-                    },
-                    regexp: {
-                        regexp: /^[0-9]{8}[a-zA-Z]{1}$/,
-                        message: 'El campo DNI debe cumplir con el siguiente formato 000000000J'
-                    }
-                }
             }, email: {
-                onError: function (e, data) {
-                    alert("Hi");
-                },
-                onSuccess: function (e, data) {
-                    // Do something ...
-                },
                 validators: {
                     notEmpty: {
                         message: 'El campo Email es obligatorio'
@@ -100,15 +74,14 @@ $(function (e) {
                         message: 'El campo Email debe cumplir con el siguiente formato: micorreo@dominio.com'
                     }
                 }
-            }, telefono: {
+            }, password: {
                 validators: {
                     notEmpty: {
-                        message: 'El campo Telefono es obligatorio'
+                        message: obtainProperLanguage('password','data-notempty')
                     },
-                    stringLength: {
-                        min: 9,
-                        max: 9,
-                        message: 'El campo telefono debe contener 9 carácteres numéricos'
+                    identical: {
+                        field: 'inputPasswordConfirm',
+                        message: 'Los campos de pw no coinciden'
                     },
                     regexp: {
                         regexp: /^(6|9)[0-9]{8}$/,

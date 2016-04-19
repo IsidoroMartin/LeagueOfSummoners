@@ -3,10 +3,10 @@ package com.leagueofsummoners.model.dto;
 /**
  * Created by juanj on 18/04/2016.
  */
-public class GenericJSONValid {
+public class GenericJsonValidator {
     private boolean valid;
 
-    public GenericJSONValid(boolean valid) {
+    public GenericJsonValidator(boolean valid) {
         this.valid = valid;
     }
 

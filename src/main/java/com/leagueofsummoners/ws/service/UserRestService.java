@@ -1,12 +1,10 @@
 package com.leagueofsummoners.ws.service;
 
 import com.leagueofsummoners.interfaces.services.IServicesUsers;
-import com.leagueofsummoners.model.dto.GenericJSONValid;
+import com.leagueofsummoners.model.dto.GenericJsonValidator;
 import com.leagueofsummoners.model.dto.UserDTO;
 import com.leagueofsummoners.security.annotations.LoginAdminRequired;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.core.MediaType;
@@ -27,14 +25,14 @@ public class UserRestService {
 
     /**
      * Este método comprueba si el nombre de usuario esta disponible (Para
-     * informar a tiempo real al usuario que se está registrando
+     * informar al usuario mediante una petición asincrona)
      *
      * @param username
      * @return si está disponible devuelve true, si no false
      */
-    @RequestMapping(value = "/username/{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
-    public boolean checkIfUserAvailable(@PathVariable String username) {
-        return this.servicioUsers.checkIfUsernameAvailable(username);
+    @RequestMapping(value = "/username", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
+    public GenericJsonValidator checkIfUserAvailable(@RequestParam("username") String username) {
+        return new GenericJsonValidator(username.length() >= 4 && this.servicioUsers.checkIfUsernameAvailable(username));
     }
 
     @RequestMapping(value = "/userlist", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
@@ -49,21 +47,18 @@ public class UserRestService {
      * @param email
      * @return si esta disponible devuelve true, si no false.
      */
-    @LoginAdminRequired
     @RequestMapping(value = "/email/{email:.+}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
     public Boolean checkIfEmailExists(@PathVariable String email) {
         return this.servicioUsers.checkIfEmailAvailable(email);
     }
 
     /**
-     * Este método comprueba si el summonerName está disponible en la BD (Para
-     * informar a tiempo real al usuario que se está registrando
-     *
+     * Este método comprueba si el summonerName está presente en la BD de RIOT
      * @param summonerName
-     * @return si está disponible devuelve true, si no false.
+     * @return si está presente devuelve true, si no false.
      */
     @RequestMapping(value = "/summonername", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
-    public GenericJSONValid checkSummonerExists(@RequestParam("summonerName") String summonerName) {
-        return new GenericJSONValid(summonerName.length() >= 4 && this.servicioUsers.checkIfSummonerNameExists(summonerName));
+    public GenericJsonValidator checkSummonerExists(@RequestParam("summonerName") String summonerName) {
+        return new GenericJsonValidator(summonerName.length() >= 4 && this.servicioUsers.checkIfSummonerNameExists(summonerName));
     }
 }

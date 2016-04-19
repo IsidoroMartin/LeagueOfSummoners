@@ -30,7 +30,8 @@ public class UserServices implements IServicesUsers {
 
     @Override
     public boolean checkIfUsernameAvailable(String username) {
-        return this.userDAO.findByUsernameIgnoringCase(username).getUsername().equals(username);
+        UserDTO user = this.userDAO.findByUsernameIgnoringCase(username);
+        return user == null;
     }
 
     @Override
