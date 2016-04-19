@@ -7,60 +7,52 @@
 <div th:replace="fragments/menu :: menu"></div>
 <div th:replace="fragments/languageSelect :: locale"></div>
 <main class="container">
-    <form role="form" class="form-horizontal col-md-offset-3 col-md-6" id="form-register" method="post" action="/register"
+    <form role="form" class="form-horizontal col-md-offset-3 col-md-6" id="form-register" method="post"
+          action="/register"
           enctype="multipart/form-data" data-toggle="validator" th:object="${userDTO}" novalidate)>
         <div class="form-group">
             <label class="control-label" for="username" th:utext="#{register.username}"></label>
             <input type="text" class="form-control" name="username" id="username" required="required"
                    th:placeholder="#{register.username}"
                    th:attr="data-usernamexists=#{register.username.exists},data-notempty=#{register.notempty(#{register.username})},
-                   data-characterslength=#{register.characterslength(#{register.username})},data-regexpusername=#{register.regexp.username.error}" >
-            <i class="form-control-feedback" data-bv-field="username" style="display: none;"></i>
+                   data-characterslength=#{register.characterslength(#{register.username})},data-regexpusername=#{register.regexp.username.error}">
         </div>
         <div class="form-group">
             <label class="control-label" for="summonerName" th:utext="#{register.summonerName}"></label>
             <input type="text" class="form-control" name="summonerName" id="summonerName" required="required"
                    th:placeholder="#{register.summonerName}"
                    th:attr="data-notempty=#{register.notempty(#{register.summonerName})},data-characterslength=#{register.characterslength(#{register.summonerName})},data-notsummavailable=#{register.summonername.error}">
-            <i class="form-control-feedback" data-bv-field="summonerName" style="display: none;"></i>
         </div>
         <div class="form-group">
             <label class="control-label" for="inputEmail">Email</label>
-            <input type="text" class="form-control" name="summonerName" id="inputEmail" required="required"
+            <input type="text" class="form-control" name="email" id="inputEmail" required="required"
                    placeholder="email@domain.com"
-                   th:attr="data-notempty=#{register.notempty('email')},data-usedemail=#{register.summonername.error}">
-            <i class="form-control-feedback" data-bv-field="summonerName" style="display: none;"></i>
+                   th:attr="data-notempty=#{register.notempty('email')},data-usedemail=#{register.email.used},data-emailerror=#{register.wrong.email}">
         </div>
-        <div class="form-group has-feedback">
-            <label for="inputEmail" class="control-label">Email*</label>
-            <div class="input-group container-full">
-                <input type="email" class="form-control" id="inputEmail" placeholder="Email"
-                       th:attr="data-emailerror=#{register.wrong.email}" name="email" required>
-            </div>
-            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-            <div class="help-block with-errors"></div>
+        <div class="form-group">
+            <label class="control-label" for="password">Password</label>
+            <input type="password" class="form-control" name="password" id="password" required="required"
+                   th:attr="data-notempty=#{register.notempty('password')},data-pwnocomplex=#{register.password.complex},data-nomatchpassword=#{register.password.notmatch}">
         </div>
-        <div class="form-group has-feedback">
-            <label for="inputPassword" class="control-label">Password*</label>
-            <div class="input-group container-full">
-                <input type="password" data-minlength="6" name="password" class="form-control" id="inputPassword"
-                       placeholder="Password" required>
-                <div class="help-block" th:utext="#{register.min.password.characters}">Minimum of 6 characters</div>
-                <label for="inputPasswordConfirm" class="control-label" th:utext="#{register.password.confirm}"></label>
-                <input type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword"
-                       th:attr="data-match-error=#{register.password.notmatch}"
-                       th:placeholder="#{register.password.confirm}" required>
-                <div class="help-block with-errors"></div>
-            </div>
+        <div class="form-group">
+            <label class="control-label" for="inputPasswordConfirm"
+                   th:utext="#{register.password.confirm}">Password</label>
+            <input type="password" class="form-control" name="inputPasswordConfirm" id="inputPasswordConfirm"
+                   required="required"
+                   th:attr="data-notempty=#{register.notempty('password')},data-nomatchpassword=#{register.password.notmatch}">
         </div>
+        <div class="progress password-progress form-group">
+            <div id="strengthBar" class="progress-bar" role="progressbar" style="width: 0;"></div>
+        </div>
+
         <div class="fileinput fileinput-new form-group" data-provides="fileinput">
-            <label for="inputPassword" class="control-label" th:utext="#{register.upload}">#{register.upload}</label>
+            <label for="fileInput" class="control-label" th:utext="#{register.upload}">#{register.upload}</label>
             <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i>
                 <span class="fileinput-filename"></span></div>
             <span class="input-group-addon btn btn-default btn-file">
                 <span class="fileinput-new" th:utext="#{register.select.image}">#{register.select.image}</span>
                 <span class="fileinput-exists" th:utext="#{register.change.image}">#{register.change.image}</span>
-                <input type="file" accept="image/png, image/jpeg" name="img-avatar"/></span>
+                <input type="file" accept="image/png, image/jpeg" id="fileInput" name="img-avatar"/></span>
             <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput"
                th:text="#{register.remove.image}"></a>
             <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput"

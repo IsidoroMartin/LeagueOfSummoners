@@ -47,8 +47,9 @@ public class UserRestService {
      * @param email
      * @return si esta disponible devuelve true, si no false.
      */
-    @RequestMapping(value = "/email/{email:.+}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
-    public GenericJsonValidator checkIfEmailExists(@RequestParam String email) {
+    @RequestMapping(value = "/email", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
+    public GenericJsonValidator checkIfEmailExists(@RequestParam("email") String email) {
+        System.out.println(email);
         return new GenericJsonValidator(this.servicioUsers.checkIfEmailAvailable(email));
     }
 

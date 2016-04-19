@@ -62,11 +62,11 @@ $(function (e) {
             }, email: {
                 validators: {
                     notEmpty: {
-                        message: obtainProperLanguage('email', 'data-notempty')
+                        message: obtainProperLanguage('inputEmail', 'data-notempty')
                     },
                     regexp: {
                         regexp: /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/,
-                        message: obtainProperLanguage('email', 'data-emailerror')
+                        message: obtainProperLanguage('inputEmail', 'data-emailerror')
                     },
                     remote: {
                         url: '/api/user/email',
@@ -75,27 +75,76 @@ $(function (e) {
                                 email: validator.getFieldElements('email').val()
                             }
                         },
-                        message: obtainProperLanguage('email', 'data-usedemail'),
+                        message: obtainProperLanguage('inputEmail', 'data-usedemail'),
                         type: 'POST',
                     }
                 }
             }, password: {
                 validators: {
                     notEmpty: {
-                        message: obtainProperLanguage('password','data-notempty')
+                        message: obtainProperLanguage('password', 'data-notempty')
                     },
                     identical: {
                         field: 'inputPasswordConfirm',
-                        message: 'Los campos de pw no coinciden'
-                    },
-                    regexp: {
-                        regexp: /^(6|9)[0-9]{8}$/,
-                        message: 'El campo telefono debe cumplir con el siguiente formato: 918548789 o 618548789 y sólo puede contener caracteres numéricos'
+                        message: obtainProperLanguage('password', 'data-nomatchpassword')
+                    }, callback: {
+                        callback: function (value, validator, $field) {
+                            var password = $('#password').val();
+                            if (password == '') {
+                                return true;
+                            }
+
+                            var result = zxcvbn(password),
+                                score = result.score,
+                                message = result.feedback.warning || 'The password is weak';
+
+                            // Update the progress bar width and add alert class
+                            var $bar = $('#strengthBar');
+                            switch (score) {
+                                case 0:
+                                    $bar.attr('class', 'progress-bar progress-bar-danger')
+                                        .css('width', '1%');
+                                    break;
+                                case 1:
+                                    $bar.attr('class', 'progress-bar progress-bar-danger')
+                                        .css('width', '25%');
+                                    break;
+                                case 2:
+                                    $bar.attr('class', 'progress-bar progress-bar-danger')
+                                        .css('width', '50%');
+                                    break;
+                                case 3:
+                                    $bar.attr('class', 'progress-bar progress-bar-warning')
+                                        .css('width', '75%');
+                                    break;
+                                case 4:
+                                    $bar.attr('class', 'progress-bar progress-bar-success')
+                                        .css('width', '100%');
+                                    break;
+                            }
+
+                            // We will treat the password as an invalid one if the score is less than 3
+                            if (score < 3) {
+                                return {
+                                    valid: false,
+                                    message: message
+                                }
+                            }
+                            return true;
+                        }
                     }
                 }
-            }
-        }
-    });
+            },
+                    inputPasswordConfirm: {
+                        validators: {
+                            identical: {
+                                field: 'password',
+                                message: obtainProperLanguage('password', 'data-nomatchpassword')
+                            }
+                        }
+                    }
+                }
+            });
 });
 
 function obtainProperLanguage(field, attribute) {
