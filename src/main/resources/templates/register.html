@@ -14,7 +14,7 @@
             <input type="text" class="form-control" name="username" id="username" required="required"
                    th:placeholder="#{register.username}"
                    th:attr="data-usernamexists=#{register.username.exists},data-notempty=#{register.notempty(#{register.username})},
-                   data-characterslength=#{register.characterslength(#{register.username})},data-regexpusername=#{register.regexp.error}" >
+                   data-characterslength=#{register.characterslength(#{register.username})},data-regexpusername=#{register.regexp.username.error}" >
             <i class="form-control-feedback" data-bv-field="username" style="display: none;"></i>
         </div>
         <div class="form-group">
@@ -24,11 +24,18 @@
                    th:attr="data-notempty=#{register.notempty(#{register.summonerName})},data-characterslength=#{register.characterslength(#{register.summonerName})},data-notsummavailable=#{register.summonername.error}">
             <i class="form-control-feedback" data-bv-field="summonerName" style="display: none;"></i>
         </div>
+        <div class="form-group">
+            <label class="control-label" for="inputEmail">Email</label>
+            <input type="text" class="form-control" name="summonerName" id="inputEmail" required="required"
+                   placeholder="email@domain.com"
+                   th:attr="data-notempty=#{register.notempty('email')},data-usedemail=#{register.summonername.error}">
+            <i class="form-control-feedback" data-bv-field="summonerName" style="display: none;"></i>
+        </div>
         <div class="form-group has-feedback">
             <label for="inputEmail" class="control-label">Email*</label>
             <div class="input-group container-full">
                 <input type="email" class="form-control" id="inputEmail" placeholder="Email"
-                       th:attr="data-error=#{register.wrong.email}" name="email" required>
+                       th:attr="data-emailerror=#{register.wrong.email}" name="email" required>
             </div>
             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
             <div class="help-block with-errors"></div>

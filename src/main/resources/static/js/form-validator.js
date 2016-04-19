@@ -21,7 +21,7 @@ $(function (e) {
                     stringLength: {
                         min: 4,
                         max: 24,
-                        message: obtainProperLanguage('username', 'data-notempty')
+                        message: obtainProperLanguage('username', 'data-characterslength')
                     },
                     regexp: {
                         regexp: /^[a-z0-9]{4,24}$/i,
@@ -62,16 +62,21 @@ $(function (e) {
             }, email: {
                 validators: {
                     notEmpty: {
-                        message: 'El campo Email es obligatorio'
-                    },
-                    stringLength: {
-                        min: 3,
-                        max: 30,
-                        message: 'El campo Email debe tener entre 3 y 30 carácteres'
+                        message: obtainProperLanguage('email', 'data-notempty')
                     },
                     regexp: {
                         regexp: /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/,
-                        message: 'El campo Email debe cumplir con el siguiente formato: micorreo@dominio.com'
+                        message: obtainProperLanguage('email', 'data-emailerror')
+                    },
+                    remote: {
+                        url: '/api/user/email',
+                        data: function (validator) {
+                            return {
+                                email: validator.getFieldElements('email').val()
+                            }
+                        },
+                        message: obtainProperLanguage('email', 'data-usedemail'),
+                        type: 'POST',
                     }
                 }
             }, password: {
