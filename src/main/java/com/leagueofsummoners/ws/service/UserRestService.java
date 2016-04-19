@@ -59,6 +59,7 @@ public class UserRestService {
      */
     @RequestMapping(value = "/summonername", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
     public GenericJsonValidator checkSummonerExists(@RequestParam("summonerName") String summonerName) {
-        return new GenericJsonValidator(summonerName.length() >= 4 && this.servicioUsers.checkIfSummonerNameExists(summonerName));
+        int summonerLength = summonerName.length();
+        return new GenericJsonValidator(summonerLength >= 4 && summonerLength <= 24 && this.servicioUsers.checkIfSummonerNameExists(summonerName));
     }
 }
