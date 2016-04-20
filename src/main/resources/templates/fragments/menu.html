@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
-<nav class="navbar navbar-default container-full" th:fragment="menu">
+<nav class="navbar navbar-default container-fluid" th:fragment="menu">
     <div class="row">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="#" class="visible-sm visible-xs navbar-brand registrarse-btn">Registrarse</a>
-            <a href="#" class="visible-sm visible-xs navbar-brand iniciar-sesion-btn"><i class="fa fa-sign-in"
-                                                                                         aria-hidden="true"></i></a>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#" class="visible-sm visible-xs navbar-brand registrarse-btn">Registrarse</a>
+                <a href="#" class="visible-sm visible-xs navbar-brand iniciar-sesion-btn"><i class="fa fa-sign-in"
+                                                                                             aria-hidden="true"></i></a>
+            </div>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="nav navbar-nav menu-left">
+                    <li class="active"><a href="index.html">Home</a>
+                    </li>
+                    <li><a href="#">Guías</a></li>
+                    <li><a href="#">Campeones</a></li>
+                    <li><a href="#">Pro Players</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right hidden-xs hidden-sm">
+                    <li><a href="#" class="registrarse-btn">Registrarse</a></li>
+                    <li><a href="#" class="iniciar-sesion-btn"><i class="fa fa-sign-in" aria-hidden="true"></i> Iniciar
+                        Sesión </a></li>
+                </ul>
+            </div>
         </div>
-        <div class="collapse navbar-collapse" id="menu">
-            <ul class="nav navbar-nav menu-left">
-                <li class="active"><a href="index.html">Home</a>
-                </li>
-                <li><a href="#">Guías</a></li>
-                <li><a href="#">Campeones</a></li>
-                <li><a href="#">Pro Players</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right hidden-xs hidden-sm">
-                <li><a href="#" class="registrarse-btn">Registrarse</a></li>
-                <li><a href="#" class="iniciar-sesion-btn"><i class="fa fa-sign-in" aria-hidden="true"></i> Iniciar
-                    Sesión </a></li>
-            </ul>
-        </div>
-    </div>
 </nav>
 </html>
 
