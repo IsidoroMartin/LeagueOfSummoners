@@ -94,57 +94,30 @@ $(function (e) {
                                 return true;
                             }
 
-                            var result = zxcvbn(password),
-                                score = result.score,
-                                message = result.feedback.warning || 'The password is weak';
+                            var validlength = password.length >= 8;
+                            var hasUpperCase = /[A-Z]/.test(password);
+                            var hasLowerCase = /[a-z]/.test(password);
+                            var hasNumbers = /\d/.test(password);
+                            var hasNonalphas = /\W/.test(password);
+                            if (hasUpperCase && hasLowerCase && hasNumbers && hasNonalphas && validlength)
+                                return true;
 
-                            // Update the progress bar width and add alert class
-                            var $bar = $('#strengthBar');
-                            switch (score) {
-                                case 0:
-                                    $bar.attr('class', 'progress-bar progress-bar-danger')
-                                        .css('width', '1%');
-                                    break;
-                                case 1:
-                                    $bar.attr('class', 'progress-bar progress-bar-danger')
-                                        .css('width', '25%');
-                                    break;
-                                case 2:
-                                    $bar.attr('class', 'progress-bar progress-bar-danger')
-                                        .css('width', '50%');
-                                    break;
-                                case 3:
-                                    $bar.attr('class', 'progress-bar progress-bar-warning')
-                                        .css('width', '75%');
-                                    break;
-                                case 4:
-                                    $bar.attr('class', 'progress-bar progress-bar-success')
-                                        .css('width', '100%');
-                                    break;
-                            }
-
-                            // We will treat the password as an invalid one if the score is less than 3
-                            if (score < 3) {
-                                return {
-                                    valid: false,
-                                    message: message
-                                }
-                            }
-                            return true;
-                        }
+                            return false;
+                        },
+                        message: obtainProperLanguage('password', 'data-pwnocomplex')
                     }
                 }
             },
-                    inputPasswordConfirm: {
-                        validators: {
-                            identical: {
-                                field: 'password',
-                                message: obtainProperLanguage('password', 'data-nomatchpassword')
-                            }
-                        }
+            inputPasswordConfirm: {
+                validators: {
+                    identical: {
+                        field: 'password',
+                        message: obtainProperLanguage('password', 'data-nomatchpassword')
                     }
                 }
-            });
+            }
+        }
+    });
 });
 
 function obtainProperLanguage(field, attribute) {

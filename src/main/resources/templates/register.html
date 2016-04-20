@@ -34,15 +34,13 @@
             <input type="password" class="form-control" name="password" id="password" required="required"
                    th:attr="data-notempty=#{register.notempty('password')},data-pwnocomplex=#{register.password.complex},data-nomatchpassword=#{register.password.notmatch}">
         </div>
+
         <div class="form-group">
             <label class="control-label" for="inputPasswordConfirm"
                    th:utext="#{register.password.confirm}">Password</label>
             <input type="password" class="form-control" name="inputPasswordConfirm" id="inputPasswordConfirm"
                    required="required"
                    th:attr="data-notempty=#{register.notempty('password')},data-nomatchpassword=#{register.password.notmatch}">
-        </div>
-        <div class="progress password-progress form-group">
-            <div id="strengthBar" class="progress-bar" role="progressbar" style="width: 0;"></div>
         </div>
 
         <div class="fileinput fileinput-new form-group" data-provides="fileinput">
@@ -55,9 +53,9 @@
                 <input type="file" accept="image/png, image/jpeg" id="fileInput" name="img-avatar"/></span>
             <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput"
                th:text="#{register.remove.image}"></a>
-            <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput"
-               th:text="#{register.pick.gallery}"></a>
-            <a href="#" class="input-group-addon btn btn-default fileinput-new" data-dismiss="fileinput"
+            <a href="#" class="input-group-addon btn btn-default fileinput-exists"
+               th:text="#{register.pick.gallery}" data-toggle="modal" data-target="#champions_modal"></a>
+            <a href="#" class="input-group-addon btn btn-default fileinput-new" data-toggle="modal" data-target="#champions_modal"
                th:text="#{register.pick.gallery}"></a>
         </div>
         <input type="hidden" name="galeria" value="/img/champion_icons/Teemo.png">
@@ -71,7 +69,7 @@
     </button>-->
 
     <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal fade" id="champions_modal" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
@@ -81,7 +79,7 @@
                 </div>
                 <div class="modal-body" id="modal-champions-body">
                     <div th:each="nombre : ${listaNamesChamps}" style="float:left;">
-                        <img th:attr="src=@{|/img/champion_icons/${nombre}|},title=${nombre},alt=${nombre}"/>
+                        <img th:attr="src=@{|/img/champion_icons/${nombre}|},title=${nombre},alt=${nombre}" onclick="this.style.border='1px solid red'" style="width:50px;height:50px;"/>
                     </div>
                 </div>
                 <div class="modal-footer">
