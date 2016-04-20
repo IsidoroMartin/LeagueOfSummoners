@@ -22,6 +22,7 @@ public class LeagueAccessAPI {
         RiotAPI.setAPIKey(LEAGUEOFLEGENDSKEY);
     }
 
+/*
     public static void main(String[] args) {
         initRIOTAPI();
         Summoner summ = RiotAPI.getSummonerByName("zrows");
@@ -36,4 +37,6 @@ public class LeagueAccessAPI {
         System.out.println("Level" + summ.getLevel());
         System.out.println("Icon ID " + summ.getProfileIconID());
     }
+}
+*/
 }

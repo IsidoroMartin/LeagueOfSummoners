@@ -164,11 +164,14 @@ public class PasswordHash {
             return hex;
     }
 
-    /**
+/*
+    */
+/**
      * Tests the basic functionality of the PasswordHash class
      *
      * @param args ignored
-     */
+     *//*
+
     public static void main(String[] args) {
         String passwordDatabase = createHash("juanjo");
         System.out.println("Password in database: " + passwordDatabase);
@@ -181,7 +184,7 @@ public class PasswordHash {
             System.out.println("LA password es incrorrecta..");
         }
 
+*/
 
     }
 
-}
