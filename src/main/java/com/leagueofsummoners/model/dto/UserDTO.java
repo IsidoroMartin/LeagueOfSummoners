@@ -1,5 +1,6 @@
 package com.leagueofsummoners.model.dto;
 
+import com.leagueofsummoners.model.custom.validators.annotations.ValidateSummonerNameExists;
 import com.leagueofsummoners.model.utils.ValidationRegEXP;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -15,7 +16,7 @@ import java.io.Serializable;
  */
 @Entity(name = "user")
 @Table(name = "users")
-public class UserDTO implements Serializable {
+public class UserDTO extends GenericDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,14 +27,17 @@ public class UserDTO implements Serializable {
 
     @Column(nullable = false, name = "summoner_name", unique = true)
     @Length(min = 4, max = 20)
+    @Pattern(regexp = ValidationRegEXP.VALIDATE_NAME)
+    @ValidateSummonerNameExists
     private String summonerName;
 
     @Column(nullable = false, unique = true)
     @Length(min = 4, max = 12)
+    @Pattern(regexp = ValidationRegEXP.VALIDATE_NAME)
     private String username;
 
     @Column(nullable = false)
-    @Length(min = 6, max = 300)
+    @Length(min = 8, max = 300)
     private String password;
 
     @Email
@@ -137,9 +141,6 @@ public class UserDTO implements Serializable {
         this.permissionLevel = permissionLevel;
     }
 
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
 
     public UserDTO(Long idUser, String summonerName, String username, String password, String email, String avatar,
                    String firma, String permissionLevel) {

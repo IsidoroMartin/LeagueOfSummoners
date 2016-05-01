@@ -1,21 +1,14 @@
-package com.leagueofsummoners.model.utils;
+package com.leagueofsummoners;
 
-import com.leagueofsummoners.model.dto.UserDTO;
 import com.robrua.orianna.api.core.RiotAPI;
-import com.robrua.orianna.type.core.common.QueueType;
 import com.robrua.orianna.type.core.common.Region;
 import com.robrua.orianna.type.core.currentgame.CurrentGame;
-import com.robrua.orianna.type.core.league.League;
-import com.robrua.orianna.type.core.staticdata.Champion;
 import com.robrua.orianna.type.core.summoner.Summoner;
 
-import java.util.List;
-
 /**
- * Created by juanj on 16/04/2016.
+ * Created by juanj on 01/05/2016.
  */
-public class LeagueAccessAPI {
-
+public class Test {
     public static final String LEAGUEOFLEGENDSKEY = "863dd8a4-3747-47cc-9628-72cbd46a826e";
 
     public static void initRIOTAPI() {
@@ -30,4 +23,5 @@ public class LeagueAccessAPI {
         CurrentGame game = summ.getCurrentGame();
     }
 }
+
 

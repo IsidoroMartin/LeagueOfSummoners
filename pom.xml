@@ -6,7 +6,7 @@
     <groupId>com.leagueofsummoners</groupId>
     <artifactId>leagueofsummoners</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>leagueofsummoners</name>
     <description>Spring Boot project League of summoners</description>
@@ -137,6 +137,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
+        </dependency>
+        <!-- Librería que evita conflictos entre apache y springboot -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>4.2.5.RELEASE</version>
         </dependency>
     </dependencies>
     <build>

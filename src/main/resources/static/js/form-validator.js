@@ -28,7 +28,7 @@ $(function (e) {
                         message: obtainProperLanguage('username', 'data-regexpusername')
                     },
                     remote: {
-                        url: '/api/user/username',
+                        url: './api/user/username',
                         data: function (validator) {
                             return {
                                 username: validator.getFieldElements('username').val()
@@ -49,7 +49,7 @@ $(function (e) {
                         message: obtainProperLanguage('summonerName', 'data-characterslength')
                     },
                     remote: {
-                        url: '/api/user/summonername',
+                        url: './api/user/summonername',
                         data: function (validator) {
                             return {
                                 summonerName: validator.getFieldElements('summonerName').val()
@@ -69,7 +69,7 @@ $(function (e) {
                         message: obtainProperLanguage('inputEmail', 'data-emailerror')
                     },
                     remote: {
-                        url: '/api/user/email',
+                        url: './api/user/email',
                         data: function (validator) {
                             return {
                                 email: validator.getFieldElements('email').val()

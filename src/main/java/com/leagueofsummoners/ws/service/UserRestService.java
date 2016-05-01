@@ -1,12 +1,12 @@
 package com.leagueofsummoners.ws.service;
 
-import com.leagueofsummoners.interfaces.services.IServicesUsers;
+import com.leagueofsummoners.model.interfaces.services.IServicesUsers;
 import com.leagueofsummoners.model.dto.GenericJsonValidator;
 import com.leagueofsummoners.model.dto.UserDTO;
-import com.leagueofsummoners.security.annotations.LoginAdminRequired;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -49,7 +49,6 @@ public class UserRestService {
      */
     @RequestMapping(value = "/email", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
     public GenericJsonValidator checkIfEmailExists(@RequestParam("email") String email) {
-        System.out.println(email);
         return new GenericJsonValidator(this.servicioUsers.checkIfEmailAvailable(email));
     }
 
@@ -59,8 +58,8 @@ public class UserRestService {
      * @return si está presente devuelve true, si no false.
      */
     @RequestMapping(value = "/summonername", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
-    public GenericJsonValidator checkSummonerExists(@RequestParam("summonerName") String summonerName) {
+    public GenericJsonValidator checkSummonerExists(@RequestParam("summonerName") String summonerName, HttpSession session) {
         int summonerLength = summonerName.length();
-        return new GenericJsonValidator(summonerLength >= 4 && summonerLength <= 24 && this.servicioUsers.checkIfSummonerNameExists(summonerName));
+        return new GenericJsonValidator(summonerLength >= 4 && summonerLength <= 24 && this.servicioUsers.checkIfSummonerNameExists(summonerName,session));
     }
 }

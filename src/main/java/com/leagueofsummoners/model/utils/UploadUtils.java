@@ -16,8 +16,10 @@ public class UploadUtils {
 
     static {
         try {
-            root = new File(".").getCanonicalPath() + File.separator + "src" + File.separator + "main"
-                    + File.separator + "resources" + File.separator + "static" + File.separator;
+           // root = new File(".").getCanonicalPath() + File.separator + "src" + File.separator + "main"
+             //       + File.separator + "resources" + File.separator + "static" + File.separator;
+             root = new File(".").getCanonicalPath() + File.separator + "webapps" + File.separator + "leagueofsummoners" + File.separator + "WEB-INF" + File.separator
+             + "classes" + File.separator + "static" + File.separator + "img" + File.separator + "avatars";
         } catch (IOException e) {
             LeagueofsummonersApplication.LOGGER.error("Error creando ruta - UploadUtils");
             e.printStackTrace();
@@ -31,8 +33,10 @@ public class UploadUtils {
                 return null;
             String imgPath = null;
             String imgName = "avatar_" + username + "." + fileExtension;
-            String avatarPath = "img" + File.separator + "avatars" + File.separator + username;
+            //String avatarPath = "img" + File.separator + "avatars" + File.separator + username;
+            String avatarPath = File.separator + username;
             return (saveFile(file, root + avatarPath + File.separator, imgName) != null) ? avatarPath + File.separator + imgName : null;
+            //return (saveFile(file, "C:\\\\avatars" + avatarPath + File.separator, imgName) != null) ? avatarPath + File.separator + imgName : null;
         }
         return null;
     }

@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @Entity(name = "championSpells")
 @Table(name = "CHAMPION_SPELLS")
-public class ChampionsSpellsDTO implements Serializable {
+public class ChampionsSpellsDTO extends GenericDTO implements Serializable {
 
 	/**
 	 * 

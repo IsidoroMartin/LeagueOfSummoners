@@ -1,51 +1,55 @@
 package com.leagueofsummoners.model.dto;
 
-import com.leagueofsummoners.model.enums.LanguageSelected;
+import javax.persistence.*;
 
-public class GuideDTO {
+import static com.leagueofsummoners.model.persistence.tables.TableNames.*;
 
-	private int id_guide;
-	private int id_user;
-	private int id_champion;
+
+@Entity(name = "guides")
+@Table(name = TABLE_GUIDES)
+public class GuideDTO extends GenericDTO {
+
+	@Id
+	@GeneratedValue
+	@Column(name = COLUMN_GUIDES_ID_GUIDE)
+	private int idGuide;
+	@Column(name = COLUMN_GUIDES_ID_USER)
+	private int idUser;
+	@Column(name = COLUMN_GUIDES_ID_CHAMPION)
+	private int idChampion;
+	@Column(name = COLUMN_GUIDES_TITLE)
 	private String guideTitle;
+	@Column(name = COLUMN_GUIDES_CONTENT)
 	private String guideContent;
-	private LanguageSelected languageSelected;
+	@Column(name = COLUMN_GUIDES_LANG)
+	private String guideLang;
 
 	public GuideDTO() {
 	}
 
-	public GuideDTO(int id_guide, int id_user, int id_champion, String guideTitle, String guideContent,
-			LanguageSelected languageSelected) {
-		this.id_guide = id_guide;
-		this.id_user = id_user;
-		this.id_champion = id_champion;
-		this.guideTitle = guideTitle;
-		this.guideContent = guideContent;
-		this.languageSelected = languageSelected;
+
+	public int getIdGuide() {
+		return idGuide;
 	}
 
-	public int getId_guide() {
-		return id_guide;
+	public void setIdGuide(int idGuide) {
+		this.idGuide = idGuide;
 	}
 
-	public void setId_guide(int id_guide) {
-		this.id_guide = id_guide;
+	public int getIdUser() {
+		return idUser;
 	}
 
-	public int getId_user() {
-		return id_user;
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
 	}
 
-	public void setId_user(int id_user) {
-		this.id_user = id_user;
+	public int getIdChampion() {
+		return idChampion;
 	}
 
-	public int getId_champion() {
-		return id_champion;
-	}
-
-	public void setId_champion(int id_champion) {
-		this.id_champion = id_champion;
+	public void setIdChampion(int idChampion) {
+		this.idChampion = idChampion;
 	}
 
 	public String getGuideTitle() {
@@ -64,12 +68,11 @@ public class GuideDTO {
 		this.guideContent = guideContent;
 	}
 
-	public LanguageSelected getLanguageSelected() {
-		return languageSelected;
+	public String getGuideLang() {
+		return guideLang;
 	}
 
-	public void setLanguageSelected(LanguageSelected languageSelected) {
-		this.languageSelected = languageSelected;
-	};
-
+	public void setGuideLang(String guideLang) {
+		this.guideLang = guideLang;
+	}
 }

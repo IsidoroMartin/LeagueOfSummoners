@@ -1,11 +1,9 @@
 package com.leagueofsummoners.controllers;
 
 import com.leagueofsummoners.LeagueofsummonersApplication;
-import com.leagueofsummoners.interfaces.services.IServicesChampions;
-import com.leagueofsummoners.interfaces.services.IServicesUsers;
-import com.leagueofsummoners.model.dto.ChampionDTO;
+import com.leagueofsummoners.model.interfaces.services.IServicesChampions;
+import com.leagueofsummoners.model.interfaces.services.IServicesUsers;
 import com.leagueofsummoners.model.dto.UserDTO;
-import com.leagueofsummoners.model.utils.DetermineLanguageExport;
 import com.leagueofsummoners.security.annotations.LoginRequired;
 import com.robrua.orianna.type.core.summoner.Summoner;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +28,7 @@ public class UserController {
     @Autowired
     private IServicesUsers servicioUsers;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/index.html","/index","/home"}, method = RequestMethod.GET)
     public String index(ModelMap valores, HttpSession session, Locale locale) {
         //AQUI DEBERIA DE IR LA PETICION A LOS CHAMPIONS DE ROTATION
         return "index";
@@ -74,10 +72,9 @@ public class UserController {
         Summoner summ = this.servicioUsers.getSummonerData(((UserDTO) session.getAttribute("userlogged")).getSummonerName());
         valores.put("summ_level", summ.getLevel());
         valores.put("summ_name", summ.getName());
-        valores.put("summ_tier", summ.getLeagueEntries().get(0).getTier());
+        valores.put("summ_tier", "No tiene");
         valores.put("summ_iconID", summ.getProfileIconID());
         valores.put("summ_playing", summ.getCurrentGame());
-
         return "profile";
     }
 

@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @Entity(name = "championPassives")
 @Table(name = "CHAMPION_PASSIVES")
-public class ChampionsPassivesDTO implements Serializable {
+public class ChampionsPassivesDTO extends GenericDTO implements Serializable {
 
 	private static final long serialVersionUID = -8937457657957212292L;
 	

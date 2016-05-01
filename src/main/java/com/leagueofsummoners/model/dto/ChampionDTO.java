@@ -4,16 +4,15 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-import static com.leagueofsummoners.persistence.tables.TableNames.*;
+import static com.leagueofsummoners.model.persistence.tables.TableNames.*;
 
 /**
  * Este bean representa el objeto Champion de la base de datos
- * 
  * @author Juanjors
  */
 @Entity(name = "champion")
 @Table(name = TABLE_CHAMPIONS)
-public class ChampionDTO implements Serializable {
+public class ChampionDTO extends GenericDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

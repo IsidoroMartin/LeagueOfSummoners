@@ -1,7 +1,7 @@
-package com.leagueofsummoners.persistence.dao;
+package com.leagueofsummoners.model.persistence.dao;
 
 import com.leagueofsummoners.LeagueofsummonersApplication;
-import com.leagueofsummoners.interfaces.persistence.UserRepository;
+import com.leagueofsummoners.model.interfaces.persistence.UserRepository;
 import com.leagueofsummoners.model.dto.UserDTO;
 import com.leagueofsummoners.model.utils.PasswordHash;
 import org.springframework.beans.factory.annotation.Autowired;

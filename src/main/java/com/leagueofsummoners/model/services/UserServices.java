@@ -1,19 +1,20 @@
 package com.leagueofsummoners.model.services;
 
 import com.leagueofsummoners.LeagueofsummonersApplication;
-import com.leagueofsummoners.interfaces.services.IServicesUsers;
+import com.leagueofsummoners.model.interfaces.services.IServicesUsers;
 import com.leagueofsummoners.model.dto.GuideDTO;
 import com.leagueofsummoners.model.dto.UserDTO;
 import com.leagueofsummoners.model.utils.PasswordHash;
 import com.leagueofsummoners.model.utils.UploadUtils;
-import com.leagueofsummoners.persistence.dao.SummonerDAO;
-import com.leagueofsummoners.persistence.dao.UserDAO;
+import com.leagueofsummoners.model.persistence.dao.SummonerDAO;
+import com.leagueofsummoners.model.persistence.dao.UserDAO;
 import com.robrua.orianna.type.core.summoner.Summoner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.List;
 
 @Service
@@ -40,8 +41,11 @@ public class UserServices implements IServicesUsers {
     }
 
     @Override
-    public boolean checkIfSummonerNameExists(String summonerName) {
-        return this.summonerDAO.getSummonerData(summonerName) != null;
+    public boolean checkIfSummonerNameExists(String summonerName, HttpSession session) {
+        boolean summonerExists =this.summonerDAO.getSummonerData(summonerName) != null;
+        if(summonerExists)
+            session.setAttribute("summonerExists", true);
+        return summonerExists;
     }
 
     @Override
@@ -101,7 +105,7 @@ public class UserServices implements IServicesUsers {
     public boolean registrarUser(UserDTO userdto, MultipartFile file, String galeriaIcon) {
         if (!this.checkIfUserExists(userdto.getUsername())) {
             String savePath = null;
-            savePath = UploadUtils.saveImg(file, userdto.getUsername());
+            savePath =  "img" + File.separator + "avatars" + UploadUtils.saveImg(file, userdto.getUsername());
             if (savePath != null) {
                 userdto.setAvatar(savePath);
             } else {
@@ -109,7 +113,7 @@ public class UserServices implements IServicesUsers {
             }
             String passwordHash = PasswordHash.createHash(userdto.getPassword());
             userdto.setPassword((passwordHash));
-            return this.save(userdto) != null; //Devuelve un usuario si este ha sido insertado, si no, null
+            return this.save(userdto) != null; //Devuelve true si el usuario es distinto de nulo
         }
         return false;
     }

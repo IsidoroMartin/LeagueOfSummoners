@@ -1,8 +1,8 @@
 package com.leagueofsummoners.model.services;
 
-import com.leagueofsummoners.interfaces.services.IServicesChampions;
+import com.leagueofsummoners.model.interfaces.services.IServicesChampions;
 import com.leagueofsummoners.model.dto.ChampionDTO;
-import com.leagueofsummoners.persistence.dao.ChampionDAO;
+import com.leagueofsummoners.model.persistence.dao.ChampionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

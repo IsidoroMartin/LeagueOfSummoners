@@ -1,4 +1,4 @@
-package com.leagueofsummoners.interfaces.services;
+package com.leagueofsummoners.model.interfaces.services;
 
 import com.leagueofsummoners.model.dto.GuideDTO;
 import com.leagueofsummoners.model.dto.UserDTO;
@@ -12,7 +12,7 @@ public interface IServicesUsers {
 
 	/**
 	 * Mira si el username parametrizado esta disponible
-	 * 
+	 *
 	 * @param username
 	 * @return true si está disponible, false si no lo esta
 	 */
@@ -32,7 +32,7 @@ public interface IServicesUsers {
 	 * @param summonerName
 	 * @return true si está disponible, false si no lo esta
 	 */
-	boolean checkIfSummonerNameExists(String summonerName);
+	boolean checkIfSummonerNameExists(String summonerName, HttpSession session);
 
 	/**
 	 * Devuelve una lista de todos los usuarios

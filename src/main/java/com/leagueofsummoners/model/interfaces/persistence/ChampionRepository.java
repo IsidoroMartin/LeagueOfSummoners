@@ -1,4 +1,4 @@
-package com.leagueofsummoners.interfaces.persistence;
+package com.leagueofsummoners.model.interfaces.persistence;
 
 
 import com.leagueofsummoners.model.dto.ChampionDTO;

@@ -1,4 +1,4 @@
-package com.leagueofsummoners.interfaces.services;
+package com.leagueofsummoners.model.interfaces.services;
 
 import com.leagueofsummoners.model.dto.ChampionDTO;
 

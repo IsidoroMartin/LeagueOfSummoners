@@ -10,7 +10,7 @@ public class DetermineLanguageExport {
 	 * Recibe el objeto del que se quiere invocar el método, el locale (el idioma en el que se quiere obtener), 
 	 * y el nombre del método (Si en el idioma de las dos últimas letras)
 	 * @param obj
-	 * @param lang
+	 * @param locale
 	 * @param nombreMetodoMultiLang
 	 * @return La ejecución del método
 	 */
