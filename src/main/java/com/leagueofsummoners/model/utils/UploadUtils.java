@@ -1,5 +1,6 @@
 package com.leagueofsummoners.model.utils;
 
+import com.leagueofsummoners.ApplicationPaths;
 import com.leagueofsummoners.LeagueofsummonersApplication;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.util.FileCopyUtils;
@@ -12,31 +13,15 @@ import java.io.IOException;
 
 public class UploadUtils {
 
-    public static String root;
-
-    static {
-        try {
-            // root = new File(".").getCanonicalPath() + File.separator + "src" + File.separator + "main"
-            //       + File.separator + "resources" + File.separator + "static" + File.separator;
-            root = new File(".").getCanonicalPath() + File.separator + "webapps" + File.separator + "leagueofsummoners" + File.separator + "WEB-INF" + File.separator
-                    + "classes" + File.separator + "static" + File.separator + "img" + File.separator + "avatars";
-        } catch (IOException e) {
-            LeagueofsummonersApplication.LOGGER.error("Error creando ruta - UploadUtils");
-            e.printStackTrace();
-        }
-    }
 
     public static String saveImg(MultipartFile file, String username) {
         if (!file.isEmpty()) {
             String fileExtension = FilenameUtils.getExtension(file.getOriginalFilename());
             if (!fileExtension.equals("jpg") && !fileExtension.equals("jpeg") && !fileExtension.equals("png"))
                 return null;
-            String imgPath = null;
             String imgName = "avatar_" + username + "." + fileExtension;
-            //String avatarPath = "img" + File.separator + "avatars" + File.separator + username;
             String avatarPath = File.separator + username;
-            return (saveFile(file, root + avatarPath + File.separator, imgName) != null) ? avatarPath + File.separator + imgName : null;
-            //return (saveFile(file, "C:\\\\avatars" + avatarPath + File.separator, imgName) != null) ? avatarPath + File.separator + imgName : null;
+            return (saveFile(file, ApplicationPaths.GALLERY_DEVELOP_SAVE_PATH + avatarPath + File.separator, imgName) != null) ? avatarPath + File.separator + imgName : null;
         }
         return null;
     }

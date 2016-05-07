@@ -123,3 +123,17 @@ $(function (e) {
 function obtainProperLanguage(field, attribute) {
     return $('#' + field).attr(attribute);
 }
+
+$('.champion-gallery').click(function () {
+    var championPicked = $(this);
+    $('.fileinput-filename').html(championPicked.attr("title"));
+    $('.glyphicon-picture').css({opacity: 1});
+    $('#img-galeria').val(championPicked.attr("src"));
+    $('#champions_modal').modal('toggle');
+    $('#fileInput').html();
+});
+
+
+$('#fileInput').click(function () {
+    $('#img-galeria').val("");
+});

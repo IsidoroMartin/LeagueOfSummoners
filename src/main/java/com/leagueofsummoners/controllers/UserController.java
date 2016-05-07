@@ -1,10 +1,12 @@
 package com.leagueofsummoners.controllers;
 
+import com.leagueofsummoners.ApplicationPaths;
 import com.leagueofsummoners.LeagueofsummonersApplication;
 import com.leagueofsummoners.model.interfaces.services.IServicesChampions;
 import com.leagueofsummoners.model.interfaces.services.IServicesUsers;
 import com.leagueofsummoners.model.dto.UserDTO;
 import com.leagueofsummoners.security.annotations.LoginRequired;
+import com.robrua.orianna.api.core.RiotAPI;
 import com.robrua.orianna.type.core.summoner.Summoner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +38,7 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register(UserDTO userdto, ModelMap valores) {
-        valores.put("listaNamesChamps", this.servicioChampions.getChampionsIconsNamesList());
+        valores.put("listaChamps", this.servicioChampions.getChampionList());
         return "register";
     }
 
@@ -44,7 +46,8 @@ public class UserController {
     public String registerUser(@Valid UserDTO userdto, BindingResult bindingResult, Model model,
                                @RequestParam("img-avatar") MultipartFile[] file, @RequestParam("galeria") String galeriaIcon) {
         String page = "redirect:index.html?action=form-error";
-        String avatar = "/img/champion_icons/" + galeriaIcon;
+        String avatar = galeriaIcon;
+        System.out.println(file.length);
         if (!bindingResult.hasErrors()) {
             if (this.servicioUsers.registrarUser(userdto, file[0], galeriaIcon))
                 page = "login";
@@ -73,8 +76,8 @@ public class UserController {
         valores.put("summ_level", summ.getLevel());
         valores.put("summ_name", summ.getName());
         valores.put("summ_tier", "No tien");
-        valores.put("summ_iconID", summ.getProfileIconID());
-        valores.put("summ_playing", summ.getCurrentGame());
+        valores.put("summ_icon", ApplicationPaths.SUMMONER_PROFILE_ICON_PATH + summ.getProfileIconID());
+     /*   valores.put("summ_playing", summ.getCurrentGame());*/
         return "profile";
     }
 

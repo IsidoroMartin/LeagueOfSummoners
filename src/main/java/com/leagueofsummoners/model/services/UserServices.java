@@ -1,5 +1,6 @@
 package com.leagueofsummoners.model.services;
 
+import com.leagueofsummoners.ApplicationPaths;
 import com.leagueofsummoners.LeagueofsummonersApplication;
 import com.leagueofsummoners.model.interfaces.services.IServicesUsers;
 import com.leagueofsummoners.model.dto.GuideDTO;
@@ -42,8 +43,8 @@ public class UserServices implements IServicesUsers {
 
     @Override
     public boolean checkIfSummonerNameExists(String summonerName, HttpSession session) {
-        boolean summonerExists =this.summonerDAO.getSummonerData(summonerName) != null;
-        if(summonerExists)
+        boolean summonerExists = this.summonerDAO.getSummonerData(summonerName) != null;
+        if (summonerExists)
             session.setAttribute("summonerExists", true);
         return summonerExists;
     }
@@ -104,10 +105,11 @@ public class UserServices implements IServicesUsers {
     @Override
     public boolean registrarUser(UserDTO userdto, MultipartFile file, String galeriaIcon) {
         if (!this.checkIfUserExists(userdto.getUsername())) {
-            String savePath = null;
-            savePath =  "img" + File.separator + "avatars" + UploadUtils.saveImg(file, userdto.getUsername());
-            if (savePath != null) {
+            if (galeriaIcon.equals("") && !file.isEmpty()) {
+                String savePath = "img" + File.separator + "avatars" + UploadUtils.saveImg(file, userdto.getUsername());
                 userdto.setAvatar(savePath);
+            } else if (galeriaIcon.equals("")) {
+                galeriaIcon = ApplicationPaths.TEEMO_ICON;
             } else {
                 userdto.setAvatar(galeriaIcon);
             }
