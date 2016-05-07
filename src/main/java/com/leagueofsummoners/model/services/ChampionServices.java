@@ -3,6 +3,8 @@ package com.leagueofsummoners.model.services;
 import com.leagueofsummoners.model.interfaces.services.IServicesChampions;
 import com.leagueofsummoners.model.dto.ChampionDTO;
 import com.leagueofsummoners.model.persistence.dao.ChampionDAO;
+
+import com.robrua.orianna.type.core.staticdata.Champion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,8 @@ public class ChampionServices implements IServicesChampions {
 	public List<ChampionDTO> getChampionList() {
 		return this.championDAO.getChampionList();
 	}
+
+	public List<Champion> getChampionRotation() {return this.championDAO.getChampionRotation();}
 
 	@Override
 	public ChampionDTO findByChampionName(String championName) {

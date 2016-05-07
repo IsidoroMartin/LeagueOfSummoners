@@ -1,5 +1,7 @@
 package com.leagueofsummoners.model.dto;
 
+import com.robrua.orianna.type.core.staticdata.Champion;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -144,5 +146,8 @@ public class ChampionDTO extends GenericDTO implements Serializable {
 	public void setPassive(ChampionsPassivesDTO passive) {
 		this.passive = passive;
 	}
-
+	@Override
+	public String toString() {
+		return this.championName;
+	}
 }

@@ -12,11 +12,11 @@ import java.util.List;
 public interface ChampionRepository extends Repository<ChampionDTO, Long> {
 
 	Page<ChampionDTO> findAll(Pageable pageable);
-	
+
 	List<ChampionDTO> findAll();
 
 	ChampionDTO findBychampionNameIgnoringCase(String championName);
-	
+
 	ChampionDTO findByIdChampion(Long idChampion);
 
 }

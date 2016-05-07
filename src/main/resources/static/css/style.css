@@ -37,10 +37,10 @@ html, body {
     font-size: 16px;
     margin: 0px;
     padding: 0px;
-/*    background-image: url(../img/wallpaper.jpg);*/
+    /*font-size: 1.5rem;*/
+    /*    background-image: url(../img/wallpaper.jpg);*/
 
 }
-
 
 h2 {
     padding: 0px;
@@ -63,8 +63,8 @@ body > header h1 {
     margin-top: 0px;
 }
 
-#buscador-home{
-    padding-bottom: 25%;
+#buscador-home {
+    padding-bottom: 27%;
 }
 
 body > header .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
@@ -116,8 +116,8 @@ header input[type=button] {
     /*border-bottom: 2px solid #c2914f;*/
 }
 
-#bootstrap-overrides #menu{
-    padding-left:0px;
+#bootstrap-overrides #menu {
+    padding-left: 0px;
 }
 
 #bootstrap-overrides .collapse .navbar-collapse {
@@ -131,23 +131,23 @@ header input[type=button] {
 
 @media only screen and (min-width: 768px) {
     #bootstrap-overrides .navbar .navbar-nav {
-        /*display: inline-block;*/
-        /*height: 44px;*/
-        /*float: none;*/
-        /*margin-left:5% ;*/
+        display: inline-block;
+        height: 44px;
+        float: none;
+        margin-left:5% ;
     }
 
     .navbar .navbar-collapse {
         text-align: center;
     }
 
-    .navbar-nav li a {
-        width: 143px;
-    }
+        /*.navbar-nav li a {*/
+            /*width: 143px;*/
+        /*}*/
 
-    .navbar-nav .navbar-right li a {
-        width: 300px;
-    }
+        /*.navbar-nav .navbar-right li a {*/
+            /*width: 300px;*/
+        /*}*/
 
     #bootstrap-overrides nav .menu-left a:hover, #bootstrap-overrides nav a:focus, #bootstrap-overrides nav .menu-left li.active a {
         background-image: url("../img/selected.png");
@@ -156,13 +156,28 @@ header input[type=button] {
 }
 
 @media only screen and (min-width: 1024px) {
-    .navbar-nav li a {
-        width: 150px;
-    }
+    /*.navbar-nav li a {*/
+        /*width: 150px;*/
+    /*}*/
 }
 
 nav.navbar {
     margin-bottom: 0px;
+}
+.navbar-brand {
+    padding: 0px;
+}
+.navbar-brand:not(#menu-logo){
+    padding: 15px;
+}
+
+.navbar-header{
+    margin-left: 2%;
+    margin-right: 2%
+}
+.navbar-brand img{
+    margin-top: 5%;
+    height: 90%;
 }
 
 #bootstrap-overrides nav a.iniciar-sesion-btn {
@@ -182,7 +197,6 @@ nav.navbar {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
 }
 
-
 #bootstrap-overrides nav a.registrarse-btn:hover, #bootstrap-overrides nav a.iniciar-sesion-btn:hover {
     /*background-color: rgba(255, 255, 255, .2);*/
     background-color: red;
@@ -194,27 +208,37 @@ header.container, main .container {
 
 #buscador-home {
     background-image: url("../img/fondo-buscador-home.jpg");
-    background-size: 100% auto;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
-    height: 80%;
 }
 
 #buscador-home header img {
     margin-top: 2%;
+    z-index: 5;
 }
 
 #buscador-home main {
+    margin-top: -1.2%;
+    z-index: 1;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.9);
-    padding: 2% 3%;
     border: rgba(28, 26, 52, 1) solid 2px;
+    padding: 1% 2%;
 }
 
-#buscador-home main form input[type=text] {
-    text-align: center;
+#buscador-home main form {
+    margin-bottom: 0px;
 }
+
+/*#buscador-home main form input[type=text] {*/
+    /*text-align: center;*/
+/*}*/
 
 #buscador-home main label h2 {
+    font-size: 1.8rem;
+}
+#buscador-home main  input[type=text],#buscador-home main  button[type=submit]{
+    height: 20%;
     font-size: 1.5rem;
 }
 
@@ -278,6 +302,11 @@ footer a, footer a:hover, footer a:focus, footer a:active, footer a:visited {
     color: white;
 }
 
-.has-feedback label~.form-control-feedback{
-    top:29px;
+.has-feedback label ~ .form-control-feedback {
+    top: 29px;
+}
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
 }

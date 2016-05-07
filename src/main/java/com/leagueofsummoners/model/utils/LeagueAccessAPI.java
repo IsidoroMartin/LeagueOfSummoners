@@ -19,7 +19,8 @@ import org.springframework.stereotype.Component;
  */
 public class LeagueAccessAPI {
 
-    public static String LEAGUE_OF_LEGENDS_KEY = "863dd8a4-3747-47cc-9628-72cbd46a826e";
+//    public static String LEAGUE_OF_LEGENDS_KEY = "863dd8a4-3747-47cc-9628-72cbd46a826e";// Juanjo
+    public static String LEAGUE_OF_LEGENDS_KEY = "731bd096-290a-4e20-aae8-0c5ff78522a6";//Isi
 
     public static void initRIOTAPI() {
         LeagueofsummonersApplication.LOGGER.debug("La riot key que se está utilizando es: " + LEAGUE_OF_LEGENDS_KEY);

@@ -30,11 +30,6 @@ public class UserController {
     @Autowired
     private IServicesUsers servicioUsers;
 
-    @RequestMapping(value = {"/", "/index.html","/index","/home"}, method = RequestMethod.GET)
-    public String index(ModelMap valores, HttpSession session, Locale locale) {
-        //AQUI DEBERIA DE IR LA PETICION A LOS CHAMPIONS DE ROTATION
-        return "index";
-    }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register(UserDTO userdto, ModelMap valores) {
