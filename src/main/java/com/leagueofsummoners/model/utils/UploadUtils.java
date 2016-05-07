@@ -16,10 +16,10 @@ public class UploadUtils {
 
     static {
         try {
-           // root = new File(".").getCanonicalPath() + File.separator + "src" + File.separator + "main"
-             //       + File.separator + "resources" + File.separator + "static" + File.separator;
-             root = new File(".").getCanonicalPath() + File.separator + "webapps" + File.separator + "leagueofsummoners" + File.separator + "WEB-INF" + File.separator
-             + "classes" + File.separator + "static" + File.separator + "img" + File.separator + "avatars";
+            // root = new File(".").getCanonicalPath() + File.separator + "src" + File.separator + "main"
+            //       + File.separator + "resources" + File.separator + "static" + File.separator;
+            root = new File(".").getCanonicalPath() + File.separator + "webapps" + File.separator + "leagueofsummoners" + File.separator + "WEB-INF" + File.separator
+                    + "classes" + File.separator + "static" + File.separator + "img" + File.separator + "avatars";
         } catch (IOException e) {
             LeagueofsummonersApplication.LOGGER.error("Error creando ruta - UploadUtils");
             e.printStackTrace();

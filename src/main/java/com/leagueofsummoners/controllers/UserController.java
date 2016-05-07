@@ -72,7 +72,7 @@ public class UserController {
         Summoner summ = this.servicioUsers.getSummonerData(((UserDTO) session.getAttribute("userlogged")).getSummonerName());
         valores.put("summ_level", summ.getLevel());
         valores.put("summ_name", summ.getName());
-        valores.put("summ_tier", "No tiene");
+        valores.put("summ_tier", "No tien");
         valores.put("summ_iconID", summ.getProfileIconID());
         valores.put("summ_playing", summ.getCurrentGame());
         return "profile";

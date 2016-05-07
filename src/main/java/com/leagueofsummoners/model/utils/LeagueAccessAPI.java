@@ -1,33 +1,47 @@
 package com.leagueofsummoners.model.utils;
 
-import com.leagueofsummoners.model.dto.UserDTO;
+import com.leagueofsummoners.LeagueofsummonersApplication;
 import com.robrua.orianna.api.core.RiotAPI;
-import com.robrua.orianna.type.core.common.QueueType;
 import com.robrua.orianna.type.core.common.Region;
 import com.robrua.orianna.type.core.currentgame.CurrentGame;
 import com.robrua.orianna.type.core.league.League;
-import com.robrua.orianna.type.core.staticdata.Champion;
 import com.robrua.orianna.type.core.summoner.Summoner;
-
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by juanj on 16/04/2016.
  */
 public class LeagueAccessAPI {
 
-    public static final String LEAGUEOFLEGENDSKEY = "863dd8a4-3747-47cc-9628-72cbd46a826e";
+    public static String LEAGUE_OF_LEGENDS_KEY = "863dd8a4-3747-47cc-9628-72cbd46a826e";
 
     public static void initRIOTAPI() {
+        LeagueofsummonersApplication.LOGGER.debug("La riot key que se está utilizando es: " + LEAGUE_OF_LEGENDS_KEY);
         RiotAPI.setRegion(Region.EUW);
-        RiotAPI.setAPIKey(LEAGUEOFLEGENDSKEY);
+        RiotAPI.setAPIKey(LEAGUE_OF_LEGENDS_KEY);
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         initRIOTAPI();
         Summoner summ = RiotAPI.getSummonerByName("airgonar");
         System.out.println("Nombre" + summ.getID());
         CurrentGame game = summ.getCurrentGame();
+    }*/
+
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    @Value("${riot.api.key}")
+    public void setRiotAPI(String riotAPI) {
+        LEAGUE_OF_LEGENDS_KEY = riotAPI;
     }
 }
 

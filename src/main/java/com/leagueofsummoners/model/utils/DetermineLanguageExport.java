@@ -31,8 +31,8 @@ public class DetermineLanguageExport {
 		Object objectRetuned = null;
 		// Invoco el String una vez validado el idioma
 		try {
-			Method metodo = obj.getClass().getMethod(nombreMetodoMultiLang, new Class[] {});
-			objectRetuned = metodo.invoke(obj, new Object[] {});
+			Method metodo = obj.getClass().getMethod(nombreMetodoMultiLang);
+			objectRetuned = metodo.invoke(obj);
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {

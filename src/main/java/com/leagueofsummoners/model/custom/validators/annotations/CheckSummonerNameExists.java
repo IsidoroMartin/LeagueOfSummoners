@@ -21,9 +21,7 @@ public class CheckSummonerNameExists implements ConstraintValidator<ValidateSumm
         }
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session = attr.getRequest().getSession();
-        if(session.getAttribute("summonerExists") != null)
-            return true;
+        return session.getAttribute("summonerExists") != null;
 
-        return false;
     }
 }

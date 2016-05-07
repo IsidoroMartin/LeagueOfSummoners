@@ -5,5 +5,5 @@ import com.leagueofsummoners.model.dto.GenericDTO;
 
 public interface IServicesSearch {
 
-    public GenericDTO searchByChampionGuideOrProPlayer(String query);
+    GenericDTO searchByChampionGuideOrProPlayer(String query);
 }

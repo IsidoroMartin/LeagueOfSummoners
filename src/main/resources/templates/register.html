@@ -5,8 +5,16 @@
 <body id="bootstrap-overrides">
 <!--<header th:replace="fragments/header :: header"></header>-->
 <div th:replace="fragments/menu :: menu"></div>
-<div th:replace="fragments/languageSelect :: locale"></div>
+<!--<div th:replace="fragments/languageSelect :: locale"></div>-->
+
+<section class="container-fluid" id="banner">
+    <div id="page-name-banner" class="container">
+        <h2 class="banner-msg" th:utext="#{register.banner}"></h2>
+    </div>
+</section>
+
 <main class="container">
+
     <form role="form" class="form-horizontal col-md-offset-3 col-md-6" id="form-register" method="post"
           action="./register"
           enctype="multipart/form-data" data-toggle="validator" th:object="${userDTO}" novalidate)>
@@ -43,9 +51,10 @@
                    th:attr="data-notempty=#{register.notempty('password')},data-nomatchpassword=#{register.password.notmatch}">
         </div>
 
-        <div class="fileinput fileinput-new form-group" data-provides="fileinput">
+        <div class="fileinput fileinput-new form-group" data-provides="fileinput" style="cursor:pointer">
             <label for="fileInput" class="control-label" th:utext="#{register.upload}">#{register.upload}</label>
-            <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i>
+            <div class="form-control" data-trigger="fileinput"><i
+                    class="glyphicon glyphicon-file fileinput-exists"></i>
                 <span class="fileinput-filename"></span></div>
             <span class="input-group-addon btn btn-default btn-file">
                 <span class="fileinput-new" th:utext="#{register.select.image}">#{register.select.image}</span>
@@ -60,11 +69,15 @@
                th:text="#{register.pick.gallery}"></a>
         </div>
         <input type="hidden" name="galeria" value="/img/champion_icons/Teemo.png">
-        <div class="form-group col-md-offset-3 col-md-6">
-            <button type="submit" class="btn btn-primary">Enviar</button>
+        <div class="text-center col-xs-12">
+            <input type="button" id="registrarse-btn" value="Registrarse" type="submit"/>
         </div>
     </form>
 
+    <select id="language" class="selectpicker pull-right" data-show-icon="true"  name="locale">
+        <option class="locale" data-content="<i class='champions-lol-48 tahm-kench'></i> ES" value="es"></option>
+        <option class="locale" data-content="<i class='flag-icon flag-icon-gb'></i> EN" value="en"></option>
+    </select>
 
     <!-- Modal -->
     <div class="modal fade" id="champions_modal" role="dialog">
@@ -76,8 +89,8 @@
                     <h4 class="modal-title">Seleccione un campeon</h4>
                 </div>
                 <div class="modal-body" id="modal-champions-body">
-                    <div th:each="nombre : ${listaNamesChamps}" style="float:left;">
-                        <img th:attr="src=@{|/img/champion_icons/${nombre}|},title=${nombre},alt=${nombre}"
+                    <div th:each="uri : ${listaNamesChamps}" style="float:left;">
+                        <img th:attr="src=@{${uri}},title=${uri},alt=${uri}"
                              onclick="this.style.border='1px solid red'" style="width:50px;height:50px;"/>
                     </div>
                 </div>
@@ -92,6 +105,7 @@
     </div>
 
 </main>
+
 <div th:replace="fragments/footer :: footer"></div>
 <div th:replace="fragments/scripts :: scripts"></div>
 </body>

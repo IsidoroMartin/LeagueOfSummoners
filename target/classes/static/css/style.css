@@ -37,9 +37,7 @@ html, body {
     font-size: 16px;
     margin: 0px;
     padding: 0px;
-    width: 100%;
-    height: 100%;
-    background-image: url(../img/wallpaper.jpg);
+/*    background-image: url(../img/wallpaper.jpg);*/
 
 }
 
@@ -183,6 +181,7 @@ nav.navbar {
     border-color: #a29361 #928456 #5f5940 #928456;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
 }
+
 
 #bootstrap-overrides nav a.registrarse-btn:hover, #bootstrap-overrides nav a.iniciar-sesion-btn:hover {
     /*background-color: rgba(255, 255, 255, .2);*/
