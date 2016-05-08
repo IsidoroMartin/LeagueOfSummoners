@@ -16,7 +16,7 @@
 
         </header>
         <!--<main class="row col-xs-12 col-xs-offset-0 col-md-6 col-md-offset-3">-->
-        <main class="row col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4">
+        <main class="row col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4 content">
             <form action="#" method="get" class="form-horizontal col-xs-12" role="form">
                 <div class="form-group">
                     <label for="summoner-name"><h2 th:utext="#{home.body.search}"></h2></label>
@@ -28,6 +28,16 @@
                 </div>
             </form>
         </main>
+        <aside id="rotacion" class="container">
+            <div class="row">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h1 class="col-xs-12">
+                        Rotación de la semana
+                    </h1>
+                </div>
+            </div>
+
+        </aside>
     </section>
 </main>
 <div th:replace="fragments/footer :: footer"></div>

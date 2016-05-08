@@ -38,7 +38,8 @@ html, body {
     margin: 0px;
     padding: 0px;
     /*font-size: 1.5rem;*/
-    /*    background-image: url(../img/wallpaper.jpg);*/
+    background: url(../img/wallpaper.jpg)  ;
+    background-size: 100% 100%;
 
 }
 
@@ -47,48 +48,13 @@ h2 {
     margin: 0px;
 }
 
-body > header {
-    text-align: center;
-    padding-top: .5%;
-    padding-bottom: 1%;
-}
-
-body > header h1 {
-    font-weight: bold;
-    color: #E9CE8B;
-    background: -webkit-linear-gradient(#E9CE8B, #BF8E4C, #E9CE8B);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 46px;
-    margin-top: 0px;
-}
-
 #buscador-home {
     padding-bottom: 24%;
 }
 
-body > header .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
-    width: 50%;
-}
-
-header input[type=button] {
-    margin-top: 3.5%;
-    width: 100%;
-}
-
-@media only screen and (max-width: 1025px) {
-    /* Doy un tamaño al select de los idiomas en resoluciones pequeñas*/
-    body > header .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
-        text-align: center;
-        width: 100%;
-        padding-top: 5%;
-    }
-
-    /* Centro el select de los idiomas */
-    body > header > .row {
-        text-align: center;
-    }
-}
+/*body > header .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {*/
+    /*width: 50%;*/
+/*}*/
 
 #bootstrap-overrides nav {
     background: rgba(28, 26, 52, 1);
@@ -202,12 +168,12 @@ nav.navbar {
     background-color: red;
 }
 
-header.container, main .container {
+.content {
     background-color: white;
 }
 
 #buscador-home {
-    background-image: url("../img/fondo-buscador-home.jpg");
+    background-image: url("../img/wallpaper.jpg");
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
@@ -217,9 +183,11 @@ header.container, main .container {
     z-index: 5;
 }
 
-#buscador-home main {
+#buscador-home main{
     margin-top: -1.2%;
     z-index: 1;
+}
+#buscador-home main,#rotacion {
     text-align: center;
     background-color: rgba(255, 255, 255, 0.9);
     border: rgba(28, 26, 52, 1) solid 2px;
@@ -250,6 +218,16 @@ header.container, main .container {
     }
 
 }
+#rotacion{
+    margin-top: 10%;
+    /*background: rgba(255, 255, 255, .8);*/
+}
+#rotacion h1{
+    text-align: center;
+    font-weight: bold;
+}
+
+
 
 #bootstrap-overrides form button {
     background: rgba(28, 26, 52, 1);

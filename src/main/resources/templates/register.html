@@ -6,15 +6,12 @@
 <!--<header th:replace="fragments/header :: header"></header>-->
 <div th:replace="fragments/menu :: menu"></div>
 <!--<div th:replace="fragments/languageSelect :: locale"></div>-->
-
-<section class="container-fluid" id="banner">
-    <div id="page-name-banner" class="container">
+<div class="container content">
+<div class="row" id="banner">
+    <div id="page-name-banner" class="col-xs-12">
         <h2 class="banner-msg" th:utext="#{register.banner}"></h2>
     </div>
-</section>
-
-<main class="container">
-
+</div>
     <form role="form" class="form-horizontal col-md-offset-3 col-md-6" id="form-register" method="post"
           action="./register"
           enctype="multipart/form-data" data-toggle="validator" th:object="${userDTO}" novalidate)>
@@ -112,7 +109,7 @@
         </div>
     </div>
 
-</main>
+</div>
 
 <div th:replace="fragments/footer :: footer"></div>
 <div th:replace="fragments/scripts :: scripts"></div>
