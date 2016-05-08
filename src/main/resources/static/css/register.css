@@ -26,6 +26,23 @@ form {
     margin-top: 3%;
 }
 
+#modal-window-button {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    width: 100%
+}
+
+#registrarse-btn:hover {
+    opacity: 0.9;
+}
+
+#modal-wrapper {
+    width: 100%;
+    height: 400px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
 #banner {
     height: 100px;
     margin-top: 30px;
@@ -34,26 +51,31 @@ form {
     border-bottom: 1px solid #f2f3f3;
 }
 
+#buscador-galeria{
+    margin-left: 33px;
+    margin-top:2%;
+    margin-bottom:2%;
+}
+
+#show-champions>p{
+    margin-left:32px;
+}
+
+#buscador-galeria>input{
+    width:300px;
+}
+
 .champion-gallery {
     border: 1px solid black;
-    width: 50px;
-    margin-left:4px;
-    margin-top:4px;
+    width: 60px;
+    margin-left: 33px;
+    margin-top: 34px;
     cursor: pointer;
+    transition: all .3s ease-in-out;
 }
 
-.champion-gallery:hover{
-    opacity:0.9;
-}
-
-#modal-window-button {
-    margin-top:10px;
-    margin-bottom:0px;
-    width: 100%
-}
-
-#registrarse-btn:hover {
-    opacity: 0.9;
+.champion-gallery:hover {
+    transform: scale(1.9);
 }
 
 .banner-msg {

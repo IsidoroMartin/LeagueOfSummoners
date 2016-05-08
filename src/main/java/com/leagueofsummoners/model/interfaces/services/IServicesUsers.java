@@ -71,7 +71,7 @@ public interface IServicesUsers {
 
 	boolean checkIfUserExists(String username);
 
-	boolean registrarUser(UserDTO user, MultipartFile file, String galeriaIcon);
+	boolean registrarUser(UserDTO user, MultipartFile[] file, String galeriaIcon);
 
 	Summoner getSummonerData(String summonerName);
 

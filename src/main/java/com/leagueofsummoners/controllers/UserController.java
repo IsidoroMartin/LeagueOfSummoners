@@ -42,9 +42,8 @@ public class UserController {
                                @RequestParam("img-avatar") MultipartFile[] file, @RequestParam("galeria") String galeriaIcon) {
         String page = "redirect:index.html?action=form-error";
         String avatar = galeriaIcon;
-        System.out.println(file.length);
         if (!bindingResult.hasErrors()) {
-            if (this.servicioUsers.registrarUser(userdto, file[0], galeriaIcon))
+            if (this.servicioUsers.registrarUser(userdto, file, galeriaIcon))
                 page = "login";
         } else {
             LeagueofsummonersApplication.LOGGER.warn("Error registrando usuario " + userdto.getUsername() + " due: " + bindingResult.getAllErrors());

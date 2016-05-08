@@ -1,6 +1,5 @@
 package com.leagueofsummoners.model.dto;
 
-import com.robrua.orianna.type.core.staticdata.Champion;
 
 import javax.persistence.*;
 import java.io.Serializable;

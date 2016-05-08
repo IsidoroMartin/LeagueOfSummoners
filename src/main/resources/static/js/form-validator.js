@@ -1,4 +1,10 @@
-var errormsg = [];
+//Obtengo una lista de todos los campeones para no tener que obtenerlos cada vez que se hace un búsqueda
+var campeonesImg = $('.champion-gallery');
+
+/**
+ * Esta fucnión utiliza bootstrap validator par controlar los errores del formulario, además de eso
+ * hace uso de la función obtainProperLanguage, para obtener el mensaje de error en el idioma en uso por el usuario
+ */
 $(function (e) {
     $('#form-register').bootstrapValidator({
         framework: 'bootstrap',
@@ -120,20 +126,64 @@ $(function (e) {
     });
 });
 
+/**
+ * Esta función obtiene el mensaje del campo 'data-algo' en el idioma correspondiente
+ * (Traducido previamente por el server)
+ * @param field
+ * @param attribute
+ * @returns {*|jQuery} El mensaje traducido
+ */
 function obtainProperLanguage(field, attribute) {
     return $('#' + field).attr(attribute);
 }
 
-$('.champion-gallery').click(function () {
-    var championPicked = $(this);
+
+/**
+ * Esta función cierra la ventana cuando seleccionas un campeón, ademas de poner el nombre en
+ * la caja de texto para saber cual has seleccionado, también pone la ruta de el campeón elegido en el
+ * input hidden
+ */
+function closeModal(champPicked) {
+    var championPicked = $(champPicked);
     $('.fileinput-filename').html(championPicked.attr("title"));
     $('.glyphicon-picture').css({opacity: 1});
     $('#img-galeria').val(championPicked.attr("src"));
     $('#champions_modal').modal('toggle');
-    $('#fileInput').html();
-});
+}
 
-
+/**
+ * cuando seleccionas una imagen pone la imagen de la galería a vacio
+ */
 $('#fileInput').click(function () {
     $('#img-galeria').val("");
 });
+
+/**
+ * Todos los botones que tengan esta clase eliminarán la ruta del input type hidden
+ * para que no se envíe al servidor
+ */
+$(".dissmissvalue").click(function () {
+    $('.img-galeria').val("");
+});
+
+$(document).keyup(function (e) {
+    if (e.keyCode == 27) {
+        $('#champions_modal').modal('hide');
+    }
+});
+
+function filtrarCampeones(inputValue) {
+    // Me creo una expresión regular con lo que ha introducido el usuario
+    var regex = new RegExp("^" + inputValue, "i");
+    var modal = $('#modal-wrapper');
+    var html = "";
+    campeonesImg.each(function (index, value) {
+        var champName = value.title;
+        if (champName.search(regex) != -1) {
+            html += '<div style="float:left;">' + value.outerHTML + '</div>';
+        }
+    });
+    if (html == "")
+        html = "<p>" + obtainProperLanguage("show-champions","data-no-champions") + "</p>";
+        $('#show-champions').hide().html(html).fadeIn(500);
+}

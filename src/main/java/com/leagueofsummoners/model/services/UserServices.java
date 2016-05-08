@@ -44,8 +44,7 @@ public class UserServices implements IServicesUsers {
     @Override
     public boolean checkIfSummonerNameExists(String summonerName, HttpSession session) {
         boolean summonerExists = this.summonerDAO.getSummonerData(summonerName) != null;
-        if (summonerExists)
-            session.setAttribute("summonerExists", true);
+        session.setAttribute("summonerExists", summonerExists);
         return summonerExists;
     }
 
@@ -103,10 +102,10 @@ public class UserServices implements IServicesUsers {
     }
 
     @Override
-    public boolean registrarUser(UserDTO userdto, MultipartFile file, String galeriaIcon) {
+    public boolean registrarUser(UserDTO userdto, MultipartFile[] file, String galeriaIcon) {
         if (!this.checkIfUserExists(userdto.getUsername())) {
-            if (galeriaIcon.equals("") && !file.isEmpty()) {
-                String savePath = "img" + File.separator + "avatars" + UploadUtils.saveImg(file, userdto.getUsername());
+            if (galeriaIcon.equals("") && file.length == 1 && !file[0].isEmpty()) {
+                String savePath = "img" + File.separator + "avatars" + UploadUtils.saveImg(file[0], userdto.getUsername());
                 userdto.setAvatar(savePath);
             } else if (galeriaIcon.equals("")) {
                 galeriaIcon = ApplicationPaths.TEEMO_ICON;
