@@ -26,5 +26,9 @@ public class ApplicationPaths {
     public static String GALLERY_DEVELOP_SAVE_PATH;
     public static final String SUMMONER_PROFILE_ICON_PATH = "http://lkimg.zamimg.com/images/v2/summoner/icons/size64x64/";
     public static final String TEEMO_ICON = "http://ddragon.leagueoflegends.com/cdn/6.9.1/img/champion/Teemo.png";
+    public static final String ROOT_PATH = "/";
+    public static final String INDEX_HTML_PATH = ROOT_PATH+"index.html";
+    public static final String INDEX_PATH = "/index";
+    public static final String HOME_PATH = "/home";
 
 }
