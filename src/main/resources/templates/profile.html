@@ -3,70 +3,59 @@
 <head th:replace="fragments/head :: head">
 </head>
 <body id="bootstrap-overrides">
-<header th:replace="fragments/header :: header"></header>
 <div th:replace="fragments/menu :: menu"></div>
-
-<section class="container-fluid" id="banner">
-    <div id="page-name-banner" class="container">
-        <h2 class="banner-msg" th:utext="#{profile.profilename(${session.userlogged.username})}"></h2>
+<div class="container content">
+    <div class="row" id="banner">
+        <div id="page-name-banner" class="col-xs-12">
+            <h2 class="banner-msg" th:utext="#{profile.profilename}"></h2>
+        </div>
     </div>
-</section>
 
-<main class="container">
-    <div class="row">
 
-        <aside id="user-profile" class="col-md-3">
-                <h1>Mi perfil</h1>
-                <img id="profile-image" th:attr="src=@{|${session.userlogged.avatar}|}"/>
-            <table class="table">
-                <tr>
-                    <th>Nombre de usuario</th>
-                    <td th:utext="${session.userlogged.username}"></td>
-                </tr>
-                <tr>
-                    <th>Nombre de usuario</th>
-                    <td th:utext="${session.userlogged.username}"></td>
-                </tr>
-                <tr>
-                    <th>Nombre de usuario</th>
-                    <td th:utext="${session.userlogged.username}"></td>
-                </tr>
-            </table>
+    <main class="container row">
+        <aside id="user-profile" class="col-md-3 col-xs-12" style="height:900px">
+            <div>
+
+
+            </div>
         </aside>
+    </main>
+</div>
+<!--  <tr>
+      <td><img th:attr="src=@{|${session.userlogged.avatar}|}" th:width="100px" height="100px"/></td>
+      <td th:utext="${session.userlogged.username}"></td>
+      <td th:utext="${session.userlogged.summonerName}"></td>
+      <td th:utext="${session.userlogged.email}"></td>
+      <td th:utext="${session.userlogged.firma}"></td>
+      <td th:utext="${session.userlogged.permissionLevel}"></td>
+  </tr>
 
-    </div>
 
-    <!--  <tr>
-          <td><img th:attr="src=@{|${session.userlogged.avatar}|}" th:width="100px" height="100px"/></td>
-          <td th:utext="${session.userlogged.username}"></td>
-          <td th:utext="${session.userlogged.summonerName}"></td>
-          <td th:utext="${session.userlogged.email}"></td>
-          <td th:utext="${session.userlogged.firma}"></td>
-          <td th:utext="${session.userlogged.permissionLevel}"></td>
-      </tr>
-
-
-      <div class="col-md-12">
-          <table class="table">
-              <tr>
-                  <th>Summoner Icon</th>
-                  <th>SummonerName</th>
-                  <th>Summoner Level</th>
-                  <th>Playing at this moment</th>
-                  <th>Highest Tier</th>
-              </tr>
-              <tr>
-                  <td><img  th:attr="src=${{summ_icon}},title=${summ_icon},alt=${summ_icon}"
-                          th:width="100px" height="100px"/></td>
-                  <td th:utext="${summ_name}"></td>
-                  <td th:utext="${summ_level}"></td>
-                  &lt;!&ndash;            <td th:utext="${summ_playing}"></td>&ndash;&gt;
-                  <td th:utext="${summ_tier}"></td>
-              </tr>
-          </table>-->
-    <!--      </div>
-      </div>-->
+  <div class="col-md-12">
+      <table class="table">
+          <tr>
+              <th>Summoner Icon</th>
+              <th>SummonerName</th>
+              <th>Summoner Level</th>
+              <th>Playing at this moment</th>
+              <th>Highest Tier</th>
+          </tr>
+          <tr>
+              <td><img  th:attr="src=${{summ_icon}},title=${summ_icon},alt=${summ_icon}"
+                      th:width="100px" height="100px"/></td>
+              <td th:utext="${summ_name}"></td>
+              <td th:utext="${summ_level}"></td>
+              &lt;!&ndash;            <td th:utext="${summ_playing}"></td>&ndash;&gt;
+              <td th:utext="${summ_tier}"></td>
+          </tr>
+      </table>-->
+<!--      </div>
+  </div>-->
 </main>
+
+</div>
+
 <div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/scripts :: scripts"></div>
 </body>
 </html>
