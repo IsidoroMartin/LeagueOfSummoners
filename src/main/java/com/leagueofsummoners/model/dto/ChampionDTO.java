@@ -1,6 +1,10 @@
 package com.leagueofsummoners.model.dto;
 
 
+
+
+import com.robrua.orianna.type.core.staticdata.Champion;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -148,5 +152,13 @@ public class ChampionDTO extends GenericDTO implements Serializable {
 	@Override
 	public String toString() {
 		return this.championName;
+	}
+
+	public static ChampionDTO buildBasicChampionDTO(Champion champion){
+		ChampionDTO champ = new ChampionDTO();
+		champ.idChampion = champion.getID();
+		champ.championName = champion.getName();
+		champ.championIconName= "http://ddragon.leagueoflegends.com/cdn/6.6.1/img/champion/"+champion.getImage().getFull();
+		return champ;
 	}
 }

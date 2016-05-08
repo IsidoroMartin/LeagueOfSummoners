@@ -1,6 +1,7 @@
 package com.leagueofsummoners.controllers;
 
 
+import com.leagueofsummoners.model.dto.ChampionDTO;
 import com.leagueofsummoners.model.interfaces.services.IServicesChampions;
 import com.robrua.orianna.type.core.staticdata.Champion;
 
@@ -26,7 +27,7 @@ public class HomeController {
 
     @RequestMapping(value = {ROOT_PATH, INDEX_HTML_PATH, INDEX_PATH, HOME_PATH}, method = RequestMethod.GET)
     public String index(ModelMap model, HttpSession session, Locale locale) {
-        List<Champion> championRotation = servicioChampions.getChampionRotation();
+        List<ChampionDTO> championRotation = servicioChampions.getChampionRotation();
         model.addAttribute("championRotation", championRotation);
         return "index";
     }

@@ -25,7 +25,7 @@ public class ChampionServices implements IServicesChampions {
 		return this.championDAO.getChampionList();
 	}
 
-	public List<Champion> getChampionRotation() {return this.championDAO.getChampionRotation();}
+	public List<ChampionDTO> getChampionRotation() {return this.championDAO.getChampionRotation();}
 
 	@Override
 	public ChampionDTO findByChampionName(String championName) {

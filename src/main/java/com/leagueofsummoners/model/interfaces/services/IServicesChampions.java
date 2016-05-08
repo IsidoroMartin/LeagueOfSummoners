@@ -14,7 +14,7 @@ public interface IServicesChampions {
      */
     List<ChampionDTO> getChampionList();
 
-    List<Champion> getChampionRotation();
+    List<ChampionDTO> getChampionRotation();
 
     /**
      * Encuentra a un usuario por id
