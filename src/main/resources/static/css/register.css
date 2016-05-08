@@ -71,7 +71,7 @@ form {
     margin-left: 33px;
     margin-top: 34px;
     cursor: pointer;
-    transition: all .3s ease-in-out;
+    transition: all .1s ease-in-out;
 }
 
 .champion-gallery:hover {
