@@ -26,11 +26,11 @@ public class ChampionDAO {
 	public List<ChampionDTO> getChampionList() {
 		return this.championRepository.findAll();
 	}
-	public List<Champion> getChampionRotation() {
+	public List<ChampionDTO> getChampionRotation() {
 		Map<Champion,ChampionStatus> championRotation = RiotAPI.getChampionStatuses(true);
-		ArrayList<Champion>championsList = new ArrayList<Champion>();
+		ArrayList<ChampionDTO>championsList = new ArrayList<ChampionDTO>();
 		for (Map.Entry<Champion, ChampionStatus> entry :championRotation.entrySet()) {
-			championsList.add((Champion)entry.getKey());
+			championsList.add(ChampionDTO.buildBasicChampionDTO((Champion)entry.getKey()));
 		}
 		return championsList;
 	}
