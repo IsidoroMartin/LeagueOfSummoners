@@ -1,0 +1,9 @@
+#user-profile{
+    background-color:gray;
+}
+
+#profile-image{
+    border:5px solid black;
+    margin-left:24%;
+    margin-bottom:3%;
+}
