@@ -2,26 +2,26 @@
 <footer class="container-fluid" th:fragment="footer">
     <div class="row">
         <div class="container">
-            <div class="col-xs-12 col-md-3 hidden-xs hidden-sm" id="redes-sociales-footer">
-                ¡Síguenos en las redes sociales!<br>
+            <div class="col-xs-12 col-md-3 hidden-xs hidden-sm" id="redes-sociales-footer" >
+                <span th:utext="#{footer.social}"></span><br>
                 <a href="#"><span class="fa fa-facebook-square fa-3x"></span></a>
                 <a href="#"><span class="fa fa-twitter fa-3x"></span></a>
                 <a href="#"><span class="fa fa-google-plus fa-3x"></span></a>
             </div>
             <div class="col-xs-12 col-md-3">
-                <a href="#">Mapa del sitio</a><br>
-                <a href="#">Contacta con nosotros</a>
+                <a href="#"  th:utext="#{footer.sitemap}"></a><br>
+                <a href="#" th:utext="#{footer.contact}"></a>
             </div>
             <div class="col-xs-12 col-md-3">
-                <a href="#">Política de cookies</a><br>
-                <a href="#">Política de privacidad</a>
+                <a href="#" th:utext="#{footer.cookies}"></a><br>
+                <a href="#" th:utext="#{footer.privacy}"></a>
             </div>
             <div class="col-xs-12 col-md-2">
-                <a href="#">Ayuda</a><br>
-                <a href="#">Licencia</a>
+                <a href="#" th:utext="#{footer.help}"></a><br>
+                <a href="#" th:utext="#{footer.license}"></a>
             </div>
             <div class="col-xs-12 col-md-3 visible-xs visible-sm">
-                ¡Síguenos en las redes sociales!<br>
+                <span th:utext="#{footer.social}"></span><br>
                 <a href="#"><span class="fa fa-facebook-square fa-3x"></span></a>
                 <a href="#"><span class="fa fa-twitter fa-3x"></span></a>
                 <a href="#"><span class="fa fa-google-plus fa-3x"></span></a>

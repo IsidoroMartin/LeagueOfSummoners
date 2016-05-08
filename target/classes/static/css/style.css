@@ -64,7 +64,7 @@ body > header h1 {
 }
 
 #buscador-home {
-    padding-bottom: 27%;
+    padding-bottom: 24%;
 }
 
 body > header .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
