@@ -9,6 +9,15 @@
     /* margin-bottom:3%;*/
 }
 
+#profile {
+    padding:5px;
+    margin-top:5%;
+}
+
+#summoner-profile{
+    margin-top:3%;
+}
+
 .centered {
     vertical-align: middle;
     text-align: center;

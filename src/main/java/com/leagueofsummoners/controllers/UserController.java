@@ -7,6 +7,8 @@ import com.leagueofsummoners.model.interfaces.services.IServicesUsers;
 import com.leagueofsummoners.model.dto.UserDTO;
 import com.leagueofsummoners.security.annotations.LoginRequired;
 import com.robrua.orianna.api.core.RiotAPI;
+import com.robrua.orianna.type.core.match.Match;
+import com.robrua.orianna.type.core.matchlist.MatchReference;
 import com.robrua.orianna.type.core.summoner.Summoner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Locale;
 
 @Controller
@@ -66,12 +69,19 @@ public class UserController {
     @LoginRequired
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String profile(ModelMap valores, HttpSession session) {
-        Summoner summ = this.servicioUsers.getSummonerData(((UserDTO) session.getAttribute("userlogged")).getSummonerName());
+      /*  Summoner summ = this.servicioUsers.getSummonerData(((UserDTO) session.getAttribute("userlogged")).getSummonerName());
+        List<MatchReference> matches = summ.getMatchList(10, 0);
         valores.put("summ_level", summ.getLevel());
-        valores.put("summ_name", summ.getName());
-        valores.put("summ_tier", "No tien");
+        valores.put("summ_tier", (summ.getLeagueEntries().size() > 0) ? summ.getLeagueEntries().get(0).getTier() : "-");
         valores.put("summ_icon", ApplicationPaths.SUMMONER_PROFILE_ICON_PATH + summ.getProfileIconID());
-     /*   valores.put("summ_playing", summ.getCurrentGame());*/
+        valores.put("summ_playing", (summ.getCurrentGame() != null) ? summ.getCurrentGame().getMap() : "-");
+        valores.put("last_matches", matches);
+        valores.put("participants", summ.getMatchList(10, 0).get(0).getMatch().getParticipants());*/
+        valores.put("latestMatches", this.servicioChampions.getLatestMatches((UserDTO) session.getAttribute("userlogged")));
+
+
+        //VALE HE PENSADO QUE LO MEJOR PARA MOSTRAR LAS PARTIDAS JUGADAS ES HACER UN DTO COMPLEJO iterando las dos lista a la vez
+        //y añadiendo las cosas que necesito.
         return "profile";
     }
 

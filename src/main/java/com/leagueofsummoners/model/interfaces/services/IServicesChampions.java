@@ -1,6 +1,8 @@
 package com.leagueofsummoners.model.interfaces.services;
 
 import com.leagueofsummoners.model.dto.ChampionDTO;
+import com.leagueofsummoners.model.dto.MatchDTO;
+import com.leagueofsummoners.model.dto.UserDTO;
 import com.robrua.orianna.type.core.staticdata.Champion;
 
 import java.util.List;
@@ -28,4 +30,5 @@ public interface IServicesChampions {
 
     List<String> getChampionsIconsNamesList();
 
+    List<MatchDTO> getLatestMatches(UserDTO userlogged);
 }

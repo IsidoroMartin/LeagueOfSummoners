@@ -38,8 +38,11 @@ html, body {
     margin: 0px;
     padding: 0px;
     /*font-size: 1.5rem;*/
-    background: url(../img/wallpaper.jpg)  ;
-    background-size: 100% 100%;
+    background: url(../img/wallpaper.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 
 }
 
@@ -171,11 +174,13 @@ nav.navbar {
 .content {
     background-color: white;
 }
-
+nav+main{
+padding-bottom: 4%;
+}
 #buscador-home {
-    background-image: url("../img/wallpaper.jpg");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
+    /*background-image: url("../img/fondo-buscador-home.jpg");*/
+    /*background-size: 100% 100%;*/
+    /*background-repeat: no-repeat;*/
 }
 
 #buscador-home header img {
@@ -218,10 +223,7 @@ nav.navbar {
     }
 
 }
-#rotacion{
-    margin-top: 10%;
-    /*background: rgba(255, 255, 255, .8);*/
-}
+
 #rotacion h1{
     text-align: center;
     font-weight: bold;
@@ -249,7 +251,10 @@ input[type=button] {
     border: 1px solid #a29361;
     border-color: #187277 #3a6668 #0e3f41 #3a6668;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
-
+}
+.panel .panel-heading,.panel .panel-body{
+    width: 100%;
+    text-align: center;
 }
 
 footer {
