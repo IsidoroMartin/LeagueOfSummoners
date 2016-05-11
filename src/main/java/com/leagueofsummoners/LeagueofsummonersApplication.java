@@ -1,6 +1,7 @@
 package com.leagueofsummoners;
 
 import com.leagueofsummoners.interceptors.InterceptorSession;
+import com.leagueofsummoners.model.dto.UserDTO;
 import com.leagueofsummoners.model.utils.LeagueAccessAPI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

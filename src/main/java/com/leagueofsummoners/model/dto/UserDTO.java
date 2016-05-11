@@ -2,6 +2,7 @@ package com.leagueofsummoners.model.dto;
 
 import com.leagueofsummoners.model.custom.validators.annotations.ValidateSummonerNameExists;
 import com.leagueofsummoners.model.utils.ValidationRegEXP;
+import org.apache.commons.lang.WordUtils;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
@@ -126,11 +127,11 @@ public class UserDTO extends GenericDTO implements Serializable {
     }
 
     public String getFirma() {
-        return firma;
+        /*String firma = WordUtils.wrap(this.firma, 37, "<br>", false);*/
+        return this.firma;
     }
 
     public void setFirma(String firma) {
-        this.firma = firma;
     }
 
     public String getPermissionLevel() {

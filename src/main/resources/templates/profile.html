@@ -3,70 +3,80 @@
 <head th:replace="fragments/head :: head">
 </head>
 <body id="bootstrap-overrides">
-<header th:replace="fragments/header :: header"></header>
 <div th:replace="fragments/menu :: menu"></div>
-
-<section class="container-fluid" id="banner">
-    <div id="page-name-banner" class="container">
-        <h2 class="banner-msg" th:utext="#{profile.profilename(${session.userlogged.username})}"></h2>
+<div class="container content">
+    <div class="row" id="banner">
+        <div id="page-name-banner" class="col-xs-12">
+            <h2 class="banner-msg" th:utext="#{profile.profilename}"></h2>
+        </div>
     </div>
-</section>
 
-<main class="container">
-    <div class="row">
-
-        <aside id="user-profile" class="col-md-3">
-                <h1>Mi perfil</h1>
-                <img id="profile-image" th:attr="src=@{|${session.userlogged.avatar}|}"/>
-            <table class="table">
-                <tr>
-                    <th>Nombre de usuario</th>
-                    <td th:utext="${session.userlogged.username}"></td>
-                </tr>
-                <tr>
-                    <th>Nombre de usuario</th>
-                    <td th:utext="${session.userlogged.username}"></td>
-                </tr>
-                <tr>
-                    <th>Nombre de usuario</th>
-                    <td th:utext="${session.userlogged.username}"></td>
-                </tr>
-            </table>
+    <main class="container row">
+        <aside id="user-profile" class="col-md-2 col-xs-12">
+            <div id="profile">
+                <div id="img-perfil">
+                    <img th:attr="src=@{${session.userlogged.avatar}}"/>
+                </div>
+                <div id="summoner-profile">
+                    <strong><p th:utext="${session.userlogged.username}"></p></strong>
+                </div>
+            </div>
         </aside>
+        <div id="profile-body" class="col-xs-10">
+            <div id="profile-header">
+                <h3 th:utext="#{profile.youraccount}"></h3>
+            </div>
+            <div id="profile-main">
+                <table class="table">
+                    <tr>
+                        <th th:utext="#{profile.summonername}"></th>
+                        <th th:utext="#{profile.summoner.level}"></th>
+                        <th>Division</th>
+                        <th th:utext="#{profile.playingmap}"></th>
+                        <th th:utext="#{profile.permission.level}">User level</th>
+                    </tr>
+                    <tr>
+                        <td th:utext="${session.userlogged.summonerName}"></td>
+                        <td th:utext="${summ_level}"></td>
+                        <td th:utext="${summ_tier}"></td>
+                        <td th:utext="${summ_playing}"></td>
+                        <td th:utext="${session.userlogged.permissionLevel}"></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="guides-profile">
+                <h3 th:utext="#{profile.createdguides}"></h3>
+                <!-- Aqui ira un if (Si el usuario tiene guias, saldran las guias, si no pues saldra lo sentimos no tienes guias -->
+                <p>Desafortunadamente no tienes guias creadas, pulsa <a href="#">aquí</a> para crear tú guia </p>
+            </div>
 
-    </div>
+            <div id="guides-last10match">
+                <h3 th:utext="#{profile.last10matches}"></h3>
+                <table class="table">
+                    <tr>
+                        <th>Duración</th>
+                        <th>Campeón</th>
+                        <th>Lane</th>
+                        <th>Puntuación</th>
+                    </tr>
+                    <tr th:each="match : ${latestMatches}">
+                        <td th:utext="${match.matchDuration}"></td>
+                        <td th:utext="${match.championName}"></td>
+                        <td th:utext="${match.lanePlayed}"></td>
+                        <td  th:utext="${match.stats}"></td>
 
-    <!--  <tr>
-          <td><img th:attr="src=@{|${session.userlogged.avatar}|}" th:width="100px" height="100px"/></td>
-          <td th:utext="${session.userlogged.username}"></td>
-          <td th:utext="${session.userlogged.summonerName}"></td>
-          <td th:utext="${session.userlogged.email}"></td>
-          <td th:utext="${session.userlogged.firma}"></td>
-          <td th:utext="${session.userlogged.permissionLevel}"></td>
-      </tr>
 
+                    </tr>
 
-      <div class="col-md-12">
-          <table class="table">
-              <tr>
-                  <th>Summoner Icon</th>
-                  <th>SummonerName</th>
-                  <th>Summoner Level</th>
-                  <th>Playing at this moment</th>
-                  <th>Highest Tier</th>
-              </tr>
-              <tr>
-                  <td><img  th:attr="src=${{summ_icon}},title=${summ_icon},alt=${summ_icon}"
-                          th:width="100px" height="100px"/></td>
-                  <td th:utext="${summ_name}"></td>
-                  <td th:utext="${summ_level}"></td>
-                  &lt;!&ndash;            <td th:utext="${summ_playing}"></td>&ndash;&gt;
-                  <td th:utext="${summ_tier}"></td>
-              </tr>
-          </table>-->
-    <!--      </div>
-      </div>-->
+                </table>
+
+            </div>
+        </div>
+    </main>
+</div>
 </main>
+
 <div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/scripts :: scripts"></div>
 </body>
 </html>

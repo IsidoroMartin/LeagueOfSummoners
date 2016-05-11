@@ -1,9 +1,29 @@
-#user-profile{
-    background-color:gray;
+#user-profile {
+    font-family: "Open Sans", arial, sans-serif;
+    font-size: 1rem;
 }
 
-#profile-image{
-    border:5px solid black;
-    margin-left:24%;
-    margin-bottom:3%;
+#profile-image {
+    border: 5px solid black;
+    /*margin-left:30%;*/
+    /* margin-bottom:3%;*/
+}
+
+#profile {
+    padding:5px;
+    margin-top:5%;
+}
+
+#summoner-profile{
+    margin-top:3%;
+}
+
+.centered {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.centered img {
+    display: block;
+    margin: 0 auto;
 }
