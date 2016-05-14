@@ -3,21 +3,17 @@
  */
 $(function () {
     var locale = $.cookie("locale");
-    $(".locale").each(function(){
-        if($(this).val() == locale){
-            $(this).attr("selected","");
+    $(".locale").each(function () {
+        if ($(this).val() == locale) {
+            $(this).attr("selected", "");
         }
     });
-    $('a[href^="#"]').on('click',function (e) {
+    $('a[href^="#"]:not(a[href="#"])').on('click', function (e) {
         e.preventDefault();
-
         var target = this.hash;
         var $target = $(target);
-
         $('html, body').stop().animate({
-            'scrollTop': $target.offset().top
-        }, 900, 'swing', function () {
-            window.location.hash = target;
-        });
+            'scrollTop': ($target.offset().top - 50)
+        }, 900, 'swing');
     });
 });
