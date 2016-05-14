@@ -54,18 +54,16 @@
                 <h3 th:utext="#{profile.last10matches}"></h3>
                 <table class="table">
                     <tr>
+                        <th>Result</th>
                         <th>Duración</th>
                         <th>Campeón</th>
-                        <th>Lane</th>
                         <th>Puntuación</th>
                     </tr>
-                    <tr th:each="match : ${latestMatches}">
-                        <td th:utext="${match.matchDuration}"></td>
-                        <td th:utext="${match.championName}"></td>
-                        <td th:utext="${match.lanePlayed}"></td>
+                    <tr th:each="match : ${latestMatches}" th:class="${match.winner} ? success : danger">
+                        <td th:class="${match.winner} ? green : red" th:utext="${match.winner} ? #{profile.match.win} : #{profile.match.lose}"></td>
+                        <td th:utext="${match.durationMins}"></td>
+                        <td th:utext="${match.champion.championName}"></td>
                         <td  th:utext="${match.stats}"></td>
-
-
                     </tr>
 
                 </table>

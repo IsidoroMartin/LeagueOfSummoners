@@ -1,6 +1,4 @@
-package com.leagueofsummoners.model.persistence.tables;
-
-import org.springframework.beans.factory.annotation.Value;
+package com.leagueofsummoners.model.dao.tables;
 
 /**
  * Esta clase tienet todos los nombres y campos de la BD

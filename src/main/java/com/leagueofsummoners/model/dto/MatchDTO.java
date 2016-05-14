@@ -1,77 +1,61 @@
 package com.leagueofsummoners.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.leagueofsummoners.model.dto.riotapi.RiotAPIMatch;
+import com.leagueofsummoners.model.dto.riotapi.RiotApiParticipantInfo;
+import lombok.Data;
+
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MatchDTO {
 
-
-    private int matchDuration;
-    private String championName;
-    private String lanePlayed;;
-    private String iconUri;
-    private int kills;
-    private int deaths;
-    private int assistences;
+    private long matchId;
+    private long matchDuration;
+    private boolean winner;
+    private String summonerName;
+    private ChampionDTO champion;
+    private long kills;
+    private long deaths;
+    private long assists;
+    private long goldEarned;
+    private long item0;
+    private long item1;
+    private long item2;
+    private long item3;
+    private long item4;
+    private long item5;
+    private long item6;
     private String stats;
+    private String durationMins;
 
 
-    public String getChampionName() {
-        return championName;
+    public String getStats() {
+        return this.kills + "/" + this.deaths + "/" + this.assists;
     }
 
-    public void setChampionName(String championName) {
-        this.championName = championName;
+    public String getDurationMins(){
+        return this.matchDuration / 60 + "''";
     }
 
-    public String getStats(){
-        this.stats =  this.kills + "/" + this.deaths + "/" + this.assistences;
-        return this.stats;
-    }
 
-    public int getMatchDuration() {
-        return matchDuration;
-    }
-
-    public void setMatchDuration(int matchDuration) {
-        this.matchDuration = matchDuration;
-    }
-
-    public String getIconUri() {
-        return iconUri;
-    }
-
-    public void setIconUri(String iconUri) {
-        this.iconUri = iconUri;
-    }
-
-    public int getKills() {
-        return kills;
-    }
-
-    public void setKills(int kills) {
-        this.kills = kills;
-    }
-
-    public int getDeaths() {
-        return deaths;
-    }
-
-    public void setDeaths(int deaths) {
-        this.deaths = deaths;
-    }
-
-    public int getAssistences() {
-        return assistences;
-    }
-
-    public void setAssistences(int assistences) {
-        this.assistences = assistences;
-    }
-
-    public String getLanePlayed() {
-        return lanePlayed;
-    }
-
-    public void setLanePlayed(String lanePlayed) {
-        this.lanePlayed = lanePlayed;
+    public MatchDTO parseToMatchDTO(RiotAPIMatch match, RiotApiParticipantInfo info) {
+        this.matchId = match.getMatchId();
+        this.matchDuration = match.getMatchDuration();
+        this.winner = info.getStats().isWinner();
+        this.summonerName = info.getSummonerName();
+        this.kills = info.getStats().getKills();
+        this.deaths = info.getStats().getDeaths();
+        this.assists = info.getStats().getAssists();
+        this.goldEarned = info.getStats().getGoldEarned();
+        this.item0 = info.getStats().getItem0();
+        this.item1 = info.getStats().getItem1();
+        this.item2 = info.getStats().getItem2();
+        this.item3 = info.getStats().getItem3();
+        this.item4 = info.getStats().getItem4();
+        this.item5 = info.getStats().getItem5();
+        this.item6 = info.getStats().getItem6();
+        this.champion = info.getChampion();
+        return this;
     }
 
 }

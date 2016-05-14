@@ -10,12 +10,12 @@
 }
 
 #profile {
-    padding:5px;
-    margin-top:5%;
+    padding: 5px;
+    margin-top: 5%;
 }
 
-#summoner-profile{
-    margin-top:3%;
+#summoner-profile {
+    margin-top: 3%;
 }
 
 .centered {
@@ -26,4 +26,12 @@
 .centered img {
     display: block;
     margin: 0 auto;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
 }

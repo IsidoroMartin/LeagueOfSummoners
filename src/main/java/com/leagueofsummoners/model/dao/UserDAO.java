@@ -1,4 +1,4 @@
-package com.leagueofsummoners.model.persistence.dao;
+package com.leagueofsummoners.model.dao;
 
 import com.leagueofsummoners.LeagueofsummonersApplication;
 import com.leagueofsummoners.model.interfaces.persistence.UserRepository;
