@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-import static com.leagueofsummoners.model.persistence.tables.TableNames.*;
+import static com.leagueofsummoners.model.dao.tables.TableNames.*;
 
 /**
  * Este bean representa el objeto Champion de la base de datos

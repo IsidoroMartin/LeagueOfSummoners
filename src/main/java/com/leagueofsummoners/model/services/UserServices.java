@@ -1,14 +1,16 @@
 package com.leagueofsummoners.model.services;
 
-import com.leagueofsummoners.ApplicationPaths;
 import com.leagueofsummoners.LeagueofsummonersApplication;
+import static com.leagueofsummoners.SessionAtts.*;
 import com.leagueofsummoners.model.interfaces.services.IServicesUsers;
 import com.leagueofsummoners.model.dto.GuideDTO;
 import com.leagueofsummoners.model.dto.UserDTO;
+import com.leagueofsummoners.model.utils.LeagueAccessAPI;
 import com.leagueofsummoners.model.utils.PasswordHash;
 import com.leagueofsummoners.model.utils.UploadUtils;
-import com.leagueofsummoners.model.persistence.dao.SummonerDAO;
-import com.leagueofsummoners.model.persistence.dao.UserDAO;
+import com.leagueofsummoners.model.dao.SummonerDAO;
+import com.leagueofsummoners.model.dao.UserDAO;
+import com.robrua.orianna.api.core.RiotAPI;
 import com.robrua.orianna.type.core.summoner.Summoner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +46,7 @@ public class UserServices implements IServicesUsers {
     @Override
     public boolean checkIfSummonerNameExists(String summonerName, HttpSession session) {
         boolean summonerExists = this.summonerDAO.getSummonerData(summonerName) != null;
-        session.setAttribute("summonerExists", summonerExists);
+        session.setAttribute(SESSION_SUMMONER_EXISTS, summonerExists);
         return summonerExists;
     }
 
@@ -89,11 +91,14 @@ public class UserServices implements IServicesUsers {
 
 
     private void createUserSession(HttpSession session, UserDTO user) {
-        LeagueofsummonersApplication.LOGGER.debug("Usuario " + user.getUsername() + " logged");
+        LeagueofsummonersApplication.LOGGER.info("Usuario " + user.getUsername() + " logged");
+        long summonerID = RiotAPI.getSummonerByName(user.getSummonerName()).getID();
+        user.setSummonerID(summonerID);
         session.setMaxInactiveInterval(60 * 60); //La session expirará en 1h
-        session.setAttribute("userlogged", user); //El atributo userlogged contiene el usuario con todos sus atributos
-        session.setAttribute("logged", true); //Un atributo logged para saber si esta logged o no
-        session.setAttribute("admin", user.isAdmin()); //Un atributo admin para saber si el usuario es admin
+        session.setAttribute(SESSION_GET_USER_LOGGED, user); //El atributo userlogged contiene el usuario con todos sus atributos
+        session.setAttribute(SESSION_IS_LOGGED, true); //Un atributo logged para saber si esta logged o no
+        session.setAttribute(SESSION_IS_ADMIN, user.isAdmin()); //Un atributo admin para saber si el usuario es admin
+
     }
 
     @Override
@@ -108,7 +113,7 @@ public class UserServices implements IServicesUsers {
                 String savePath = "img" + File.separator + "avatars" + UploadUtils.saveImg(file[0], userdto.getUsername());
                 userdto.setAvatar(savePath);
             } else if (galeriaIcon.equals("")) {
-                galeriaIcon = ApplicationPaths.TEEMO_ICON;
+                galeriaIcon = LeagueAccessAPI.RIOT_API_TEEMO_ICON;
             } else {
                 userdto.setAvatar(galeriaIcon);
             }

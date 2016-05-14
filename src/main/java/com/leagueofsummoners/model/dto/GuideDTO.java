@@ -2,7 +2,7 @@ package com.leagueofsummoners.model.dto;
 
 import javax.persistence.*;
 
-import static com.leagueofsummoners.model.persistence.tables.TableNames.*;
+import static com.leagueofsummoners.model.dao.tables.TableNames.*;
 
 
 @Entity(name = "guides")

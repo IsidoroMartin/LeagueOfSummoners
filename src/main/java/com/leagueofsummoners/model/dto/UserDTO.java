@@ -32,6 +32,9 @@ public class UserDTO extends GenericDTO implements Serializable {
     @ValidateSummonerNameExists
     private String summonerName;
 
+    @Transient
+    private long summonerID;
+
     @Column(nullable = false, unique = true)
     @Length(min = 4, max = 12)
     @Pattern(regexp = ValidationRegEXP.VALIDATE_NAME)
@@ -143,6 +146,14 @@ public class UserDTO extends GenericDTO implements Serializable {
     }
 
 
+    public long getSummonerID() {
+        return summonerID;
+    }
+
+    public void setSummonerID(long summonerID) {
+        this.summonerID = summonerID;
+    }
+
     public UserDTO(Long idUser, String summonerName, String username, String password, String email, String avatar,
                    String firma, String permissionLevel) {
         super();
@@ -166,5 +177,7 @@ public class UserDTO extends GenericDTO implements Serializable {
         this.firma = firma;
         this.permissionLevel = "User";
     }
+
+
 
 }
