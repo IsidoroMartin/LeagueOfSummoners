@@ -70,14 +70,11 @@ h1, h2, h3, h4 {
 #buscador-home {
     /*padding-bottom: 38%;*/
 }
-
-@media (min-width: 1280px) {
     #buscador-home {
-        padding-bottom: 5%;
+        padding-bottom: 6%;
     }
-}
 
-#bootstrap-overrides nav {
+#bootstrap-overrides nav, .dropdown-menu {
     background: rgba(28, 26, 52, 1);
     background: -moz-linear-gradient(top, rgba(28, 26, 52, 1) 0%, rgba(48, 43, 89, 1) 50%, rgba(28, 26, 52, 1) 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(top, rgba(28, 26, 52, 1) 0%, rgba(48, 43, 89, 1) 50%, rgba(28, 26, 52, 1) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -91,23 +88,28 @@ h1, h2, h3, h4 {
 
 }
 
+#bootstrap-overrides .dropdown-menu .dropdown-menu-right li.menu-item a {
+    padding: 15px;
+}
+
 #bootstrap-overrides nav a, #bootstrap-overrides nav {
     color: white;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
-.navbar{
+
+.navbar {
     background-image: none;
 }
 
-#bootstrap-overrides nav .menu-left a.menu-item:hover,
-#bootstrap-overrides nav .menu-left a.menu-item:focus,
-#bootstrap-overrides nav .menu-left a.menu-item:active,
-#bootstrap-overrides nav .menu-left a.menu-item:target,
-.navbar-default .navbar-nav>.open>a,
-.navbar-default .navbar-nav>.open>a:focus,
-.navbar-default .navbar-nav>.open>a:hover,
-#bootstrap-overrides nav li.active  a {
+#bootstrap-overrides nav a.menu-item:hover,
+#bootstrap-overrides nav a.menu-item:focus,
+#bootstrap-overrides nav a.menu-item:active,
+#bootstrap-overrides nav a.menu-item:target,
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:focus,
+.navbar-default .navbar-nav > .open > a:hover,
+#bootstrap-overrides nav li.active a {
     color: white;
     background: rgba(255, 255, 255, .05);
     background: linear-gradient(top right, rgba(35, 32, 64, 1) 0%, rgba(60, 53, 110, 1) 25%, rgba(60, 53, 110, 1) 75%, rgba(35, 32, 64, 1) 100%);
@@ -133,16 +135,6 @@ nav#nav-menu div.row {
     margin-left: 0px;
     margin-right: 0px;
 }
-@media only screen and (min-width: 768px) {
-    #bootstrap-overrides #nav-menu{
-        padding-right: 15px;
-    }
-}
-.dropdown-menu,.navbar-nav{
-    padding-top: 0px;
-    padding-bottom: 0px;
-}
-
 
 nav.navbar {
     margin-bottom: 0px;
@@ -155,6 +147,10 @@ nav.navbar {
 .navbar-brand:not(#menu-logo) {
     padding: 15px;
 }
+#menu-logo{
+    padding-left:20px ;
+    padding-right:20px ;
+}
 
 .navbar-header {
     margin-left: 1%;
@@ -164,6 +160,12 @@ nav.navbar {
 .navbar-brand img {
     margin-top: 2.5%;
     height: 85%;
+}
+
+@media (min-width: 768px) {
+    .menu-right {
+        float: right;
+    }
 }
 
 #bootstrap-overrides nav a.iniciar-sesion-btn {
@@ -185,27 +187,48 @@ nav.navbar {
     height: 100%;
 }
 
+#bootstrap-overrides nav a.registrarse-btn:hover, #bootstrap-overrides nav a.iniciar-sesion-btn:hover {
+    box-shadow: inset 1px 1px 9px rgba(255, 255, 255, .8), inset -1px -1px 5px rgba(255, 255, 255, .01);
+}
 
 .content {
     background-color: white;
+}
+
+nav .container {
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+@media (min-width: 1921px) {
+    nav .container {
+        width: 1920px;
+    }
 }
 
 #buscador-home header div {
     margin-top: 5%;
     z-index: 5;
 }
+
 #buscador-home main {
-    margin-top: -1.5%;
+    margin-top: -1.8%;
     z-index: 1;
 }
+
 /* Link ver rotacion */
 #buscador-home h3 {
     text-align: center;
-    margin-top: 30%;
-    font-weight: bold;
+    margin-top: 33%;
+    /*font-weight: bold;*/
     text-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
 }
-
+@media (max-width: 1281px) {
+    #buscador-home h3 {
+        margin-top: 28%;
+    }
+}
 #buscador-home h3 a {
     color: white;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
@@ -215,17 +238,18 @@ nav.navbar {
     #buscador-home header div {
         margin-top: 20%;
     }
+
     #buscador-home main {
-         margin-top: -3%;
-     }
+        margin-top: -3%;
+    }
+
     #buscador-home h3 {
         margin-top: 39%;
     }
 
 }
 
-
-#buscador-home main, #rotacion>.panel{
+#buscador-home main, #rotacion > .panel {
     text-align: center;
     background-color: rgba(255, 255, 255, 0.9);
     border: rgba(28, 26, 52, 1) solid 2px;
@@ -336,7 +360,7 @@ footer a, footer a:hover, footer a:focus, footer a:active, footer a:visited {
 .col-sm-15,
 .col-md-15,
 .col-lg-15,
-.col-sm-tablet{
+.col-sm-tablet {
     position: relative;
     min-height: 1px;
     padding-right: 10px;
@@ -367,4 +391,12 @@ footer a, footer a:hover, footer a:focus, footer a:active, footer a:visited {
         width: 20%;
         float: left;
     }
+}
+
+.padding0 {
+    padding: 0px;
+}
+
+.margin0 {
+    margin: 0px;
 }
