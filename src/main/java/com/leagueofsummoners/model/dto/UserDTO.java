@@ -29,7 +29,6 @@ public class UserDTO extends GenericDTO implements Serializable {
     @Column(nullable = false, name = "summoner_name", unique = true)
     @Length(min = 4, max = 20)
     @Pattern(regexp = ValidationRegEXP.VALIDATE_NAME)
-    @ValidateSummonerNameExists
     private String summonerName;
 
     @Transient

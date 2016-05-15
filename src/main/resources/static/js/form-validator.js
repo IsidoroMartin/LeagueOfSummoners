@@ -71,7 +71,7 @@ $(function (e) {
                         message: obtainProperLanguage('inputEmail', 'data-notempty')
                     },
                     regexp: {
-                        regexp: /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/,
+                        regexp: /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i,
                         message: obtainProperLanguage('inputEmail', 'data-emailerror')
                     },
                     remote: {

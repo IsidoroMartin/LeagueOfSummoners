@@ -32,4 +32,15 @@ public class ApplicationPaths {
     public static final String INDEX_PATH = "/index";
     public static final String HOME_PATH = "/home";
 
+    //Rest Services Path
+
+    public static final String REST_API_USER = "/api/user";
+    public static final String REST_API_USER_USERNAME = "/username";
+    public static final String REST_API_USER_EMAIL = "/email";
+    public static final String REST_API_USER_SUMMONERNAME= "/summonername";
+
+    public static final String REST_API_SUMMONER = "/api/summoner";
+    public static final String REST_API_SUMMONER_MATCHLIST = "/matchlist";
+
+
 }

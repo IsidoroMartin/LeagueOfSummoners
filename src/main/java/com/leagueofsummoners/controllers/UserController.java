@@ -4,11 +4,14 @@ import com.leagueofsummoners.LeagueofsummonersApplication;
 
 import static com.leagueofsummoners.SessionAtts.*;
 
+import com.leagueofsummoners.SessionAtts;
 import com.leagueofsummoners.model.dto.MatchDTO;
 import com.leagueofsummoners.model.interfaces.services.IServicesChampions;
+import com.leagueofsummoners.model.interfaces.services.IServicesSummoner;
 import com.leagueofsummoners.model.interfaces.services.IServicesUsers;
 import com.leagueofsummoners.model.dto.UserDTO;
 import com.leagueofsummoners.model.utils.CacheUtils;
+import com.leagueofsummoners.model.utils.LeagueAccessAPI;
 import com.leagueofsummoners.security.annotations.LoginRequired;
 import com.robrua.orianna.type.core.summoner.Summoner;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +35,13 @@ public class UserController {
 
     @Autowired
     private IServicesChampions servicioChampions;
+
     @Autowired
     private IServicesUsers servicioUsers;
+
+    @Autowired
+    private IServicesSummoner servicioSummoners;
+
 
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -59,7 +67,7 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(ModelMap valores, HttpSession session, Locale locale) {
-        return "login";
+        return (session.getAttribute(SessionAtts.SESSION_IS_LOGGED) == null) ? "login" : "redirect:profile";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -75,12 +83,12 @@ public class UserController {
         if (session.getAttribute(SESSION_MODEL_MAP) == null) {
             HashMap<String, Object> valores = new HashMap<>();
             UserDTO user = (UserDTO) session.getAttribute(SESSION_GET_USER_LOGGED);
-            List<MatchDTO> matches = this.servicioChampions.getLatestMatches(user, 2);
             Summoner summ = this.servicioUsers.getSummonerData(user.getSummonerName());
             valores.put("summ_level", summ.getLevel());
             valores.put("summ_tier", (summ.getLeagueEntries().size() > 0) ? summ.getLeagueEntries().get(0).getTier() : "-");
             valores.put("summ_playing", (summ.getCurrentGame() != null) ? summ.getCurrentGame().getMap() : "-");
-            valores.put("latestMatches", matches);
+            valores.put("summoner_avatar", LeagueAccessAPI.RIOT_API_SUMMONER_PROFILE_ICON_PATH + summ.getProfileIconID() + ".png");
+            valores.put("latest_matches", this.servicioSummoners.getLatestMatchesFromDB(user));
             session.setAttribute(SESSION_MODEL_MAP, valores);
         }
 
@@ -88,6 +96,11 @@ public class UserController {
         return "profile";
     }
 
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logOut(HttpSession session) {
+        session.invalidate();
+        return "redirect:index?logout=true";
+    }
 
     @RequestMapping(value = "/notlogged", method = RequestMethod.GET)
     public String notLogged() {

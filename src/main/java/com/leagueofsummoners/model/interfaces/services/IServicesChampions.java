@@ -29,5 +29,4 @@ public interface IServicesChampions {
 
     List<String> getChampionsIconsNamesList();
 
-    List<MatchDTO> getLatestMatches(UserDTO userlogged, int nMatches);
 }

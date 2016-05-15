@@ -55,9 +55,5 @@ public class ChampionServices implements IServicesChampions {
         return championNames;
     }
 
-    @Override
-    public List<MatchDTO> getLatestMatches(UserDTO userlogged, int nMatches) {
-        return  this.summonerDAO.getLatestMatches(userlogged.getSummonerID(), userlogged.getSummonerName(),nMatches);
-    }
 
 }
