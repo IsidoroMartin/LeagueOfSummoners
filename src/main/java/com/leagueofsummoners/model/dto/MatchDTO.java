@@ -5,27 +5,73 @@ import com.leagueofsummoners.model.dto.riotapi.RiotAPIMatch;
 import com.leagueofsummoners.model.dto.riotapi.RiotApiParticipantInfo;
 import lombok.Data;
 
+import javax.persistence.*;
+
 @Data
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Entity(name = "MATCH")
+@Table(name = "MATCHS")
 public class MatchDTO {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "ID_MATCH")
     private long matchId;
+
+    @Column(name = "ID_USER")
+    private long idUser;
+
+    @Column(name = "MATCH_DURATION")
     private long matchDuration;
+
+    @Column(name = "MATCH_WIN")
     private boolean winner;
+
+    @Column(name = "ID_CHAMPION")
+    private long idChampion;
+
+    @Transient
     private String summonerName;
-    private ChampionDTO champion;
-    private long kills;
-    private long deaths;
-    private long assists;
-    private long goldEarned;
-    private long item0;
-    private long item1;
-    private long item2;
-    private long item3;
-    private long item4;
-    private long item5;
-    private long item6;
+
+   @Transient
+    private String championName;
+
+    @Column(name = "KILLS")
+    private Long kills;
+
+    @Column(name = "DEATHS")
+    private Long  deaths;
+
+    @Column(name = "ASSISTS")
+    private Long  assists;
+
+    @Column(name = "GOLD_EARNED")
+    private Long  goldEarned;
+
+    @Column(name = "ITEM0")
+    private Long  item0;
+
+    @Column(name = "ITEM1")
+    private Long  item1;
+
+    @Column(name = "ITEM2")
+    private Long  item2;
+
+    @Column(name = "ITEM3")
+    private Long  item3;
+
+    @Column(name = "ITEM4")
+    private Long  item4;
+
+    @Column(name = "ITEM5")
+    private Long  item5;
+
+    @Column(name = "ITEM6")
+    private Long  item6;
+
+    @Transient
     private String stats;
+
+    @Transient
     private String durationMins;
 
 
@@ -33,7 +79,7 @@ public class MatchDTO {
         return this.kills + "/" + this.deaths + "/" + this.assists;
     }
 
-    public String getDurationMins(){
+    public String getDurationMins() {
         return this.matchDuration / 60 + "''";
     }
 
@@ -54,7 +100,7 @@ public class MatchDTO {
         this.item4 = info.getStats().getItem4();
         this.item5 = info.getStats().getItem5();
         this.item6 = info.getStats().getItem6();
-        this.champion = info.getChampion();
+        this.championName = info.getChampion().getChampionName();
         return this;
     }
 

@@ -2,9 +2,12 @@ package com.leagueofsummoners.model.dao;
 
 
 import com.leagueofsummoners.LeagueofsummonersApplication;
+import com.leagueofsummoners.SessionAtts;
 import com.leagueofsummoners.model.dto.MatchDTO;
+import com.leagueofsummoners.model.dto.UserDTO;
 import com.leagueofsummoners.model.dto.riotapi.*;
 import com.leagueofsummoners.model.interfaces.persistence.ChampionRepository;
+import com.leagueofsummoners.model.interfaces.persistence.SummonerRepository;
 import com.leagueofsummoners.model.utils.LeagueAccessAPI;
 import com.robrua.orianna.api.core.RiotAPI;
 import com.robrua.orianna.type.core.summoner.Summoner;
@@ -20,6 +23,10 @@ public class SummonerDAO {
 
     @Autowired
     private ChampionRepository championRepository;
+
+    @Autowired
+    private SummonerRepository summonerRepository;
+
     private RestTemplate rest;
 
     public SummonerDAO() {
@@ -48,7 +55,7 @@ public class SummonerDAO {
                 MatchDTO matchdto = new MatchDTO();
                 RiotAPIMatch match = this.rest.getForObject(LeagueAccessAPI.RIOT_API_OBTAIN_INFO_MATCHES, RiotAPIMatch.class, matchesAPI.get(i).getMatchId());
                 RiotApiParticipantInfo info = this.filterParticipantsBySummonerName(summonerName, match.getParticipantIdentities(), match.getParticipants());
-                matchList.add(matchdto.parseToMatchDTO(match,info));
+                matchList.add(matchdto.parseToMatchDTO(match, info));
             }
         }
         return matchList;
@@ -79,4 +86,12 @@ public class SummonerDAO {
     }
 
 
+    public List<MatchDTO> getLatestMatchesFromDb(UserDTO userlogged) {
+        List<MatchDTO> matchs = this.summonerRepository.findByIdUser(userlogged.getIdUser());
+        for (MatchDTO matchDTO : matchs) {
+            matchDTO.setChampionName(this.championRepository.findByIdChampion(matchDTO.getIdChampion()).getChampionName());
+            matchDTO.setSummonerName(userlogged.getSummonerName());
+        }
+        return matchs;
+    }
 }

@@ -14,8 +14,27 @@
     margin-top: 5%;
 }
 
-#summoner-profile {
+.summoner-profile {
     margin-top: 3%;
+}
+
+#refresh-icon {
+    float: right;
+    font-size: 20px;
+    margin-top:30px;
+    cursor:pointer;
+}
+
+#guides-last10match h3 {
+    display: inline-block;
+}
+
+#ajax-loader{
+    width:100%;
+}
+
+#ajax-loader img{
+    padding:25px;
 }
 
 .centered {

@@ -33,7 +33,7 @@ public class LeagueAccessAPI {
 
     public static final String RIOT_API_OBTAIN_SUMMONER_MATCHES = "https://euw.api.pvp.net/api/lol/euw/v2.2/matchlist/by-summoner/{summonerID}?seasons=SEASON2016&api_key=" + LeagueAccessAPI.LEAGUE_OF_LEGENDS_KEY;
     public static final String RIOT_API_OBTAIN_INFO_MATCHES = "https://euw.api.pvp.net/api/lol/euw/v2.2/match/{matchId}?api_key=" + LeagueAccessAPI.LEAGUE_OF_LEGENDS_KEY;
-    public static final String RIOT_API_SUMMONER_PROFILE_ICON_PATH = "http://lkimg.zamimg.com/images/v2/summoner/icons/size64x64/";
+    public static final String RIOT_API_SUMMONER_PROFILE_ICON_PATH = "http://ddragon.leagueoflegends.com/cdn/6.6.1/img/profileicon/";
     public static final String RIOT_API_TEEMO_ICON = "http://ddragon.leagueoflegends.com/cdn/6.9.1/img/champion/Teemo.png";
 
 
@@ -43,20 +43,6 @@ public class LeagueAccessAPI {
         RiotAPI.setAPIKey(LEAGUE_OF_LEGENDS_KEY);
     }
 
-   /* public static void main(String[] args) {
-        initRIOTAPI();
-        Summoner summ = RiotAPI.getSummonerByName("zrows");
-        System.out.println(summ.getMatchList(10,0));
-       *//* List<MatchReference> lista =*//*
-*//*
-        System.out.println(lista.size());
-
-        for (int i = 0; i < lista.size(); i++) {
-            System.out.println(lista.get(i).getChampion());
-        }
-*//*
-
-    }*/
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {

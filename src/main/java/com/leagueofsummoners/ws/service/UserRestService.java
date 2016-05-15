@@ -1,5 +1,6 @@
 package com.leagueofsummoners.ws.service;
 
+import static com.leagueofsummoners.ApplicationPaths.*;
 import com.leagueofsummoners.model.interfaces.services.IServicesUsers;
 import com.leagueofsummoners.model.dto.GenericJsonValidator;
 import com.leagueofsummoners.model.dto.UserDTO;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -16,7 +18,7 @@ import java.util.List;
  * @author Juanjors
  */
 @RestController
-@RequestMapping(value = "/api/user")
+@RequestMapping(value = REST_API_USER)
 public class UserRestService {
 
     @Autowired
@@ -30,14 +32,9 @@ public class UserRestService {
      * @param username
      * @return si está disponible devuelve true, si no false
      */
-    @RequestMapping(value = "/username", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
+    @RequestMapping(value = REST_API_USER_USERNAME, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
     public GenericJsonValidator checkIfUserAvailable(@RequestParam("username") String username) {
         return new GenericJsonValidator(username.length() >= 4 && this.servicioUsers.checkIfUsernameAvailable(username));
-    }
-
-    @RequestMapping(value = "/userlist", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
-    public List<UserDTO> getListOfUsers() {
-        return this.servicioUsers.getUserList();
     }
 
     /**
@@ -47,7 +44,7 @@ public class UserRestService {
      * @param email
      * @return si esta disponible devuelve true, si no false.
      */
-    @RequestMapping(value = "/email", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
+    @RequestMapping(value = REST_API_USER_EMAIL, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
     public GenericJsonValidator checkIfEmailExists(@RequestParam("email") String email) {
         return new GenericJsonValidator(this.servicioUsers.checkIfEmailAvailable(email));
     }
@@ -57,7 +54,7 @@ public class UserRestService {
      * @param summonerName
      * @return si está presente devuelve true, si no false.
      */
-    @RequestMapping(value = "/summonername", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
+    @RequestMapping(value = REST_API_USER_SUMMONERNAME, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
     public GenericJsonValidator checkSummonerExists(@RequestParam("summonerName") String summonerName, HttpSession session) {
         int summonerLength = summonerName.length();
         return new GenericJsonValidator(summonerLength >= 4 && summonerLength <= 24 && this.servicioUsers.checkIfSummonerNameExists(summonerName,session));

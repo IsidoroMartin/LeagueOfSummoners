@@ -17,16 +17,16 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 		HandlerMethod handlerMethod = (HandlerMethod) handler;
 		LoginRequired loginRequired = handlerMethod.getMethod().getAnnotation(LoginRequired.class);
 		UserDTO user = (UserDTO) httpServletRequest.getSession().getAttribute("userlogged");
-		
+
 		if (loginRequired == null) {
 			return true;
 		}
-		
+
 		if(null == user){
-			httpServletResponse.sendRedirect("/?champName=Amumu&locale=en&error=notlogged");
+			httpServletResponse.sendRedirect("/?error=notlogged");
 			return false;
 		}
-		
+
 
 		return super.preHandle(httpServletRequest, httpServletResponse, handler);
 	}
