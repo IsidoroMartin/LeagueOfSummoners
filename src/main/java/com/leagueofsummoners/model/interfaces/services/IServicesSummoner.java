@@ -9,7 +9,10 @@ import java.util.List;
 
 public interface IServicesSummoner {
 
-    List<MatchDTO> getLatestMatches(UserDTO userlogged, int nMatches);
+    List<MatchDTO> getLatestMatches(UserDTO user, int nMatches);
 
-    List<MatchDTO> getLatestMatchesFromDB(UserDTO userlogged);
+    List<MatchDTO> getLatestMatchesFromDB(UserDTO user);
+
+    List<MatchDTO> getNextMatches(UserDTO user, int nMatches);
+
 }

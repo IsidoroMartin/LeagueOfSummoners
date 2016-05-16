@@ -31,13 +31,13 @@
             </main>
         </div>
         <div class="row">
-            <h3 class="col-md-4 col-md-offset-4 col-xs-12"><a href="#rotacion">Ver rotación gratuita</a></h3>
+            <h3 class="col-centered"><a href="#rotacion" th:utext="#{home.body.rotacion.link}"></a></h3>
         </div>
     </section>
     <aside id="rotacion" class="container">
         <div class="row panel panel-default">
             <div class="panel-heading">
-                <h1>Rotación de la semana gratuita</h1>
+                <h1 th:utext="#{home.body.rotacion.title}"></h1>
             </div>
             <div class="panel-body">
                 <th:block th:each="champion : ${championRotation}">

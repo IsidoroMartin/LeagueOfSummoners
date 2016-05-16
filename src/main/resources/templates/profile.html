@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
 <head th:replace="fragments/head :: head">
 </head>
-<body id="bootstrap-overrides" onload="getMatchList(false)">
+<body id="bootstrap-overrides">
 <div th:replace="fragments/menu :: menu"></div>
 <div class="container content">
     <div class="row" id="banner">
@@ -70,14 +70,15 @@
                         <th>Resultado</th>
                         <th>Duración</th>
                         <th>Campeón</th>
+                        <th>Items</th>
+                        <th>Oro</th>
                         <th>Puntuación</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    <tr th:each="match : ${latestMatches}" th:class="${match.winner} ? success : danger">
-                        <td th:class="${match.winner} ? green : red"
-                            th:utext="${match.winner} ? #{profile.match.win} : #{profile.match.lose}"></td>
+                    <tr th:each="match : ${latest_matches}" th:class="${match.winner} ? success : danger">
+                        <td th:class="${match.winner} ? green : red"  th:utext="${match.winner} ? #{profile.match.win} : #{profile.match.lose}"></td>
                         <td th:utext="${match.durationMins}"></td>
                         <td th:utext="${match.championName}"></td>
                         <td th:utext="${match.stats}"></td>
