@@ -43,7 +43,7 @@ public class LeagueofsummonersApplication extends SpringBootServletInitializer {
         return new InterceptorSession();
     }
 
-    @Override
+     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         LOGGER.info("Tomcat empieza por aqui");
         LeagueAccessAPI.initRIOTAPI();

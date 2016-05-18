@@ -74,7 +74,7 @@ h1, h2, h3, h4 {
         padding-bottom: 6%;
     }
 
-#bootstrap-overrides nav, .dropdown-menu {
+#bootstrap-overrides nav, nav .dropdown-menu {
     background: rgba(28, 26, 52, 1);
     background: -moz-linear-gradient(top, rgba(28, 26, 52, 1) 0%, rgba(48, 43, 89, 1) 50%, rgba(28, 26, 52, 1) 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(top, rgba(28, 26, 52, 1) 0%, rgba(48, 43, 89, 1) 50%, rgba(28, 26, 52, 1) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -255,6 +255,12 @@ nav .container {
     border: rgba(28, 26, 52, 1) solid 2px;
     padding: 1% 2%;
 }
+.panel-body{
+    text-align: center;
+}
+.panel-body img {
+   width:100%;
+}
 
 #buscador-home main form {
     margin-bottom: 0px;
@@ -282,22 +288,17 @@ nav .container {
 
 }
 
-#rotacion h1 {
-
+h1 {
+    font-size: 3rem;
     text-align: center;
     font-weight: bold;
 }
 
-#bootstrap-overrides form button {
+#bootstrap-overrides form  button.btn {
     background: rgba(28, 26, 52, 1);
     background: linear-gradient(top bottom, rgba(28, 26, 52, 1) 0%, rgba(48, 43, 89, 1) 50%, rgba(28, 26, 52, 1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1c1a34', endColorstr='#1c1a34', GradientType=0);
     color: white;
-}
-
-header button#idiomaSelect {
-    background: none;
-    border: none;
 }
 
 /*, #bootstrap-overrides button, #bootstrap-overrides form button:hover, input[type=button]:hover*/
@@ -316,7 +317,6 @@ input[type=button] {
 }
 
 footer {
-    margin-top: 5%;
     color: white;
     border-top: 3px solid #c2914f;
     background: rgba(28, 26, 52, 1);

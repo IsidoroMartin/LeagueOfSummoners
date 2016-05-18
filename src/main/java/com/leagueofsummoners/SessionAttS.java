@@ -10,5 +10,4 @@ public class SessionAtts {
     public static final String SESSION_MODEL_MAP = "modelMap";
     public static final String SESSION_MODEL_MAP_SIZE = "modelMapSize";
 
-
 }

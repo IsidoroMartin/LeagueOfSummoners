@@ -32,6 +32,17 @@ public class ApplicationPaths {
     public static final String INDEX_PATH = "/index";
     public static final String HOME_PATH = "/home";
 
+    public static final String CHAMPIONS_PATH = "/champions";
+    public static final String CHAMPIONS_HTML_PATH = "/champions.html";
+
+    public static final String SUMMONER_MATCH_STADISTICS_HTML_PATH = "/summonermatchstadistics.html";
+    public static final String SUMMONER_MATCH_STADISTICS_PATH= "/summonermatchstadistics";
+
+    public static final String GUIDES_HTML_PATH = "/guides.html";
+    public static final String GUIDES_PATH = "/guides";
+
+    public static final String SEARCH_PATH = "/search";
+
     //Rest Services Path
 
     public static final String REST_API_USER = "/api/user";

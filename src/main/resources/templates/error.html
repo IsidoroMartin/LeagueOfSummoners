@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
-<head th:replace="fragments/head :: head">
+<!--<div th:replace="fragments/prueba :: div"></div>-->
+<head th:replace="fragments/head :: head(title='Home ~ League of summoners')">
 </head>
 <body id="bootstrap-overrides">
 <!--<header th:replace="fragments/header :: header"></header>-->
-<div th:replace="fragments/menu :: menu"></div>
-<div th:replace="fragments/languageSelect :: locale"></div>
-<main class="container">
 
+<div th:replace="fragments/menu :: menu"></div>
+<!--<div th:replace="fragments/languageSelect :: locale"></div>-->
+<main>
+        ERROR 400
 </main>
 <div th:replace="fragments/footer :: footer"></div>
 <div th:replace="fragments/scripts :: scripts"></div>

@@ -14,6 +14,7 @@ public interface IServicesChampions {
      * @return Lista con los campeones
      */
     List<ChampionDTO> getChampionList();
+    String[] getStringChampionList();
 
     List<ChampionDTO> getChampionRotation();
 
