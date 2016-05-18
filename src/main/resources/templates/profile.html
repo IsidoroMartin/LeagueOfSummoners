@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
 <head th:replace="fragments/head :: head">
 </head>
-<body id="bootstrap-overrides">
+<body id="bootstrap-overrides" onload="getMatchList(false)">
 <div th:replace="fragments/menu :: menu"></div>
 <div class="container content">
     <div class="row" id="banner">
@@ -41,14 +41,14 @@
                         <th th:utext="#{profile.summonername}"></th>
                         <th th:utext="#{profile.summoner.level}"></th>
                         <th>Division</th>
-                        <th th:utext="#{profile.playingmap}"></th>
+                        <th th:utext="#{profile.team}"></th>
                         <th th:utext="#{profile.permission.level}">User level</th>
                     </tr>
                     <tr>
                         <td th:utext="${session.userlogged.summonerName}"></td>
                         <td th:utext="${summ_level}"></td>
                         <td th:utext="${summ_tier}"></td>
-                        <td th:utext="${summ_playing}"></td>
+                        <td th:utext="${team}"></td>
                         <td th:utext="${session.userlogged.permissionLevel}"></td>
                     </tr>
                 </table>
@@ -64,6 +64,9 @@
                     <th:block th:text="#{profile.last10matches}"></th:block>
                 </h3>
                 <i class="fa fa-refresh fa-1" id="refresh-icon" aria-hidden="true" onclick="getMatchList(true)"></i>
+                <div id="no-rankeds" class="red" hidden>
+                    <h4> Oops! Parece que aun no has jugando ninguna ranked</h4>
+                </div>
                 <table class="table" id="table-matches">
                     <thead>
                     <tr>
@@ -76,14 +79,6 @@
                     </tr>
                     </thead>
                     <tbody>
-
-                    <tr th:each="match : ${latest_matches}" th:class="${match.winner} ? success : danger">
-                        <td th:class="${match.winner} ? green : red"  th:utext="${match.winner} ? #{profile.match.win} : #{profile.match.lose}"></td>
-                        <td th:utext="${match.durationMins}"></td>
-                        <td th:utext="${match.championName}"></td>
-                        <td th:utext="${match.stats}"></td>
-                    </tr>
-
                     </tbody>
                 </table>
                 <div class="text-center" id="ajax-loader">

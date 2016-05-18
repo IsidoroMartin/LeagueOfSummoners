@@ -1,7 +1,6 @@
 package com.leagueofsummoners;
 
 import com.leagueofsummoners.interceptors.InterceptorSession;
-import com.leagueofsummoners.model.dto.UserDTO;
 import com.leagueofsummoners.model.utils.LeagueAccessAPI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +12,6 @@ import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomi
 import org.springframework.boot.context.embedded.ErrorPage;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.http.HttpStatus;
 
 import javax.servlet.http.HttpSessionListener;

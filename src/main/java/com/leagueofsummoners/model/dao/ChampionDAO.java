@@ -26,6 +26,7 @@ public class ChampionDAO {
 	public List<ChampionDTO> getChampionList() {
 		return this.championRepository.findAll();
 	}
+
 	public List<ChampionDTO> getChampionRotation() {
 		Map<Champion,ChampionStatus> championRotation = RiotAPI.getChampionStatuses(true);
 		ArrayList<ChampionDTO>championsList = new ArrayList<ChampionDTO>();

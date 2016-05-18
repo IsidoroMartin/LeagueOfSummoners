@@ -14,6 +14,8 @@ import com.leagueofsummoners.model.utils.CacheUtils;
 import com.leagueofsummoners.model.utils.LeagueAccessAPI;
 import com.leagueofsummoners.security.annotations.LoginRequired;
 import com.robrua.orianna.type.core.summoner.Summoner;
+import com.robrua.orianna.type.core.team.Team;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +33,7 @@ import java.util.List;
 import java.util.Locale;
 
 @Controller
+@Slf4j
 public class UserController {
 
     @Autowired
@@ -41,7 +44,6 @@ public class UserController {
 
     @Autowired
     private IServicesSummoner servicioSummoners;
-
 
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -80,19 +82,22 @@ public class UserController {
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String profile(ModelMap values, HttpSession session) {
 
-    /*    if (session.getAttribute(SESSION_MODEL_MAP) == null) {*/
-            HashMap<String, Object> valores = new HashMap<>();
-            UserDTO user = (UserDTO) session.getAttribute(SESSION_GET_USER_LOGGED);
-            Summoner summ = this.servicioUsers.getSummonerData(user.getSummonerName());
-            valores.put("summ_level", summ.getLevel());
-            valores.put("summ_tier", (summ.getLeagueEntries().size() > 0) ? summ.getLeagueEntries().get(0).getTier() : "-");
-            valores.put("summ_playing", (summ.getCurrentGame() != null) ? summ.getCurrentGame().getMap() : "-");
-            valores.put("summoner_avatar", LeagueAccessAPI.RIOT_API_SUMMONER_PROFILE_ICON_PATH + summ.getProfileIconID() + ".png");
-            valores.put("latest_matches", this.servicioSummoners.getLatestMatchesFromDB(user));
-            session.setAttribute(SESSION_MODEL_MAP, valores);
-      /*  }*/
-
-        CacheUtils.setValuesToModelMap((HashMap) session.getAttribute(SESSION_MODEL_MAP), values, session);
+        try {
+            if (session.getAttribute(SESSION_MODEL_MAP) == null) {
+                HashMap<String, Object> valores = new HashMap<>();
+                UserDTO user = (UserDTO) session.getAttribute(SESSION_GET_USER_LOGGED);
+                Summoner summ = this.servicioUsers.getSummonerData(user.getSummonerName());
+                valores.put("summ_level", summ.getLevel());
+                valores.put("summ_tier", (summ.getLeagueEntries().size() > 0) ? summ.getLeagueEntries().get(0).getTier() : "-");
+                List<Team> teams = summ.getTeams();
+                valores.put("team", (!teams.isEmpty()) ? teams.get(0).getName() : "Sin equipo");
+                valores.put("summoner_avatar", LeagueAccessAPI.RIOT_API_SUMMONER_PROFILE_ICON_PATH + summ.getProfileIconID() + ".png");
+                session.setAttribute(SESSION_MODEL_MAP, valores);
+            }
+        }catch(Exception e){
+            log.error("Error obteniendo la información del usuario! " + e.getMessage());
+        }
+        CacheUtils.setValuesToModelMap((HashMap<String, Object>) session.getAttribute(SESSION_MODEL_MAP), values, session);
         return "profile";
     }
 
