@@ -7,6 +7,7 @@ import com.leagueofsummoners.model.interfaces.services.IServicesChampions;
 import com.leagueofsummoners.model.dto.ChampionDTO;
 import com.leagueofsummoners.model.dao.ChampionDAO;
 
+import com.leagueofsummoners.model.utils.RiotUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,11 @@ public class ChampionServices implements IServicesChampions {
     @Override
     public List<ChampionDTO> getChampionList() {
         return this.championDAO.getChampionList();
+    }
+    @Override
+    public String[] getStringChampionList() {
+        RiotUtils rt = new RiotUtils();
+        return rt.parseRiotListToString(this.championDAO.getChampionList());
     }
 
     public List<ChampionDTO> getChampionRotation() {
