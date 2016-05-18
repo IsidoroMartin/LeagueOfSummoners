@@ -1,9 +1,11 @@
 package com.leagueofsummoners.model.interfaces.persistence;
 
 
+import com.leagueofsummoners.model.dao.tables.Querys;
 import com.leagueofsummoners.model.dto.UserDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
 import java.util.List;
@@ -24,5 +26,5 @@ public interface UserRepository extends Repository<UserDTO, Long> {
 	UserDTO findByIdUser(Long idUser);
 
 	UserDTO save(UserDTO user);
-
+	
 }

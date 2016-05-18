@@ -13,6 +13,4 @@ public interface IServicesSummoner {
 
     List<MatchDTO> getLatestMatchesFromDB(UserDTO user);
 
-    List<MatchDTO> getNextMatches(UserDTO user, int nMatches);
-
 }

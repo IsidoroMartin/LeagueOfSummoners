@@ -90,6 +90,13 @@ public class MatchDTO {
     @Transient
     private ItemDTO itemDto6;
 
+    @Transient
+    private String champMatchGlyphIcon;
+
+    public String getChampMatchGlyphIcon(){
+        return ((this.championName.contains(" ")) ? this.championName.replace(" ", "-") : this.championName).toLowerCase();
+    }
+
     public String getStats() {
         return this.kills + "/" + this.deaths + "/" + this.assists;
     }

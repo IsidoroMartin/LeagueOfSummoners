@@ -4,6 +4,7 @@ package com.leagueofsummoners.model.dto;
 
 
 import com.robrua.orianna.type.core.staticdata.Champion;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import static com.leagueofsummoners.model.dao.tables.TableNames.*;
  * Este bean representa el objeto Champion de la base de datos
  * @author Juanjors
  */
+@Data
 @Entity(name = "champion")
 @Table(name = TABLE_CHAMPIONS)
 public class ChampionDTO extends GenericDTO implements Serializable {
@@ -55,104 +57,6 @@ public class ChampionDTO extends GenericDTO implements Serializable {
 	@Transient
 	private ChampionsPassivesDTO passive;
 
-	public ChampionDTO() {
-	}
-
-	public Long getIdChampion() {
-		return idChampion;
-	}
-
-	public void setIdChampion(Long idChampion) {
-		this.idChampion = idChampion;
-	}
-
-	public String getChampionName() {
-		return championName;
-	}
-
-	public void setChampionName(String championName) {
-		this.championName = championName;
-	}
-
-	public String getChampionIconName() {
-		return championIconName;
-	}
-
-	public void setChampionIconName(String championIconName) {
-		this.championIconName = championIconName;
-	}
-
-	public Long getIdPassive() {
-		return idPassive;
-	}
-
-	public void setIdPassive(Long idPassive) {
-		this.idPassive = idPassive;
-	}
-
-	public String getChampionTitleES() {
-		return championTitleES;
-	}
-
-	public void setChampionTitleES(String championTitleES) {
-		this.championTitleES = championTitleES;
-	}
-
-	public String getChampionTitleEN() {
-		return championTitleEN;
-	}
-
-	public void setChampionTitleEN(String championTitleEN) {
-		this.championTitleEN = championTitleEN;
-	}
-
-	public String getChampionLoreES() {
-		return championLoreES;
-	}
-
-	public void setChampionLoreES(String championLoreES) {
-		this.championLoreES = championLoreES;
-	}
-
-	public String getChampionLoreEN() {
-		return championLoreEN;
-	}
-
-	public void setChampionLoreEN(String championLoreEN) {
-		this.championLoreEN = championLoreEN;
-	}
-
-	public String getChampionInfo() {
-		return championInfo;
-	}
-
-	public void setChampionInfo(String championInfo) {
-		this.championInfo = championInfo;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public List<ChampionsSpellsDTO> getSpellsList() {
-		return spellsList;
-	}
-
-	public void setSpellsList(List<ChampionsSpellsDTO> spellsList) {
-		this.spellsList = spellsList;
-	}
-
-	public ChampionsPassivesDTO getPassive() {
-		return passive;
-	}
-
-	public void setPassive(ChampionsPassivesDTO passive) {
-		this.passive = passive;
-	}
-	@Override
-	public String toString() {
-		return this.championName;
-	}
 
 	public static ChampionDTO buildBasicChampionDTO(Champion champion){
 		ChampionDTO champ = new ChampionDTO();

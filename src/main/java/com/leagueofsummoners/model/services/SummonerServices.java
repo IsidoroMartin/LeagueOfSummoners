@@ -1,6 +1,5 @@
 package com.leagueofsummoners.model.services;
 
-import com.leagueofsummoners.SessionAtts;
 import com.leagueofsummoners.model.dao.SummonerDAO;
 import com.leagueofsummoners.model.dto.MatchDTO;
 import com.leagueofsummoners.model.dto.UserDTO;
@@ -9,13 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
 @Service
 public class SummonerServices implements IServicesSummoner {
-
 
     @Autowired
     private SummonerDAO summonerDAO;
@@ -24,9 +21,9 @@ public class SummonerServices implements IServicesSummoner {
     public List<MatchDTO> getLatestMatches(UserDTO userlogged, int nMatches) {
         List<MatchDTO> lista = null;
         try {
-            lista = this.summonerDAO.getLatestMatchesFromRiot(userlogged.getSummonerID(), userlogged.getSummonerName(), nMatches);
+            lista = this.summonerDAO.getLatestMatchesFromRiot(userlogged, nMatches);
         } catch (Exception e) {
-            log.debug("Error en GetLatestMatches " + e.getMessage());
+            log.error("Error en GetLatestMatches " + e.getMessage());
         }
         return lista;
     }
@@ -34,13 +31,7 @@ public class SummonerServices implements IServicesSummoner {
     @Override
     public List<MatchDTO> getLatestMatchesFromDB(UserDTO userlogged) {
         List<MatchDTO> lista = null;
-        lista = this.summonerDAO.getLatestMatchesFromDb(userlogged);
+        lista = this.summonerDAO.getLatestMatchesFromDB(userlogged);
         return lista;
-    }
-
-
-    @Override
-    public List<MatchDTO> getNextMatches(UserDTO user, int nMatches) {
-        return this.summonerDAO.getNextMatches(user, nMatches);
     }
 }
