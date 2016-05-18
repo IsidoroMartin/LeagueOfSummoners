@@ -80,7 +80,7 @@ public class UserController {
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String profile(ModelMap values, HttpSession session) {
 
-        if (session.getAttribute(SESSION_MODEL_MAP) == null) {
+    /*    if (session.getAttribute(SESSION_MODEL_MAP) == null) {*/
             HashMap<String, Object> valores = new HashMap<>();
             UserDTO user = (UserDTO) session.getAttribute(SESSION_GET_USER_LOGGED);
             Summoner summ = this.servicioUsers.getSummonerData(user.getSummonerName());
@@ -90,7 +90,7 @@ public class UserController {
             valores.put("summoner_avatar", LeagueAccessAPI.RIOT_API_SUMMONER_PROFILE_ICON_PATH + summ.getProfileIconID() + ".png");
             valores.put("latest_matches", this.servicioSummoners.getLatestMatchesFromDB(user));
             session.setAttribute(SESSION_MODEL_MAP, valores);
-        }
+      /*  }*/
 
         CacheUtils.setValuesToModelMap((HashMap) session.getAttribute(SESSION_MODEL_MAP), values, session);
         return "profile";

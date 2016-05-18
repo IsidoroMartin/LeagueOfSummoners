@@ -23,8 +23,8 @@ import java.util.List;
  */
 public class LeagueAccessAPI {
 
-//        public static String LEAGUE_OF_LEGENDS_KEY = "863dd8a4-3747-47cc-9628-72cbd46a826e";// Juanjo
-    public static String LEAGUE_OF_LEGENDS_KEY = "731bd096-290a-4e20-aae8-0c5ff78522a6";//Isi
+    public static String LEAGUE_OF_LEGENDS_KEY = "863dd8a4-3747-47cc-9628-72cbd46a826e";// Juanjo
+  /*  public static String LEAGUE_OF_LEGENDS_KEY = "731bd096-290a-4e20-aae8-0c5ff78522a6";//Isi*/
 
 
     /**
@@ -35,6 +35,8 @@ public class LeagueAccessAPI {
     public static final String RIOT_API_OBTAIN_INFO_MATCHES = "https://euw.api.pvp.net/api/lol/euw/v2.2/match/{matchId}?api_key=" + LeagueAccessAPI.LEAGUE_OF_LEGENDS_KEY;
     public static final String RIOT_API_SUMMONER_PROFILE_ICON_PATH = "http://ddragon.leagueoflegends.com/cdn/6.6.1/img/profileicon/";
     public static final String RIOT_API_TEEMO_ICON = "http://ddragon.leagueoflegends.com/cdn/6.9.1/img/champion/Teemo.png";
+    public static final String RIOT_API_ITEMS_PATH = "http://ddragon.leagueoflegends.com/cdn/6.9.1/img/item/";
+
 
 
     public static void initRIOTAPI() {

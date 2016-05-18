@@ -24,7 +24,7 @@ public class SummonerServices implements IServicesSummoner {
     public List<MatchDTO> getLatestMatches(UserDTO userlogged, int nMatches) {
         List<MatchDTO> lista = null;
         try {
-            lista = this.summonerDAO.getLatestMatches(userlogged.getSummonerID(), userlogged.getSummonerName(), nMatches);
+            lista = this.summonerDAO.getLatestMatchesFromRiot(userlogged.getSummonerID(), userlogged.getSummonerName(), nMatches);
         } catch (Exception e) {
             log.debug("Error en GetLatestMatches " + e.getMessage());
         }
@@ -36,5 +36,11 @@ public class SummonerServices implements IServicesSummoner {
         List<MatchDTO> lista = null;
         lista = this.summonerDAO.getLatestMatchesFromDb(userlogged);
         return lista;
+    }
+
+
+    @Override
+    public List<MatchDTO> getNextMatches(UserDTO user, int nMatches) {
+        return this.summonerDAO.getNextMatches(user, nMatches);
     }
 }

@@ -3,9 +3,11 @@ package com.leagueofsummoners.model.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.leagueofsummoners.model.dto.riotapi.RiotAPIMatch;
 import com.leagueofsummoners.model.dto.riotapi.RiotApiParticipantInfo;
+import com.robrua.orianna.type.core.staticdata.Item;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity(name = "MATCH")
@@ -13,7 +15,6 @@ import javax.persistence.*;
 public class MatchDTO {
 
     @Id
-    @GeneratedValue
     @Column(name = "ID_MATCH")
     private long matchId;
 
@@ -32,41 +33,41 @@ public class MatchDTO {
     @Transient
     private String summonerName;
 
-   @Transient
+    @Transient
     private String championName;
 
     @Column(name = "KILLS")
     private Long kills;
 
     @Column(name = "DEATHS")
-    private Long  deaths;
+    private Long deaths;
 
     @Column(name = "ASSISTS")
-    private Long  assists;
+    private Long assists;
 
     @Column(name = "GOLD_EARNED")
-    private Long  goldEarned;
+    private Long goldEarned;
 
     @Column(name = "ITEM0")
-    private Long  item0;
+    private Long item0;
 
     @Column(name = "ITEM1")
-    private Long  item1;
+    private Long item1;
 
     @Column(name = "ITEM2")
-    private Long  item2;
+    private Long item2;
 
     @Column(name = "ITEM3")
-    private Long  item3;
+    private Long item3;
 
     @Column(name = "ITEM4")
-    private Long  item4;
+    private Long item4;
 
     @Column(name = "ITEM5")
-    private Long  item5;
+    private Long item5;
 
     @Column(name = "ITEM6")
-    private Long  item6;
+    private Long item6;
 
     @Transient
     private String stats;
@@ -74,6 +75,20 @@ public class MatchDTO {
     @Transient
     private String durationMins;
 
+    @Transient
+    private ItemDTO itemDto0;
+    @Transient
+    private ItemDTO itemDto1;
+    @Transient
+    private ItemDTO itemDto2;
+    @Transient
+    private ItemDTO itemDto3;
+    @Transient
+    private ItemDTO itemDto4;
+    @Transient
+    private ItemDTO itemDto5;
+    @Transient
+    private ItemDTO itemDto6;
 
     public String getStats() {
         return this.kills + "/" + this.deaths + "/" + this.assists;
@@ -101,6 +116,7 @@ public class MatchDTO {
         this.item5 = info.getStats().getItem5();
         this.item6 = info.getStats().getItem6();
         this.championName = info.getChampion().getChampionName();
+        this.idChampion = info.getChampion().getIdChampion();
         return this;
     }
 
