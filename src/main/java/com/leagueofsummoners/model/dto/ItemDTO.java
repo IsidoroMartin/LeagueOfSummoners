@@ -18,12 +18,6 @@ public class ItemDTO {
     @Column(name = "ITEM_NAME_ES")
     private String itemNameEs;
 
-    @Column(name = "ITEM_NAME_EN")
-    private String itemNameEn;
-
-    @Column(name = "ITEM_DESC_EN")
-    private boolean itemDescEn;
-
     @Column(name = "ITEM_DESC_ES")
     private boolean itemDescEs;
 

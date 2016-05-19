@@ -1,0 +1,55 @@
+main.champions-body {
+	min-height: 702px;
+}
+
+div.img-separation {
+	margin: 1%;
+	margin-left: 2%;
+	cursor: pointer;
+}
+
+div.img-separation img:hover {
+	transform: scale(1.1);
+}
+
+#buscador-campeones {
+	height: 160px;
+	margin-top: 30px;
+	border: rgba(28, 26, 52, 1) solid 2px;
+}
+
+#buscador-campeones input[type="text"] {
+	width: 90%;
+	height: 50px;
+	margin-left: 15px;
+}
+
+#buscador-campeones label {
+	padding-left: 15px;
+	text-indent: -10px;
+	float: left;
+}
+
+#buscador-campeones input[type="checkbox"] {
+	margin-top: 10px; height : 20px;
+	width: 20px;
+	padding: 0;
+	margin: 0;
+	margin-left: 15px;
+	float: left;
+	height: 20px;
+}
+
+#filtros{
+	margin-top:1%;
+}
+
+#buscador-campeones h2 {
+	padding: 15px;
+}
+
+@media only screen and (max-width: 768px) {
+	div.img-separation {
+		margin: 0px;
+	}
+}

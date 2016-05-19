@@ -22,6 +22,7 @@ public class SummonerServices implements IServicesSummoner {
         List<MatchDTO> lista = null;
         try {
             lista = this.summonerDAO.getLatestMatchesFromRiot(userlogged, nMatches);
+            lista = this.summonerDAO.getLatestMatchesFromDB(userlogged);
         } catch (Exception e) {
             log.error("Error en GetLatestMatches " + e.getMessage());
         }

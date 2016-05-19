@@ -7,7 +7,7 @@ import static com.leagueofsummoners.model.dao.tables.TableNames.*;
 
 @Entity(name = "guides")
 @Table(name = TABLE_GUIDES)
-public class GuideDTO extends GenericDTO {
+public class GuideDTO {
 
 	@Id
 	@GeneratedValue

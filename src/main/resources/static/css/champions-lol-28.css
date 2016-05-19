@@ -130,3 +130,17 @@
 .champions-lol-28.aurelion-sol { background-position:-252px -336px; }
 .champions-lol-28 { width:28px; height:28px; float:left; background-image:url(../img/champions-lol-28.jpeg) }
 
+
+
+.champion-ranks{ width:28px; height:28px; float:left; background-image:url(../img/lol_ranks_28.png) }
+.champion-ranks.UNRANKED{background-position:-78px -78px}
+.champion-ranks.null{background-position:-78px -78px}
+.champion-ranks.BRONZE{background-position:0 0}
+.champion-ranks.SILVER{background-position:0 -1794px}
+.champion-ranks.GOLD{background-position:0 -858px}
+.champion-ranks.PLATINUM{background-position:0 -1560px}
+.champion-ranks.DIAMOND{background-position:0 -468px}
+.champion-ranks.MASTER{background-position:-80px -156px}
+.champion-ranks.CHALLANGER{background-position:0 -390px}
+
+
