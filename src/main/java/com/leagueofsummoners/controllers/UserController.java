@@ -13,6 +13,7 @@ import com.leagueofsummoners.model.dto.UserDTO;
 import com.leagueofsummoners.model.utils.CacheUtils;
 import com.leagueofsummoners.model.utils.LeagueAccessAPI;
 import com.leagueofsummoners.security.annotations.LoginRequired;
+import com.robrua.orianna.type.core.league.League;
 import com.robrua.orianna.type.core.summoner.Summoner;
 import com.robrua.orianna.type.core.team.Team;
 import lombok.extern.slf4j.Slf4j;
@@ -36,89 +37,105 @@ import java.util.Locale;
 @Slf4j
 public class UserController {
 
-    @Autowired
-    private IServicesChampions servicioChampions;
+	@Autowired
+	private IServicesChampions servicioChampions;
 
-    @Autowired
-    private IServicesUsers servicioUsers;
+	@Autowired
+	private IServicesUsers servicioUsers;
 
-    @Autowired
-    private IServicesSummoner servicioSummoners;
+	@Autowired
+	private IServicesSummoner servicioSummoners;
 
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String register(UserDTO userdto, ModelMap valores, HttpSession session) {
+		valores.put("listaChamps", this.servicioChampions.getChampionList());
+		return (session.getAttribute(SessionAtts.SESSION_IS_LOGGED) == null) ? "register" : "redirect:profile";
+	}
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String register(UserDTO userdto, ModelMap valores) {
-        valores.put("listaChamps", this.servicioChampions.getChampionList());
-        return "register";
-    }
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String registerUser(@Valid UserDTO userdto, BindingResult bindingResult, Model model,
+			@RequestParam("img-avatar") MultipartFile[] file, @RequestParam("galeria") String galeriaIcon) {
+		String page = "redirect:index.html?action=form-error";
+		String avatar = galeriaIcon;
+		if (!bindingResult.hasErrors()) {
+			if (this.servicioUsers.registrarUser(userdto, file, galeriaIcon))
+				page = "login";
+		} else {
+			LeagueofsummonersApplication.LOGGER.warn(
+					"Error registrando usuario " + userdto.getUsername() + " due: " + bindingResult.getAllErrors());
+		}
+		return page;
+	}
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String registerUser(@Valid UserDTO userdto, BindingResult bindingResult, Model model,
-                               @RequestParam("img-avatar") MultipartFile[] file, @RequestParam("galeria") String galeriaIcon) {
-        String page = "redirect:index.html?action=form-error";
-        String avatar = galeriaIcon;
-        if (!bindingResult.hasErrors()) {
-            if (this.servicioUsers.registrarUser(userdto, file, galeriaIcon))
-                page = "login";
-        } else {
-            LeagueofsummonersApplication.LOGGER.warn("Error registrando usuario " + userdto.getUsername() + " due: " + bindingResult.getAllErrors());
-        }
-        return page;
-    }
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String loginPage(ModelMap valores, HttpSession session, Locale locale) {
+		return (session.getAttribute(SessionAtts.SESSION_IS_LOGGED) == null) ? "login" : "redirect:profile";
+	}
 
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String loginProcess(ModelMap valores, HttpSession session, @RequestParam(name = "username") String username,
+			@RequestParam(name = "password") String password) {
+		return (this.servicioUsers.checkValidLoginCreateSession(username, password, session))
+				? profile(valores, session) : "login";
+	}
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage(ModelMap valores, HttpSession session, Locale locale) {
-        return (session.getAttribute(SessionAtts.SESSION_IS_LOGGED) == null) ? "login" : "redirect:profile";
-    }
+	@LoginRequired
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	public String profile(ModelMap values, HttpSession session) {
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginProcess(ModelMap valores, HttpSession session, @RequestParam(name = "username") String username,
-                               @RequestParam(name = "password") String password) {
-        return (this.servicioUsers.checkValidLoginCreateSession(username, password, session)) ? profile(valores, session) : "login";
-    }
+		try {
+			if (session.getAttribute(SESSION_MODEL_MAP) == null) {
+				HashMap<String, Object> valores = new HashMap<>();
+				UserDTO user = (UserDTO) session.getAttribute(SESSION_GET_USER_LOGGED);
+				Summoner summ = this.servicioUsers.getSummonerData(user.getSummonerName());
+				Long level = summ.getLevel();
+				valores.put("summ_level", (level != null) ? level : "0");
+				try {
+					List<League> listEntries = summ.getLeagueEntries();
+					valores.put("summ_tier", (listEntries != null && listEntries.size() > 0)
+							? summ.getLeagueEntries().get(0).getTier() : "UNRANKED");
+				} catch (Exception e) {
+					valores.put("summ_tier","UNRANKED");
+				}
 
-    @LoginRequired
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String profile(ModelMap values, HttpSession session) {
+				try {
+					List<Team> teams = summ.getTeams();
+					valores.put("team", (!teams.isEmpty()) ? teams.get(0).getName() : "Sin equipo");
+				} catch (Exception e) {
+					valores.put("team","Sin equipo");
+				}
+				
+				valores.put("summoner_avatar",
+						LeagueAccessAPI.RIOT_API_SUMMONER_PROFILE_ICON_PATH + summ.getProfileIconID() + ".png");
+				session.setAttribute(SESSION_MODEL_MAP, valores);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Error obteniendo la información del usuario! " + e.getMessage());
+		}
+		CacheUtils.setValuesToModelMap((HashMap<String, Object>) session.getAttribute(SESSION_MODEL_MAP), values,
+				session);
+		return "profile";
+	}
 
-        try {
-            if (session.getAttribute(SESSION_MODEL_MAP) == null) {
-                HashMap<String, Object> valores = new HashMap<>();
-                UserDTO user = (UserDTO) session.getAttribute(SESSION_GET_USER_LOGGED);
-                Summoner summ = this.servicioUsers.getSummonerData(user.getSummonerName());
-                valores.put("summ_level", summ.getLevel());
-                valores.put("summ_tier", (summ.getLeagueEntries().size() > 0) ? summ.getLeagueEntries().get(0).getTier() : "-");
-                List<Team> teams = summ.getTeams();
-                valores.put("team", (!teams.isEmpty()) ? teams.get(0).getName() : "Sin equipo");
-                valores.put("summoner_avatar", LeagueAccessAPI.RIOT_API_SUMMONER_PROFILE_ICON_PATH + summ.getProfileIconID() + ".png");
-                session.setAttribute(SESSION_MODEL_MAP, valores);
-            }
-        }catch(Exception e){
-            log.error("Error obteniendo la información del usuario! " + e.getMessage());
-        }
-        CacheUtils.setValuesToModelMap((HashMap<String, Object>) session.getAttribute(SESSION_MODEL_MAP), values, session);
-        return "profile";
-    }
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logOut(HttpSession session) {
+		session.invalidate();
+		return "redirect:index?logout=true";
+	}
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logOut(HttpSession session) {
-        session.invalidate();
-        return "redirect:index?logout=true";
-    }
+	@RequestMapping(value = "/notlogged", method = RequestMethod.GET)
+	public String notLogged() {
+		return "notlogged";
+	}
 
-    @RequestMapping(value = "/notlogged", method = RequestMethod.GET)
-    public String notLogged() {
-        return "notlogged";
-    }
+	@RequestMapping(value = "/forbbiden", method = RequestMethod.GET)
+	public String forbbiden() {
+		return "forbbiden";
+	}
 
-    @RequestMapping(value = "/forbbiden", method = RequestMethod.GET)
-    public String forbbiden() {
-        return "forbbiden";
-    }
-
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public String test() {
-        return "test";
-    }
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test() {
+		return "test";
+	}
 }

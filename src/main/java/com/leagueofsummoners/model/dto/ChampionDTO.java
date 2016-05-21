@@ -33,9 +33,6 @@ public class ChampionDTO extends GenericDTO implements Serializable {
 	@Column(nullable = false, name = COLUMN_CHAMPIONS_CHAMPION_TITLE_ES)
 	private String championTitleES;
 
-	@Column(nullable = false, name = COLUMN_CHAMPIONS_CHAMPION_TITLE_EN)
-	private String championTitleEN;
-
 	@Column(name = COLUMN_CHAMPIONS_CHAMPION_ICON_NAME)
 	private String championIconName;
 
@@ -45,8 +42,9 @@ public class ChampionDTO extends GenericDTO implements Serializable {
 	@Column(nullable = false, name = COLUMN_CHAMPIONS_CHAMPION_LORE_ES)
 	private String championLoreES;
 
-	@Column(nullable = false, name = COLUMN_CHAMPIONS_CHAMPION_LORE_EN)
-	private String championLoreEN;
+	@Column(nullable = false, name = COLUMN_CHAMPIONS_CHAMPION_TYPE)
+	private String championType;
+
 
 	@Column(nullable = false, name = COLUMN_CHAMPIONS_CHAMPION_INFO)
 	private String championInfo;
@@ -56,10 +54,11 @@ public class ChampionDTO extends GenericDTO implements Serializable {
 
 	@Transient
 	private ChampionsPassivesDTO passive;
-	@Override
+
 	public String toString(){
 		return this.championName;
 	}
+
 
 	public static ChampionDTO buildBasicChampionDTO(Champion champion){
 		ChampionDTO champ = new ChampionDTO();

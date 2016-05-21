@@ -31,7 +31,7 @@ function getMatchList(update) {
 	                matchs += "<td class='" + colorText + "'>" + result + "</td>";
 	                matchs += "<td>" + match.durationMins + "</td>";
 	                matchs += "<td> <i class='icon champions-lol-28 " + determineClassChampionName(match.championName) + "'></i>&nbsp;" + match.championName + "</td>";
-	                matchs += "<td>";
+	                matchs += "<td class='hidden-xs'>";
 	                matchs += ((match.itemDto0 != null) ? "<img src='" + match.itemDto0.itemIcon + "' : class='itemIcon' title='" + match.itemDto0.itemNameEs + "' alt='" + match.itemDto0.itemNameEs + "' />" : "");
 	                matchs += ((match.itemDto1 != null) ? "<img src='" + match.itemDto1.itemIcon + "' : class='itemIcon' title='" + match.itemDto1.itemNameEs + "' alt='" + match.itemDto1.itemNameEs + "' />" : "")
 	                matchs += ((match.itemDto2 != null) ? "<img src='" + match.itemDto2.itemIcon + "' : class='itemIcon' title='" + match.itemDto2.itemNameEs + "' alt='" + match.itemDto2itemNameEs + "' />" : "")
@@ -41,7 +41,7 @@ function getMatchList(update) {
 	                matchs += ((match.itemDto6 != null) ? "<img src='" + match.itemDto6.itemIcon + "' : class='itemIcon' title='" + match.itemDto6.itemNameEs + "' alt='" + match.itemDto6.itemNameEs + "' />" : "")
 	                matchs += "</td>";
 	                matchs += "<td><img src='img/gold.png' alt='oro' title='oro'>" + (match.goldEarned / 1000).toFixed(2) + "k</td>";
-	                matchs += "<td>" + match.stats + "</td>";
+	                matchs += "<td class='hidden-xs'>" + match.stats + "</td>";
 	                matchs += "</tr>";
 	            }
 	        );
@@ -67,5 +67,5 @@ function determineClassChampionName(name) {
     if(name.search("'") >= 0){
     	name = name.replace("'","");
     }
-    return name.toLowerCase();
+   return name.toLowerCase();
 }

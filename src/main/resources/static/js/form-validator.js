@@ -174,7 +174,7 @@ $(document).keyup(function (e) {
 
 function filtrarCampeones(inputValue) {
     // Me creo una expresión regular con lo que ha introducido el usuario
-    var regex = new RegExp("^" + inputValue, "i");
+    var regex = new RegExp(inputValue, "i");
     var modal = $('#modal-wrapper');
     var html = "";
     campeonesImg.each(function (index, value) {
