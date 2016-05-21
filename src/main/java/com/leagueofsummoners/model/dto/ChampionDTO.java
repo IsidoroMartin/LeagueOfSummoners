@@ -1,10 +1,14 @@
 package com.leagueofsummoners.model.dto;
 
-
+import com.leagueofsummoners.model.utils.LeagueAccessAPI;
+import com.leagueofsummoners.model.utils.RiotUtils;
 import com.robrua.orianna.type.core.staticdata.Champion;
 import lombok.Data;
 
 import javax.persistence.*;
+
+import org.apache.commons.lang.StringUtils;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -12,6 +16,7 @@ import static com.leagueofsummoners.model.dao.tables.TableNames.*;
 
 /**
  * Este bean representa el objeto Champion de la base de datos
+ * 
  * @author Juanjors
  */
 @Data
@@ -39,10 +44,9 @@ public class ChampionDTO extends GenericDTO implements Serializable {
 
 	@Column(nullable = false, name = COLUMN_CHAMPIONS_CHAMPION_LORE_ES)
 	private String championLoreES;
-	
+
 	@Column(nullable = false, name = COLUMN_CHAMPIONS_CHAMPION_TYPE)
 	private String championType;
-	
 
 	@Column(nullable = false, name = COLUMN_CHAMPIONS_CHAMPION_INFO)
 	private String championInfo;
@@ -52,17 +56,30 @@ public class ChampionDTO extends GenericDTO implements Serializable {
 
 	@Transient
 	private ChampionsPassivesDTO passive;
-	
-	public String toString(){
+
+	@Transient
+	private String championNormalized;
+
+	@Transient
+	private String splashArtUri;
+
+	public String toString() {
 		return this.championName;
 	}
 
+	public String getChampionNormalized() {
+		return RiotUtils.normalizeChampion(championName.toLowerCase());
+	}
 
-	public static ChampionDTO buildBasicChampionDTO(Champion champion){
+	public String getSplashArtUri() {
+		return LeagueAccessAPI.RIOT_API_SPLASH_ART + RiotUtils.normalizeChampion(this.championName) + "_0.jpg";
+	}
+
+	public static ChampionDTO buildBasicChampionDTO(Champion champion) {
 		ChampionDTO champ = new ChampionDTO();
 		champ.idChampion = champion.getID();
 		champ.championName = champion.getName();
-		champ.championIconName= "http://ddragon.leagueoflegends.com/cdn/6.6.1/img/champion/"+champion.getImage().getFull();
+		champ.championIconName = LeagueAccessAPI.RIOT_API_CHAMPIONS + champion.getImage().getFull();
 		return champ;
 	}
 }

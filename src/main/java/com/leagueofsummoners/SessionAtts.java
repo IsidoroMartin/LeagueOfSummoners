@@ -9,5 +9,6 @@ public class SessionAtts {
     public static final String SESSION_SUMMONER_EXISTS = "summonerExists";
     public static final String SESSION_MODEL_MAP = "modelMap";
     public static final String SESSION_MODEL_MAP_SIZE = "modelMapSize";
+    public static final String SESSION_GET_CHAMPIONS = "champions";
 
 }

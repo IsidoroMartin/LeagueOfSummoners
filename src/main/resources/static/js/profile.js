@@ -60,12 +60,3 @@ function getMatchList(update) {
 };
 
 
-function determineClassChampionName(name) {
-    if (name.search(" ") >= 0) {
-        name = name.replace(" ", "-");
-    }
-    if(name.search("'") >= 0){
-    	name = name.replace("'","");
-    }
-   return name.toLowerCase();
-}
