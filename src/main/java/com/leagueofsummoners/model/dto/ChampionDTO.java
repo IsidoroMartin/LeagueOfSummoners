@@ -56,7 +56,10 @@ public class ChampionDTO extends GenericDTO implements Serializable {
 
 	@Transient
 	private ChampionsPassivesDTO passive;
-
+	@Override
+	public String toString(){
+		return this.championName;
+	}
 
 	public static ChampionDTO buildBasicChampionDTO(Champion champion){
 		ChampionDTO champ = new ChampionDTO();

@@ -14,5 +14,4 @@ champions.initialize();
 $('.input_champions').typeahead(null, {
     displayKey: 'name_champion',
     source: champions.ttAdapter()
-
 });
