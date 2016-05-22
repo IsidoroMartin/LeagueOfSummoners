@@ -21,4 +21,28 @@ public class RiotUtils {
 		return championName;
 	}
 
+	public static String determineSpecialChampionNames(String championName) {
+		switch (championName) {
+		case "Wukong":
+			championName = "MonkeyKing";
+			break;
+		case "Fiddlesticks":
+			championName = "FiddleSticks";
+			break;
+		case "KhaZix":
+			championName = "Khazix";
+			break;
+		case "VelKoz":
+			championName = "Velkoz";
+			break;
+		case "ChoGath":
+			championName = "Chogath";
+			break;
+		case "LeBlanc":
+			championName = "Leblanc";
+			break;
+		}
+		return championName;
+	}
+
 }

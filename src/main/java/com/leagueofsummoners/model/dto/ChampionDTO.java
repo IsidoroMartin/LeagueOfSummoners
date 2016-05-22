@@ -7,7 +7,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-import org.apache.commons.lang.StringUtils;
 
 import java.io.Serializable;
 import java.util.List;
@@ -52,10 +51,10 @@ public class ChampionDTO extends GenericDTO implements Serializable {
 	private String championInfo;
 
 	@Transient
-	private List<ChampionsSpellsDTO> spellsList;
+	private List<ChampionSpellDTO> spellsList;
 
 	@Transient
-	private ChampionsPassivesDTO passive;
+	private ChampionPassiveDTO passive;
 
 	@Transient
 	private String championNormalized;
@@ -70,9 +69,9 @@ public class ChampionDTO extends GenericDTO implements Serializable {
 	public String getChampionNormalized() {
 		return RiotUtils.normalizeChampion(championName.toLowerCase());
 	}
-
-	public String getSplashArtUri() {
-		return LeagueAccessAPI.RIOT_API_SPLASH_ART + RiotUtils.normalizeChampion(this.championName) + "_0.jpg";
+	
+	public void setChampionName(String championName){
+		this.championName = championName;
 	}
 
 	public static ChampionDTO buildBasicChampionDTO(Champion champion) {

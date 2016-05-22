@@ -34,14 +34,14 @@ public class ChampionServices implements IServicesChampions, Serializable {
 	}
 
 	@Override
-	public List<ChampionDTO> getChampionList() {
-		return this.championDAO.getChampionList();
+	public List<ChampionDTO> getChampionList(boolean fullInfo) {
+		return this.championDAO.getChampionList(fullInfo);
 	}
 
 	@Override
 	public String[] getStringChampionList() {
 		RiotUtils rt = new RiotUtils();
-		return rt.parseRiotListToString(this.championDAO.getChampionList());
+		return rt.parseRiotListToString(this.championDAO.getChampionList(false));
 	}
 
 	public List<ChampionDTO> getChampionRotation() {
@@ -70,7 +70,7 @@ public class ChampionServices implements IServicesChampions, Serializable {
 
 	@Override
 	public List<String> getChampionsIconsNamesList() {
-		List<ChampionDTO> championsList = this.championDAO.getChampionList();
+		List<ChampionDTO> championsList = this.championDAO.getChampionList(false);
 		List<String> championNames = new ArrayList<>();
 		for (ChampionDTO championDTO : championsList) {
 			championNames.add(championDTO.getChampionIconName());

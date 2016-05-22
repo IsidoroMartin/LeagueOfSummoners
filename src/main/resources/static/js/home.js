@@ -1,7 +1,6 @@
 /**
- * 
+ *  Cuando das clic sobre ver la rotación, scrollea la pantalla hasta mostrar la lista de campeoens
  */
-
 $(function(){
 	$('a[href^="#"]:not(a[href="#"])').on('click', function(e) {
 		e.preventDefault();
@@ -13,3 +12,6 @@ $(function(){
 	});
 });
 
+function showChampionDetails(champion){
+	window.location.href = "/champions#" + normalizeChampionName(champion);
+}
