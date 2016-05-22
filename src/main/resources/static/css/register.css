@@ -83,3 +83,9 @@ form {
 	margin-top: 3%;
 	margin-left: 6%;
 }
+.has-feedback label ~ .form-control-feedback{
+	top:80px;
+}
+.form-horizontal .has-feedback .form-control-feedback{
+	right: 6px;
+}

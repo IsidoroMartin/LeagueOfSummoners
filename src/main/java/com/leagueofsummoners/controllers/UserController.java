@@ -51,6 +51,11 @@ public class UserController {
 		valores.put("listaChamps", this.servicioChampions.getChampionList());
 		return (session.getAttribute(SessionAtts.SESSION_IS_LOGGED) == null) ? "register" : "redirect:profile";
 	}
+	@RequestMapping(value = "/register2", method = RequestMethod.GET)
+	public String register2(UserDTO userdto, ModelMap valores, HttpSession session) {
+		valores.put("listaChamps", this.servicioChampions.getChampionList());
+		return (session.getAttribute(SessionAtts.SESSION_IS_LOGGED) == null) ? "register2" : "redirect:profile";
+	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String registerUser(@Valid UserDTO userdto, BindingResult bindingResult, Model model,
@@ -69,14 +74,16 @@ public class UserController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage(ModelMap valores, HttpSession session, Locale locale) {
+
 		return (session.getAttribute(SessionAtts.SESSION_IS_LOGGED) == null) ? "login" : "redirect:profile";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginProcess(ModelMap valores, HttpSession session, @RequestParam(name = "username") String username,
 			@RequestParam(name = "password") String password) {
+
 		return (this.servicioUsers.checkValidLoginCreateSession(username, password, session))
-				? profile(valores, session) : "login";
+				? profile(valores, session) : "redirect:/login?error_message=El usuario introducido no esta registrado o la clave no es correcta.";
 	}
 
 	@LoginRequired

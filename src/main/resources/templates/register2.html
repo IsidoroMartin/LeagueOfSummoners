@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
+<head th:replace="fragments/head :: head">
+</head>
+<body id="bootstrap-overrides">
+<!--<header th:replace="fragments/header :: header"></header>-->
+<div th:replace="fragments/menu :: menu"></div>
+<!--<div th:replace="fragments/languageSelect :: locale"></div>-->
+<main class="container content body-register">
+<div class="row" id="banner">
+    <div id="page-name-banner" class="col-xs-12">
+
+    </div>
+</div>
+    <form role="form" class="form-horizontal col-md-offset-3 col-md-6" id="form-register" method="post"
+          action="./register"
+          enctype="multipart/form-data" data-toggle="validator" th:object="${userDTO}" novalidate)>
+        <div class="form-group">
+            <label class="control-label" for="username" th:utext="#{register.username}"></label>
+            <input type="text" class="form-control" name="username" id="username" required="required"
+                   th:placeholder="#{register.username}"
+                   th:attr="data-usernamexists=#{register.username.exists},data-notempty=#{register.notempty(#{register.username})},
+                   data-characterslength=#{register.characterslength(#{register.username})},data-regexpusername=#{register.regexp.username.error}">
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="summonerName" th:utext="#{register.summonerName}"></label>
+            <input type="text" class="form-control" name="summonerName" id="summonerName" required="required"
+                   th:placeholder="#{register.summonerName}"
+                   th:attr="data-notempty=#{register.notempty(#{register.summonerName})},data-characterslength=#{register.characterslength(#{register.summonerName})},data-notsummavailable=#{register.summonername.error}">
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="inputEmail">Email*</label>
+            <input type="text" class="form-control" name="email" id="inputEmail" required="required"
+                   placeholder="email@domain.com"
+                   th:attr="data-notempty=#{register.notempty('email')},data-usedemail=#{register.email.used},data-emailerror=#{register.wrong.email}">
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="password">Password*</label>
+            <input type="password" class="form-control" name="password" id="password" required="required"
+                   placeholder="Password*"
+                   th:attr="data-notempty=#{register.notempty('password')},data-pwnocomplex=#{register.password.complex},data-nomatchpassword=#{register.password.notmatch}">
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="inputPasswordConfirm"
+                   th:utext="#{register.password.confirm}">Password</label>
+            <input type="password" class="form-control" name="inputPasswordConfirm" id="inputPasswordConfirm"
+                   th:placeholder="#{register.password.confirm}"
+                   required="required"
+                   th:attr="data-notempty=#{register.notempty('password')},data-nomatchpassword=#{register.password.notmatch}">
+        </div>
+
+        <div class="fileinput fileinput-new form-group" data-provides="fileinput" style="cursor:pointer">
+            <label for="fileInput" class="control-label" th:utext="#{register.upload}">#{register.upload}</label>
+            <div class="form-control" data-trigger="fileinput">
+                <i class="glyphicon glyphicon-picture"></i>
+                <span class="fileinput-filename" th:utext="#{register.select.image}"></span></div>
+            <span class="input-group-addon btn btn-default btn-file">
+                <span class="fileinput-new" th:utext="#{register.select.image}">#{register.select.image}</span>
+                <span class="fileinput-exists" th:utext="#{register.change.image}">#{register.change.image}</span>
+                <input type="file" accept="image/png, image/jpeg" id="fileInput" name="img-avatar"/></span>
+            <a href="#" class="input-group-addon btn btn-default fileinput-exists dissmissvalue"
+               data-dismiss="fileinput"
+               th:text="#{register.remove.image}"></a>
+            <a href="#" class="input-group-addon btn btn-default fileinput-exists dissmissvalue"
+               th:text="#{register.pick.gallery}" data-toggle="modal" data-target="#champions_modal"></a>
+            <a href="#" class="input-group-addon btn btn-default fileinput-new dissmissvalue" data-toggle="modal"
+               data-target="#champions_modal"
+               th:text="#{register.pick.gallery}"></a>
+        </div>
+        <input id="img-galeria" type="hidden" name="galeria" value="">
+
+        <div class="text-center col-xs-12">
+            <input type="button" id="registrarse-btn" value="Registrarse" type="submit"/>
+        </div>
+    </form>
+
+    <!-- Modal -->
+    <div class="modal fade" id="champions_modal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" th:utext="#{select.champion.gallery}"></h4>
+                </div>
+                <div id="modal-champions-body">
+                    <div id="buscador-galeria">
+                        <label th:utext="#{register.filtrar.name}"></label><br>
+                        <input type="text" oninput="filtrarCampeones(this.value)"
+                               th:placeholder="#{register.filtrar.name}">
+                    </div>
+                    <div id="modal-wrapper">
+                        <div id="show-champions" th:attr="data-no-champions=#{register.no.chmapions.found}">
+                            <div th:each="champion : ${listaChamps}" style="float:left;">
+                                <img class="champion-gallery" onclick="closeModal(this)"
+                                     th:attr="src=@{${champion.championIconName}},title=${champion.championName},alt=${champion.championName}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="modal-window-button" class="btn btn-default"
+                            data-dismiss="modal" th:utext="#{register.close.modal.window}">
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/scripts :: scripts"></div>
+</body>
+</html>

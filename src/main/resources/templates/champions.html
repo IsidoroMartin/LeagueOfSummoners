@@ -1,114 +1,118 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:with="lang=${#locale.language}" th:lang="${lang}">
+      th:with="lang=${#locale.language}" th:lang="${lang}">
 <!--<div th:replace="fragments/prueba :: div"></div>-->
 <head
-	th:replace="fragments/head :: head(title='Home ~ League of summoners')">
+        th:replace="fragments/head :: head(title='Home ~ League of summoners')">
 </head>
 <body id="bootstrap-overrides">
-	<!--<header th:replace="fragments/header :: header"></header>-->
-	<div th:replace="fragments/menu :: menu"></div>
-	<main class="container content champions-body">
-	<div class="row" id="banner">
-		<div id="page-name-banner" class="col-xs-12">
-			<h2 class="banner-msg" th:utext="#{champions.banner}"></h2>
-		</div>
-	</div>
-	<div id="buscador-campeones">
-		<h2>Buscador de campeones</h2>
-		<input id="campo-busqueda" type="text"
-			placeholder="Introduzca el nombre del campeón que busca"
-			oninput="filterChampions(this.value)">
-		<div id="filtros" class="hidden-xs">
-			<input type="radio" name="type" class="unique col-xs-4" value="Mago">
-			<label>Mago</label> <input type="radio" name="type"
-				class="unique col-xs-4" value="Tanque"> <label>Tanque</label>
-			<input type="radio" name="type" class="unique col-xs-4"
-				value="Jungla"> <label>Jungla</label> <input type="radio"
-				name="type" class="unique col-xs-4" value="Marksman"> <label>Marksman</label>
-			<input type="radio" name="type" class="unique col-xs-4"
-				value="Asesino"> <label>Asesino</label> <input type="radio"
-				name="type" class="unique col-xs-4" value="Support"> <label>Support</label>
-		</div>
-		<div id="filtros-mobile" class="">
-			<select>
-				<option>Filtrar por tipo campeón</option>
-				<option>Mago</option>
-				<option>Tanque</option>
-				<option>Jungle</option>
-				<option>Marksman</option>
-				<option>Support</option>
-			</select>
-		</div>
-	</div>
+<!--<header th:replace="fragments/header :: header"></header>-->
+<div th:replace="fragments/menu :: menu"></div>
+<main class="container content champions-body">
+    <div class="row" id="banner">
+        <div id="page-name-banner" class="col-xs-12">
+            <h2 class="banner-msg" th:utext="#{champions.banner}"></h2>
+        </div>
+    </div>
+    <div id="buscador-campeones">
+        <h2>Buscador de campeones</h2>
+        <input id="campo-busqueda" type="text"
+               placeholder="Introduzca el nombre del campeón que busca"
+               oninput="filterChampions(this.value)">
+        <div id="filtros" class="hidden-xs">
+            <input type="radio" name="type" class="unique col-xs-4" value="Mago">
+            <label>Mago</label> <input type="radio" name="type"
+                                       class="unique col-xs-4" value="Tanque"> <label>Tanque</label>
+            <input type="radio" name="type" class="unique col-xs-4"
+                   value="Jungla"> <label>Jungla</label> <input type="radio"
+                                                                name="type" class="unique col-xs-4" value="Marksman">
+            <label>Marksman</label>
+            <input type="radio" name="type" class="unique col-xs-4"
+                   value="Asesino"> <label>Asesino</label> <input type="radio"
+                                                                  name="type" class="unique col-xs-4" value="Support">
+            <label>Support</label>
+        </div>
+        <div id="filtros-mobile" class="">
+            <select>
+                <option>Filtrar por tipo campeón</option>
+                <option>Mago</option>
+                <option>Tanque</option>
+                <option>Jungle</option>
+                <option>Marksman</option>
+                <option>Support</option>
+            </select>
+        </div>
+    </div>
 
-	<div class="row" id="champions">
-		<div th:each="champion : ${champions}" class="champion">
-			<!--  Champion clase para obtenertodos los champions -->
-			<div class="col-xs-6 col-md-2 img-separation">
-				<div class="panel panel-default"
-					th:attr="data-model=${'link' + champion.championNormalized}"
-					onclick="document.getElementById(this.getAttribute('data-model')).click()">
-					<div class="panel-heading">
-						<span th:utext="${champion.championName}"></span>
-					</div>
-					<div class="panel-body">
-						<img th:src="${champion.championIconName}"
-							th:attr="data-original=${champion.championIconName}, data-type=${champion.championType}"
-							th:title="${champion.championName}" name="champion"
-							class="img-responsive lazy"></img>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="row" id="champions">
+        <div th:each="champion : ${champions}" class="champion">
+            <!--  Champion clase para obtenertodos los champions -->
+            <div class="col-xs-6 col-md-2 img-separation">
+                <div class="panel panel-default"
+                     th:attr="data-model=${'link' + champion.championNormalized}"
+                     onclick="document.getElementById(this.getAttribute('data-model')).click()">
+                    <div class="panel-heading">
+                        <span th:utext="${champion.championName}"></span>
+                    </div>
+                    <div class="panel-body">
+                        <img th:src="${champion.championIconName}"
+                             th:attr="data-original=${champion.championIconName}, data-type=${champion.championType}"
+                             th:title="${champion.championName}" name="champion"
+                             class="img-responsive lazy"></img>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<a th:each="champion : ${champions}"
-		th:attr="id='link' + ${champion.championNormalized},href='#modal-'+ ${champion.championNormalized}"
-		hidden=""></a>
-	<div th:each="champion : ${champions}"
-		th:attr="id='modal-' + ${champion.championNormalized}">
-		<div th:attr="class='close-modal-' + ${champion.championNormalized}">
-			<div class="btn-close-modal">X</div>
-		</div>
-		<div class="modal-content">
-			<div class="champion-name lazy" th:attr="style=|background-image:url(${champion.splashArtUri}); |">  
-				<h1 th:utext="${champion.championName}"></h1>
-			</div>
-		</div>
-	</div>
+    <a th:each="champion : ${champions}"
+       th:attr="id='link' + ${champion.championNormalized},href='#modal-'+ ${champion.championNormalized}"
+       hidden=""></a>
+    <div id="div-modals">
+        <div th:each="champion : ${champions}"
+             th:attr="id='modal-' + ${champion.championNormalized}">
+            <div th:attr="class='close-modal-' + ${champion.championNormalized}">
+                <div class="btn-close-modal">X</div>
+            </div>
+            <div class="modal-content">
+                <div class="champion-name lazy" th:attr="style=|background-image:url(${champion.splashArtUri}); |">
+                    <h1 th:utext="${champion.championName}"></h1>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	</main>
-	<div th:replace="fragments/footer :: footer"></div>
-	<div th:replace="fragments/scripts :: scripts"></div>
-	<script type="text/javascript" src="libraries/animatedModal.min.js"></script>
-	<script type="text/javascript" src="js/champions.js"></script>
-	<script th:inline="javascript">
-		var jsonChampions = JSON
-				.parse(/*[[${champions_json}]]*/"champions_json");
-		for (var i = 0; i < jsonChampions.length; i++) {
-			$("#link" + normalizeChampionName(jsonChampions[i].championName))
-					.animatedModal(
-							{
-								modalTarget : 'modal-'
-										+ normalizeChampionName(jsonChampions[i].championName),
-								animatedIn : 'zoomIn',
-								animatedOut : 'bounceOutDown',
-								color : '#1c1a34',
-								beforeOpen : function() {
-									console.log("The animation was called");
-								},
-								afterOpen : function() {
-									console.log("The animation is completed");
-								},
-								beforeClose : function() {
-									console.log("The animation was called");
-								},
-								afterClose : function() {
-									console.log("The animation is completed");
-								}
-							});
-		}
-	</script>
+</main>
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/scripts :: scripts"></div>
+<script type="text/javascript" src="libraries/animatedModal.min.js"></script>
+<script type="text/javascript" src="js/champions.js"></script>
+<script th:inline="javascript">
+    var jsonChampions = JSON
+            .parse(/*[[${champions_json}]]*/"champions_json");
+    for (var i = 0; i < jsonChampions.length; i++) {
+        $("#link" + normalizeChampionName(jsonChampions[i].championName))
+                .animatedModal(
+                        {
+                            modalTarget: 'modal-'
+                            + normalizeChampionName(jsonChampions[i].championName),
+                            animatedIn: 'zoomIn',
+                            animatedOut: 'bounceOutDown',
+                            color: '#1c1a34',
+                            beforeOpen: function () {
+                                console.log("The animation was called");
+                            },
+                            afterOpen: function () {
+                                console.log("The animation is completed");
+                            },
+                            beforeClose: function () {
+                                console.log("The animation was called");
+                            },
+                            afterClose: function () {
+                                console.log("The animation is completed");
+                            }
+                        });
+    }
+</script>
 </body>
 </html>
