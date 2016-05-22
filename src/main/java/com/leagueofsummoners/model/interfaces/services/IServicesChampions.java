@@ -13,7 +13,7 @@ public interface IServicesChampions {
      *
      * @return Lista con los campeones
      */
-    List<ChampionDTO> getChampionList();
+    List<ChampionDTO> getChampionList(boolean fullInfo);
     String[] getStringChampionList();
 
     List<ChampionDTO> getChampionRotation();

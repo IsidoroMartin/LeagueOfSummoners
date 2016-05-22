@@ -11,14 +11,14 @@ import java.io.Serializable;
 
 @Data
 @Entity(name = "championSpells")
-@Table(name = "CHAMPION_SPELLS")
-public class ChampionsSpellsDTO implements Serializable {
+@Table(name = "CHAMPIONS_SPELLS")
+public class ChampionSpellDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
 	@Column("ID_SPELL")
 	private Long idSpell;
-	@Id
+	
 	@Column("ID_CHAMPION")
 	private Long idChampion;
 
@@ -30,6 +30,9 @@ public class ChampionsSpellsDTO implements Serializable {
 
 	@Column("SPELL_CD")
 	private String spellCd;
+	
+	@Column("SPELL_ICON")
+	private String spellIcon;
 
 	@Column("SPELL_DESCRIPTION_ES")
 	private String spellDescriptionEs;

@@ -34,10 +34,11 @@ function determineClassChampionName(name) {
 	if (name.search("'") >= 0) {
 		name = name.replace("'", "");
 	}
-	
+
 	if (name.search(".") >= 0) {
-		name = name.replace(".", "");}
-	
+		name = name.replace(".", "");
+	}
+
 	return name.toLowerCase();
 }
 
@@ -48,9 +49,21 @@ function normalizeChampionName(name) {
 	if (name.search("'") >= 0) {
 		name = name.replace("'", "");
 	}
-	
+
 	if (name.search(".") >= 0) {
-		name = name.replace(".", "");}
-	
+		name = name.replace(".", "");
+	}
+
 	return name.toLowerCase();
 }
+
+function normalizeDescription(description) {
+	console.log(description)
+	if (description.search('"') >= 0) {
+		description = description.replace(new RegExp('"', 'g'), "'");
+	}
+	console.log(description)
+	return description;
+}
+
+

@@ -48,7 +48,7 @@ public class UserController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String register(UserDTO userdto, ModelMap valores, HttpSession session) {
-		valores.put("listaChamps", this.servicioChampions.getChampionList());
+		valores.put("listaChamps", this.servicioChampions.getChampionList(false));
 		return (session.getAttribute(SessionAtts.SESSION_IS_LOGGED) == null) ? "register" : "redirect:profile";
 	}
 

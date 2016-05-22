@@ -43,12 +43,12 @@
 	</div>
 
 	<div class="row" id="champions">
-		<div th:each="champion : ${champions}" class="champion">
+		<div th:each="champion,iterStat : ${champions}" class="champion">
 			<!--  Champion clase para obtenertodos los champions -->
 			<div class="col-xs-6 col-md-2 img-separation">
 				<div class="panel panel-default"
-					th:attr="data-model=${'link' + champion.championNormalized}"
-					onclick="document.getElementById(this.getAttribute('data-model')).click()">
+					th:attr="data-index=${iterStat.index}"
+					onclick="prepareModalWindow(this.getAttribute('data-index'));">
 					<div class="panel-heading">
 						<span th:utext="${champion.championName}"></span>
 					</div>
@@ -62,53 +62,21 @@
 			</div>
 		</div>
 	</div>
-
-	<a th:each="champion : ${champions}"
-		th:attr="id='link' + ${champion.championNormalized},href='#modal-'+ ${champion.championNormalized}"
-		hidden=""></a>
-	<div th:each="champion : ${champions}"
-		th:attr="id='modal-' + ${champion.championNormalized}">
-		<div th:attr="class='close-modal-' + ${champion.championNormalized}">
-			<div class="btn-close-modal">X</div>
-		</div>
-		<div class="modal-content">
-			<div class="champion-name lazy" th:attr="style=|background-image:url(${champion.splashArtUri}); |">  
-				<h1 th:utext="${champion.championName}"></h1>
-			</div>
-		</div>
-	</div>
-
+	<a id="modal-link" href="#champion" hidden=""></a>
+	<div id="modals"></div>
 	</main>
+
+
 	<div th:replace="fragments/footer :: footer"></div>
 	<div th:replace="fragments/scripts :: scripts"></div>
-	<script type="text/javascript" src="libraries/animatedModal.min.js"></script>
-	<script type="text/javascript" src="js/champions.js"></script>
 	<script th:inline="javascript">
 		var jsonChampions = JSON
 				.parse(/*[[${champions_json}]]*/"champions_json");
-		for (var i = 0; i < jsonChampions.length; i++) {
-			$("#link" + normalizeChampionName(jsonChampions[i].championName))
-					.animatedModal(
-							{
-								modalTarget : 'modal-'
-										+ normalizeChampionName(jsonChampions[i].championName),
-								animatedIn : 'zoomIn',
-								animatedOut : 'bounceOutDown',
-								color : '#1c1a34',
-								beforeOpen : function() {
-									console.log("The animation was called");
-								},
-								afterOpen : function() {
-									console.log("The animation is completed");
-								},
-								beforeClose : function() {
-									console.log("The animation was called");
-								},
-								afterClose : function() {
-									console.log("The animation is completed");
-								}
-							});
-		}
+
 	</script>
+
+	<script type="text/javascript" src="libraries/animatedModal.js"></script>
+	<script type="text/javascript" src="/js/champions.js"></script>
+
 </body>
 </html>

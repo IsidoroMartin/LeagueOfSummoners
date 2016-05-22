@@ -11,16 +11,18 @@ import java.io.Serializable;
 
 @Data
 @Entity(name = "championPassives")
-@Table(name = "CHAMPION_PASSIVES")
-public class ChampionsPassivesDTO extends GenericDTO implements Serializable {
+@Table(name = "CHAMPIONS_PASSIVES")
+public class ChampionPassiveDTO extends GenericDTO implements Serializable {
 
 	private static final long serialVersionUID = -8937457657957212292L;
 	
 	@Id
 	@Column("ID_PASSIVE")
 	private Long idPassive;
-	@Column("PASSIVE_NAME_ES")
-	private String passiveNameES;
+	
+//	@Column("PASSIVE_NAME")
+//	private String passiveNameES;
+	
 	@Column("PASSIVE_DESCRIPTION_ES")
 	private String passiveDescriptionEs;
 	@Column("PASSIVE_ICON")

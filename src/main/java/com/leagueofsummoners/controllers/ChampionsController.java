@@ -26,7 +26,7 @@ public class ChampionsController {
 	@RequestMapping(value = { CHAMPIONS_PATH, CHAMPIONS_HTML_PATH }, method = RequestMethod.GET)
 	public String champions(ModelMap model, HttpSession session) {
 		if (listaChampions == null || championsJson == null) {
-			listaChampions = this.servicioChampions.getChampionList();
+			listaChampions = this.servicioChampions.getChampionList(true);
 			championsJson = new Gson().toJson(listaChampions); 
 		}
 		model.put("champions", listaChampions);
