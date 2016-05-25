@@ -76,12 +76,6 @@ div.img-separation img:hover {
 	font-size: 3rem
 }
 
-#wrapper-modal{
-	position:relative;
-	width:100%;
-	height:100%;
-}
-
 .btn-close-modal {
 	text-align: center;
 	position: fixed;
@@ -103,9 +97,9 @@ div.img-separation img:hover {
 }
 
 .spells {
-	position: fixed;
-	bottom:80px;
-	right:90px;
+	position: absolute;
+
+	right:10px;
 	width:400px;
 }
 

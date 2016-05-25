@@ -69,10 +69,8 @@ h1, h2, h3, h4 {
 
 #buscador-home {
     /*padding-bottom: 38%;*/
-}
-
-.fill-main {
     padding-bottom: 6%;
+
 }
 
 #bootstrap-overrides nav, nav .dropdown-menu {
@@ -532,6 +530,10 @@ input[type=checkbox] {
 #login-container main {
     border-color: #194A4C;
 }
+#login-container{
+    padding-bottom: 8.4%;
+}
+
 
 #register-container main {
     border-color: #BF6904;

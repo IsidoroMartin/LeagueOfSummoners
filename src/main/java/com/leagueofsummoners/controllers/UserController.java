@@ -51,11 +51,6 @@ public class UserController {
 		valores.put("listaChamps", this.servicioChampions.getChampionList(false));
 		return (session.getAttribute(SessionAtts.SESSION_IS_LOGGED) == null) ? "register" : "redirect:profile";
 	}
-	@RequestMapping(value = "/register2", method = RequestMethod.GET)
-	public String register2(UserDTO userdto, ModelMap valores, HttpSession session) {
-		valores.put("listaChamps", this.servicioChampions.getChampionList());
-		return (session.getAttribute(SessionAtts.SESSION_IS_LOGGED) == null) ? "register2" : "redirect:profile";
-	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String registerUser(@Valid UserDTO userdto, BindingResult bindingResult, Model model,
