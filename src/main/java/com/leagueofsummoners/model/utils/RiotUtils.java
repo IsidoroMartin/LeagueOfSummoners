@@ -2,11 +2,10 @@ package com.leagueofsummoners.model.utils;
 
 import java.util.List;
 
-/**
- * Created by isi on 18/05/2016.
- */
+
 public class RiotUtils {
-	public String[] parseRiotListToString(List<?> list) {
+	
+	public static String[] parseRiotListToString(List<?> list) {
 		String[] stringList = new String[list.size()];
 		for (int i = 0; i < stringList.length; i++) {
 			stringList[i] = list.get(i).toString();
@@ -18,6 +17,19 @@ public class RiotUtils {
 		championName = championName.replace(" ", "");
 		championName = championName.replace("'", "");
 		championName = championName.replace(".", "");
+		return championName;
+	}
+	
+	/**
+	 * Este método normaliza el nombre de los campeones apra que sean usables en los links, 
+	 * no esta parametrizado con el otro método porque se llama desde thymleaf y es más sencillo así.
+	 * @param championName
+	 * @return nombre normalizzado
+	 */
+	public static String normalizeChampionForLink(String championName) {
+		championName = championName.replace(" ", "");
+		championName = championName.replace("'", "");
+		championName = championName.replace(".", "-");
 		return championName;
 	}
 

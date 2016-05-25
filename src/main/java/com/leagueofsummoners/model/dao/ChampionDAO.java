@@ -32,6 +32,11 @@ public class ChampionDAO {
 		return this.championRepository.findBychampionNameIgnoringCase(championName);
 	}
 
+	/**
+	 * Devuelve una lista con todos los campeones
+	 * @param fullInfo Indica si en la respuesta debe ir todala información de los campeones (Skills, spells etc)
+	 * @return lista con todos los campeones
+	 */
 	public List<ChampionDTO> getChampionList(boolean fullInfo) {
 		List<ChampionDTO> champions = this.championRepository.findAll();
 		if (fullInfo) {

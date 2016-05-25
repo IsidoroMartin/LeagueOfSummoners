@@ -8,20 +8,20 @@ import com.leagueofsummoners.model.dto.riotapi.*;
 import com.leagueofsummoners.model.interfaces.persistence.ChampionRepository;
 import com.leagueofsummoners.model.interfaces.persistence.ItemRepository;
 import com.leagueofsummoners.model.interfaces.persistence.SummonerRepository;
-import com.leagueofsummoners.model.interfaces.persistence.UserRepository;
 import com.leagueofsummoners.model.utils.LeagueAccessAPI;
 import com.leagueofsummoners.model.utils.RepositoryUtils;
 import com.robrua.orianna.api.core.RiotAPI;
-import com.robrua.orianna.type.core.match.Match;
-import com.robrua.orianna.type.core.matchlist.MatchReference;
 import com.robrua.orianna.type.core.summoner.Summoner;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Future;
 
 @Component
 @Slf4j
@@ -58,6 +58,12 @@ public class SummonerDAO {
 		}
 		return sum;
 	}
+	
+	@Async
+	public Future<List<MatchDTO>> getLatestMatchesFromRiotAsync(UserDTO user, int matchesNumber) {
+		return this.getLatestMatchesFromRiot(user, matchesNumber);
+	}
+
 
 	/**
 	 * Obtiene las últimas partidas de la Base de datos de RIOT
@@ -67,12 +73,11 @@ public class SummonerDAO {
 	 * @param matchesNumber
 	 * @return Lista con las ultimas partidas del servidor de RIOT
 	 */
-	public List<MatchDTO> getLatestMatchesFromRiot(UserDTO user, int matchesNumber) {
+	public Future<List<MatchDTO>> getLatestMatchesFromRiot(UserDTO user, int matchesNumber) {
 		List<RiotAPIMatch> matchesAPI = this.getUserMatches(user);
 		List<MatchDTO> matchList = new ArrayList<>();
 		int matchSize = matchesAPI.size();
-		if (matchSize > 0
-				&& !checkIfLastMatchSavedIsLastRiotSaved(this.summonerRepository.idLastSavedMatch(user.getIdUser()),
+		if (matchSize > 0 && !checkIfLastMatchSavedIsLastRiotSaved(this.summonerRepository.idLastSavedMatch(user.getIdUser()),
 						matchesAPI.get(0).getMatchId())) {
 			// Si la i es menor que los 'match' pedidos y además los match
 			// pedidos son menos que los match recibidos (Para evitar salir del
@@ -92,12 +97,13 @@ public class SummonerDAO {
 					this.summonerRepository.save(matchDTO);
 				} catch (Exception e) {
 					log.error("Error obteniendo partida de " + user.getSummonerID() + " \n " + e.getMessage());
+					e.printStackTrace();
 				}
 			}
 		} else {
 			matchList = this.getLatestMatchesFromDB(user);
 		}
-		return matchList;
+		return new AsyncResult<List<MatchDTO>>(matchList);
 	}
 
 	private boolean checkIfLastMatchSavedIsLastRiotSaved(Long idMatchBD, Long idMatchRiot) {
@@ -153,28 +159,7 @@ public class SummonerDAO {
 		return matchs;
 	}
 
-	/**
-	 * Este es el método que se invoca la primera vez que un usuario loggea a su
-	 * cuenta partidas
-	 *
-	 * @param userlogged
-	 */
-	public List<MatchDTO> getMatches(UserDTO userlogged, int matchesNumber) {
-		List<MatchDTO> matchesFromDB = this.getLatestMatchesFromDB(userlogged);
-		List<MatchDTO> matchesFromRiot = null;
-		if (matchesFromDB.isEmpty()) {
-			matchesFromRiot = this.getLatestMatchesFromRiot(userlogged, matchesNumber);
-			for (MatchDTO matchDTO : matchesFromRiot) {
-				matchDTO.setIdUser(userlogged.getIdUser());
-				matchDTO.setIdChampion(this.championRepository
-						.findBychampionNameIgnoringCase(matchDTO.getChampionName()).getIdChampion());
-				RepositoryUtils.setItemsInMatchDTO(this.itemsRepository, matchDTO);
-				this.summonerRepository.save(matchDTO);
-			}
-			matchesFromDB.addAll(matchesFromRiot);
-		}
-		return matchesFromDB;
-	}
+
 
 	/**
 	 * Devuelve las partidas del usuario
@@ -184,14 +169,21 @@ public class SummonerDAO {
 	 */
 	private List<RiotAPIMatch> getUserMatches(UserDTO user) {
 		try {
-			List<RiotAPIMatch> matches = this.rest.getForObject(LeagueAccessAPI.RIOT_API_OBTAIN_SUMMONER_MATCHES,
-					RiotAPIMatches.class, user.getSummonerID()).getMatches();
+			Summoner summ = null;
+			String url = LeagueAccessAPI.RIOT_API_OBTAIN_SUMMONER_MATCHES;
+			if (user.getSummonerID() == 0) {
+				summ = RiotAPI.getSummonerByName(user.getSummonerName());
+				user.setSummonerID(summ.getID());
+			}
+			url = url.replace("{summonerID}", "" + user.getSummonerID());
+			List<RiotAPIMatch> matches = this.rest.getForObject(url,
+					RiotAPIMatches.class).getMatches();
 			return matches;
 		} catch (Exception e) {
 			e.printStackTrace();
 			LeagueofsummonersApplication.LOGGER.error("Error obteniendo las partidas del invocador " + e.getMessage());
 		}
-		return null;
+		return new ArrayList<>();
 	}
 
 }

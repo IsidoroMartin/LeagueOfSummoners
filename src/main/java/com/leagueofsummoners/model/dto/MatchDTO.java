@@ -16,7 +16,7 @@ public class MatchDTO {
 
     @Id
     @Column(name = "ID_MATCH")
-    private long matchId;
+    private long idMatch;
 
     @Column(name = "ID_USER")
     private long idUser;
@@ -107,7 +107,7 @@ public class MatchDTO {
 
 
     public MatchDTO parseToMatchDTO(RiotAPIMatch match, RiotApiParticipantInfo info) {
-        this.matchId = match.getMatchId();
+        this.idMatch = match.getMatchId();
         this.matchDuration = match.getMatchDuration();
         this.winner = info.getStats().isWinner();
         this.summonerName = info.getSummonerName();

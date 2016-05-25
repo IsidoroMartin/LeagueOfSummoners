@@ -40,8 +40,7 @@ public class ChampionServices implements IServicesChampions, Serializable {
 
 	@Override
 	public String[] getStringChampionList() {
-		RiotUtils rt = new RiotUtils();
-		return rt.parseRiotListToString(this.championDAO.getChampionList(false));
+		return RiotUtils.parseRiotListToString(this.championDAO.getChampionList(false));
 	}
 
 	public List<ChampionDTO> getChampionRotation() {

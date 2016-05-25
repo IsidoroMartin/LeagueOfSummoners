@@ -20,5 +20,7 @@ public interface GuidesRepository extends Repository<GuideDTO, Long> {
 	List<GuideDTO> findByIdChampion(Long idChampion);
 
 	List<GuideDTO> findByIdUser(Long idChampion);
+	
+	public void deleteByIdGuideAndIdUser(Long idGuide, Long idUsername);
 
 }

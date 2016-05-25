@@ -58,11 +58,9 @@ function normalizeChampionName(name) {
 }
 
 function normalizeDescription(description) {
-	console.log(description)
 	if (description.search('"') >= 0) {
 		description = description.replace(new RegExp('"', 'g'), "'");
 	}
-	console.log(description)
 	return description;
 }
 

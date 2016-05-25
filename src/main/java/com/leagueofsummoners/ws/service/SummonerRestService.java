@@ -35,12 +35,12 @@ public class SummonerRestService {
 			@RequestParam(name = "update", required = false) Boolean isUpdating) {
 		UserDTO user = null;
 		List<MatchDTO> matchs = null;
-		
+		System.out.println(isUpdating);
 		try {
 			user = (UserDTO) session.getAttribute(SessionAtts.SESSION_GET_USER_LOGGED);
 			matchs = this.servicesSummoner.getLatestMatchesFromDB(user);
 			if (isUpdating != null && isUpdating || matchs.isEmpty()) {
-				matchs = this.servicesSummoner.getLatestMatches(user, 5);
+				matchs = this.servicesSummoner.getLatestMatchesSync(user, 5);
 			}
 		} catch (Exception e) {
 			log.error("Se ha producido un error en: " + this.getClass().getName());

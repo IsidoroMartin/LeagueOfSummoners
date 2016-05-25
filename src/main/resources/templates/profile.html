@@ -17,20 +17,22 @@
 	<div class="row">
 		<aside id="user-profile" class="col-md-2">
 			<div id="profile">
-				<div class="img-perfil col-xs-6 col-md-12" >
-					<img th:attr="src=@{${session.userlogged.avatar}}" />
+				<div class="img-perfil col-xs-6 col-md-12">
+					<img class="img-responsive" width="120px" height="120px"
+						th:attr="src=@{${session.userlogged.avatar}}"
+						onerror="this.src='/img/notfoundimg.png'" />
 					<div class="summoner-profile">
 						<strong><p th:utext="${session.userlogged.username}"></p></strong>
 					</div>
 				</div>
 				<div class="img-perfil col-xs-6 col-md-12">
 					<img th:attr="src=@{${summoner_avatar}}" width="120px"
-						height="120px" onerror="this.src='/img/notfoundimg.png'"/>
-						<div class="summoner-profile">
-					<strong><p th:utext="${session.userlogged.summonerName}"></p></strong>
+						height="120px" onerror="this.src='/img/notfoundimg.png'" />
+					<div class="summoner-profile">
+						<strong><p th:utext="${session.userlogged.summonerName}"></p></strong>
+					</div>
 				</div>
-				</div>
-				
+
 			</div>
 		</aside>
 		<div id="profile-body" class="col-xs-10">
@@ -44,32 +46,77 @@
 						<th th:utext="#{profile.summoner.level}"></th>
 						<th>Division</th>
 						<th th:utext="#{profile.team}"></th>
-						<th class="hidden-xs" th:utext="#{profile.permission.level}">User level</th>
+						<th class="hidden-xs" th:utext="#{profile.permission.level}">User
+							level</th>
 					</tr>
 					<tr>
 						<td th:utext="${session.userlogged.summonerName}"></td>
 						<td th:utext="${summ_level}"></td>
-						<td><i th:class="'icon champion-ranks ' + ${summ_tier}"></i>&nbsp;<th:block th:utext="${summ_tier}" ></th:block></td>
+						<td><i th:class="'icon champion-ranks ' + ${summ_tier}"></i>&nbsp;<th:block
+								th:utext="${summ_tier}"></th:block></td>
 						<td th:utext="${team}"></td>
-						<td class="hidden-xs" th:utext="${session.userlogged.permissionLevel}"></td>
+						<td class="hidden-xs"
+							th:utext="${session.userlogged.permissionLevel}"></td>
 					</tr>
 				</table>
 			</div>
 			<div id="guides-profile">
 				<h3 th:utext="#{profile.createdguides}"></h3>
-				<!-- Aqui ira un if (Si el usuario tiene guias, saldran las guias, si no pues saldra lo sentimos no tienes guias -->
-				<p>
-					Desafortunadamente no tienes guias creadas, pulsa <a href="#">aquí</a>
-					para crear tú guia
-				</p>
+
+				<div th:if="${#lists.isEmpty(user_guides)}">
+					<p>
+						Desafortunadamente no tienes guias creadas, pulsa <a href="#">aquí</a>
+						para crear tú guia.
+					</p>
+				</div>
+
+				<div th:if="${not #lists.isEmpty(user_guides)}">
+					<table class="table" style="">
+						<tr>
+							<th>Tipo</th>
+							<th>Campeón</th>
+							<th>Título de la guía</th>
+							<th>Editar</th>
+							<th>Borrar</th>
+							<th>Visitas</th>
+						</tr>
+						<tr th:each="guide : ${user_guides}">
+							<td><a th:utext="${guide.champion.championType}"
+								th:attr="href='/champions#' + ${guide.champion.championType}"></a></td>
+							<td><a
+								th:attr="href='/champions#' + ${guide.champion.championNormalized}"><i
+									th:attrappend="class=${' ' + guide.champion.championLinkNormalized}"
+									class="icon champions-lol-28"></i>&nbsp;<th:block
+										th:utext="${guide.champion.championName}"></th:block></a></td>
+							<td><a th:utext="${guide.guideTitle}"
+								th:href="@{guides/view/{id}(id=${guide.idGuide})}"> </a></td>
+							<td><a th:href="@{guides/editar/{id}(id=${guide.idGuide})}">Editar</a></td>
+							<td><a class="deleteGuide"
+								th:href="@{api/guides/borrar/{id}(id=${guide.idGuide})}">Borrar</a></td>
+							<td th:utext="${guide.visitas}"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<div class="alert alert-danger fade in" style="display: none;"
+				id="mensajeError">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>La guía seleccionada no se ha podido eliminar</strong>
+			</div>
+
+			<div class="alert alert-info fade in" style="display: none;"
+				id="mensajeInfo">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>La guía seleccionada se ha eliminado correctamente.</strong>
 			</div>
 
 			<div id="guides-last10match">
 				<h3>
 					<th:block th:text="#{profile.last10matches}"></th:block>
 				</h3>
-				<i class="fa fa-refresh fa-1 hidden-xs" id="refresh-icon" aria-hidden="true"
-					onclick="getMatchList(true)"></i>
+				<i class="fa fa-refresh fa-1 hidden-xs" id="refresh-icon"
+					aria-hidden="true" onclick="getMatchList(true)"></i>
 				<div id="no-rankeds" class="red" hidden>
 					<h4>Oops! Parece que aun no has jugando ninguna ranked</h4>
 				</div>
