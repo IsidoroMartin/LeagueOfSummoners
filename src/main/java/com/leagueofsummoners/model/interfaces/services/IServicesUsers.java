@@ -1,8 +1,11 @@
 package com.leagueofsummoners.model.interfaces.services;
 
 import com.leagueofsummoners.model.dto.GuideDTO;
+import com.leagueofsummoners.model.dto.MatchDTO;
 import com.leagueofsummoners.model.dto.UserDTO;
 import com.robrua.orianna.type.core.summoner.Summoner;
+
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -74,5 +77,7 @@ public interface IServicesUsers {
 	boolean registrarUser(UserDTO user, MultipartFile[] file, String galeriaIcon);
 
 	Summoner getSummonerData(String summonerName);
-
+	
+	
+	
 }

@@ -11,24 +11,24 @@ div.img-separation img:hover {
 	transform: scale(1.1);
 }
 
-#buscador-campeones {
+#buscador-generico {
 	min-height: 160px;
 	margin-top: 30px;
 }
 
-#buscador-campeones input[type="text"] {
+#buscador-generico input[type="text"] {
 	width: 99%;
 	height: 50px;
 	margin-left: 10px;
 }
 
-#buscador-campeones label {
+#buscador-generico label {
 	padding-left: 15px;
 	text-indent: -10px;
 	float: left;
 }
 
-#buscador-campeones input[type="radio"] {
+#buscador-generico input[type="radio"] {
 	margin-top: 10px;
 	height: 20px;
 	width: 20px;
@@ -39,7 +39,7 @@ div.img-separation img:hover {
 	height: 20px;
 }
 
-#buscador-campeones input[type="radio"]:first-child {
+#buscador-generico input[type="radio"]:first-child {
 	/* 	margin-left: 0px; */
 	
 }
@@ -52,7 +52,7 @@ div.img-separation img:hover {
 	visibility: hidden;
 }
 
-#buscador-campeones h2 {
+#buscador-generico h2 {
 	padding: 15px;
 }
 
@@ -70,16 +70,17 @@ div.img-separation img:hover {
 	font-size: 4rem;
 	width: 0px;
 	margin-bottom: 0px;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
 }
 
 #modals h2 {
-	font-size: 3rem
+	font-size: 3rem text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
 }
 
-#wrapper-modal{
-	position:relative;
-	width:100%;
-	height:100%;
+#wrapper-modal {
+	position: relative;
+	width: 100%;
+	height: 100%;
 }
 
 .btn-close-modal {
@@ -96,7 +97,6 @@ div.img-separation img:hover {
 	z-index: 3;
 }
 
-
 .tooltip-inner {
 	max-width: 350px;
 	width: 350px;
@@ -104,15 +104,17 @@ div.img-separation img:hover {
 
 .spells {
 	position: fixed;
-	bottom:80px;
-	right:90px;
-	width:400px;
+	bottom: 80px;
+	right: 90px;
+	width: 465px;
 }
 
 .spells img {
 	border: 4px solid black;
 	margin: 10px;
 	float: left;
+	width: 64px;
+	height: 64px;
 }
 
 .spells img:hover {
@@ -123,12 +125,12 @@ div.img-separation img:hover {
 }
 
 .champion-lore {
-	margin-top:40px;
+	margin-top: 40px;
 	width: 850px;
 	margin-left: 60px;
 	background: rgba(0, 0, 0, 0.5);
 	padding: 10px;
-	margin-bottom:130px;
+	margin-bottom: 130px;
 }
 
 .champion-lore h2 {
@@ -169,15 +171,29 @@ div.img-separation img:hover {
 h3.champion-title {
 	margin-left: 8px;
 	margin-top: 0px;
+	text-shadow: 1px 1px 8px rgba(0, 0, 0, 1);
 }
 
 .nombre-campeones {
 	margin-left: 60px;
 	margin-top: 50px;
 }
+.btn-buscador-campeones{
+	margin-top:15px;
+}
+
+.btn-buscador-campeones:hover{
+	background-color:#337ab7;
+	color:white;
+}
+
+.btn-buscador-campeones:active{
+	color:white;
+}
+
 
 @media only screen and (max-width: 768px) {
-	#buscador-campeones {
+	#buscador-generico {
 		min-height: 180px;
 	}
 	#filtros-mobile {
@@ -193,5 +209,17 @@ h3.champion-title {
 		margin-top: 3%;
 		margin-left: 0px;
 		margin-right: 0px;
+	}
+	.btn-close-modal {
+		text-align: center;
+		position: fixed;
+		cursor: pointer;
+		color: #fff;
+		padding: 10px 20px;
+		font-size: 30px;
+		font-weight: 200;
+		border: 2px solid #fff;
+		right: 0px;
+		z-index: 3;
 	}
 }

@@ -22,7 +22,9 @@ public interface SummonerRepository extends Repository<MatchDTO, Long> {
 	List<MatchDTO> findTop10ByIdUser(Long idChampion);
 
 	MatchDTO save(MatchDTO match);
+	
 
+	//Query construida: SELECT MAX(e.ID_MATCH) FROM Matchs e WHERE ID_USER = :idUser
     @Query(value = Querys.SUMMONERS_QUERY_GET_LAST_MATCH_ID, nativeQuery = true)
     Long idLastSavedMatch(@Param("idUser") Long userId);
 

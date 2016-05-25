@@ -14,25 +14,39 @@ import java.util.List;
 @Service
 public class SummonerServices implements IServicesSummoner {
 
-    @Autowired
-    private SummonerDAO summonerDAO;
+	@Autowired
+	private SummonerDAO summonerDAO;
 
-    @Override
-    public List<MatchDTO> getLatestMatches(UserDTO userlogged, int nMatches) {
-        List<MatchDTO> lista = null;
-        try {
-            lista = this.summonerDAO.getLatestMatchesFromRiot(userlogged, nMatches);
-            lista = this.summonerDAO.getLatestMatchesFromDB(userlogged);
-        } catch (Exception e) {
-            log.error("Error en GetLatestMatches " + e.getMessage());
-        }
-        return lista;
-    }
+	@Override
+	public List<MatchDTO> getLatestMatchesAsync(UserDTO userlogged, int nMatches) throws Exception {
+		List<MatchDTO> lista = null;
+		try {
+			lista = this.summonerDAO.getLatestMatchesFromRiotAsync(userlogged, nMatches).get();
+			lista = this.summonerDAO.getLatestMatchesFromDB(userlogged);
+		} catch (Exception e) {
+			lista = this.summonerDAO.getLatestMatchesFromDB(userlogged);
+			log.error("Error en GetLatestMatches " + e.getMessage());
+		}
+		return lista;
+	}
 
-    @Override
-    public List<MatchDTO> getLatestMatchesFromDB(UserDTO userlogged) {
-        List<MatchDTO> lista = null;
-        lista = this.summonerDAO.getLatestMatchesFromDB(userlogged);
-        return lista;
-    }
+	@Override
+	public List<MatchDTO> getLatestMatchesFromDB(UserDTO userlogged) {
+		List<MatchDTO> lista = null;
+		lista = this.summonerDAO.getLatestMatchesFromDB(userlogged);
+		return lista;
+	}
+
+	@Override
+	public List<MatchDTO> getLatestMatchesSync(UserDTO userlogged, int nMatches) throws Exception {
+		List<MatchDTO> lista = null;
+		try {
+			lista = this.summonerDAO.getLatestMatchesFromRiot(userlogged, nMatches).get();
+			lista = this.summonerDAO.getLatestMatchesFromDB(userlogged);
+		} catch (Exception e) {
+			lista = this.summonerDAO.getLatestMatchesFromDB(userlogged);
+			log.error("Error en GetLatestMatches " + e.getMessage());
+		}
+		return lista;
+	}
 }

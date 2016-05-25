@@ -93,24 +93,10 @@ $(function (e) {
                     identical: {
                         field: 'inputPasswordConfirm',
                         message: obtainProperLanguage('password', 'data-nomatchpassword')
-                    }, callback: {
-                        callback: function (value, validator, $field) {
-                            var password = $('#password').val();
-                            if (password == '') {
-                                return true;
-                            }
-
-                            var validlength = password.length >= 8;
-                            var hasUpperCase = /[A-Z]/.test(password);
-                            var hasLowerCase = /[a-z]/.test(password);
-                            var hasNumbers = /\d/.test(password);
-                            var hasNonalphas = /\W/.test(password);
-                            if (hasUpperCase && hasLowerCase && hasNumbers && hasNonalphas && validlength)
-                                return true;
-
-                            return false;
-                        },
-                        message: obtainProperLanguage('password', 'data-pwnocomplex')
+                    },stringLength: {
+                        min: 8,
+                        max: 15,
+                        message: obtainProperLanguage('password', 'data-pwnolength')
                     }
                 }
             },

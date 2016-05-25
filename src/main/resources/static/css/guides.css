@@ -1,0 +1,38 @@
+#campo-busqueda{
+	width:100%;	
+}
+
+.guide {
+	border:2px solid #302b59;
+	margin-top:10px;
+	cursor:pointer;
+}
+
+.guide:hover{
+	opacity:0.8;
+}
+
+.guide:last-child{
+	margin-bottom:20px;
+}
+
+div.guide-champ-name h2 {
+	margin-top: 1%;
+}
+
+div.guide-champ-name h3 {
+	margin-top: 0px;
+}
+
+.guide-info p {
+	margin: 0px;
+}
+
+.guide-info {
+	margin-top: 0px;
+	padding: 0px;
+}
+
+.visitas {
+	width:120px;
+}

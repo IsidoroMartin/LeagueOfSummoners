@@ -58,6 +58,9 @@ public class ChampionDTO extends GenericDTO implements Serializable {
 
 	@Transient
 	private String championNormalized;
+	
+	@Transient
+	private String championLinkNormalized;
 
 	@Transient
 	private String splashArtUri;
@@ -67,7 +70,11 @@ public class ChampionDTO extends GenericDTO implements Serializable {
 	}
 
 	public String getChampionNormalized() {
-		return RiotUtils.normalizeChampion(championName.toLowerCase());
+		return RiotUtils.normalizeChampion(this.championName.toLowerCase());
+	}
+	
+	public String getChampionLinkNormalized(){
+		return RiotUtils.normalizeChampionForLink(this.championName.toLowerCase());
 	}
 	
 	public void setChampionName(String championName){

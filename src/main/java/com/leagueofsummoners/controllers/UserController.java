@@ -7,6 +7,7 @@ import static com.leagueofsummoners.SessionAtts.*;
 import com.leagueofsummoners.SessionAtts;
 import com.leagueofsummoners.model.dto.MatchDTO;
 import com.leagueofsummoners.model.interfaces.services.IServicesChampions;
+import com.leagueofsummoners.model.interfaces.services.IServicesGuides;
 import com.leagueofsummoners.model.interfaces.services.IServicesSummoner;
 import com.leagueofsummoners.model.interfaces.services.IServicesUsers;
 import com.leagueofsummoners.model.dto.UserDTO;
@@ -46,15 +47,13 @@ public class UserController {
 	@Autowired
 	private IServicesSummoner servicioSummoners;
 
+	@Autowired
+	private IServicesGuides servicioGuias;
+
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String register(UserDTO userdto, ModelMap valores, HttpSession session) {
 		valores.put("listaChamps", this.servicioChampions.getChampionList(false));
 		return (session.getAttribute(SessionAtts.SESSION_IS_LOGGED) == null) ? "register" : "redirect:profile";
-	}
-	@RequestMapping(value = "/register2", method = RequestMethod.GET)
-	public String register2(UserDTO userdto, ModelMap valores, HttpSession session) {
-		valores.put("listaChamps", this.servicioChampions.getChampionList());
-		return (session.getAttribute(SessionAtts.SESSION_IS_LOGGED) == null) ? "register2" : "redirect:profile";
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -63,8 +62,9 @@ public class UserController {
 		String page = "redirect:index.html?action=form-error";
 		String avatar = galeriaIcon;
 		if (!bindingResult.hasErrors()) {
-			if (this.servicioUsers.registrarUser(userdto, file, galeriaIcon))
+			if (this.servicioUsers.registrarUser(userdto, file, galeriaIcon)) {
 				page = "login";
+			}
 		} else {
 			LeagueofsummonersApplication.LOGGER.warn(
 					"Error registrando usuario " + userdto.getUsername() + " due: " + bindingResult.getAllErrors());
@@ -74,7 +74,6 @@ public class UserController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage(ModelMap valores, HttpSession session, Locale locale) {
-
 		return (session.getAttribute(SessionAtts.SESSION_IS_LOGGED) == null) ? "login" : "redirect:profile";
 	}
 
@@ -82,46 +81,58 @@ public class UserController {
 	public String loginProcess(ModelMap valores, HttpSession session, @RequestParam(name = "username") String username,
 			@RequestParam(name = "password") String password) {
 
-		return (this.servicioUsers.checkValidLoginCreateSession(username, password, session))
-				? profile(valores, session) : "redirect:/login?error_message=El usuario introducido no esta registrado o la clave no es correcta.";
+		return (this.servicioUsers.checkValidLoginCreateSession(username, password, session)) ? "redirect:/profile"
+				: "redirect:/login?error_message=El usuario introducido no esta registrado o la clave no es correcta.";
 	}
 
 	@LoginRequired
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String profile(ModelMap values, HttpSession session) {
+		HashMap<String, Object> valores = new HashMap<>();
+		UserDTO user = (UserDTO) session.getAttribute(SESSION_GET_USER_LOGGED);
+		Long level = null;
+		Summoner summ = null;
 
 		try {
 			if (session.getAttribute(SESSION_MODEL_MAP) == null) {
-				HashMap<String, Object> valores = new HashMap<>();
-				UserDTO user = (UserDTO) session.getAttribute(SESSION_GET_USER_LOGGED);
-				Summoner summ = this.servicioUsers.getSummonerData(user.getSummonerName());
-				Long level = summ.getLevel();
-				valores.put("summ_level", (level != null) ? level : "0");
+				summ = this.servicioUsers.getSummonerData(user.getSummonerName());
+				try {
+					level = summ.getLevel();
+					valores.put("summ_level", (level != null) ? level : "0");
+				} catch (Exception e) {
+					e.printStackTrace();
+					valores.put("summ_level", "0");
+				}
 				try {
 					List<League> listEntries = summ.getLeagueEntries();
-					valores.put("summ_tier", (listEntries != null && listEntries.size() > 0)
+					valores.put("summ_tier", (listEntries != null && !listEntries.isEmpty())
 							? summ.getLeagueEntries().get(0).getTier() : "UNRANKED");
 				} catch (Exception e) {
-					valores.put("summ_tier","UNRANKED");
+					e.printStackTrace();
+					valores.put("summ_tier", "UNRANKED");
 				}
 
 				try {
 					List<Team> teams = summ.getTeams();
 					valores.put("team", (!teams.isEmpty()) ? teams.get(0).getName() : "Sin equipo");
 				} catch (Exception e) {
-					valores.put("team","Sin equipo");
+					e.printStackTrace();
+					valores.put("team", "Sin equipo");
 				}
-				
+
 				valores.put("summoner_avatar",
 						LeagueAccessAPI.RIOT_API_SUMMONER_PROFILE_ICON_PATH + summ.getProfileIconID() + ".png");
 				session.setAttribute(SESSION_MODEL_MAP, valores);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			valores.put("summoner_avatar", LeagueAccessAPI.RIOT_API_TEEMO_ICON);
+			session.setAttribute(SESSION_MODEL_MAP, valores);
 			log.error("Error obteniendo la información del usuario! " + e.getMessage());
 		}
 		CacheUtils.setValuesToModelMap((HashMap<String, Object>) session.getAttribute(SESSION_MODEL_MAP), values,
 				session);
+		values.put("user_guides", this.servicioGuias.findByIdUser(user.getIdUser()));
 		return "profile";
 	}
 

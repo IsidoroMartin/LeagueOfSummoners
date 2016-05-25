@@ -2,77 +2,60 @@ package com.leagueofsummoners.model.dto;
 
 import javax.persistence.*;
 
+import lombok.Data;
+
 import static com.leagueofsummoners.model.dao.tables.TableNames.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Comparator;
+import java.util.Date;
 
+@Data
 @Entity(name = "guides")
 @Table(name = TABLE_GUIDES)
-public class GuideDTO {
+public class GuideDTO implements Comparator<GuideDTO> {
 
 	@Id
 	@GeneratedValue
 	@Column(name = COLUMN_GUIDES_ID_GUIDE)
-	private int idGuide;
+	private Long idGuide;
 	@Column(name = COLUMN_GUIDES_ID_USER)
-	private int idUser;
+	private Long idUser;
 	@Column(name = COLUMN_GUIDES_ID_CHAMPION)
-	private int idChampion;
+	private Long idChampion;
 	@Column(name = COLUMN_GUIDES_TITLE)
 	private String guideTitle;
 	@Column(name = COLUMN_GUIDES_CONTENT)
 	private String guideContent;
-	@Column(name = COLUMN_GUIDES_LANG)
-	private String guideLang;
+	@Column(name = COLUMN_GUIDES_DATE)
+	private Date guideDate;
+	
+	@Column(name = COLUMN_GUIDES_VISITS)
+	private int visitas;
+	
+	@Transient
+	private ChampionDTO champion;
+	
+	@Transient
+	private UserDTO user;
+	
+	@Transient
+	private String formattedDay;
 
-	public GuideDTO() {
+	
+	public String getFormattedDay(){
+		return new SimpleDateFormat("dd/MM/yyyy").format(this.guideDate);
+	}
+
+	@Override
+	public String toString() {
+		return "Guía de " + this.champion.getChampionName() + " by you. - " + this.visitas + " visitas";
 	}
 
 
-	public int getIdGuide() {
-		return idGuide;
+	@Override
+	public int compare(GuideDTO o1, GuideDTO o2) {
+		return o2.visitas - o1.visitas;
 	}
 
-	public void setIdGuide(int idGuide) {
-		this.idGuide = idGuide;
-	}
-
-	public int getIdUser() {
-		return idUser;
-	}
-
-	public void setIdUser(int idUser) {
-		this.idUser = idUser;
-	}
-
-	public int getIdChampion() {
-		return idChampion;
-	}
-
-	public void setIdChampion(int idChampion) {
-		this.idChampion = idChampion;
-	}
-
-	public String getGuideTitle() {
-		return guideTitle;
-	}
-
-	public void setGuideTitle(String guideTitle) {
-		this.guideTitle = guideTitle;
-	}
-
-	public String getGuideContent() {
-		return guideContent;
-	}
-
-	public void setGuideContent(String guideContent) {
-		this.guideContent = guideContent;
-	}
-
-	public String getGuideLang() {
-		return guideLang;
-	}
-
-	public void setGuideLang(String guideLang) {
-		this.guideLang = guideLang;
-	}
 }

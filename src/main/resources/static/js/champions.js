@@ -96,7 +96,7 @@ function getSelectedSelectType() {
 
 /**
  * Este método controla que los radibox se puedan desactivar,además también
- * sirve de listener para filtrar campeones, ya que dependede que elcheckbox
+ * sirve de listener para filtrar campeones, ya que dependede que el radio
  * cambie de estado
  */
 var $unique = $('input.unique');
@@ -114,49 +114,65 @@ $unique.on('click', function(event) {
  */
 $(function displayChampionDetails() {
 	var hash = window.location.hash;
-	hash = hash.substring(1);
-	prepareModalWindow(determineIndexChampion(hash));
+	if (hash != "") {
+		hash = hash.substring(1);
+		if (hash == "Mago" || hash == "Tanque" || hash == "Jungla"
+				|| hash == "Support" || hash == "Marksman") {
+			$("#" + hash).click();
+		}
+		prepareModalWindow(determineIndexChampion(hash));
+	}
 });
 
 function prepareModalWindow(championIndex) {
 	var championClicked = jsonChampions[championIndex];
-	var modalLink = $('#modal-link');
-	var normalizedName = normalizeChampionName(championClicked.championName);
-	modalLink.attr("href", "#modals");
-	var modalWindow = "";
-	modalWindow += '<div id="wrapper-modal">';
-	modalWindow += '<div class="close-modals">';
-	modalWindow += '<div class="btn-close-modal">X</div>';
-	modalWindow += '</div>'
-	modalWindow += '<div class="modal-contenido">';
-	modalWindow += '<div class="nombre-campeones">';
-	modalWindow += '<h1>' + championClicked.championName + '</h1>';
-	modalWindow += '<h3 class="champion-title" >'
-			+ championClicked.championTitleES + '</h3>';
-	modalWindow += '</div>'
-	modalWindow += '<div class="champion-lore col-xs-6"><h2>Historia de ' + championClicked.championName + "</h2>";
-	modalWindow += '<p>' +  championClicked.championLoreES + '</p>';
-	modalWindow += '</div>'
-	modalWindow += '<div class="spells">';
-	modalWindow += '<h2>Hechizos</h2>';
-	for (var i = 0; i < championClicked.spellsList.length; i++) {
-		var title = normalizeDescription("<strong>"
-				+ championClicked.spellsList[i].spellNameEs + "</strong><br>"
-				+ championClicked.spellsList[i].spellDescriptionEs);
+	if (championClicked != undefined) {
+		var modalLink = $('#modal-link');
+		var normalizedName = normalizeChampionName(championClicked.championName);
+		modalLink.attr("href", "#modals");
+		console.log(championClicked)
+		var modalWindow = "";
+		modalWindow += '<div id="wrapper-modal">';
+		modalWindow += '<div class="close-modals">';
+		modalWindow += '<div class="btn-close-modal">X</div>';
+		modalWindow += '</div>'
+		modalWindow += '<div class="modal-contenido">';
+		modalWindow += '<div class="nombre-campeones col-xs-6">';
+		modalWindow += '<h1>' + championClicked.championName + '</h1>';
+		modalWindow += '<h3 class="champion-title" >'
+				+ championClicked.championTitleES + '</h3>';
+		modalWindow += '</div>'
+		modalWindow += '<div class="champion-lore col-xs-10"><h2>Historia de '
+				+ championClicked.championName + "</h2>";
+		modalWindow += '<p>'
+				+ normalizeDescription(championClicked.championLoreES) + '</p>';
+		modalWindow += '</div>'
+		modalWindow += '<div class="spells">';
+		modalWindow += '<h2>Hechizos</h2>';
 		modalWindow += '<img src="'
-				+ championClicked.spellsList[i].spellIcon
+				+ championClicked.passive.passiveIcon
 				+ '" data-toggle="tooltip" data-html="true"  class="img-responsive lazy champion-spell" title=" '
-				+ title + '">';
+				+ normalizeDescription(championClicked.passive.passiveDescriptionEs)
+				+ '">';
+		for (var i = 0; i < championClicked.spellsList.length; i++) {
+			var title = normalizeDescription("<strong>"
+					+ championClicked.spellsList[i].spellNameEs
+					+ "</strong><br>"
+					+ championClicked.spellsList[i].spellDescriptionEs);
+			modalWindow += '<img src="'
+					+ championClicked.spellsList[i].spellIcon
+					+ '" data-toggle="tooltip" data-html="true"  class="img-responsive lazy champion-spell" title=" '
+					+ title + '">';
+		}
+		modalWindow += '</div>';
+		modalWindow += '</div>';
+		modalWindow += '</div>';
+		modalWindow += '</div>';
+		$('#modals').html(modalWindow);
+		animateModal(normalizedName, championClicked.splashArtUri);
+		$('[data-toggle="tooltip"]').tooltip();
+		$('#modal-link').click();
 	}
-	modalWindow += '</div>';
-	modalWindow += '</div>';
-	modalWindow += '</div>';
-	modalWindow += '</div>';
-	$('#modals').html(modalWindow);
-	animateModal(normalizedName, championClicked.splashArtUri);
-	$('[data-toggle="tooltip"]').tooltip();
-	$('#modal-link').click();
-
 }
 
 function animateModal(champName, splash) {
@@ -169,6 +185,7 @@ function animateModal(champName, splash) {
 		wrapper : "modals",
 
 		beforeOpen : function() {
+			modal.css("display", "inherit");
 		},
 		afterOpen : function() {
 
@@ -196,5 +213,5 @@ function determineIndexChampion(championName) {
 			return i;
 		}
 	}
-
 }
+

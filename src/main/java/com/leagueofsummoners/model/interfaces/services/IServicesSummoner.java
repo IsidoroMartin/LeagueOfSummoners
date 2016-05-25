@@ -9,8 +9,12 @@ import java.util.List;
 
 public interface IServicesSummoner {
 
-    List<MatchDTO> getLatestMatches(UserDTO user, int nMatches);
+    List<MatchDTO> getLatestMatchesAsync(UserDTO user, int nMatches) throws Exception;
+    
+    List<MatchDTO> getLatestMatchesSync(UserDTO user, int nMatches) throws Exception;
 
     List<MatchDTO> getLatestMatchesFromDB(UserDTO user);
+    
+    
 
 }

@@ -14,21 +14,25 @@
 			<h2 class="banner-msg" th:utext="#{champions.banner}"></h2>
 		</div>
 	</div>
-	<div id="buscador-campeones">
+	<div id="buscador-generico">
 		<h2>Buscador de campeones</h2>
 		<input id="campo-busqueda" type="text"
 			placeholder="Introduzca el nombre del campeón que busca"
 			oninput="filterChampions(this.value)">
 		<div id="filtros" class="hidden-xs">
-			<input type="radio" name="type" class="unique col-xs-4" value="Mago">
-			<label>Mago</label> <input type="radio" name="type"
+			<input type="radio" name="type" class="unique col-xs-4" id="Mago" value="Mago">
+			<label>Mago</label> <input id="Tanque" type="radio" name="type"
 				class="unique col-xs-4" value="Tanque"> <label>Tanque</label>
 			<input type="radio" name="type" class="unique col-xs-4"
-				value="Jungla"> <label>Jungla</label> <input type="radio"
-				name="type" class="unique col-xs-4" value="Marksman"> <label>Marksman</label>
+				value="Jungla" id="Jungla"> <label>Jungla</label> <input type="radio"
+				name="type" class="unique col-xs-4" id="Marksman" value="Marksman"> <label>Marksman</label>
 			<input type="radio" name="type" class="unique col-xs-4"
-				value="Asesino"> <label>Asesino</label> <input type="radio"
-				name="type" class="unique col-xs-4" value="Support"> <label>Support</label>
+				value="Asesino" id="Asesino"> <label>Asesino</label> <input type="radio"
+				name="type" class="unique col-xs-4" id="Support" value="Support"> <label>Support</label>
+			<button type="submit" class="btn form-control btn-buscador-campeones">
+				<span class="glyphicon glyphicon-search"></span> <span
+					th:utext="#{home.body.search.button}"></span>
+			</button>
 		</div>
 		<div id="filtros-mobile" class="">
 			<select>
@@ -63,7 +67,7 @@
 		</div>
 	</div>
 	<a id="modal-link" href="#champion" hidden=""></a>
-	<div id="modals"></div>
+	<div id="modals" class="container-fluid" style="display: none"></div>
 	</main>
 
 
@@ -72,7 +76,6 @@
 	<script th:inline="javascript">
 		var jsonChampions = JSON
 				.parse(/*[[${champions_json}]]*/"champions_json");
-
 	</script>
 
 	<script type="text/javascript" src="libraries/animatedModal.js"></script>

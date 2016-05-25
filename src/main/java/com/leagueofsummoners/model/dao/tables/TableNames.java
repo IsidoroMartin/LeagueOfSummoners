@@ -27,6 +27,8 @@ public class TableNames {
     public static final String COLUMN_GUIDES_TITLE = "GUIDE_TITLE";
     public static final String COLUMN_GUIDES_CONTENT = "GUIDE_CONTENT";
     public static final String COLUMN_GUIDES_LANG = "GUIDE_LANG";
+    public static final String COLUMN_GUIDES_DATE = "GUIDE_DATE";
+    public static final String COLUMN_GUIDES_VISITS = "GUIDE_VISITAS";
 
  /*   @Value("${table.champions}")
     public static void setTableChampions(String tableChampions) {
