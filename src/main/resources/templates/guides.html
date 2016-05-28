@@ -29,7 +29,7 @@
 				placeholder="Introduzca el nombre de la guía, autor o campeón"
 				oninput="findGuidesByChampionOrGuideTitle(this.value)"
 				onchange="findGuidesByChampionOrGuideTitle(this.value)"
-				class="input_champions">
+				class="input_champions col-xs-12">
 			<div id="filtros" class="hidden-xs">
 				<input type="radio" name="type" class="unique col-xs-4" id="Todos"
 					value="Todos" checked> <label>Todos</label> <input
@@ -48,7 +48,7 @@
 					<option>Filtrar por tipo campeón</option>
 					<option>Mago</option>
 					<option>Tanque</option>
-					<option>Jungle</option>
+					<option>Jungla</option>
 					<option>Marksman</option>
 					<option>Support</option>
 				</select>
@@ -56,23 +56,23 @@
 		</div>
 		<div id="guias">
 			<div class="col-xs-12 guide" th:each="guia : ${guias}">
-				<div class="col-xs-2">
+				<div class="col-xs-12 col-md-2">
 					<img class="img-responsive lazy" name="champion"
 						th:attr="data-original=${guia.champion.championIconName},data-type=${guia.champion.championType},
 					src=${guia.champion.championIconName},title=${guia.champion.championName}"
 						style="display: block;">
 				</div>
-				<div class="guide-content col-xs-10">
+				<div class="guide-content col-xs-12 col-md-10">
 					<div class="guide-champ-name">
 						<h2 th:utext="${guia.champion.championName}"></h2>
 						<h3
 							th:utext="${guia.guideTitle + ' - ' + guia.champion.championType}"></h3>
 					</div>
-					<div class="guide-info col-xs-10">
+					<div class="guide-info col-xs-12 col-md-10">
 						<p th:utext="${'Autor: ' + guia.user.username}"></p>
 						<small th:utext="${'Fecha: ' + guia.formattedDay}"></small>
 					</div>
-					<div class="visitas  col-xs-2">
+					<div class="visitas col-md-2 col-xs-12">
 						<th:block th:utext="${guia.visitas  + ' Visitas'}"></th:block>
 					</div>
 				</div>

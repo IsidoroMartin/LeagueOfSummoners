@@ -23,7 +23,7 @@
 		<h2>Buscador de campeones</h2>
 		<input id="campo-busqueda" type="text"
 			placeholder="Introduzca el nombre del campeón que busca"
-			oninput="filterChampions(this.value)">
+			oninput="filterChampions(this.value)" class="search-field">
 		<div id="filtros" class="hidden-xs">
 			<input type="radio" name="type" class="unique col-xs-4 input_champions" id="Todos"
 				value="Todos" checked> <label>Todos</label> <input
@@ -39,12 +39,12 @@
 				name="type" class="unique col-xs-4" id="Support" value="Support">
 			<label>Support</label>
 		</div>
-		<div id="filtros-mobile" class="">
-			<select>
+		<div id="filtros-mobile" class="row">
+			<select class="col-xs-10">
 				<option>Filtrar por tipo campeón</option>
 				<option>Mago</option>
 				<option>Tanque</option>
-				<option>Jungle</option>
+				<option>Jungla</option>
 				<option>Marksman</option>
 				<option>Support</option>
 			</select>

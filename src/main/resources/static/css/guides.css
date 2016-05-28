@@ -38,3 +38,16 @@ div.guide-champ-name h3 {
 .visitas {
 	width:120px;
 }
+
+
+@media only screen and (max-width: 768px) {
+	input#campo-busqueda.input_champions.col-xs-12.tt-input{
+		margin:0px;
+		width:104%;
+	}	
+	
+	div.visitas{
+		padding-left:0px;
+	}
+	
+}

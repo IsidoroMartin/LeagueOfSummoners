@@ -129,17 +129,17 @@ function prepareModalWindow(championIndex) {
 		modalLink.attr("href", "#modals");
 		console.log(championClicked)
 		var modalWindow = "";
-		modalWindow += '<div id="wrapper-modal">';
+		modalWindow += '<div id="wrapper-modal" class="row">';
 		modalWindow += '<div class="close-modals">';
 		modalWindow += '<div class="btn-close-modal">X</div>';
 		modalWindow += '</div>'
 		modalWindow += '<div class="modal-contenido">';
-		modalWindow += '<div class="nombre-campeones col-xs-6">';
+		modalWindow += '<div class="nombre-campeones col-md-12 col-md-6">';
 		modalWindow += '<h1>' + championClicked.championName + '</h1>';
 		modalWindow += '<h3 class="champion-title" >'
 				+ championClicked.championTitleES + '</h3>';
 		modalWindow += '</div>'
-		modalWindow += '<div class="champion-lore col-xs-10"><h2>Historia de '
+		modalWindow += '<div class="champion-lore col-md-10"><h2>Historia de '
 				+ championClicked.championName + "</h2>";
 		modalWindow += '<p>'
 				+ normalizeDescription(championClicked.championLoreES) + '</p>';
@@ -195,6 +195,7 @@ function animateModal(champName, splash) {
 	});
 	var divModal = $('#' + champName);
 	modal.css("background-image", "url('" + splash + "')");
+	divModal.addClass("champion-modal-mobile")
 }
 
 /**

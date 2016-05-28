@@ -13,7 +13,6 @@ div.img-separation img:hover {
 
 #buscador-generico {
 	min-height: 160px;
-	margin-top: 30px;
 }
 
 #buscador-generico input[type="text"] {
@@ -178,35 +177,67 @@ h3.champion-title {
 	margin-left: 60px;
 	margin-top: 50px;
 }
-.btn-buscador-campeones{
-	margin-top:15px;
+
+.btn-buscador-campeones {
+	margin-top: 15px;
 }
 
-.btn-buscador-campeones:hover{
-	background-color:#337ab7;
-	color:white;
+.btn-buscador-campeones:hover {
+	background-color: #337ab7;
+	color: white;
 }
 
-.btn-buscador-campeones:active{
-	color:white;
+.btn-buscador-campeones:active {
+	color: white;
 }
 
-div.container.content.banner{
-	padding-left:0px;
+div.container.content.banner {
+	padding-left: 0px;
 }
 
+ol.breadcrumb.col-xs-12 {
+	margin-bottom: 0px;
+}
 
 @media only screen and (max-width: 768px) {
+	main.container.content.champions-body {
+		padding: 0px;
+		margin: 0px;
+	}
+	input#campo-busqueda.search-field {
+		margin-left: 0px;
+		width: 100%;
+	}
+	div.nombre-campeones {
+		margin-left: 0px;
+		margin-top: 0px;
+	}
+	
+	div.champion-lore {
+		margin: 0px;
+		width: 120%;
+		position: static;
+	}
+	div.spells {
+		clear:both;
+		position: static;
+		width:120%;
+		height:600px;
+	}
+	
+	img.champion-spell{
+		width:50px;
+		height:50px;
+	}
+	
 	#buscador-generico {
 		min-height: 180px;
 	}
 	#filtros-mobile {
-		width: 90%;
-		margin-left: 15px;
 		visibility: visible;
 	}
 	#filtros-mobile select {
-		width: 100%;
+		width: 400px;
 		height: 40px;
 	}
 	div.img-separation {

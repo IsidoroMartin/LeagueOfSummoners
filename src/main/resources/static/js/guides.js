@@ -33,6 +33,10 @@ $(".tt-menu").click(function() {
 	findGuidesByChampionOrGuideTitle($('#campo-busqueda').val());
 });
 
+$("#filtros-mobile select").change(function() {
+	findGuidesByChampionOrGuideTitle(this.value != "Todos" ? this.value : "");
+});
+
 $(function() {
 	var search_input = getUrlParameter("search_input");
 	if (search_input != undefined) {

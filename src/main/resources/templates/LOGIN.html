@@ -4,10 +4,7 @@
 <head th:replace="fragments/head :: head(title='Login ~ LOS')">
 </head>
 <body id="bootstrap-overrides">
-<!--<header th:replace="fragments/header :: header"></header>-->
-
 <div th:replace="fragments/menu :: menu"></div>
-
 <main class="container">
 
     <section class="container fill-main" id="login-container">
@@ -67,46 +64,5 @@
 <div th:replace="fragments/footer :: footer"></div>
 <div th:replace="fragments/scripts :: scripts"></div>
 <script type="text/javascript" src="js/login.js"></script>
-
 </body>
 </html>
-
-<!--<div class="col-xs-12 padding0">-->
-<!--<h2>Sign in</h2>-->
-<!--</div>-->
-<!--<form role="form" method="post" action="./login"-->
-<!--enctype="multipart/form-data" th:object="${userDTO}">-->
-<!--<div class="form-group">-->
-<!--<label for="username">Username</label>-->
-<!--<input type="text" class="form-control" name="username" pattern="" title="" id="username" required="required"/>-->
-<!--</div>-->
-<!--<div class="form-group">-->
-<!--<label for="password">Password</label>-->
-<!--<input type="password" class="form-control" name="password" pattern="" title="" id="password" required="required"/>-->
-<!--</div>-->
-<!--<input type="hidden" name="galeria" value="/img/champion_icons/Teemo.png">-->
-<!--<div class="form-group" id="remember-credentials">-->
-<!--<div class="cell col-xs-2">-->
-<!--<div class="squaredTwo pull-right">-->
-<!--<input type="checkbox" value="None" id="squaredTwo" class="form-control" name="check">-->
-<!--<label for="squaredTwo"></label>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="cell col-xs-8">-->
-<!--<label >Remember password</label>-->
-<!--</div>-->
-<!--</div>-->
-<!--<button type="submit" class="btn form-control iniciar-sesion-btn" disabled value="Login">-->
-<!--<span>Sign in</span>-->
-<!--</button>-->
-<!--</form>-->
-<!--<hr>-->
-<!--<div class="col-xs-12 padding0">-->
-<!--<a href="#">Have you forgotten your password? Get it back</a>-->
-<!--</div>-->
-<!--<div class="col-xs-12 padding0">-->
-<!--<a href="#">Have you forgotten your username? Get it back</a>-->
-<!--</div>-->
-<!--<div class="col-xs-12 padding0">-->
-<!--<a href="/register">Doesn't have an account? Register</a>-->
-<!--</div>-->
