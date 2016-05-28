@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	th:with="lang=${#locale.language}" th:lang="${lang}">
-<head th:replace="fragments/head :: head">
+<head th:replace="fragments/head :: head(title='Visualizar guía ~ LOS')">
 </head>
 <body id="bootstrap-overrides" onload="getMatchList(false)">
 	<div th:replace="fragments/menu :: menu"></div>
@@ -12,25 +12,25 @@
 			</div>
 		</div>
 	</div>
-
 	<main class="container content profile-body">
 	<div class="row">
 		<aside id="user-profile" class="col-md-2">
 			<div id="profile">
-				<div class="img-perfil col-xs-6 col-md-12" >
-					<img class="img-responsive" width="120px" height="120px"  th:attr="src=@{${session.userlogged.avatar}}" />
+				<div class="img-perfil col-xs-6 col-md-12">
+					<img class="img-responsive" width="120px" height="120px"
+						th:attr="src=@{${session.userlogged.avatar}}" />
 					<div class="summoner-profile">
 						<strong><p th:utext="${session.userlogged.username}"></p></strong>
 					</div>
 				</div>
 				<div class="img-perfil col-xs-6 col-md-12">
 					<img th:attr="src=@{${summoner_avatar}}" width="120px"
-						height="120px" onerror="this.src='/img/notfoundimg.png'"/>
-						<div class="summoner-profile">
-					<strong><p th:utext="${session.userlogged.summonerName}"></p></strong>
+						height="120px" onerror="this.src='/img/notfoundimg.png'" />
+					<div class="summoner-profile">
+						<strong><p th:utext="${session.userlogged.summonerName}"></p></strong>
+					</div>
 				</div>
-				</div>
-				
+
 			</div>
 		</aside>
 		<div id="profile-body" class="col-xs-10">
@@ -44,14 +44,17 @@
 						<th th:utext="#{profile.summoner.level}"></th>
 						<th>Division</th>
 						<th th:utext="#{profile.team}"></th>
-						<th class="hidden-xs" th:utext="#{profile.permission.level}">User level</th>
+						<th class="hidden-xs" th:utext="#{profile.permission.level}">User
+							level</th>
 					</tr>
 					<tr>
 						<td th:utext="${session.userlogged.summonerName}"></td>
 						<td th:utext="${summ_level}"></td>
-						<td><i th:class="'icon champion-ranks ' + ${summ_tier}"></i>&nbsp;<th:block th:utext="${summ_tier}" ></th:block></td>
+						<td><i th:class="'icon champion-ranks ' + ${summ_tier}"></i>&nbsp;<th:block
+								th:utext="${summ_tier}"></th:block></td>
 						<td th:utext="${team}"></td>
-						<td class="hidden-xs" th:utext="${session.userlogged.permissionLevel}"></td>
+						<td class="hidden-xs"
+							th:utext="${session.userlogged.permissionLevel}"></td>
 					</tr>
 				</table>
 			</div>
@@ -68,8 +71,8 @@
 				<h3>
 					<th:block th:text="#{profile.last10matches}"></th:block>
 				</h3>
-				<i class="fa fa-refresh fa-1 hidden-xs" id="refresh-icon" aria-hidden="true"
-					onclick="getMatchList(true)"></i>
+				<i class="fa fa-refresh fa-1 hidden-xs" id="refresh-icon"
+					aria-hidden="true" onclick="getMatchList(true)"></i>
 				<div id="no-rankeds" class="red" hidden>
 					<h4>Oops! Parece que aun no has jugando ninguna ranked</h4>
 				</div>

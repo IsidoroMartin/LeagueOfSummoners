@@ -1,6 +1,7 @@
 package com.leagueofsummoners.controllers;
 
 
+import com.google.gson.Gson;
 import com.leagueofsummoners.model.dto.ChampionDTO;
 import com.leagueofsummoners.model.interfaces.services.IServicesChampions;
 
@@ -42,7 +43,11 @@ public class HomeController {
             if (dia == DayOfWeek.TUESDAY) hasBeenUpdated = true;
             championRotation = servicioChampions.getChampionRotation();
         } else if (dia == DayOfWeek.WEDNESDAY && hasBeenUpdated) hasBeenUpdated = false;
-
+        
+        String[] championsList = servicioChampions.getStringChampionList();
+		Gson gson = new Gson();
+		String champions = gson.toJson(championsList, String[].class);
+		model.addAttribute("champion_list", champions);
         model.addAttribute("championRotation", championRotation);
         return "index";
     }

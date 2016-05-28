@@ -12,6 +12,8 @@ public class RiotUtils {
 		}
 		return stringList;
 	}
+	
+	
 
 	public static String normalizeChampion(String championName) {
 		championName = championName.replace(" ", "");
@@ -32,6 +34,15 @@ public class RiotUtils {
 		championName = championName.replace(".", "-");
 		return championName;
 	}
+	
+	public  static boolean containsCaseInsensitive(String s, List<String> l){
+	     for (String string : l){
+	        if (string.equalsIgnoreCase(s)){
+	            return true;
+	         }
+	     }
+	    return false;
+	  }
 
 	public static String determineSpecialChampionNames(String championName) {
 		switch (championName) {

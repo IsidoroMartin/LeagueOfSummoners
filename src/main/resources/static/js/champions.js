@@ -12,6 +12,9 @@ function filterChampions() {
 	if (html == "")
 		html = "<div class='alert alert-warning fade in'>No existen campeones con estas caracteristicas</div>";
 	$('#champions').hide().html(html).fadeIn(500);
+	 $("div.holder").jPages({
+		    containerID : "champions"
+		  });
 }
 
 /**
@@ -36,7 +39,7 @@ function filterChampionsByName(inputValue) {
 
 function filterChampionsByType(listaFiltrada, type) {
 	var filtroType = [];
-	if (type != "no-type") {
+	if (type != "Todos") {
 		$(listaFiltrada).each(function(index, value) {
 			if ($(value).attr("data-type") == type) {
 				filtroType.push(value);
@@ -91,21 +94,15 @@ function getSelectedRadioType() {
 
 function getSelectedSelectType() {
 	return (filtrosMobile.val() != "Filtrar por tipo campeón") ? filtrosMobile
-			.val() : "no-type";
+			.val() : "Todos";
 }
 
 /**
- * Este método controla que los radibox se puedan desactivar,además también
- * sirve de listener para filtrar campeones, ya que dependede que el radio
- * cambie de estado
+ * Filtra los campeones cuando un radio es pulsado
  */
 var $unique = $('input.unique');
 $unique.on('click', function(event) {
-	var $this = $(this);
-	var was_checked = $this.data('checked');
-	$('input[name=' + $this.prop('name') + ']').data('checked', false);
-	$this.data('checked', !was_checked).prop('checked', !was_checked);
-	filterChampions("");
+	filterChampions();
 });
 
 /**

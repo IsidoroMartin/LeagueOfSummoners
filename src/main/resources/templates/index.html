@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
 <!--<div th:replace="fragments/prueba :: div"></div>-->
-<head th:replace="fragments/head :: head(title='Home ~ League of summoners')">
+<head th:replace="fragments/head :: head(title='Home ~ LOS')">
 </head>
 <body id="bootstrap-overrides">
 <!--<header th:replace="fragments/header :: header"></header>-->
@@ -20,9 +20,9 @@
                 <form action="./search" method="get" class="form-horizontal col-xs-12" role="form">
                     <div class="form-group">
                         <label for="summoner-name"><h2 th:utext="#{home.body.search}"></h2></label>
-                        <input class="form-control" type="text" name="search_input" id="summoner-name"
+                        <input class="form-control input_champions" type="text" name="search_input" id="summoner-name"
                                th:placeholder="#{home.body.search.placeholder}">
-                        <button type="submit" class=" btn form-control">
+                        <button type="submit" id="buscar-btn" class=" btn form-control">
                             <span class="glyphicon glyphicon-search"></span> <span
                                 th:utext="#{home.body.search.button}"></span>
                         </button>
@@ -41,7 +41,7 @@
             </div>
             <div class="panel-body">
                 <th:block th:each="champion : ${championRotation}">
-                    <div class="col-md-15 col-xs-6 col-sm-3 rotation-champ" th:onclick="'javascript:showChampionDetails(\'' + ${champion.championName} + '\');'">
+                    <div class="col-md-15 col-xs-6 col-sm-3 rotation-champ" th:onclick="'javascript:showChampionDetails(\'' + ${champion.championNormalized} + '\');'">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <span th:utext="${champion.championName}"></span>
@@ -60,5 +60,10 @@
 <div th:replace="fragments/footer :: footer"></div>
 <div th:replace="fragments/scripts :: scripts"></div>
 <script type="text/javascript" src="http:/js/home.js"></script>
+	<script th:inline="javascript">
+		var champion_list = JSON
+				.parse(/*[[${champion_list}]]*/"champion_list");
+	</script>
+	<script type="text/javascript" src="js/typehead_script.js"></script>
 </body>
 </html>
