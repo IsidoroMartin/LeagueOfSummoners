@@ -2,8 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:with="lang=${#locale.language}" th:lang="${lang}">
 <!--<div th:replace="fragments/prueba :: div"></div>-->
-<head
-	th:replace="fragments/head :: head(title='Home ~ League of summoners')">
+<head th:replace="fragments/head :: head(title='Campeones ~ LOS')">
 </head>
 <body id="bootstrap-overrides">
 	<!--<header th:replace="fragments/header :: header"></header>-->
@@ -14,25 +13,31 @@
 			<h2 class="banner-msg" th:utext="#{champions.banner}"></h2>
 		</div>
 	</div>
+	<div class="row">
+		<ol class="breadcrumb col-xs-12">
+			<li><a href="/index">Home</a></li>
+			<li class="active" th:utext="${pageName}"></li>
+		</ol>
+	</div>
 	<div id="buscador-generico">
 		<h2>Buscador de campeones</h2>
 		<input id="campo-busqueda" type="text"
 			placeholder="Introduzca el nombre del campeón que busca"
 			oninput="filterChampions(this.value)">
 		<div id="filtros" class="hidden-xs">
-			<input type="radio" name="type" class="unique col-xs-4" id="Mago" value="Mago">
-			<label>Mago</label> <input id="Tanque" type="radio" name="type"
-				class="unique col-xs-4" value="Tanque"> <label>Tanque</label>
-			<input type="radio" name="type" class="unique col-xs-4"
-				value="Jungla" id="Jungla"> <label>Jungla</label> <input type="radio"
-				name="type" class="unique col-xs-4" id="Marksman" value="Marksman"> <label>Marksman</label>
-			<input type="radio" name="type" class="unique col-xs-4"
-				value="Asesino" id="Asesino"> <label>Asesino</label> <input type="radio"
-				name="type" class="unique col-xs-4" id="Support" value="Support"> <label>Support</label>
-			<button type="submit" class="btn form-control btn-buscador-campeones">
-				<span class="glyphicon glyphicon-search"></span> <span
-					th:utext="#{home.body.search.button}"></span>
-			</button>
+			<input type="radio" name="type" class="unique col-xs-4 input_champions" id="Todos"
+				value="Todos" checked> <label>Todos</label> <input
+				type="radio" name="type" class="unique col-xs-4" id="Mago"
+				value="Mago"> <label>Mago</label> <input id="Tanque"
+				type="radio" name="type" class="unique col-xs-4" value="Tanque">
+			<label>Tanque</label> <input type="radio" name="type"
+				class="unique col-xs-4" value="Jungla" id="Jungla"> <label>Jungla</label>
+			<input type="radio" name="type" class="unique col-xs-4" id="Marksman"
+				value="Marksman"> <label>Marksman</label> <input
+				type="radio" name="type" class="unique col-xs-4" value="Asesino"
+				id="Asesino"> <label>Asesino</label> <input type="radio"
+				name="type" class="unique col-xs-4" id="Support" value="Support">
+			<label>Support</label>
 		</div>
 		<div id="filtros-mobile" class="">
 			<select>
@@ -45,7 +50,6 @@
 			</select>
 		</div>
 	</div>
-
 	<div class="row" id="champions">
 		<div th:each="champion,iterStat : ${champions}" class="champion">
 			<!--  Champion clase para obtenertodos los champions -->
@@ -66,6 +70,9 @@
 			</div>
 		</div>
 	</div>
+	<div class="holder text-center"></div>
+
+
 	<a id="modal-link" href="#champion" hidden=""></a>
 	<div id="modals" class="container-fluid" style="display: none"></div>
 	</main>
@@ -74,11 +81,17 @@
 	<div th:replace="fragments/footer :: footer"></div>
 	<div th:replace="fragments/scripts :: scripts"></div>
 	<script th:inline="javascript">
+		//${champions_json} == La lista de campeones en JSON.
 		var jsonChampions = JSON
 				.parse(/*[[${champions_json}]]*/"champions_json");
+		defaults.perPage = 18;
+		$(function() { //INICIA LA PAGINACIÓN
+			$("div.holder").jPages({
+				containerID : "champions"
+			});
+		});
 	</script>
 	<script type="text/javascript" src="libraries/animatedModal.js"></script>
 	<script type="text/javascript" src="/js/champions.js"></script>
-
 </body>
 </html>

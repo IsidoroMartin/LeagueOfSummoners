@@ -31,6 +31,7 @@ public class ChampionsController {
 		}
 		model.put("champions", listaChampions);
 		model.put("champions_json",championsJson);
+		model.put("pageName","Campeones");
 		return "champions";
 	}
 }

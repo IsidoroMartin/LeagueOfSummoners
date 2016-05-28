@@ -46,6 +46,7 @@ public class GuidesController {
 		String champions = gson.toJson(championsList, String[].class);
 		model.addAttribute("champion_list", champions);
 		model.addAttribute("guias", guias);
+		model.addAttribute("pageName", "Guías");
 		// Como se setea la view¿?
 		return new ModelAndView("guides");
 	}

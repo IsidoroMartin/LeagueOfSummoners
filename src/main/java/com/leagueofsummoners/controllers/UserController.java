@@ -120,8 +120,8 @@ public class UserController {
 					valores.put("team", "Sin equipo");
 				}
 
-				valores.put("summoner_avatar",
-						LeagueAccessAPI.RIOT_API_SUMMONER_PROFILE_ICON_PATH + summ.getProfileIconID() + ".png");
+				valores.put("summoner_avatar",LeagueAccessAPI.RIOT_API_SUMMONER_PROFILE_ICON_PATH + summ.getProfileIconID() + ".png");
+				valores.put("pageName", "Perfil");
 				session.setAttribute(SESSION_MODEL_MAP, valores);
 			}
 		} catch (Exception e) {

@@ -22,7 +22,6 @@
                         </li>
                         <li><a href="/guides" class="menu-item" th:utext="#{menu.guides}"></a></li>
                         <li><a href="/champions" class="menu-item" th:utext="#{menu.champions}"></a></li>
-                        <li><a href="#" class="menu-item" th:utext="#{menu.proplayers}"></a></li>
                     </ul>
                     <th:block th:replace="fragments/menu-autentication-buttons :: ((${session.logged})?'user-connected':'user-disconnected')"></th:block>
                 </div>
