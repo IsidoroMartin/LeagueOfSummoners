@@ -80,7 +80,7 @@
 							<th>Tipo</th>
 							<th>Campeón</th>
 							<th>Título de la guía</th>
-							<th>Editar</th>
+							<th class="hidden-xs">Editar</th>
 							<th>Borrar</th>
 							<th>Visitas</th>
 						</tr>
@@ -93,7 +93,7 @@
 										th:utext="${guide.champion.championName}"></th:block></a></td>
 							<td><a th:utext="${guide.guideTitle}"
 								th:href="@{guides/view/{id}(id=${guide.idGuide})}"> </a></td>
-							<td><a th:href="@{guides/editar/{id}(id=${guide.idGuide})}">Editar</a></td>
+							<td class="hidden-xs"><a th:href="@{guides/editar/{id}(id=${guide.idGuide})}">Editar</a></td>
 							<td><a class="deleteGuide"
 								th:href="@{api/guides/borrar/{id}(id=${guide.idGuide})}">Borrar</a></td>
 							<td th:utext="${guide.visitas}"></td>
