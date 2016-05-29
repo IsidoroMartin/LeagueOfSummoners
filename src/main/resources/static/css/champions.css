@@ -11,15 +11,6 @@ div.img-separation img:hover {
 	transform: scale(1.1);
 }
 
-#buscador-generico {
-	min-height: 160px;
-}
-
-#buscador-generico input[type="text"] {
-	width: 99%;
-	height: 50px;
-	margin-left: 10px;
-}
 
 #buscador-generico label {
 	padding-left: 15px;

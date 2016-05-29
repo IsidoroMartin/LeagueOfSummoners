@@ -46,5 +46,5 @@ $(function() {
 });
 
 $('.unique').click(function() {
-	findGuidesByChampionOrGuideTitle(this.value != "Todos" ? this.value : "");
+	findGuidesByChampionOrGuideTitle(this.firstElementChild.value != "Todos" ? this.firstElementChild.value : "");
 });

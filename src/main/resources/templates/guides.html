@@ -1,93 +1,103 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:with="lang=${#locale.language}" th:lang="${lang}">
+      th:with="lang=${#locale.language}" th:lang="${lang}">
 <!--<div th:replace="fragments/prueba :: div"></div>-->
 <head th:replace="fragments/head :: head(title='Guías ~ LOS')">
 </head>
 <body id="bootstrap-overrides">
-	<!--<header th:replace="fragments/header :: header"></header>-->
+<!--<header th:replace="fragments/header :: header"></header>-->
 
-	<div th:replace="fragments/menu :: menu"></div>
-	<main>
-	<div class="container content banner">
-		<div th:replace="fragments/menu :: menu"></div>
-		<main class="container content champions-body">
-		<div class="row" id="banner">
-			<div id="page-name-banner" class="col-xs-12">
-				<h2 class="banner-msg">Guías</h2>
-			</div>
-		</div>
-		<div class="row">
-			<ol class="breadcrumb col-xs-12">
-				<li><a href="/index">Home</a></li>
-				<li class="active" th:utext="${pageName}"></li>
-			</ol>
-		</div>
-		<div id="buscador-generico">
-			<h2>Buscador de guías</h2>
-			<input id="campo-busqueda" type="text"
-				placeholder="Introduzca el nombre de la guía, autor o campeón"
-				oninput="findGuidesByChampionOrGuideTitle(this.value)"
-				onchange="findGuidesByChampionOrGuideTitle(this.value)"
-				class="input_champions col-xs-12">
-			<div id="filtros" class="hidden-xs">
-				<input type="radio" name="type" class="unique col-xs-4" id="Todos"
-					value="Todos" checked> <label>Todos</label> <input
-					type="radio" name="type" class="unique col-xs-4" value="Mago">
-				<label>Mago</label> <input type="radio" name="type"
-					class="unique col-xs-4" value="Tanque"> <label>Tanque</label>
-				<input type="radio" name="type" class="unique col-xs-4"
-					value="Jungla"> <label>Jungla</label> <input type="radio"
-					name="type" class="unique col-xs-4" value="Marksman"> <label>Marksman</label>
-				<input type="radio" name="type" class="unique col-xs-4"
-					value="Asesino"> <label>Asesino</label> <input type="radio"
-					name="type" class="unique col-xs-4" value="Support"> <label>Support</label>
-			</div>
-			<div id="filtros-mobile" class="">
-				<select>
-					<option>Filtrar por tipo campeón</option>
-					<option>Mago</option>
-					<option>Tanque</option>
-					<option>Jungla</option>
-					<option>Marksman</option>
-					<option>Support</option>
-				</select>
-			</div>
-		</div>
-		<div id="guias">
-			<div class="col-xs-12 guide" th:each="guia : ${guias}">
-				<div class="col-xs-12 col-md-2">
-					<img class="img-responsive lazy" name="champion"
-						th:attr="data-original=${guia.champion.championIconName},data-type=${guia.champion.championType},
+<div th:replace="fragments/menu :: menu"></div>
+<main id="guides-body">
+    <div class="container content banner">
+        <div th:replace="fragments/menu :: menu"></div>
+        <main class="container content champions-body">
+            <div class="row" id="banner">
+                <div id="page-name-banner" class="col-xs-12">
+                    <h1 class="banner-msg">Guías</h1>
+                </div>
+            </div>
+            <div class="row">
+                <ol class="breadcrumb col-xs-12">
+                    <li><a href="/index">Home</a></li>
+                    <li class="active" th:utext="${pageName}"></li>
+                </ol>
+            </div>
+            <div id="buscador-generico">
+                <h2>Buscador de guías</h2>
+                <input id="campo-busqueda" type="text"
+                       placeholder="Introduzca el nombre de la guía, autor o campeón"
+                       oninput="findGuidesByChampionOrGuideTitle(this.value)"
+                       onchange="findGuidesByChampionOrGuideTitle(this.value)"
+                       class="input_champions col-xs-12 form-control">
+                <div id="filtros" class="hidden-xs" class="btn-group" data-toggle="buttons">
+                    <label for="Todos" class="btn btn-primary unique">
+                        <input type="radio" name="type" class="unique col-xs-4" id="Todos"
+                               value="Todos" checked> Todos</label>
+                    <label for="mago" class="btn btn-primary unique">
+                        <input type="radio" id="mago" name="type" class="unique col-xs-4" value="Mago"> Mago</label>
+                    <label for="tanque" class="btn btn-primary unique">
+                        <input type="radio" id="tanque" name="type" class="col-xs-4" value="Tanque">
+                        Tanque</label>
+                    <label for="jungla" class="btn btn-primary unique">
+                        <input type="radio" id="jungla" name="type" class="unique col-xs-4" value="Jungla">
+                        Jungla</label>
+                    <label for="marksman" class="btn btn-primary unique">
+                        <input type="radio" id="marksman" name="type" class="unique col-xs-4" value="Marksman">
+                        Marksman</label>
+                    <label for="asesino" class="btn btn-primary unique">
+                        <input type="radio" id="asesino" name="type" class="unique col-xs-4" value="Asesino">
+                        Asesino</label>
+                    <label for="support" class="btn btn-primary unique">
+                        <input type="radio" id="support" name="type" class="unique col-xs-4" value="Support">
+                        Support
+                    </label>
+                </div>
+                <div id="filtros-mobile" class="">
+                    <select>
+                        <option>Filtrar por tipo campeón</option>
+                        <option>Mago</option>
+                        <option>Tanque</option>
+                        <option>Jungla</option>
+                        <option>Marksman</option>
+                        <option>Support</option>
+                    </select>
+                </div>
+            </div>
+            <div id="guias">
+                <div class="col-xs-12 guide" th:each="guia : ${guias}">
+                    <div class="col-xs-12 col-md-2">
+                        <img class="img-responsive lazy" name="champion"
+                             th:attr="data-original=${guia.champion.championIconName},data-type=${guia.champion.championType},
 					src=${guia.champion.championIconName},title=${guia.champion.championName}"
-						style="display: block;">
-				</div>
-				<div class="guide-content col-xs-12 col-md-10">
-					<div class="guide-champ-name">
-						<h2 th:utext="${guia.champion.championName}"></h2>
-						<h3
-							th:utext="${guia.guideTitle + ' - ' + guia.champion.championType}"></h3>
-					</div>
-					<div class="guide-info col-xs-12 col-md-10">
-						<p th:utext="${'Autor: ' + guia.user.username}"></p>
-						<small th:utext="${'Fecha: ' + guia.formattedDay}"></small>
-					</div>
-					<div class="visitas col-md-2 col-xs-12">
-						<th:block th:utext="${guia.visitas  + ' Visitas'}"></th:block>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="holder text-center"></div>
-	</div>
-	</main>
-	<div th:replace="fragments/footer :: footer"></div>
-	<div th:replace="fragments/scripts :: scripts"></div>
-	<script th:inline="javascript">
-		var champion_list = JSON
-				.parse(/*[[${champion_list}]]*/"champion_list");
-	</script>
-	<script type="text/javascript" src="js/typehead_script.js"></script>
-	<script type="text/javascript" src="js/guides.js"></script>
+                             style="display: block;">
+                    </div>
+                    <div class="guide-content col-xs-12 col-md-10">
+                        <div class="guide-champ-name">
+                            <h2 th:utext="${guia.champion.championName}"></h2>
+                            <h3
+                                    th:utext="${guia.guideTitle + ' - ' + guia.champion.championType}"></h3>
+                        </div>
+                        <div class="guide-info col-xs-12 col-md-10">
+                            <p th:utext="${'Autor: ' + guia.user.username}"></p>
+                            <small th:utext="${'Fecha: ' + guia.formattedDay}"></small>
+                        </div>
+                        <div class="visitas col-md-2 col-xs-12">
+                            <th:block th:utext="${guia.visitas  + ' Visitas'}"></th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="holder text-center"></div>
+    </div>
+</main>
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/scripts :: scripts"></div>
+<script th:inline="javascript">
+    var champion_list = JSON
+            .parse(/*[[${champion_list}]]*/"champion_list");
+</script>
+<script type="text/javascript" src="js/typehead_script.js"></script>
+<script type="text/javascript" src="js/guides.js"></script>
 </body>
 </html>
