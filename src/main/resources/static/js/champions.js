@@ -104,7 +104,7 @@ function buildHtmlChampions(listaChampsFiltrada) {
                 html += "<span>" + champName + "<\/span>";
                 html += "<\/div>";
                 html += "<div class=\"panel-body\">";
-                html += "<img class=\"img-responsive lazy\" name=\"champion\" data-original=\""
+                html += "<img alt='" + champName + "' class=\"img-responsive lazy\" name=\"champion\" data-original=\""
                     + championImg.attr("data-original")
                     + "\" data-type=\"Mago\""
                     + " src=\""
