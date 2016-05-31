@@ -1,91 +1,94 @@
-main.body-register{
-	padding-bottom:7%;
+main.body-register {
+    padding-bottom: 7%;
 }
 
 form {
-	margin-top: 2%;
+    margin-top: 2%;
 }
 
 #page-name-banner {
-	background-image: url("/img/banners/game_bg_banner.png");
-	background-size: 100% 100%;
-	height: 100px;
+    background-image: url("../img/banners/game_bg_banner.png");
+    background-size: 100% 100%;
+    min-height: 120px;
 }
 
 /* Cambiamos el cursor en el botón de subir imagen*/
 #fileInput {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 #registrarse-btn {
-	background-color: #BF6904;
-	background: linear-gradient(#db8e01, #871e0a);
-	box-shadow: inset 1px 1px 9px rgba(135, 30, 10, .8), inset -1px -1px 5px
-		rgba(181, 60, 2, .8);
-	color: #FFF;
-	border-color: #a29361 #928456 #5f5940 #928456;
-	text-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
-	height: 40px;
-	width: 90%;
-	margin-top: 3%;
+    background-color: #BF6904;
+    background: linear-gradient(#db8e01, #871e0a);
+    box-shadow: inset 1px 1px 9px rgba(135, 30, 10, .8), inset -1px -1px 5px rgba(181, 60, 2, .8);
+    color: #FFF;
+    border-color: #a29361 #928456 #5f5940 #928456;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
+    height: 40px;
+    width: 90%;
+    margin-top: 3%;
 }
 
 #modal-window-button {
-	margin-top: 10px;
-	margin-bottom: 0px;
-	width: 100%
+    margin-top: 10px;
+    margin-bottom: 0px;
+    width: 100%
 }
 
 #registrarse-btn:hover {
-	opacity: 0.9;
+    opacity: 0.9;
 }
 
 #modal-wrapper {
-	width: 100%;
-	height: 400px;
-	overflow: scroll;
-	overflow-x: hidden;
+    width: 100%;
+    height: 400px;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 #banner {
-	height: 100px;
-	font-family: "Open Sans", arial, sans-serif;
+    height: 100px;
+    font-family: "Open Sans", arial, sans-serif;
 }
 
 #buscador-galeria {
-	margin-left: 33px;
-	margin-top: 2%;
-	margin-bottom: 2%;
+    margin-left: 33px;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
-#show-champions>p {
-	margin-left: 32px;
+#show-champions > p {
+    margin-left: 32px;
 }
 
-#buscador-galeria>input {
-	width: 300px;
+#buscador-galeria > input {
+    width: 300px;
 }
 
 .champion-gallery {
-	border: 1px solid black;
-	width: 60px;
-	margin-left: 33px;
-	margin-top: 34px;
-	cursor: pointer;
-	transition: all .1s ease-in-out;
+    border: 1px solid black;
+    width: 60px;
+    margin-left: 33px;
+    margin-top: 34px;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
 }
 
 .champion-gallery:hover {
-	transform: scale(1.9);
+    transform: scale(1.9);
 }
 
 .banner-msg {
-	margin-top: 3%;
-	margin-left: 1%;
+    margin-top: 3%;
+    margin-left: 1%;
 }
-.has-feedback label ~ .form-control-feedback{
-	top:80px;
+
+.has-feedback label ~ .form-control-feedback {
+    top: 80px;
 }
-.form-horizontal .has-feedback .form-control-feedback{
-	right: 6px;
+
+.form-horizontal .has-feedback .form-control-feedback {
+    right: 6px;
 }
+
+

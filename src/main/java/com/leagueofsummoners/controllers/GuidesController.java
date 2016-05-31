@@ -26,30 +26,35 @@ import static com.leagueofsummoners.ApplicationPaths.*;
 @Controller
 public class GuidesController {
 
-	@Autowired
-	private IServicesChampions servicioChampions;
-	
-	@Autowired
-	private IServicesGuides serviceGuides;
+    @Autowired
+    private IServicesChampions servicioChampions;
 
-	@RequestMapping(value = { GUIDES_HTML_PATH, GUIDES_PATH }, method = RequestMethod.GET)
-	@ResponseBody
-	public ModelAndView guides(ModelMap model, @RequestParam(value = "search_input", required = false) String search_input) {
-		if (search_input != null) {
+    @Autowired
+    private IServicesGuides serviceGuides;
 
-		}
-		List<GuideDTO> guias = this.serviceGuides.findAll();
-		Collections.sort(guias, new GuideDTO());
-		
-		String[] championsList = servicioChampions.getStringChampionList();
-		Gson gson = new Gson();
-		String champions = gson.toJson(championsList, String[].class);
-		model.addAttribute("champion_list", champions);
-		model.addAttribute("guias", guias);
-		model.addAttribute("pageName", "Guías");
-		// Como se setea la view¿?
-		return new ModelAndView("guides");
-	}
+    @RequestMapping(value = {GUIDES_HTML_PATH, GUIDES_PATH}, method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView guides(ModelMap model, @RequestParam(value = "search_input", required = false) String search_input) {
+        if (search_input != null) {
 
+        }
+        List<GuideDTO> guias = this.serviceGuides.findAll();
+        Collections.sort(guias, new GuideDTO());
 
+        String[] championsList = servicioChampions.getStringChampionList();
+        Gson gson = new Gson();
+        String champions = gson.toJson(championsList, String[].class);
+        model.addAttribute("champion_list", champions);
+        model.addAttribute("guias", guias);
+        model.addAttribute("pageName", "Guías");
+        // Como se setea la view¿?
+        return new ModelAndView("guides");
+    }
+
+    @RequestMapping(value = {VIEW_GUIDE_HTML_PATH, VIEW_GUIDE_PATH}, method = RequestMethod.GET)
+    @ResponseBody
+    public String viewguide(ModelMap model, @RequestParam(value = "champion") String champion) {
+
+        return "view_guide";
+    }
 }

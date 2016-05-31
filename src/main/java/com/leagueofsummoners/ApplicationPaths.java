@@ -52,6 +52,10 @@ public class ApplicationPaths {
 
     public static final String P_PRIVACIDAD_PATH = "/p_privacidad";
 
+    public static final String VIEW_GUIDE_HTML_PATH = "/view_guide.html";
+    public static final String VIEW_GUIDE_PATH = "/view_guide";
+
+
     // Rest Services Path
 
     public static final String REST_API_USER = "/api/user";
