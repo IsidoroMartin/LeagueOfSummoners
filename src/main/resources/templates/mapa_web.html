@@ -1,101 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      th:with="lang=${#locale.language}" th:lang="${lang}">
-<!--<div th:replace="fragments/prueba :: div"></div>-->
+	th:with="lang=${#locale.language}" th:lang="${lang}">
 <head
-        th:replace="fragments/head :: head(title='Home ~ League of summoners')">
+	th:replace="fragments/head :: head(title='Home ~ League of summoners')">
 </head>
 <body id="bootstrap-overrides">
-<!--<header th:replace="fragments/header :: header"></header>-->
-<div th:replace="fragments/menu :: menu"></div>
-<main class="container content" id="cookies">
-    <div class="container row">
-        <div class="col-md-12">
-            <h1>POLITICA DE COOKIES</h1>
+	<div th:replace="fragments/menu :: menu"></div>
+	<main class="container content " id="mapa-sitio">
+	<div class="row" id="banner">
+		<div id="page-name-banner" class="col-xs-12">
+			<h1 class="banner-msg" style="font-size: 2.9rem;"
+				th:utext="${pageName}"></h1>
+		</div>
+	</div>
+	<div class="row">
+		<ol class="breadcrumb col-xs-12">
+			<li><a href="/index">Home</a></li>
+			<li class="active" th:utext="${pageName}"></li>
+		</ol>
+	</div>
+	<div id="mapa-web-container">
+		<ul>
+			<li><a href="/home">Home</a></li>
 
-            <p>Cookie es un fichero que se descarga en su ordenador al acceder a determinadas páginas web. Las cookies
-                permiten a una página web, entre otras cosas, almacenar y recuperar información sobre los hábitos de
-                navegación de un usuario o de su equipo y, dependiendo de la información que contengan y de la forma en
-                que
-                utilice su equipo, pueden utilizarse para reconocer al usuario.. El navegador del usuario memoriza
-                cookies
-                en el disco duro solamente durante la sesión actual ocupando un espacio de memoria mínimo y no
-                perjudicando
-                al ordenador. Las cookies no contienen ninguna clase de información personal específica, y la mayoría de
-                las
-                mismas se borran del disco duro al finalizar la sesión de navegador (las denominadas cookies de
-                sesión).</p>
-            <p>
-                La mayoría de los navegadores aceptan como estándar a las cookies y, con independencia de las mismas,
-                permiten o impiden en los ajustes de seguridad las cookies temporales o memorizadas.
-            </p><br>
-
-            <h4>¿Qué tipos de cookies utiliza esta página web?</h4>
-
-            <p> Las cookies se pueden clasificar en diferentes categorías dependiendo de la entidad que las gestione, el
-                plazo de tiempo que permanecen activas o según su finalidad. No obstante lo anterior, en ocasiones es
-                posible que una misma cookie pueda estar incluida en más de una categoría.
-                En la actualidad podemos distinguir los siguientes tipos de cookies:</p>
-
-            <ul>
-                <li><strong>Cookies técnicas:</strong> Son aquéllas que permiten al usuario la navegación a través de
-                    una
-                    página web,
-                    plataforma o aplicación y la utilización de las diferentes opciones o servicios que en ella existan
-                    como,
-                    por ejemplo, controlar el tráfico y la comunicación de datos, identificar la sesión, acceder a
-                    partes de
-                    acceso restringido, recordar los elementos que integran un pedido, realizar el proceso de compra de
-                    un
-                    pedido, realizar la solicitud de inscripción o participación en un evento, utilizar elementos de
-                    seguridad
-                    durante la navegación, almacenar contenidos para la difusión de videos o sonido o compartir
-                    contenidos a
-                    través de redes sociales.
-                </li>
-                <li>
-                    <strong>Cookies de análisis:</strong> Son aquéllas que bien tratadas por nosotros o por terceros,
-                    nos
-                    permiten
-                    cuantificar el número de usuarios y así realizar la medición y análisis estadístico de la
-                    utilización
-                    que hacen los usuarios del servicio ofertado. Para ello se analiza su navegación en nuestra página
-                    web
-                    con el fin de mejorar la oferta de productos o servicios que le ofrecemos.
-                </li>
-            </ul>
-            <br>
-            <p><strong>El usuario acepta expresamente, por la utilización de este sitio, el tratamiento de la
-                información
-                recabada en la forma y con los fines anteriormente mencionados.</strong> Y asimismo reconoce conocer la
-                posibilidad de rechazar el tratamiento de tales datos o información rechazando el uso de Cookies
-                mediante la selección de la configuración apropiada a tal fin en su navegador. Si bien esta opción de
-                bloqueo de Cookies en su navegador puede no permitirle el uso pleno de todas las funcionalidades del
-                Website.</p>
-
-            <p>Puede usted permitir, bloquear o eliminar las cookies instaladas en su equipo
-                mediante la configuración de las opciones del navegador instalado en su
-                ordenador
-            </p>
+			<li><a href="/guides">Guías</a></li>
 
 
-            <ul>
-                <li><a href="https://support.google.com/chrome/answer/95647?hl=es">Chrome</a></li>
-                <li><a href="http://windows.microsoft.com/es-es/windows7/how-to-manage-cookies-in-internet-explorer-9">Explorer</a>
-                </li>
-                <li>
-                    <a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias?redirectlocale=es&amp;redirectslug=habilitar-y-deshabilitar-cookies-que-los-sitios-we">Firefox</a>
-                </li>
-                <li><a href="https://support.apple.com/kb/ph5042?locale=es_ES">Safari</a></li>
-            </ul>
-            <p>Si tiene dudas sobre esta política de cookies, puede contactar con cookies@naturepath.com</p>
-        </div>
-    </div>
-</main>
+			<li><a href="/champions">Campeones</a></li>
+			<li><a href="/profile">Perfil</a></li>
+			<li><a href="/register">Registro</a></li>
+			<li><a href="/login">Login</a></li>
+			<li><a href="/webmap">Mapa del sitio </a></li>
+			<li><a href="/contacto">Contacta con nosotros</a></li>
+			<li><a href="/cookies">Política de cookies</a></li>
+			<li><a href="/p_privacidad">Política de privacidad</a></li>
+			<li><a href="/ayuda">Ayuda</a></li>
+			<li><a href="/licencia" onclick="window.open(this.href, this, 'width=600,height=600');return false;">Licencia</a></li>
+		</ul>
+	</div>
+	</main>
 
 
-<div th:replace="fragments/footer :: footer"></div>
-<div th:replace="fragments/scripts :: scripts"></div>
+	<div th:replace="fragments/footer :: footer"></div>
+	<div th:replace="fragments/scripts :: scripts"></div>
 
 </body>
 </html>

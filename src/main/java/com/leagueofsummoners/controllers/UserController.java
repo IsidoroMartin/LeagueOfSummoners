@@ -1,14 +1,13 @@
 package com.leagueofsummoners.controllers;
 
+import com.leagueofsummoners.ApplicationPaths;
 import com.leagueofsummoners.LeagueofsummonersApplication;
 
 import static com.leagueofsummoners.SessionAtts.*;
 
 import com.leagueofsummoners.SessionAtts;
-import com.leagueofsummoners.model.dto.MatchDTO;
 import com.leagueofsummoners.model.interfaces.services.IServicesChampions;
 import com.leagueofsummoners.model.interfaces.services.IServicesGuides;
-import com.leagueofsummoners.model.interfaces.services.IServicesSummoner;
 import com.leagueofsummoners.model.interfaces.services.IServicesUsers;
 import com.leagueofsummoners.model.dto.UserDTO;
 import com.leagueofsummoners.model.utils.CacheUtils;
@@ -34,33 +33,73 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+/*
+Autores= Juan José Ramírez & Isidoro Martín
+Fecha= Junio de 2016
+Licencia=  gp130
+Version= 1.0
+Descripcion= Proyecto final desarrollo de aplicaciones web. League of Summoners es una aplicación
+enfocada a los jugadores del popular juego League of Legends, usando esta aplicación podrán acceder
+a guías, detalles sobre campeones e incluso sus últimas partidas.
+
+Copyright (C) 2016 Juan José Ramírez & Isidoro Martín
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/**
+ * Este es el controlador encargado de gestionar todo 
+ * lo relaccionado con los usuarios. (Login, registro)
+ */
 @Controller
 @Slf4j
 public class UserController {
-
+	
+	//Servicio de campeones
 	@Autowired
 	private IServicesChampions servicioChampions;
-
+	
+	//Servicio de usuarios
 	@Autowired
 	private IServicesUsers servicioUsers;
 
-	@Autowired
-	private IServicesSummoner servicioSummoners;
-
+	//Servicio de guías
 	@Autowired
 	private IServicesGuides servicioGuias;
 
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String register(UserDTO userdto, ModelMap valores, HttpSession session) {
+	/**
+	 * Método encargado de mostrar la página de registro (Si no estas loggeado).
+	 * @param valores
+	 * @param session
+	 * @return la página de registro o de profile.
+	 */
+	@RequestMapping(value = ApplicationPaths.REGISTER_PATH, method = RequestMethod.GET)
+	public String register(ModelMap valores, HttpSession session) {
 		valores.put("listaChamps", this.servicioChampions.getChampionList(false));
 		return (session.getAttribute(SessionAtts.SESSION_IS_LOGGED) == null) ? "register" : "redirect:profile";
 	}
-
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	
+	/**
+	 * Registra un usuario en laaplicación
+	 * @param userdto El objeto user con los parametros rellenados en el registro
+	 * @param bindingResult El resultado de la valicación
+	 * @param model 
+	 * @param file Si hay algún archivo en la petición (Si el usuario ha subido su propio avatar)
+	 * @param galeriaIcon El icono de la galeria si el usuario ha escogido un icono
+	 * @return La página de login si el registro es correcto
+	 */
+	@RequestMapping(value = ApplicationPaths.REGISTER_PATH, method = RequestMethod.POST)
 	public String registerUser(@Valid UserDTO userdto, BindingResult bindingResult, Model model,
 			@RequestParam("img-avatar") MultipartFile[] file, @RequestParam("galeria") String galeriaIcon) {
-		String page = "redirect:index.html?action=form-error";
-		String avatar = galeriaIcon;
+		String page = "redirect:/login?error_message=Ha habido un error al registrar al usuario.";
 		if (!bindingResult.hasErrors()) {
 			if (this.servicioUsers.registrarUser(userdto, file, galeriaIcon)) {
 				page = "login";
@@ -72,21 +111,43 @@ public class UserController {
 		return page;
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	/**
+	 * Sirve la página de login siempre que el usuario no este loggeado.
+	 * @param valores
+	 * @param session
+	 * @param locale
+	 * @return la página de login o perfil (Si el usuario esta loggeado)
+	 */
+	@RequestMapping(value = ApplicationPaths.LOGIN_PATH, method = RequestMethod.GET)
 	public String loginPage(ModelMap valores, HttpSession session, Locale locale) {
 		return (session.getAttribute(SessionAtts.SESSION_IS_LOGGED) == null) ? "login" : "redirect:profile";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	/**
+	 * Loggea a un usuario en la aplicación 
+	 * @param valores
+	 * @param session
+	 * @param username
+	 * @param password
+	 * @return La página de perfil si el usuario ha sido loggeado corerctamente
+	 */
+	@RequestMapping(value = ApplicationPaths.LOGIN_PATH, method = RequestMethod.POST)
 	public String loginProcess(ModelMap valores, HttpSession session, @RequestParam(name = "username") String username,
 			@RequestParam(name = "password") String password) {
 
 		return (this.servicioUsers.checkValidLoginCreateSession(username, password, session)) ? "redirect:/profile"
 				: "redirect:/login?error_message=El usuario introducido no esta registrado o la clave no es correcta.";
 	}
-
+	
+	/**
+	 * Muestra el perfil del usuario y obtiene los datos del api de riot a travesdel servicio
+	 * @param values
+	 * @param session
+	 * @return perfil con los valores setteados.
+	 */
+	@SuppressWarnings("unchecked")
 	@LoginRequired
-	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	@RequestMapping(value = ApplicationPaths.PROFILE_PATH, method = RequestMethod.GET)
 	public String profile(ModelMap values, HttpSession session) {
 		HashMap<String, Object> valores = new HashMap<>();
 		UserDTO user = (UserDTO) session.getAttribute(SESSION_GET_USER_LOGGED);
@@ -135,25 +196,16 @@ public class UserController {
 		values.put("user_guides", this.servicioGuias.findByIdUser(user.getIdUser()));
 		return "profile";
 	}
-
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	
+	/**
+	 * Destruye la sessión del usuario
+	 * @param session
+	 * @return la página de login
+	 */
+	@RequestMapping(value = ApplicationPaths.PROFILE_LOGOUT, method = RequestMethod.GET)
 	public String logOut(HttpSession session) {
 		session.invalidate();
 		return "redirect:index?logout=true";
 	}
 
-	@RequestMapping(value = "/notlogged", method = RequestMethod.GET)
-	public String notLogged() {
-		return "notlogged";
-	}
-
-	@RequestMapping(value = "/forbbiden", method = RequestMethod.GET)
-	public String forbbiden() {
-		return "forbbiden";
-	}
-
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String test() {
-		return "test";
-	}
 }

@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       th:with="lang=${#locale.language}" th:lang="${lang}">
-<!--<div th:replace="fragments/prueba :: div"></div>-->
 <head
         th:replace="fragments/head :: head(title='Home ~ League of summoners')">
 </head>
 <body id="bootstrap-overrides">
-<!--<header th:replace="fragments/header :: header"></header>-->
 <div th:replace="fragments/menu :: menu"></div>
 <main class="container content " id="p_privacidad">
-    <div class="col-md-12">
-        <h1>Política de Privacidad y Protección de datos personales</h1>
-    </div> <!-- /#content-header -->
+ <div class="row" id="banner">
+                <div id="page-name-banner" class="col-xs-12">
+                    <h1 class="banner-msg" style="font-size:2.9rem;" th:utext="${pageName}"></h1>
+                </div>
+            </div>
+            <div class="row">
+                <ol class="breadcrumb col-xs-12">
+                    <li><a href="/index">Home</a></li>
+                    <li class="active" th:utext="${pageName}"></li>
+                </ol>
+            </div>
     <h3>1. Navegación anónima a través de la web</h3>
     <p>League of summoners sólo obtiene y conserva la siguiente información acerca de los visitantes de nuestra web:</p>
     <p> a. El nombre de dominio del proveedor (PSI) y/o dirección IP que les da acceso a la red. <br>b. La fecha y hora
@@ -86,7 +92,7 @@
     dirigirse por escrito a <a href="#">administrator@leagueofsummoners.com</a> o al domicilio social de
     League of summoners anteriormente indicado, para el ejercicio de los derechos de acceso, rectificación, cancelación
     y oposición relativo al tratamiento responsabilidad de League of summoners, indicando en el asunto ‘LOPD’ y
-    acreditando su identidad.</p&ndash;&gt;&lt;!&ndash;p>De acuerdo con la normativa vigente en materia de protección de
+    acreditando su identidad.</p>De acuerdo con la normativa vigente en materia de protección de
     datos así como en materia de servicios de sociedad de la información y comercio electrónico, el usuario acepta que
     los datos personales que el usuario facilite a través de la web <a href="/index.html" title="www.leagueofsummoners.com">www.leagueofsummoners.com</a>
     serán objeto de tratamiento e incorporados en un fichero titularidad de League of summoners del que es responsable
@@ -105,7 +111,8 @@
     dirigirse por escrito a <a href="#">administrator@leagueofsummoners.com</a> o al domicilio social de
     League of summoners anteriormente indicado, para el ejercicio de los derechos de acceso, rectificación, cancelación
     y oposición relativo al tratamiento responsabilidad de League of summoners, indicando en el asunto ‘LOPD’ y
-    acreditando su identidad.</p>&ndash;&gt;<h3>5. Seguridad</h3>
+    acreditando su identidad.
+    <h3>5. Seguridad</h3>
     <p>Garantizamos que cualquier transmisión que se produzca de sus datos personales se hará mediante una tecnología
         que cumple los máximos estándares de seguridad. La comunicación entre su máquina y nuestros servidores se
         establece de manera encriptada. El tratamiento de los datos lo realizará solamente personal autorizado y
