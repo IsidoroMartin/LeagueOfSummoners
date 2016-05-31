@@ -1,0 +1,14 @@
+com.leagueofsummoners
+com.leagueofsummoners.controllers
+com.leagueofsummoners.interceptors
+com.leagueofsummoners.model.custom.validators.annotations
+com.leagueofsummoners.model.dao
+com.leagueofsummoners.model.dao.tables
+com.leagueofsummoners.model.dto
+com.leagueofsummoners.model.dto.riotapi
+com.leagueofsummoners.model.interfaces.persistence
+com.leagueofsummoners.model.interfaces.services
+com.leagueofsummoners.model.services
+com.leagueofsummoners.model.utils
+com.leagueofsummoners.security.annotations
+com.leagueofsummoners.ws.service

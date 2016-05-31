@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:with="lang=${#locale.language}" th:lang="${lang}">
+<head
+	th:replace="fragments/head :: head(title='Home ~ League of summoners')">
+</head>
+<body id="bootstrap-overrides" style="margin:0px;">
+	<main class="container content" style="height:600px">
+	<div class="row" id="banner">
+		<div id="page-name-banner" class="col-xs-12">
+			<h1 class="banner-msg" style="font-size: 2.9rem;"
+				th:utext="${pageName}"></h1>
+		</div>
+	</div>
+	<div class="row">
+		<ol class="breadcrumb col-xs-12">
+			<li><a href="/index">Home</a></li>
+			<li class="active" th:utext="${pageName}"></li>
+		</ol>
+	</div>
+	<div>
+		<br>
+		<h2>Licencia GPLv3</h2>
+		<p>
+			<br>Copyright (C) 2016
+		</p>
+		<p>This program is free software: you can redistribute it and/or
+			modify it under the terms of the GNU General Public License as
+			published by the Free Software Foundation, either version 3 of the
+			License, or (at your option) any later version.</p>
+		<p>This program is distributed in the hope that it will be useful,
+			but WITHOUT ANY WARRANTY; without even the implied warranty of
+			MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+			General Public License for more details.</p>
+		<p>You should have received a copy of the GNU General Public
+			License along with this program. If not, see
+			http://www.gnu.org/licenses/.</p>
+	</div>
+	<input type="button" class="col-xs-offset-5 btn-licencia" value="Cerrar" onclick="window.close()" style="color:white">
+	</main>
+	<div th:replace="fragments/scripts :: scripts"></div>
+
+</body>
+</html>
