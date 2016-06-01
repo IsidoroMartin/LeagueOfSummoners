@@ -50,7 +50,7 @@ public class FooterPagesController {
     @RequestMapping(value = ApplicationPaths.P_PRIVACIDAD_PATH, method = RequestMethod.GET)
     public String p_privacidad(ModelMap map) {
     	map.put("pageName", "Política de Privacidad y Protección de datos personales");
-        return " ApplicationPaths.P_PRIVACIDAD_PATH";
+        return ApplicationPaths.P_PRIVACIDAD_PATH;
     }
     
     /***
