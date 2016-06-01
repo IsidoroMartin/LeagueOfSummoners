@@ -45,31 +45,39 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 @Controller
 public class GuidesController {
 
-	//Servicio campeones - Inyección de depdencias
-	@Autowired
-	private IServicesChampions servicioChampions;
-	
-	//Servicio de guías - Inyección de dependencias
-	@Autowired
-	private IServicesGuides serviceGuides;
+    //Servicio campeones - Inyección de depdencias
+    @Autowired
+    private IServicesChampions servicioChampions;
 
-	/**
-	 * Método gestiona las peticionesa /guides, settea en el contexto una lista de campeoens, una lista de guias
-	 * y el nombre de la página.
-	 * @param model
-	 * @return Página de visualización de guías
-	 */
-	@RequestMapping(value = { GUIDES_HTML_PATH, GUIDES_PATH }, method = RequestMethod.GET)
-	@ResponseBody
-	public ModelAndView guides(ModelMap model, @RequestParam(value = "search_input", required = false) String search_input) {
-		List<GuideDTO> guias = this.serviceGuides.findAll();
-		Collections.sort(guias, new GuideDTO());
-		String[] championsList = servicioChampions.getStringChampionList();
-		Gson gson = new Gson();
-		String champions = gson.toJson(championsList, String[].class);
-		model.addAttribute("champion_list", champions);
-		model.addAttribute("guias", guias);
-		model.addAttribute("pageName", "Guías");
-		return new ModelAndView("guides");
-	}
+    //Servicio de guías - Inyección de dependencias
+    @Autowired
+    private IServicesGuides serviceGuides;
+
+    /**
+     * Método gestiona las peticionesa /guides, settea en el contexto una lista de campeoens, una lista de guias
+     * y el nombre de la página.
+     *
+     * @param model
+     * @return Página de visualización de guías
+     */
+    @RequestMapping(value = {GUIDES_HTML_PATH, GUIDES_PATH}, method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView guides(ModelMap model, @RequestParam(value = "search_input", required = false) String search_input) {
+        List<GuideDTO> guias = this.serviceGuides.findAll();
+        Collections.sort(guias, new GuideDTO());
+        String[] championsList = servicioChampions.getStringChampionList();
+        Gson gson = new Gson();
+        String champions = gson.toJson(championsList, String[].class);
+        model.addAttribute("champion_list", champions);
+        model.addAttribute("guias", guias);
+        model.addAttribute("pageName", "Guías");
+        return new ModelAndView("guides");
+    }
+
+    @RequestMapping(value = {VIEW_GUIDE_HTML_PATH, VIEW_GUIDE_PATH}, method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView viewguide(ModelMap model, @RequestParam(value = "idGuide") Long idGuide) {
+        model.addAttribute("guia", serviceGuides.findByIdGuide(idGuide));
+        return new ModelAndView("view_guide");
+    }
 }

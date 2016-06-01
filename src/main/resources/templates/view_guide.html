@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}" th:lang="${lang}">
+<!--<div th:replace="fragments/prueba :: div"></div>-->
+<head th:replace="fragments/head :: head(title='Guia de zed~ League of summoners')">
+</head>
+<body id="bootstrap-overrides">
+<div th:replace="fragments/menu :: menu"></div>
+<div class="container content">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="banner">
+                <div id="page-name-banner" class="col-xs-12">
+                    <div class="col-xs-2 logo-title">
+                        <img class="img-responsive lazy" name="champion"
+                             src="http://ddragon.leagueoflegends.com/cdn/6.6.1/img/champion/Zed.png"
+                             title="Zed" style="display: block;">
+                    </div>
+                    <div class="col-xs-10">
+                        <h1>Guía de Zed</h1>
+                        <h2>El Maestro de las Sombras</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 padding0">
+            <ol class="breadcrumb">
+                <li><a href="/index">Home</a></li>
+                <li><a href="/guides">Guides</a></li>
+                <li class="active">Zed - El asesino imparable</li>
+            </ol>
+        </div>
+    </div>
+    <main id="view_guide" class="row">
+        <div class="col-xs-12 text-center">
+            <h1 class="col-xs-12">Zed: El maestro de sombras</h1>
+            <h2 class="text-center">El asesino imparable</h2>
+            <div id="indice_guide" class="col-xs-12 col-md-6">
+                <ul>
+                    <li><a href="">Campeón</a></li>
+                    <li><a href=""></a></li>
+                    <li><a href=""></a></li>
+                    <li><a href=""></a></li>
+                    <li><a href=""></a></li>
+                    <li><a href=""></a></li>
+                    <li><a href=""></a></li>
+                </ul>
+                <span th:utext="${guia.champion.championIconName}"></span>
+            </div>
+            <div id="autor_guide" class="col-xs-12 col-md-6">
+
+
+            </div>
+        </div>
+    </main>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/scripts :: scripts"></div>
+
+</body>
+</html>

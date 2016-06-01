@@ -38,87 +38,94 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 @Component
 public class GuidesDAO {
-	
-	//Repositorio de campeones
-	@Autowired
-	private ChampionRepository championRepository;
 
-	//Repositorio de usuarios
-	@Autowired
-	private UserRepository userRepository;
+    //Repositorio de campeones
+    @Autowired
+    private ChampionRepository championRepository;
 
-	//Repositorio de guías
-	@Autowired
-	private GuidesRepository guidesRepository;
+    //Repositorio de usuarios
+    @Autowired
+    private UserRepository userRepository;
 
-	/**
-	 * Obtiene todas las guías de la BD
-	 * @return List<GuideDTO> lista de guías
-	 */
-	public List<GuideDTO> findAll() {
-		List<GuideDTO> guides = this.guidesRepository.findAll();
-		for (GuideDTO guide : guides) {
-			guide.setChampion(this.championRepository.findByIdChampion(guide.getIdChampion()));
-			guide.setUser(this.userRepository.findByIdUser(guide.getIdUser()));
-		}
-		return guides;
-	}
-	
-	/**
-	 * Busca una guía por el titulo
-	 * @param guideName
-	 * @return La guía con el titulo coincidente al string parametrizado
-	 */
-	public GuideDTO findByGuideTitleIgnoringCase(String guideName) {
-		return this.guidesRepository.findByGuideTitleIgnoringCase(guideName);
-	}
-	
-	/**
-	 * Busca una guía por ID
-	 * @param idGuide
-	 * @return la guía con el id parametrizada
-	 */
-	public GuideDTO findByIdGuide(Long idGuide) {
-		return this.guidesRepository.findByIdGuide(idGuide);
-	}
-	
-	/**
-	 * Busca las guías por id de cmapeón
-	 * @param idChampion
-	 * @return las guías con el id parametrizado.
-	 */
-	public List<GuideDTO> findByIdChampion(Long idChampion) {
-		List<GuideDTO> guides = this.findByIdChampion(idChampion);
+    //Repositorio de guías
+    @Autowired
+    private GuidesRepository guidesRepository;
 
-		for (GuideDTO guide : guides) {
-			guide.setChampion(this.championRepository.findByIdChampion(guide.getIdChampion()));
-		}
+    /**
+     * Obtiene todas las guías de la BD
+     *
+     * @return List<GuideDTO> lista de guías
+     */
+    public List<GuideDTO> findAll() {
+        List<GuideDTO> guides = this.guidesRepository.findAll();
+        for (GuideDTO guide : guides) {
+            guide.setChampion(this.championRepository.findByIdChampion(guide.getIdChampion()));
+            guide.setUser(this.userRepository.findByIdUser(guide.getIdUser()));
+        }
+        return guides;
+    }
 
-		return guides;
-	}
-	
-	/**
-	 * Obtien las guías por el idUsuario parametrizado (Autor)
-	 * @param idUser
-	 * @return Las guías con ese idUser
-	 */
-	public List<GuideDTO> findByIdUser(Long idUser) {
-		List<GuideDTO> guides = this.guidesRepository.findByIdUser(idUser);
+    /**
+     * Busca una guía por el titulo
+     *
+     * @param guideName
+     * @return La guía con el titulo coincidente al string parametrizado
+     */
+    public GuideDTO findByGuideTitleIgnoringCase(String guideName) {
+        return this.guidesRepository.findByGuideTitleIgnoringCase(guideName);
+    }
 
-		for (GuideDTO guide : guides) {
-			guide.setChampion(this.championRepository.findByIdChampion(guide.getIdChampion()));
-		}
-		return guides;
-	}
-	
-	/**
-	 * Elimina una guía por su ID y por su username.
-	 * @param idGuide
-	 * @param idUsername
-	 */
-	@Transactional
-	public void deleteByIdGuide(Long idGuide, Long idUsername) {
-		this.guidesRepository.deleteByIdGuideAndIdUser(idGuide, idUsername);
-	}
+    /**
+     * Busca una guía por ID
+     *
+     * @param idGuide
+     * @return la guía con el id parametrizada
+     */
+    public GuideDTO findByIdGuide(Long idGuide) {
+        GuideDTO guide = this.guidesRepository.findByIdGuide(idGuide);
+        guide.setChampion(this.championRepository.findByIdChampion(guide.getIdChampion()));
+        return guide;
+    }
+
+    /**
+     * Busca las guías por id de cmapeón
+     *
+     * @param idChampion
+     * @return las guías con el id parametrizado.
+     */
+    public List<GuideDTO> findByIdChampion(Long idChampion) {
+        List<GuideDTO> guides = this.findByIdChampion(idChampion);
+
+        for (GuideDTO guide : guides) {
+            guide.setChampion(this.championRepository.findByIdChampion(guide.getIdChampion()));
+        }
+
+        return guides;
+    }
+
+    /**
+     * Obtien las guías por el idUsuario parametrizado (Autor)
+     *
+     * @param idUser
+     * @return Las guías con ese idUser
+     */
+    public List<GuideDTO> findByIdUser(Long idUser) {
+        List<GuideDTO> guides = this.guidesRepository.findByIdUser(idUser);
+        for (GuideDTO guide : guides) {
+            guide.setChampion(this.championRepository.findByIdChampion(guide.getIdChampion()));
+        }
+        return guides;
+    }
+
+    /**
+     * Elimina una guía por su ID y por su username.
+     *
+     * @param idGuide
+     * @param idUsername
+     */
+    @Transactional
+    public void deleteByIdGuide(Long idGuide, Long idUsername) {
+        this.guidesRepository.deleteByIdGuideAndIdUser(idGuide, idUsername);
+    }
 
 }
