@@ -1,3 +1,28 @@
+
+/*
+Autores= Juan José Ramírez & Isidoro Martín
+Fecha= Junio de 2016
+Licencia=  gp130
+Version= 1.0
+Descripcion= Proyecto final desarrollo de aplicaciones web. League of Summoners es una aplicación
+enfocada a los jugadores del popular juego League of Legends, usando esta aplicación podrán acceder
+a guías, detalles sobre campeones e incluso sus últimas partidas.
+
+Copyright (C) 2016 Juan José Ramírez & Isidoro Martín
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Este CSS contiene los estilos comunes de todas las páginas
+*/
+
 @font-face {
     font-family: BeaufortLOL-Regular;
     src: url(../fonts/BeaufortforLOL-Regular.woff);
@@ -68,6 +93,14 @@ h1, h2, h3, h4 {
 
 }
 
+#mapa-sitio{
+	min-height:800px;
+}
+
+#mapa-web-container{
+	margin-top:5%;	
+}
+
 #bootstrap-overrides nav, nav .dropdown-menu {
     background: rgba(28, 26, 52, 1);
     background: -moz-linear-gradient(top, rgba(28, 26, 52, 1) 0%,
@@ -125,6 +158,7 @@ h1, h2, h3, h4 {
     .navbar .navbar-collapse {
         text-align: center;
     }
+	
 }
 
 nav#nav-menu div.row {
@@ -172,13 +206,16 @@ nav.navbar {
     }
 }
 
-#bootstrap-overrides nav a.iniciar-sesion-btn {
+#bootstrap-overrides nav a.iniciar-sesion-btn, .cc_container .cc_btn, .cc_container .cc_btn:visited {
     background-color: #194A4C;
     background: linear-gradient(#215f62, #0a2021);
     /*color: #baa27c;*/
     border-color: #187277 #3a6668 #0e3f41 #3a6668;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
     height: 100%;
+    /*Este important es para sobrescribir el color que viene predefinida por la librería de mostrar el mensaje
+    de las cookies. */
+    color:white !important; 
 }
 
 #bootstrap-overrides nav a.registrarse-btn {
@@ -267,6 +304,17 @@ nav .container {
     text-align: center;
 }
 
+.btn-licencia{
+	color:white;
+	padding:15px;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+.btn-licencia:hover{
+	opacity:0.8;
+}
+
 .panel-body img {
     width: 100%;
 }
@@ -312,11 +360,19 @@ nav .container {
     height: auto;
 }
 
+#page-name-banner {
+	background-image: url("/img/banners/game_bg_banner.png");
+	background-size: 100% 100%;
+	min-height: 120px;
+}
+
+
 @media only screen and (max-width: 768px) {
     .fill-main main input[type=text], .fill-main main label, .fill-main main input[type=password],
     .fill-main main button[type=submit], .fileinput-filename, .fileinput i, input[type="text"] {
         font-size: 1rem;
     }
+    
 }
 
 h1 {
@@ -410,6 +466,7 @@ footer a, footer a:hover, footer a:focus, footer a:active, footer a:visited {
         width: 20%;
         float: left;
     }
+    
 }
 
 @media ( min-width: 992px) {

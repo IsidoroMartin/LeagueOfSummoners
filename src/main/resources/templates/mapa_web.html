@@ -1,79 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      th:with="lang=${#locale.language}" th:lang="${lang}">
-<!--<div th:replace="fragments/prueba :: div"></div>-->
+	th:with="lang=${#locale.language}" th:lang="${lang}">
 <head
-        th:replace="fragments/head :: head(title='Home ~ League of summoners')">
+	th:replace="fragments/head :: head(title='Home ~ League of summoners')">
 </head>
 <body id="bootstrap-overrides">
-<!--<header th:replace="fragments/header :: header"></header>-->
-<div th:replace="fragments/menu :: menu"></div>
-<main class="content" id="cookies">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row" id="banner">
-                    <div id="page-name-banner" class="col-xs-12">
-                        <h1 class="banner-msg">Mapa web</h1>
-                    </div>
-                </div>
-                <ul>
-                    <a href="">
-                        <li>Home</li>
-                    </a>
-                    <a href="">
-                        <li>Guías</li>
-                    </a>
-                    <a href="">
-                        <li>Campeones</li>
-                    </a>
-                    <ul>
-                        <a href="">
-                            <li>Lista de campeones</li>
-                        </a>
-                        <a href="">
-                            <li>Página de detalle de un campeón</li>
-                        </a>
-                    </ul>
-                    <a href="">
-                        <li>Perfil</li>
-                    </a>
-                    <ul>
-                        <a href="">
-                            <li>Creación de guías</li>
-                        </a>
-                    </ul>
-                    <a href="">
-                        <li>Registro</li>
-                    </a>
-                    <a href="">
-                        <li>Login</li>
-                    </a>
-                    <a href="">
-                        <li>Mapa del sitio</li>
-                    </a>
-                    <a href="">
-                        <li>Contacta con nosotros</li>
-                    </a>
-                    <a href="">
-                        <li>Política de cookies</li>
-                    </a>
-                    <a href="">
-                        <li>Política de privacidad</li>
-                    </a>
-                    <a href="">
-                        <li>Ayuda</li>
-                    </a>
-                    <a href="">
-                        <li>Licencia</li>
-                    </a>
-                </ul>
-            </div>
-        </div>
-    </div>
-</main>
-<div th:replace="fragments/footer :: footer"></div>
-<div th:replace="fragments/scripts :: scripts"></div>
+	<div th:replace="fragments/menu :: menu"></div>
+	<main class="container content " id="mapa-sitio">
+	<div class="row" id="banner">
+		<div id="page-name-banner" class="col-xs-12">
+			<h1 class="banner-msg" style="font-size: 2.9rem;"
+				th:utext="${pageName}"></h1>
+		</div>
+	</div>
+	<div class="row">
+		<ol class="breadcrumb col-xs-12">
+			<li><a href="/index">Home</a></li>
+			<li class="active" th:utext="${pageName}"></li>
+		</ol>
+	</div>
+	<div id="mapa-web-container">
+		<ul>
+			<li><a href="/home">Home</a></li>
+
+			<li><a href="/guides">Guías</a></li>
+
+
+			<li><a href="/champions">Campeones</a></li>
+			<li><a href="/profile">Perfil</a></li>
+			<li><a href="/register">Registro</a></li>
+			<li><a href="/login">Login</a></li>
+			<li><a href="/webmap">Mapa del sitio </a></li>
+			<li><a href="/contacto">Contacta con nosotros</a></li>
+			<li><a href="/cookies">Política de cookies</a></li>
+			<li><a href="/p_privacidad">Política de privacidad</a></li>
+			<li><a href="/ayuda">Ayuda</a></li>
+			<li><a href="/licencia" onclick="window.open(this.href, this, 'width=600,height=600');return false;">Licencia</a></li>
+		</ul>
+	</div>
+	</main>
+
+
+	<div th:replace="fragments/footer :: footer"></div>
+	<div th:replace="fragments/scripts :: scripts"></div>
 
 </body>
 </html>

@@ -15,10 +15,10 @@
 
 	<main class="container content profile-body">
 	<div class="row">
-			<ol class="breadcrumb col-xs-12">
-				<li><a href="/index">Home</a></li>
-				<li class="active" th:utext="${pageName}"></li>
-			</ol>
+		<ol class="breadcrumb col-xs-12">
+			<li><a href="/index">Home</a></li>
+			<li class="active" th:utext="${pageName}"></li>
+		</ol>
 		<aside id="user-profile" class="col-md-2">
 			<div id="profile">
 				<div class="img-perfil col-xs-6 col-md-12">
@@ -74,6 +74,19 @@
 					</p>
 				</div>
 
+				<div class="alert alert-danger fade in" style="display: none;"
+					id="mensajeError">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>La guía seleccionada no se ha podido eliminar</strong>
+				</div>
+
+				<div class="alert alert-info fade in" style="display: none;"
+					id="mensajeInfo">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>La guía seleccionada se ha eliminado
+						correctamente.</strong>
+				</div>
+
 				<div th:if="${not #lists.isEmpty(user_guides)}">
 					<table class="table" style="">
 						<tr>
@@ -81,7 +94,7 @@
 							<th>Campeón</th>
 							<th>Título de la guía</th>
 							<th class="hidden-xs">Editar</th>
-							<th>Borrar</th>
+							<th>Eliminar</th>
 							<th>Visitas</th>
 						</tr>
 						<tr th:each="guide : ${user_guides}">
@@ -93,26 +106,16 @@
 										th:utext="${guide.champion.championName}"></th:block></a></td>
 							<td><a th:utext="${guide.guideTitle}"
 								th:href="@{guides/view/{id}(id=${guide.idGuide})}"> </a></td>
-							<td class="hidden-xs"><a th:href="@{guides/editar/{id}(id=${guide.idGuide})}">Editar</a></td>
+							<td class="hidden-xs"><a
+								th:href="@{guides/editar/{id}(id=${guide.idGuide})}">Editar</a></td>
 							<td><a class="deleteGuide"
-								th:href="@{api/guides/borrar/{id}(id=${guide.idGuide})}">Borrar</a></td>
+								th:href="@{api/guides/borrar/{id}(id=${guide.idGuide})}">Eliminar</a></td>
 							<td th:utext="${guide.visitas}"></td>
 						</tr>
 					</table>
 				</div>
 			</div>
 
-			<div class="alert alert-danger fade in" style="display: none;"
-				id="mensajeError">
-				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-				<strong>La guía seleccionada no se ha podido eliminar</strong>
-			</div>
-
-			<div class="alert alert-info fade in" style="display: none;"
-				id="mensajeInfo">
-				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-				<strong>La guía seleccionada se ha eliminado correctamente.</strong>
-			</div>
 
 			<div id="guides-last10match">
 				<h3>
