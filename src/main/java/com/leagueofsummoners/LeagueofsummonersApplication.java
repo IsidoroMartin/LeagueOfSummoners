@@ -53,8 +53,8 @@ public class LeagueofsummonersApplication extends SpringBootServletInitializer {
      * @param args
      */
     public static void main(String[] args) {
-        SpringApplication.run(LeagueofsummonersApplication.class, args);
-        LeagueAccessAPI.initRIOTAPI();
+		SpringApplication.run(LeagueofsummonersApplication.class, args);
+		LeagueAccessAPI.initRIOTAPI();
         LOGGER.info("League Of Summoners app started...");
     }
 

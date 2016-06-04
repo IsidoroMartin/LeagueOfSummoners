@@ -71,6 +71,7 @@ public class GuidesController {
         model.addAttribute("champion_list", champions);
         model.addAttribute("guias", guias);
         model.addAttribute("pageName", "Guías");
+        model.addAttribute("activeGuides", "active");
         return new ModelAndView("guides");
     }
 

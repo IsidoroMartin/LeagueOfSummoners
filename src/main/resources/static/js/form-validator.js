@@ -38,7 +38,7 @@ $(function (e) {
             invalid: 'glyphicon glyphicon-remove',
             validating: 'glyphicon glyphicon-refresh'
         },
-        message: 'This value is not valid',
+        message: 'Este valor no es válido',
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
             invalid: 'glyphicon glyphicon-remove',

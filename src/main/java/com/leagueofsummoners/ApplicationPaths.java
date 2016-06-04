@@ -1,8 +1,5 @@
 package com.leagueofsummoners;
 
-import com.leagueofsummoners.model.utils.LeagueAccessAPI;
-import com.robrua.orianna.api.core.RiotAPI;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -76,6 +73,8 @@ public class ApplicationPaths {
 	public static final String SEARCH_PATH = "/search";
 
 	public static final String COOKIES_PATH = "/cookies";
+	
+	public static final String AYUDA = "/help";
 
 	public static final String P_PRIVACIDAD_PATH = "/p_privacidad";
 	public static final String MAPA_WEB = "/webmap";
@@ -83,6 +82,7 @@ public class ApplicationPaths {
 
     public static final String VIEW_GUIDE_HTML_PATH = "/view_guide.html";
     public static final String VIEW_GUIDE_PATH = "/view_guide";
+    public static final String CONTACT= "/contact";
 
 
     // Rest Services Path

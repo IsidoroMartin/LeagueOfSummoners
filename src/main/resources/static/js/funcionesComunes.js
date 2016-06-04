@@ -41,17 +41,18 @@ $("img.lazy").lazyload({
 	effect : "fadeIn"
 });
 
-/**
- * Setea la variable active en el menú
- */
-$(function setActive() {
-	var aObj = $('.menu-item').get();
-	for (i = 0; i < aObj.length; i++) {
-		if (document.location.href.indexOf($(aObj[i]).first().attr("href")) >= 0) {
-			$(aObj[i]).parent().addClass("active");
-		}
-	}
-});
+///**
+// * Setea la variable active en el menú
+// */
+//$(function setActive() {
+//	var aObj = $('.menu-item').get();
+//	for (i = 0; i < aObj.length; i++) {
+//		if (document.location.href.indexOf($(aObj[i]).first().attr("href")) >= 0) {
+//			console.log($(aObj[i]).parent());
+//			$(aObj[i]).parent().addClass("active");
+//		}
+//	}
+//});
 
 /**
  * Determinael nombre del campeón usado enclases CSS

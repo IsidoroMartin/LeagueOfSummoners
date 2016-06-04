@@ -61,6 +61,7 @@ public class UserAdminController {
 			valores.put("pageName", "Lista de usuarios");
 			return ApplicationPaths.USER_LIST;
 		}
+		valores.put("activeUserList", "active");
 		return "redirect:profile";
 	}
 

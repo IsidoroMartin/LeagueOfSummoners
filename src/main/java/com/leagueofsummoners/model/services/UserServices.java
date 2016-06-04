@@ -6,6 +6,7 @@ import com.leagueofsummoners.model.interfaces.services.IServicesUsers;
 import com.leagueofsummoners.model.dto.GuideDTO;
 import com.leagueofsummoners.model.dto.UserDTO;
 import com.leagueofsummoners.model.utils.LeagueAccessAPI;
+import com.leagueofsummoners.model.utils.MailUtils;
 import com.leagueofsummoners.model.utils.PasswordHash;
 import com.leagueofsummoners.model.utils.UploadUtils;
 import com.leagueofsummoners.model.dao.GuidesDAO;
@@ -47,9 +48,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /**
- * Esta clase contiene los servicios del usuario. 
- * Implementa su interfaz correspondiente donde está la definición de 
- * los métodos y su explicación. (Comentarios)
+ * Esta clase contiene los servicios del usuario. Implementa su interfaz
+ * correspondiente donde está la definición de los métodos y su explicación.
+ * (Comentarios)
  */
 @Slf4j
 @Service
@@ -60,7 +61,7 @@ public class UserServices implements IServicesUsers {
 
 	@Autowired
 	private SummonerDAO summonerDAO;
-	
+
 	@Autowired
 	private GuidesDAO guidesDAO;
 
@@ -103,7 +104,6 @@ public class UserServices implements IServicesUsers {
 		return summonerExists;
 	}
 
-
 	/**
 	 * Devuelve una lista de todos los usuarios
 	 * 
@@ -124,7 +124,7 @@ public class UserServices implements IServicesUsers {
 	public List<UserDTO> getUserList() {
 		return this.userDAO.getUserList();
 	}
-	
+
 	/**
 	 * Crea un usuario en la BD
 	 * 
@@ -140,9 +140,10 @@ public class UserServices implements IServicesUsers {
 		}
 		return userNotNull;
 	}
-	
+
 	/**
 	 * Crea la sessión del usuario
+	 * 
 	 * @param session
 	 * @param user
 	 */
@@ -168,6 +169,7 @@ public class UserServices implements IServicesUsers {
 
 	/**
 	 * Registra al usuario
+	 * 
 	 * @param user
 	 * @param file
 	 * @param galeriaIcon
@@ -175,7 +177,7 @@ public class UserServices implements IServicesUsers {
 	 */
 	@Override
 	public boolean registrarUser(UserDTO userdto, MultipartFile[] file, String galeriaIcon) {
-		if (!this.checkIfUsernameAvailable(userdto.getUsername())) {
+		if (this.checkIfUsernameAvailable(userdto.getUsername())) {
 			if (galeriaIcon.equals("") && file.length == 1 && !file[0].isEmpty()) {
 				String savePath = "img" + File.separator + "avatars"
 						+ UploadUtils.saveImg(file[0], userdto.getUsername());
@@ -190,8 +192,10 @@ public class UserServices implements IServicesUsers {
 			String passwordHash = PasswordHash.createHash(userdto.getPassword());
 			userdto.setPassword((passwordHash));
 			UserDTO user = this.save(userdto);
-			if (user != null)
+			if (user != null) {
+				enviarCorreoBienvenida(user.getEmail(), user.getUsername());
 				this.summonerDAO.getLatestMatchesFromRiotAsync(user, 5);
+			}
 			// Devuelve true si el usuario se ha guardado bien, false si no
 			return user != null;
 		}
@@ -199,7 +203,17 @@ public class UserServices implements IServicesUsers {
 	}
 
 	/**
+	 * Envia un correo de bienvenida
+	 * @param useremail
+	 * @param username
+	 */
+	private void enviarCorreoBienvenida(String useremail, String username) {
+		MailUtils.sendEmail(useremail, "Bienvenido a League of Summoners!", "Hola, " + username + " gracias por registrarte en League Of Summoenrs, tu página de guías de League Of Legends. Si quieres contactar con nosotros no dudes en hacerlo desde la página de contacto en leagueofsummoners/contacto. Gracias y un saludo!");
+	}
+
+	/**
 	 * Obtiene los datos de este summonername del API de RIOT
+	 * 
 	 * @param summonerName
 	 * @return
 	 */
@@ -218,16 +232,17 @@ public class UserServices implements IServicesUsers {
 		}
 		return summ;
 	}
-	
+
 	/**
 	 * Actualiza el permiso del usuario
+	 * 
 	 * @param newPermissionLevel
 	 * @param userToChange
 	 * @return el número de columnas actualizadas
 	 */
 	@Override
 	public int updateUserPermission(String newPermissionLevel, String userToChange) {
-		return this.userDAO.updateUserPermission(newPermissionLevel,userToChange);
+		return this.userDAO.updateUserPermission(newPermissionLevel, userToChange);
 	}
 
 	/**
@@ -241,7 +256,7 @@ public class UserServices implements IServicesUsers {
 		}
 		return this.userDAO.getUserList();
 	}
-	
+
 	/**
 	 * Elimina por username
 	 */
@@ -250,23 +265,18 @@ public class UserServices implements IServicesUsers {
 		this.userDAO.deleteByUsername(userToDelete);
 	}
 
-	
 	/**
 	 * Estos métodos aun no están implementados
 	 */
-	
 
 	@Override
 	public UserDTO findById(int id) {
 		return null;
 	}
-	
+
 	@Override
 	public List<GuideDTO> listGuidesFromUser(int userId) {
 		return null;
 	}
-
-	
-
 
 }

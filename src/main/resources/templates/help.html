@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:with="lang=${#locale.language}" th:lang="${lang}">
+<head
+	th:replace="fragments/head :: head(title='Ayuda ~ League of summoners')">
+
+
+
+</head>
+<body id="bootstrap-overrides">
+	<div th:replace="fragments/menu :: menu"></div>
+	<main class="container content champions-body">
+	<div class="row" id="banner">
+		<div id="page-name-banner" class="col-xs-12">
+			<h1 class="banner-msg" style="font-size: 2.9rem;"
+				th:utext="${pageName}"></h1>
+		</div>
+	</div>
+	<div class="row">
+		<ol class="breadcrumb col-xs-12">
+			<li><a href="/index">Home</a></li>
+			<li class="active" th:utext="${pageName}"></li>
+		</ol>
+	</div>
+	<div class="container row">
+		<div class="container col-md-12">
+			<br>
+			<div class="col-xs-3">
+				<ul class="list-group">
+					<li class="list-group-item"><a href="#ayuda-registro">Registro</a></li>
+					<li class="list-group-item"><a href="#ayuda-login">Iniciar sesión</a></li>
+					<li class="list-group-item"><a href="#ayuda-buscador-principal">Buscador página principal</a></li>
+					<li class="list-group-item"><a href="#ayuda-rotacion">Campeones de rotación</a></li>
+					<li class="list-group-item"><a href="#ayuda-guias">Buscador de guías</a></li>
+					<li class="list-group-item"><a href="#ayuda-campeones">Buscador de campeones</a></li>
+				</ul>
+			</div>
+			<div class="col-xs-9">
+				<p>En este apartado explicaremos todos los aspectos del sitio
+					web que pudieran tener alguna dificultad para que cualquier usuario
+					pueda hacer uso de todas las funcionalidades del sitio sin ninguna
+					dificultad.</p>
+				<div id="ayuda-registro">
+					<h2>Registrarse en la aplicación</h2>
+					<p>Para poder registrarse en la aplicación basta con ir al botón de registro en la parte superior derecha de la pantalla o en el menú desplegable en móviles.</p>
+					<p>Formato a rellenar los campos del formulario de registro:</p>
+						<ul>
+							<li><strong>Nombre de usuario:</strong> Este campo contener entre 1 y 24 carácteres (Texto y letras). No puede contener espacios</li>
+							<li><strong>Nombre de invocador:</strong>  Este campo es tú nombre de invocador en la cuenta de League of Legends</li>
+							<li><strong>Email:</strong> Este campo debe ser un email válido. (email@dominio.com)</li>
+							<li><strong>Password:</strong> Este campo debe contener una contraseña de almenos 8 caracteres.</li>
+							<li><strong>Avatar:</strong> En este campo se puede seleccionar entre una imagen de la galería o una imágen del PC del usuario. No es obligatorio</li>
+						</ul>
+				</div>
+				<div id="ayuda-login">
+					<h2>Iniciar sesión en la aplicación</h2>
+					<p>Para iniciar sesión debemos dirigirnos a la página de login, que es accesible desde cualquier página de la aplicación, en el menú superior a la derecha.</p>
+				</div>
+				<div id="ayuda-buscador-principal">
+					<h2>Buscador página principal</h2>
+					<p>En el buscador de la página principal se puede buscar por nombre de campeón, guía y autor<p>
+					<p>Si escribes un nombre de campeón te redirigirá a la pantalla de detalle de ese campeón</p>
+					<p>Si escribes "Guia" seguido del nombre del campeón te mostrará las guías de ese campeón</p>
+					<p>Si escribes el autor, te mostrará las guías de ese autor</p>
+				</div>
+				<div id="ayuda-rotacion">
+					<h2>Ayuda con los campeones de rotación</h2>
+					<p>Los campeones de rotación se encuentran en la página home, basta con hacer clic sobre "Ver rotación semanal gratuita" esta rotación se actualiza todos los martes. </p>
+					<p>Haciendo clic sobre un campeón de la rotación el usuario será redirigido a la página de detalle del campeón pulsado.</p>
+				</div>
+				<div id="ayuda-campeones">
+					<h2>Ayuda con la página de campeones</h2>
+					<p>En la página de campeones puedes buscar un campeón por nombre y por tipo, si escribes el tipo del campeón o lo seleccionas en el botón  de tipo te mostraá los campeones de ese tipo.</p>
+				</div>
+				<div id="ayuda-guias">
+					<h2>Ayuda con las guías</h2>
+					<p>En la página de guías puedes buscar por nombre de campeón, por tipo de campeón y por autor de guía</p>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	</main>
+
+	<script type="text/javascript">
+		var oldHash = "";
+		window.onload = function() {
+			seleccionarLiActive(window.location.hash.substring(1));
+		}
+		function seleccionarLiActive(opcion) {
+			if (opcion != oldHash) {
+				var opcionSeleccionada = document.querySelector('li[data-li="'
+						+ opcion + '"]');
+				opcionSeleccionada.className += " li-active";
+				if (oldHash != "") {
+					var oldLi = document.querySelector('li[data-li="' + oldHash
+							+ '"]');
+					oldLi.className = "list-group-item";
+				}
+				oldHash = opcion;
+			}
+		}
+	</script>
+
+	<div th:replace="fragments/footer :: footer"></div>
+	<div th:replace="fragments/scripts :: scripts"></div>
+
+</body>
+</html>

@@ -78,6 +78,7 @@ public class HomeController {
 		String champions = gson.toJson(championsList, String[].class);
 		model.addAttribute("champion_list", champions);
         model.addAttribute("championRotation", championRotation);
+        model.addAttribute("activeHome", "active");
         return "index";
     }
 }

@@ -180,7 +180,7 @@ public class UserController {
 					e.printStackTrace();
 					valores.put("team", "Sin equipo");
 				}
-
+					
 				valores.put("summoner_avatar",LeagueAccessAPI.RIOT_API_SUMMONER_PROFILE_ICON_PATH + summ.getProfileIconID() + ".png");
 				valores.put("pageName", "Perfil");
 				session.setAttribute(SESSION_MODEL_MAP, valores);
@@ -194,6 +194,7 @@ public class UserController {
 		CacheUtils.setValuesToModelMap((HashMap<String, Object>) session.getAttribute(SESSION_MODEL_MAP), values,
 				session);
 		values.put("user_guides", this.servicioGuias.findByIdUser(user.getIdUser()));
+		values.put("activeProfile", "active");
 		return "profile";
 	}
 	

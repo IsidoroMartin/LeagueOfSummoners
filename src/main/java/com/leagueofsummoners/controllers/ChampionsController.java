@@ -67,6 +67,7 @@ public class ChampionsController {
 		model.put("champions", listaChampions);
 		model.put("champions_json",championsJson);
 		model.put("pageName","Campeones");
+		model.addAttribute("activeChampions", "active");
 		return "champions";
 	}
 }

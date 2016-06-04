@@ -19,51 +19,20 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Este CSS contiene los estilos de la página de guías.
+Este CSS contiene los estilos de la página de contacto.
 */
-#campo-busqueda {
-	width: 100%;
+
+div#email.has-feedback label ~ .form-control-feedback {
+    top: 50px;
 }
 
-.guide {
-	border-bottom: 1px solid #302b59;
-	cursor: pointer;
-	padding-top:10px;
-	padding-bottom:10px;
+div#nombre.has-feedback label ~ .form-control-feedback {
+    top: 108px;
 }
 
-.guide:hover{
-	color: white;
-	background-color: rgba(47, 42, 87,0.1);
+.form-horizontal .has-feedback .form-control-feedback {
+    right: 6px;
 }
 
-.guide:last-child {
-	margin-bottom: 20px;
-}
 
-div.guide-champ-name h3 {
-	margin-top: 0px;
-}
 
-.guide-info p {
-	margin: 0px;
-}
-
-.guide-info {
-	margin-top: 0px;
-	padding: 0px;
-}
-
-.visitas {
-	width: 120px;
-}
-
-@media only screen and (max-width: 768px) {
-	input#campo-busqueda.input_champions.col-xs-12.tt-input {
-		margin: 0px;
-		width: 104%;
-	}
-	div.visitas {
-		padding-left: 0px;
-	}
-}

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:with="lang=${#locale.language}" th:lang="${lang}">
 <head
-	th:replace="fragments/head :: head(title='Home ~ League of summoners')">
+	th:replace="fragments/head :: head(title='Licencia ~ League of summoners')">
 </head>
 <body id="bootstrap-overrides" style="margin:0px;">
 	<main class="container content" style="height:600px">
@@ -36,7 +36,7 @@
 			License along with this program. If not, see
 			http://www.gnu.org/licenses/.</p>
 	</div>
-	<input type="button" class="col-xs-offset-5 btn-licencia" value="Cerrar" onclick="window.close()" style="color:white">
+	<input type="button" class="col-xs-offset-5" value="Cerrar" onclick="window.close()" id="licencia-btn">
 	</main>
 	<div th:replace="fragments/scripts :: scripts"></div>
 
