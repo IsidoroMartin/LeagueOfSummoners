@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       th:with="lang=${#locale.language}" th:lang="${lang}">
 <!--<div th:replace="fragments/prueba :: div"></div>-->
-<head th:replace="fragments/head :: head(title='Guia de zed~ League of summoners')">
+<head th:replace="fragments/head :: head(title='Guia de '+${guia.champion.championName}+'~ League of summoners')">
 </head>
 <body id="bootstrap-overrides">
 <div th:replace="fragments/menu :: menu"></div>
@@ -12,13 +12,16 @@
             <div id="banner">
                 <div id="page-name-banner" class="col-xs-12">
                     <div class="col-xs-2 logo-title">
-                        <img class="img-responsive lazy" name="champion"
-                             src="http://ddragon.leagueoflegends.com/cdn/6.6.1/img/champion/Zed.png"
-                             title="Zed" style="display: block;">
+                        <img class="img-responsive lazy pointer"
+                             th:onclick="'javascript:showChampionDetails(\'' + ${guia.champion.championNormalized} + '\');'"
+                             th:src="${guia.champion.championIconName}"
+                             th:title="${guia.champion.championName}">
                     </div>
                     <div class="col-xs-10">
-                        <h1>Guía de Zed</h1>
-                        <h2>El Maestro de las Sombras</h2>
+                        <h1>Guía de
+                            <th:block th:utext="${guia.champion.championName}"></th:block>
+                        </h1>
+                        <h2 th:utext="${guia.champion.championTitleES}"></h2>
                     </div>
                 </div>
             </div>
@@ -27,36 +30,122 @@
         <div class="col-xs-12 padding0">
             <ol class="breadcrumb">
                 <li><a href="/index">Home</a></li>
-                <li><a href="/guides">Guides</a></li>
-                <li class="active">Zed - El asesino imparable</li>
+                <li><a href="/guides">Guías</a></li>
+                <li class="active" th:utext="${guia.champion.championName}+' - '+${guia.guideTitle}"></li>
             </ol>
         </div>
     </div>
-    <main id="view_guide" class="row">
-        <div class="col-xs-12 text-center">
-            <h1 class="col-xs-12">Zed: El maestro de sombras</h1>
-            <h2 class="text-center">El asesino imparable</h2>
-            <div id="indice_guide" class="col-xs-12 col-md-6">
-                <ul>
-                    <li><a href="">Campeón</a></li>
-                    <li><a href=""></a></li>
-                    <li><a href=""></a></li>
-                    <li><a href=""></a></li>
-                    <li><a href=""></a></li>
-                    <li><a href=""></a></li>
-                    <li><a href=""></a></li>
-                </ul>
-                <span th:utext="${guia.champion.championIconName}"></span>
+    <main id="view_guide">
+        <div class="row" style="position: relative">
+            <div id="bg-guias" th:style="'background-image: url('+${guia.champion.splashArtUri}+') '"
+                 class="hidden-xs hidden-sm"></div>
+            <div id="info-guide" class="col-xs-12 margin0">
+                <p class="pull-left visitas  margin0" th:utext="'<small>Visitas: '+${guia.visitas}+'</small>'"></p>
+                <p class="pull-right visitas  margin0" th:utext="'<small>'+${guia.formattedDay}+'</small>'"></p>
             </div>
-            <div id="autor_guide" class="col-xs-12 col-md-6">
-
-
+            <div class="col-xs-12">
+                <h1 class="text-center">
+                    <th:block th:utext="${guia.guideTitle}"></th:block>
+                </h1>
+                <div id="indice_guide" class="col-md-4 col-md-offset-2">
+                    <h2>Indice</h2>
+                    <ol>
+                        <li>
+                            <a href="#champion">Campeón</a>
+                        </li>
+                        <li><a href="#introduction">Introducción</a></li>
+                        <li><a href="#summ_spells">Hechizos de invocador</a></li>
+                        <li><a href="#runes">Runas</a></li>
+                        <li><a href="#maestries">Maestrias</a></li>
+                        <li><a href="#habilities">Habilidades</a></li>
+                        <li><a href="#objects">Objetos</a></li>
+                    </ol>
+                </div>
+                <div id="autor_guide" class="col-md-5">
+                    <div class="col-xs-12"><h2>Autor</h2></div>
+                    <div class="col-xs-12 visible-xs visible-sm">
+                        <img th:src="${summoner_avatar}" onerror="this.src='/img/notfoundimg.png'"/>
+                    </div>
+                    <div class="col-md-7 col-xs-12" id="summoner-detail">
+                        <p th:utext="'Username: '+${guia.user.username}"></p>
+                        <p th:utext="'Rol: '+${guia.user.permissionLevel}"></p>
+                        <p th:utext="'Summoner name: '+${summ_name}"></p>
+                        <p th:utext="'Nivel: '+${summ_level}"></p>
+                        <p><i th:class="'icon champion-ranks ' + ${summ_tier}"></i>&nbsp;
+                            <th:block th:utext="${summ_tier}"></th:block>
+                        </p>
+                    </div>
+                    <!--<div class="col-md-3 hidden-xs hidden-sm">-->
+                    <!--<img th:src="${guia.user.avatar}" onerror="this.src='/img/notfoundimg.png'"/>-->
+                    <!--</div>-->
+                    <div class="col-md-3 hidden-xs hidden-sm">
+                        <img th:src="${summoner_avatar}" onerror="this.src='/img/notfoundimg.png'"/>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-xs-12 col-lg-10 col-lg-offset-1">
+                <div id="champion" class="col-xs-12">
+                    <h2>1. Campeón</h2>
+                    <div class="col-xs-12">Pulsa en el campeón para obtener más información</div>
+                    <div class="col-xs-2 logo-title">
+                        <img class="img-responsive lazy pointer"
+                             th:onclick="'javascript:showChampionDetails(\'' + ${guia.champion.championNormalized} + '\');'"
+                             th:src="${guia.champion.championIconName}"
+                             th:title="${guia.champion.championName}">
+                    </div>
+                    <div class="col-xs-10">
+                        <h3 th:utext="${guia.champion.championName}"></h3>
+                        <p th:utext="${guia.champion.championTitleES}"></p>
+                    </div>
+                </div>
+                <div id="introduction" class="col-xs-12">
+                    <h2>2. Introducción</h2>
+                    <p th:utext="${guia.guideContent}"></p>
+                </div>
+                <div id="summ_spells" class="col-xs-12">
+                    <h2>3. Hechizos de invocador</h2>
+                    <p th:utext="'Para esta guía el usuario '+${guia.user.username}+' ha optado por los siguientes hechizos de invocador:'"></p>
+                    <div class="col-xs-2 logo-title">
+                        <img class="img-responsive lazy pointer"
+                             data-toggle="tooltip" data-html="true"
+                             th:src="${guia.summonerSpellD.icon}"
+                             th:title="'<strong>'+${guia.summonerSpellD.name}+'</strong><br>'+${guia.summonerSpellD.description}">
+                    </div>
+                    <div class="col-xs-2 logo-title">
+                        <img class="img-responsive lazy pointer champion-spell"
+                             data-toggle="tooltip" data-html="true"
+                             th:src="${guia.summonerSpellF.icon}"
+                             th:title="'<strong>'+${guia.summonerSpellF.name}+'</strong><br>'+${guia.summonerSpellF.description}">
+                    </div>
+                </div>
+                <div id="runes" class="col-xs-12">
+                    <h2>4. Runas</h2>
+
+                </div>
+                <div id="maestries" class="col-xs-12">
+                    <h2>5. Maestrias</h2>
+
+                </div>
+                <div id="habilities" class="col-xs-12">
+                    <h2>6. Habilidades</h2>
+
+                </div>
+                <div id="objects" class="col-xs-12">
+                    <h2>7. Objetos</h2>
+                    <p th:utext="'Para esta guía el usuario '+${guia.user.username}+' ha optado por los siguientes objetos:'"></p>
+                    <div class="col-xs-2 logo-title">
+
+                    </div>
+                </div>
+            </div>
     </main>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
 <div th:replace="fragments/scripts :: scripts"></div>
-
+<script type="text/javascript">
+    $('[data-toggle="tooltip"]').tooltip();
+</script>
 </body>
 </html>

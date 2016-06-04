@@ -1,7 +1,10 @@
 package com.leagueofsummoners.model.dto;
 
 import javax.persistence.*;
+import javax.persistence.Column;
 
+import com.leagueofsummoners.model.dao.tables.TableNames;
+import com.mysema.query.sql.*;
 import lombok.Data;
 
 import static com.leagueofsummoners.model.dao.tables.TableNames.*;
@@ -9,6 +12,7 @@ import static com.leagueofsummoners.model.dao.tables.TableNames.*;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 /*
 Autores= Juan José Ramírez & Isidoro Martín
@@ -49,6 +53,10 @@ public class GuideDTO implements Comparator<GuideDTO> {
 	private Long idUser;
 	@Column(name = COLUMN_GUIDES_ID_CHAMPION)
 	private Long idChampion;
+	@Column(name = COLUMN_GUIDES_SUMM_SPELL_D)
+	private Long id_summ_spell_d;
+	@Column(name = COLUMN_GUIDES_SUMM_SPELL_F)
+	private Long id_summ_spell_f;
 	@Column(name = COLUMN_GUIDES_TITLE)
 	private String guideTitle;
 	@Column(name = COLUMN_GUIDES_CONTENT)
@@ -58,7 +66,16 @@ public class GuideDTO implements Comparator<GuideDTO> {
 	
 	@Column(name = COLUMN_GUIDES_VISITS)
 	private int visitas;
-	
+
+	@Transient
+	private List<ItemDTO> guideItems;
+
+	@Transient
+	private SummonerSpellDTO summonerSpellD;
+
+	@Transient
+	private SummonerSpellDTO summonerSpellF;
+
 	@Transient
 	private ChampionDTO champion;
 	

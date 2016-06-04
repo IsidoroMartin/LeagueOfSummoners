@@ -1,9 +1,16 @@
 package com.leagueofsummoners.controllers;
 
 import com.google.gson.Gson;
+import com.leagueofsummoners.model.dto.ChampionDTO;
 import com.leagueofsummoners.model.dto.GuideDTO;
 import com.leagueofsummoners.model.interfaces.services.IServicesChampions;
 import com.leagueofsummoners.model.interfaces.services.IServicesGuides;
+import com.leagueofsummoners.model.interfaces.services.IServicesUsers;
+import com.leagueofsummoners.model.utils.CacheUtils;
+import com.leagueofsummoners.model.utils.LeagueAccessAPI;
+import com.leagueofsummoners.model.utils.RiotUtils;
+import com.robrua.orianna.type.core.league.League;
+import com.robrua.orianna.type.core.summoner.Summoner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +19,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import static com.leagueofsummoners.ApplicationPaths.*;
 
@@ -52,6 +62,10 @@ public class GuidesController {
     //Servicio de guías - Inyección de dependencias
     @Autowired
     private IServicesGuides serviceGuides;
+    
+  //Servicio de usuarios - Inyección de dependencias
+    @Autowired
+    private IServicesUsers servicioUsers;
 
     /**
      * Método gestiona las peticionesa /guides, settea en el contexto una lista de campeoens, una lista de guias
@@ -77,8 +91,53 @@ public class GuidesController {
 
     @RequestMapping(value = {VIEW_GUIDE_HTML_PATH, VIEW_GUIDE_PATH}, method = RequestMethod.GET)
     @ResponseBody
-    public ModelAndView viewguide(ModelMap model, @RequestParam(value = "idGuide") Long idGuide) {
-        model.addAttribute("guia", serviceGuides.findByIdGuide(idGuide));
+    public ModelAndView viewguide(ModelMap model, @RequestParam(value = "idGuide") Long idGuide, HttpSession session) {
+        GuideDTO guia = serviceGuides.findByIdGuide(idGuide);
+        ChampionDTO champ = guia.getChampion();
+        champ.setSplashArtUri(LeagueAccessAPI.RIOT_API_SPLASH_ART +
+                RiotUtils.determineSpecialChampionNames(RiotUtils.normalizeChampion(champ.getChampionName())) + "_1.jpg");
+        HashMap<String, Object> valores = new HashMap<>();
+        Long level = null;
+        String name = null;
+        Summoner summ = null;
+        try {
+            try {
+                summ = this.servicioUsers.getSummonerData(guia.getUser().getSummonerName());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                name = summ.getName();
+                valores.put("summ_name", (name != null) ? name: "No name");
+            } catch (Exception e) {
+                e.printStackTrace();
+                valores.put("summ_name", "No name");
+            }
+            try {
+                level = summ.getLevel();
+                valores.put("summ_level", (level != null) ? level : "0");
+            } catch (Exception e) {
+                e.printStackTrace();
+                valores.put("summ_level", "0");
+            }
+            try {
+                List<League> listEntries = summ.getLeagueEntries();
+                valores.put("summ_tier", (listEntries != null && !listEntries.isEmpty())
+                        ? summ.getLeagueEntries().get(0).getTier() : "UNRANKED");
+            } catch (Exception e) {
+                e.printStackTrace();
+                valores.put("summ_tier", "UNRANKED");
+            }
+            valores.put("summoner_avatar", LeagueAccessAPI.RIOT_API_SUMMONER_PROFILE_ICON_PATH + summ.getProfileIconID() + ".png");
+        } catch (Exception e) {
+            e.printStackTrace();
+            valores.put("summoner_avatar", LeagueAccessAPI.RIOT_API_TEEMO_ICON);
+        }
+
+        model.addAttribute("summoner_avatar", LeagueAccessAPI.RIOT_API_SUMMONER_PROFILE_ICON_PATH + summ.getProfileIconID() + ".png");
+        CacheUtils.setValuesToModelMap(valores, model, session);
+        model.addAttribute("guia", guia);
         return new ModelAndView("view_guide");
     }
 }
+    

@@ -1,5 +1,6 @@
 package com.leagueofsummoners.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +8,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.leagueofsummoners.model.dto.GuideDTO;
+import com.leagueofsummoners.model.dto.GuideItemsDTO;
+import com.leagueofsummoners.model.dto.ItemDTO;
 import com.leagueofsummoners.model.interfaces.persistence.ChampionRepository;
+import com.leagueofsummoners.model.interfaces.persistence.GuidesItemsRepository;
 import com.leagueofsummoners.model.interfaces.persistence.GuidesRepository;
+import com.leagueofsummoners.model.interfaces.persistence.ItemRepository;
+import com.leagueofsummoners.model.interfaces.persistence.SummonerSpellsRepository;
 import com.leagueofsummoners.model.interfaces.persistence.UserRepository;
 
 /*
@@ -50,6 +56,15 @@ public class GuidesDAO {
     //Repositorio de guías
     @Autowired
     private GuidesRepository guidesRepository;
+    //Repositorio de guideItems
+    @Autowired
+    private GuidesItemsRepository guidesItemsRepository;
+    //Repositorio de Items
+    @Autowired
+    private ItemRepository itemsRepository;
+    //Repositorio de los de las habilidades de invocador
+    @Autowired
+    private SummonerSpellsRepository summonerSpellRepository;
 
     /**
      * Obtiene todas las guías de la BD
@@ -84,6 +99,15 @@ public class GuidesDAO {
     public GuideDTO findByIdGuide(Long idGuide) {
         GuideDTO guide = this.guidesRepository.findByIdGuide(idGuide);
         guide.setChampion(this.championRepository.findByIdChampion(guide.getIdChampion()));
+        guide.setUser(userRepository.findByIdUser(guide.getIdUser()));
+        guide.setSummonerSpellD(summonerSpellRepository.findById(guide.getId_summ_spell_d()));
+        guide.setSummonerSpellF(summonerSpellRepository.findById(guide.getId_summ_spell_f()));
+        List<GuideItemsDTO> guidesItemsList = guidesItemsRepository.findByIdGuide(guide.getIdGuide());
+        List<ItemDTO> guideItemsDTO = new ArrayList<ItemDTO>();
+        for (GuideItemsDTO guideItem : guidesItemsList) {
+            guideItemsDTO.add(itemsRepository.findByIdItem(guideItem.getIdItem()));
+        }
+        guide.setGuideItems(guideItemsDTO);
         return guide;
     }
 

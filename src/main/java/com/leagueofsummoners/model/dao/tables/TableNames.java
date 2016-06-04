@@ -52,6 +52,8 @@ public class TableNames {
 	public static final String COLUMN_GUIDES_LANG = "GUIDE_LANG";
 	public static final String COLUMN_GUIDES_DATE = "GUIDE_DATE";
 	public static final String COLUMN_GUIDES_VISITS = "GUIDE_VISITAS";
+	public static final String COLUMN_GUIDES_SUMM_SPELL_D = "GUIDE_SUMM_SPELL1";
+	public static final String COLUMN_GUIDES_SUMM_SPELL_F = "GUIDE_SUMM_SPELL2";
 
 	/* Tabla pasivas */
 	public static final String TABLE_PASSIVES_ENTITY = "championPassives";
@@ -99,7 +101,7 @@ public class TableNames {
 	public static final String COLUMN_MATCHS_ITEM4 = "ITEM4";
 	public static final String COLUMN_MATCHS_ITEM5 = "ITEM5";
 	public static final String COLUMN_MATCHS_ITEM6 = "ITEM6";
-	
+
 	/* Tabla Users */
 	public static final String TABLE_USERS_ENTITY = "user";
 	public static final String TABLE_USERS = "users";
@@ -108,9 +110,25 @@ public class TableNames {
 	public static final String COLUMN_USERS_USERNAME = "username";
 	public static final String COLUMN_USERS_MATCHES_PLAYED = "MATCHES_PLAYED";
 	public static final String COLUMN_USERS_PASSWORD = "password";
-	public static final String COLUMN_USERS_EMAIL= "email";
-	public static final String COLUMN_USERS_AVATAR= "avatar";
-	public static final String COLUMN_USERS_FIRMA= "firma";
-	public static final String COLUMN_USERS_PERMISSION_LEVEL= "permission_level";
+	public static final String COLUMN_USERS_EMAIL = "email";
+	public static final String COLUMN_USERS_AVATAR = "avatar";
+	public static final String COLUMN_USERS_FIRMA = "firma";
+	public static final String COLUMN_USERS_PERMISSION_LEVEL = "permission_level";
+
+
+	/* Tabla guides_items */
+	public static final String TABLE_GUIDE_ITEMS_ENTITY = "guide_items";
+	public static final String TABLE_GUIDES_ITEMS = "guides_items";
+	public static final String COLUMN_GUIDES_ITEMS_ID_GUIDE_ITEM = "ID_GUIDE_ITEM";
+	public static final String COLUMN_GUIDES_ITEMS_ID_GUIDE = "ID_GUIDE";
+	public static final String COLUMN_GUIDES_ITEMS_ID_ITEM = "ID_ITEM";
+
+	/* Tabla summoners spells */
+	public static final String TABLE_SUMM_SPELLS_ENTITY = "summ_spell";
+	public static final String TABLE_SUMM_SPELLS = "guide_summoner_spells";
+	public static final String COLUMN_SUMMONER_SPELL_ID = "ID_SUMMONER_SPELL";
+	public static final String COLUMN_SUMMONER_SPELL_NAME = "SUMMONER_SPELL_NAME_ES";
+	public static final String COLUMN_SUMMONER_SPELL_DESC = "SUMMONER_SPELL_DESC_ES";
+	public static final String COLUMN_SUMMONER_SPELL_ICON = "SUMMONER_SPELL_ICON";
 
 }

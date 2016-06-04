@@ -172,18 +172,7 @@ nav.navbar {
 	padding: 0px;
 }
 
-.navbar-brand
-
-
-
-
-:not
-
-
-
-
-
-(
+.navbar-brand:not(
 #menu-logo
 
 
@@ -364,13 +353,13 @@ nav .container {
 
 .fill-main main input[type=text], .fill-main main label, .fill-main main input[type=password],
 	.fill-main main button[type=submit], .fileinput-filename, .fileinput i,
-	input[type="text"],input[type="email"], .fileinput {
+	input[type="text"],input[type="email"], .fileinput,#view_guide {
 	font-size: 1.5rem;
 }
 
 #bootstrap-overrides textarea{
 	font-size:1.2rem;
-	overflow: hidden;
+	overflow: 
 }
 
 #buscador-generico input[type=text] {
@@ -397,7 +386,7 @@ textarea {
 @media only screen and (max-width: 768px) {
 	.fill-main main input[type=text], .fill-main main label, .fill-main main input[type=password],
 		.fill-main main button[type=submit], .fileinput-filename, .fileinput i,
-		input[type="text"],input[type="email"], textarea {
+		input[type="text"],input[type="email"], textarea,#view_guide {
 		font-size: 1rem;
 	}
 }
@@ -782,4 +771,71 @@ input[type=checkbox] {
 
 footer a:visited{
 	color:gray;
+}
+
+
+#view_guide {
+    min-height: 800px;
+}
+
+#bootstrap-overrides .logo-title {
+    width: 10.5%;
+    margin-top: 1.5%;
+}
+
+#bootstrap-overrides #page-name-banner .col-xs-10 h1 {
+    margin-top: 15px;
+}
+
+#view_guide h1 {
+    margin-bottom: 20px;
+}
+#view_guide h2 {
+    font-size: 2.3rem;
+    font-weight: bold;
+}
+#bootstrap-overrides #view_guide #indice_guide h2 {
+    margin-left: 20px;
+}
+#bootstrap-overrides #view_guide h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#view_guide #autor_guide h3{
+    display: inline;
+}
+#bg-guias{
+    position: absolute;
+    top: -20px;
+    width: 100%;
+    opacity: .1;
+
+}
+
+@media (min-width: 769px) {
+    #autor_guide, #indice_guide{
+        min-height: 500px;
+    }
+    #bg-guias{
+        height:600px;
+        background-size: 100% 100%;
+    }
+}
+@media (min-width: 1280px) {
+    #autor_guide, #indice_guide{
+        min-height: 630px;
+    }
+    #bg-guias{
+        height:730px;
+        background-size: cover;
+    }
+}
+#info-guide{
+    position: absolute;
+    top:0px;
+}
+.pointer{
+    cursor: hand;
+    cursor: pointer;
 }
