@@ -313,6 +313,8 @@
                     </th:block>
                 </div>
             </div>
+        </div>
+        <div class="subir fa fa-chevron-up hidden-xs hidden-sm"></div>
     </main>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
@@ -320,6 +322,23 @@
 <script type="text/javascript" src="http:/js/scroll.js"></script>
 <script type="text/javascript">
     $('[data-toggle="tooltip"]').tooltip();
+    $('.subir').click(function () {
+        $('body, html').animate({
+            scrollTop: '0px'
+        }, 300);
+    });
+
+    $(window).scroll(function () {
+        if (window.innerWidth > 768) {
+            if ($(this).scrollTop() > 0) {
+                $('.subir').slideDown(200);
+            } else {
+
+                $('.subir').slideUp(200);
+
+            }
+        }
+    });
 </script>
 </body>
 </html>
