@@ -41,14 +41,16 @@
             </div>
             <div class="panel-body">
                 <th:block th:each="champion : ${championRotation}">
-                    <div class="col-md-15 col-xs-6 col-sm-3 rotation-champ" th:onclick="'javascript:showChampionDetails(\'' + ${champion.championNormalized} + '\');'">
+                    <div class="col-md-15 col-xs-6 col-sm-3"
+                         th:onclick="'javascript:showChampionDetails(\'' + ${champion.championNormalized} + '\');'">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <span th:utext="${champion.championName}"></span>
                             </div>
                             <div class="panel-body">
                                 <img th:src="${champion.championIconName}"
-                                  th:alt="${champion.championName}"  th:title="${champion.championName}" class="img-responsive"></img>
+                                     th:alt="${champion.championName}" th:title="${champion.championName}"
+                                     class="img-responsive rotation-champ"></img>
                             </div>
                         </div>
                     </div>
@@ -59,7 +61,7 @@
 </main>
 <div th:replace="fragments/footer :: footer"></div>
 <div th:replace="fragments/scripts :: scripts"></div>
-<script type="text/javascript" src="http:/js/home.js"></script>
+<script type="text/javascript" src="http:/js/scroll.js"></script>
 	<script th:inline="javascript">
 		var champion_list = JSON
 				.parse(/*[[${champion_list}]]*/"champion_list");

@@ -107,6 +107,13 @@ form {
     margin-left: 1%;
 }
 
+@media (max-width: 768px) {
+    .banner-msg {
+        margin-top: 13%;
+        margin-left: 10%;
+    }
+}
+
 .has-feedback label ~ .form-control-feedback {
     top: 80px;
 }

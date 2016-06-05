@@ -126,3 +126,10 @@ function getUrlParameter(sParam) {
     }
 };
 
+/**
+ * Muestra los detalles del campeón pulsado en el HOME.
+ * @param champion
+ */
+function showChampionDetails(champion) {
+	window.location.href = "/champions#" + normalizeChampionName(champion);
+}

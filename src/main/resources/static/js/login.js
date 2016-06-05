@@ -33,6 +33,7 @@ $(function () {
     if (localStorage.getItem("username") != null) {
         $("#username").val(localStorage.getItem("username")).css("background-color", "#FFFCE6");
         $("#password").val(localStorage.getItem("password")).css("background-color", "#FFFCE6");
+        $("#remember-credentials-checkbox").attr("checked", "checked");
         $("#submit-login").removeAttr("disabled");
 
     }

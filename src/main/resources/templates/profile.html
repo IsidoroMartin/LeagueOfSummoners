@@ -10,15 +10,15 @@
 			<div id="page-name-banner" class="col-xs-12">
 				<h1 class="banner-msg" th:utext="#{profile.profilename}"></h1>
 			</div>
+			<ol class="breadcrumb col-xs-12">
+				<li><a href="/index">Home</a></li>
+				<li class="active" th:utext="${pageName}"></li>
+			</ol>
 		</div>
 	</div>
 
 	<main class="container content profile-body">
 	<div class="row">
-		<ol class="breadcrumb col-xs-12">
-			<li><a href="/index">Home</a></li>
-			<li class="active" th:utext="${pageName}"></li>
-		</ol>
 		<aside id="user-profile" class="col-md-2">
 			<div id="profile">
 				<div class="img-perfil col-xs-6 col-md-12">

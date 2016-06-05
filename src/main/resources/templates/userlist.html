@@ -1,142 +1,158 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:with="lang=${#locale.language}" th:lang="${lang}">
+      th:with="lang=${#locale.language}" th:lang="${lang}">
 <!--<div th:replace="fragments/prueba :: div"></div>-->
 <head
-	th:replace="fragments/head :: head(title='Lista de usuarios ~ LOS')">
+        th:replace="fragments/head :: head(title='Lista de usuarios ~ LOS')">
 </head>
 <body id="bootstrap-overrides">
-	<!--<header th:replace="fragments/header :: header"></header>-->
-	<div th:replace="fragments/menu :: menu"></div>
-	<main class="container content champions-body">
-	<div class="row" id="banner">
-		<div id="page-name-banner" class="col-xs-12">
-			<h1 class="banner-msg">Lista de usuarios</h1>
-		</div>
-	</div>
-	<div class="row">
-		<ol class="breadcrumb col-xs-12">
-			<li><a href="/index">Home</a></li>
-			<li><a href="/profile">Perfil</a></li>
-			<li class="active" th:utext="${pageName}"></li>
-		</ol>
-	</div>
+<!--<header th:replace="fragments/header :: header"></header>-->
+<div th:replace="fragments/menu :: menu"></div>
+<main class="container content champions-body">
+    <div class="row" id="banner">
+        <div id="page-name-banner" class="col-xs-12">
+            <h1 class="banner-msg">Lista de usuarios</h1>
+        </div>
+    </div>
+    <div class="row">
+        <ol class="breadcrumb col-xs-12">
+            <li><a href="/index">Home</a></li>
+            <li><a href="/profile">Perfil</a></li>
+            <li class="active" th:utext="${pageName}"></li>
+        </ol>
+    </div>
 
-	<div class="row">
-		<div class="col-xs-10 col-xs-offset-1">
-			<div class="alert alert-info fade in" style="display: none; margin-top:30px;"
-				id="mensajeInfo">
-				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-				<strong>El usuario se ha eliminado correctamente.</strong>
-			</div>
-			<table class="table table-responsive">
-				<tr>
-					<th class="hidden-xs">ID usuario</th>
-					<th class="hidden-xs">SummonerName</th>
-					<th>Username</th>
-					<th class="hidden-xs">Número de guías</th>
-					<th>Email</th>
-					<th class="hidden-xs">Nivel de permiso</th>
-					<th>Eliminar</th>
-				</tr>
-				<tr th:each="user : ${userList}">
-					<td class="hidden-xs" th:utext="${user.idUser}"></td>
-					<td class="hidden-xs" th:utext="${user.summonerName}"></td>
-					<td class="username" th:utext="${user.username}"></td>
-					<td class="hidden-xs" class="hidden-xs"><a th:utext="${user.guidesNumber}" th:href="@{/guides?search_input={id}(id=${user.username})}"></a></td>
-					<td class="hidden-xs" th:utext="${user.email}"></td>
-					<td><select onload="seleccionarAdecuado()"
-						onchange="cambiarPermisosUsuario(this)"
-						th:attr="data-permission=${user.permissionLevel}">
-							<option value="User">User</option>
-							<option value="Admin">Admin</option>
-					</select></td>
-					<td><a href="#" th:href="@{api/user/delete/{id}(id=${user.username})}" class="deleteUser">Eliminar</a></td>
-				</tr>
-			</table>
-		</div>
-	</div>
-	</main>
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1">
+            <div class="alert alert-info fade in" style="display: none; margin-top:30px;"
+                 id="mensajeInfo">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>El usuario se ha eliminado correctamente.</strong>
+            </div>
+            <div class="alert alert-danger fade in" style="display: none; margin-top:30px;"
+                 id="mensajeError">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>El usuario no ha podido eliminarse.</strong>
+            </div>
+            <table class="table table-responsive">
+                <tr>
+                    <th class="hidden-xs">ID usuario</th>
+                    <th class="hidden-xs">SummonerName</th>
+                    <th>Username</th>
+                    <th class="hidden-xs">Número de guías</th>
+                    <th>Email</th>
+                    <th class="hidden-xs">Nivel de permiso</th>
+                    <th>Eliminar</th>
+                </tr>
+                <tr th:each="user : ${userList}">
+                    <td class="hidden-xs" th:utext="${user.idUser}"></td>
+                    <td class="hidden-xs" th:utext="${user.summonerName}"></td>
+                    <td class="username" th:utext="${user.username}"></td>
+                    <td class="hidden-xs" class="hidden-xs"><a th:utext="${user.guidesNumber}"
+                                                               th:href="@{/guides?search_input={id}(id=${user.username})}"></a>
+                    </td>
+                    <td class="hidden-xs" th:utext="${user.email}"></td>
+                    <td><select onload="seleccionarAdecuado()"
+                                onchange="cambiarPermisosUsuario(this)"
+                                th:attr="data-permission=${user.permissionLevel}">
+                        <option value="User">User</option>
+                        <option value="Admin">Admin</option>
+                    </select></td>
+                    <td><a href="#" th:href="@{api/user/delete/{id}(id=${user.username})}"
+                           class="deleteUser">Eliminar</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</main>
 
-	<div th:replace="fragments/footer :: footer"></div>
-	<div th:replace="fragments/scripts :: scripts"></div>
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/scripts :: scripts"></div>
 
-	<script type="text/javascript" src="libraries/animatedModal.js"></script>
-	<script type="text/javascript" src="/js/champions.js"></script>
-	<script type="text/javascript">
-		seleccionarAdecuado();
-		/*Selecciona el userType adecuado*/
-		function seleccionarAdecuado() {
-			var selects = $("select");
-			selects.each(function() {
-				var permiso = $(this).attr("data-permission");
-				if (permiso != "User") {
-					$(this).find("option").each(function() {
-						if (this.value == "Admin") {
-							this.selected = true;
-						}
-					});
-				}
-			});
-		}
+<script type="text/javascript" src="libraries/animatedModal.js"></script>
+<script type="text/javascript" src="/js/champions.js"></script>
+<script type="text/javascript">
+    seleccionarAdecuado();
+    /*Selecciona el userType adecuado*/
+    function seleccionarAdecuado() {
+        var selects = $("select");
+        selects.each(function () {
+            var permiso = $(this).attr("data-permission");
+            if (permiso != "User") {
+                $(this).find("option").each(function () {
+                    if (this.value == "Admin") {
+                        this.selected = true;
+                    }
+                });
+            }
+        });
+    }
 
-		function cambiarPermisosUsuario(select) {
-			var newPermission = select.value;
-			var tr = $(select.parentNode.parentNode);
-			var username = tr.find(".username")[0].childNodes[0].nodeValue;
-			$
-					.ajax({
-						type : 'PUT',
-						url : "/api/user/update/permission",
-						contentType : "application/x-www-form-urlencoded; charset=UTF-8",
-						error : function(xhr, status, error) {
-							console.log("Error en la petición al servidor");
-						},
-						data : "username=" + username + "&permission="
-								+ newPermission
-					});
-		}
+    function cambiarPermisosUsuario(select) {
+        var newPermission = select.value;
+        var tr = $(select.parentNode.parentNode);
+        var username = tr.find(".username")[0].childNodes[0].nodeValue;
+        $
+                .ajax({
+                    type: 'PUT',
+                    url: "/api/user/update/permission",
+                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                    error: function (xhr, status, error) {
+                        console.log("Error en la petición al servidor");
+                    },
+                    data: "username=" + username + "&permission="
+                    + newPermission
+                });
+    }
 
-		/*
-		 * Cuando das click sobre eliminar usuario seinvoca esta petición para eliminarle 
-		 */
-		$('.deleteUser').click(function(event) {
-			var href = this;
-			var tr = $(this).parent().parent();
-			var tituloGuia = $(tr.find("a")[2]).html();
+    /*
+     * Cuando das click sobre eliminar usuario seinvoca esta petición para eliminarle
+     */
+    $('.deleteUser').click(function (event) {
+        var href = this;
+        var tr = $(this).parent().parent();
+        var tituloGuia = $(tr.find("a")[2]).html();
 
-			swal({
-				title : 'Estás segur@ de eliminar a este usuario?',
-				text : "El usuario perderá su cuenta, sus guías se borrarán y sus partidas también.",
-				showCancelButton : true,
-				type : 'warning',
-				confirmButtonText : 'Eliminar',
-				confirmButtonClass : 'btn btn-danger',
-				cancelButtonClass : 'btn btn-success',
-				confirmButtonColor : "#b92c28",
-				preConfirm : function() {
-					return new Promise(function(resolve) {
-						swal.enableLoading();
-						$.ajax({
-							url : href,
-							type : 'DELETE',
-							data : "",
-							success : function(result) {
-								tr.hide('slow', function() {
-									tr.remove();
-									$('#mensajeInfo').show();
-								});
-								resolve();
-							}
-						});
+        swal({
+            title: 'Estás segur@ de eliminar a este usuario?',
+            text: "El usuario perderá su cuenta, sus guías se borrarán y sus partidas también.",
+            showCancelButton: true,
+            type: 'warning',
+            confirmButtonText: 'Eliminar',
+            confirmButtonClass: 'btn btn-danger',
+            cancelButtonClass: 'btn btn-success',
+            confirmButtonColor: "#b92c28",
+            preConfirm: function () {
+                return new Promise(function (resolve) {
+                    swal.enableLoading();
 
-					});
-				},
-				allowOutsideClick : false
-			});
+                    $.ajax({
+                        url: href,
+                        type: 'DELETE',
+                        data: "",
+                        error: function () {
+                            alert("Error");
+                            resolve();
+                            $('#mensajeInfo').hide();
+                            $('#mensajeError').show();
+                        },
+                        success: function (result) {
+                            tr.hide('slow', function () {
+                                tr.remove();
+                                $('#mensajeError').hide();
+                                $('#mensajeInfo').show();
+                            });
+                            resolve();
+                        }
+                    });
 
-			return false;
-		});
-	</script>
+                });
+            },
+            allowOutsideClick: true
+        });
+
+        return false;
+    });
+</script>
 </body>
 </html>
