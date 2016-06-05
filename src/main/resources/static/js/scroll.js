@@ -25,7 +25,7 @@ Este JS gestiona las funciones de la página home.
 
 
 /**
- *  Cuando das clic sobre ver la rotación, scrollea la pantalla hasta mostrar la lista de campeoens
+ *  Cuando das clic sobre ver la rotación, scrollea la pantalla hasta el target pulsado
  */
 $(function(){
 	$('a[href^="#"]:not(a[href="#"])').on('click', function(e) {
@@ -38,10 +38,3 @@ $(function(){
 	});
 });
 
-/**
- * Muestra los detalles del campeón pulsado en el HOME.
- * @param champion
- */
-function showChampionDetails(champion){
-	window.location.href = "/champions#" + normalizeChampionName(champion);
-}

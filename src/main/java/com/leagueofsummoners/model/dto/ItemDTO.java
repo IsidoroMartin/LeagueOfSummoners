@@ -1,10 +1,12 @@
 package com.leagueofsummoners.model.dto;
 
+import com.leagueofsummoners.model.dao.tables.TableNames;
 import lombok.Data;
 
-import javax.persistence.*;
-
-import com.leagueofsummoners.model.dao.tables.TableNames;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 /*
@@ -46,7 +48,7 @@ public class ItemDTO {
     private String itemNameEs;
 
     @Column(name = TableNames.COLUMN_ITEMS_ITEM_DESC_ES)
-    private boolean itemDescEs;
+    private String itemDescEs;
 
     @Column(name = TableNames.COLUMN_ITEMS_ITEM_ICON)
     private String itemIcon;

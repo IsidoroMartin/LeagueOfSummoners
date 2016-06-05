@@ -192,7 +192,7 @@ function prepareModalWindow(championIndex) {
 		modalWindow += '<div class="btn-close-modal">X</div>';
 		modalWindow += '</div>'
 		modalWindow += '<div class="modal-contenido">';
-		modalWindow += '<div class="nombre-campeones col-md-12 col-md-6">';
+		modalWindow += '<div class="nombre-campeones col-md-12 ">';
 		modalWindow += '<h1>' + championClicked.championName + '</h1>';
 		modalWindow += '<h3 class="champion-title" >'
 				+ championClicked.championTitleES + '</h3>';

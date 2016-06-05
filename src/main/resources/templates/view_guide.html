@@ -11,13 +11,13 @@
         <div class="col-md-12">
             <div id="banner">
                 <div id="page-name-banner" class="col-xs-12">
-                    <div class="col-xs-2 logo-title">
+                    <div class="col-md-2 col-xs-3 padding0" id="img-banner">
                         <img class="img-responsive lazy pointer"
                              th:onclick="'javascript:showChampionDetails(\'' + ${guia.champion.championNormalized} + '\');'"
                              th:src="${guia.champion.championIconName}"
                              th:title="${guia.champion.championName}">
                     </div>
-                    <div class="col-xs-10">
+                    <div class="col-xs-9">
                         <h1>Guía de
                             <th:block th:utext="${guia.champion.championName}"></th:block>
                         </h1>
@@ -89,7 +89,7 @@
                 <div id="champion" class="col-xs-12">
                     <h2>1. Campeón</h2>
                     <div class="col-xs-12">Pulsa en el campeón para obtener más información</div>
-                    <div class="col-xs-2 logo-title">
+                    <div class="col-md-2 col-xs-6">
                         <img class="img-responsive lazy pointer"
                              th:onclick="'javascript:showChampionDetails(\'' + ${guia.champion.championNormalized} + '\');'"
                              th:src="${guia.champion.championIconName}"
@@ -106,44 +106,218 @@
                 </div>
                 <div id="summ_spells" class="col-xs-12">
                     <h2>3. Hechizos de invocador</h2>
-                    <p th:utext="'Para esta guía el usuario '+${guia.user.username}+' ha optado por los siguientes hechizos de invocador:'"></p>
-                    <div class="col-xs-2 logo-title">
+                    <p th:utext="'Para esta guía el usuario '+${guia.user.username}+' ha elegido los siguientes hechizos de invocador:'"></p>
+                    <div class="summ-spell col-md-offset-0 col-xs-4">
                         <img class="img-responsive lazy pointer"
                              data-toggle="tooltip" data-html="true"
                              th:src="${guia.summonerSpellD.icon}"
                              th:title="'<strong>'+${guia.summonerSpellD.name}+'</strong><br>'+${guia.summonerSpellD.description}">
                     </div>
-                    <div class="col-xs-2 logo-title">
-                        <img class="img-responsive lazy pointer champion-spell"
+                    <div class="summ-spell col-md-offset-0 col-xs-4">
+                        <img class="img-responsive  lazy pointer"
                              data-toggle="tooltip" data-html="true"
                              th:src="${guia.summonerSpellF.icon}"
-                             th:title="'<strong>'+${guia.summonerSpellF.name}+'</strong><br>'+${guia.summonerSpellF.description}">
+                             th:title="'<strong><big>'+${guia.summonerSpellF.name}+'</big></strong><br>'+${guia.summonerSpellF.description}">
                     </div>
                 </div>
                 <div id="runes" class="col-xs-12">
                     <h2>4. Runas</h2>
+                    <div class="col-xs-12 visible-xs visible-sm">
+                        <div class="col-xs-6">
+                            <img src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/bl_1_3.png"
+                                 data-toggle="tooltip" data-html="true"
+                                 title="<strong><big>Greater Quintessence of Ability Power</big></strong><br>+4.95 ability power"><strong><big>
+                            x3</big></strong>
+                            <img src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/r_3_3.png"
+                                 data-toggle="tooltip" data-html="true" title="<strong><big>Greater Mark of Hybrid Penetration
+                             </big></strong><br>+0.9 Armor Penetration / +0.62 Magic Penetration"><strong><big> x9</big></strong>
+                        </div>
+                        <div class="col-xs-6">
+                            <img src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/y_4_3.png"
+                                 data-toggle="tooltip" data-html="true"
+                                 title="<strong><big>Greater Seal of Scaling Health</big></strong><br>+1.33 health per level"><strong><big>
+                            x9</big></strong>
+                            <img src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/b_2_3.png"
+                                 data-toggle="tooltip" data-html="true"
+                                 title="<strong><big>Greater Glyph of Magic Resist</big></strong><br>+1.34 magic resist">
+                            <strong><big> x9</big></strong>
+                        </div>
+                    </div>
+                    <div class="guide-runes ps40">
 
+                        <div class="rune-page-0">
+                            <div class="left rune-page pos-rel hidden-xs hidden-sm">
+
+                                <img class="mark-1 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/r_3_3.png"
+                                     data-toggle="tooltip" data-html="true" title="<strong><big>Greater Mark of Hybrid Penetration
+                             </big></strong><br>+0.9 Armor Penetration / +0.62 Magic Penetration">
+                                <img class="mark-2 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/r_3_3.png"
+                                     data-toggle="tooltip" data-html="true" title="<strong><big>Greater Mark of Hybrid Penetration
+                             </big></strong><br>+0.9 Armor Penetration / +0.62 Magic Penetration">
+                                <img class="mark-3 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/r_3_3.png"
+                                     data-toggle="tooltip" data-html="true" title="<strong><big>Greater Mark of Hybrid Penetration
+                             </big></strong><br>+0.9 Armor Penetration / +0.62 Magic Penetration">
+                                <img class="mark-4 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/r_3_3.png"
+                                     data-toggle="tooltip" data-html="true" title="<strong><big>Greater Mark of Hybrid Penetration
+                             </big></strong><br>+0.9 Armor Penetration / +0.62 Magic Penetration">
+                                <img class="mark-5 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/r_3_3.png"
+                                     data-toggle="tooltip" data-html="true" title="<strong><big>Greater Mark of Hybrid Penetration
+                             </big></strong><br>+0.9 Armor Penetration / +0.62 Magic Penetration">
+                                <img class="mark-6 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/r_3_3.png"
+                                     data-toggle="tooltip" data-html="true" title="<strong><big>Greater Mark of Hybrid Penetration
+                             </big></strong><br>+0.9 Armor Penetration / +0.62 Magic Penetration">
+                                <img class="mark-7 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/r_3_3.png"
+                                     data-toggle="tooltip" data-html="true" title="<strong><big>Greater Mark of Hybrid Penetration
+                             </big></strong><br>+0.9 Armor Penetration / +0.62 Magic Penetration">
+                                <img class="mark-8 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/r_3_3.png"
+                                     data-toggle="tooltip" data-html="true" title="<strong><big>Greater Mark of Hybrid Penetration
+                             </big></strong><br>+0.9 Armor Penetration / +0.62 Magic Penetration">
+                                <img class="mark-9 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/r_3_3.png"
+                                     data-toggle="tooltip" data-html="true" title="<strong><big>Greater Mark of Hybrid Penetration
+                             </big></strong><br>+0.9 Armor Penetration / +0.62 Magic Penetration">
+                                <img class="seal-1 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/y_4_3.png"
+                                     data-toggle="tooltip" data-html="true"
+                                     title="<strong><big>Greater Seal of Scaling Health</big></strong><br>+1.33 health per level">
+                                <img class="seal-2 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/y_4_3.png"
+                                     data-toggle="tooltip" data-html="true"
+                                     title="<strong><big>Greater Seal of Scaling Health</big></strong><br>+1.33 health per level">
+                                <img class="seal-3 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/y_4_3.png"
+                                     data-toggle="tooltip" data-html="true"
+                                     title="<strong><big>Greater Seal of Scaling Health</big></strong><br>+1.33 health per level">
+                                <img class="seal-4 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/y_4_3.png"
+                                     data-toggle="tooltip" data-html="true"
+                                     title="<strong><big>Greater Seal of Scaling Health</big></strong><br>+1.33 health per level">
+                                <img class="seal-5 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/y_4_3.png"
+                                     data-toggle="tooltip" data-html="true"
+                                     title="<strong><big>Greater Seal of Scaling Health</big></strong><br>+1.33 health per level">
+                                <img class="seal-6 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/y_4_3.png"
+                                     data-toggle="tooltip" data-html="true"
+                                     title="<strong><big>Greater Seal of Scaling Health</big></strong><br>+1.33 health per level">
+                                <img class="seal-7 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/y_4_3.png"
+                                     data-toggle="tooltip" data-html="true"
+                                     title="<strong><big>Greater Seal of Scaling Health</big></strong><br>+1.33 health per level">
+                                <img class="seal-8 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/y_4_3.png"
+                                     data-toggle="tooltip" data-html="true"
+                                     title="<strong><big>Greater Seal of Scaling Health</big></strong><br>+1.33 health per level">
+                                <img class="seal-9 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/y_4_3.png"
+                                     data-toggle="tooltip" data-html="true"
+                                     title="<strong><big>Greater Seal of Scaling Health</big></strong><br>+1.33 health per level">
+                                <img class="glyph-1 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/b_4_3.png"
+                                     data-toggle="tooltip" data-html="true"
+                                     title="<strong><big>Greater Glyph of Magic Resist</big></strong><br>+1.34 magic resist">
+                                <img class="glyph-2 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/b_4_3.png"
+                                     data-toggle="tooltip" data-html="true"
+                                     title="<strong><big>Greater Glyph of Magic Resist</big></strong><br>+1.34 magic resist">
+                                <img class="glyph-3 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/b_4_3.png"
+                                     data-toggle="tooltip" data-html="true"
+                                     title="<strong><big>Greater Glyph of Magic Resist</big></strong><br>+1.34 magic resist">
+                                <img class="glyph-4 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/b_2_3.png"
+                                     data-toggle="tooltip" data-html="true"
+                                     title="<strong><big>Greater Glyph of Magic Resist</big></strong><br>+1.34 magic resist">
+                                <img class="glyph-5 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/b_2_3.png"
+                                     data-toggle="tooltip" data-html="true"
+                                     title="<strong><big>Greater Glyph of Magic Resist</big></strong><br>+1.34 magic resist">
+                                <img class="glyph-6 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/b_2_3.png"
+                                     data-toggle="tooltip" data-html="true"
+                                     title="<strong><big>Greater Glyph of Magic Resist</big></strong><br>+1.34 magic resist">
+                                <img class="glyph-7 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/b_2_3.png"
+                                     data-toggle="tooltip" data-html="true"
+                                     title="<strong><big>Greater Glyph of Magic Resist</big></strong><br>+1.34 magic resist">
+                                <img class="glyph-8 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/b_2_3.png"
+                                     data-toggle="tooltip" data-html="true"
+                                     title="<strong><big>Greater Glyph of Magic Resist</big></strong><br>+1.34 magic resist">
+                                <img class="glyph-9 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/b_2_3.png"
+                                     data-toggle="tooltip" data-html="true"
+                                     title="<strong><big>Greater Glyph of Magic Resist</big></strong><br>+1.34 magic resist">
+                                <img class="quint-1 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/bl_1_3.png"
+                                     data-toggle="tooltip" data-html="true"
+                                     title="<strong><big>Greater Quintessence of Ability Power</big></strong><br>+4.95 ability power">
+                                <img class="quint-2 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/bl_1_3.png"
+                                     data-toggle="tooltip" data-html="true"
+                                     title="<strong><big>Greater Quintessence of Ability Power</big></strong><br>+4.95 ability power">
+                                <img class="quint-3 pos-abs"
+                                     src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/rune/bl_1_3.png"
+                                     data-toggle="tooltip" data-html="true"
+                                     title="<strong><big>Greater Quintessence of Ability Power</big></strong><br>+4.95 ability power">
+                            </div>
+                        </div>
+
+
+                        <div class="clear"></div>
+                    </div>
                 </div>
                 <div id="maestries" class="col-xs-12">
                     <h2>5. Maestrias</h2>
-
+                    <div class="col-xs-12 padding-left0">
+                        <img src="img/maestries.jpg" class="img-responsive col-xs-12" alt="habilidades">
+                    </div>
                 </div>
                 <div id="habilities" class="col-xs-12">
                     <h2>6. Habilidades</h2>
-
+                    <p>El orden de habilidades recomendado por el usuario es el siguiente: </p>
+                    <div class="col-xs-12">
+                        <img src="img/HABILITIES.png" class="img-responsive col-xs-12" alt="habilidades">
+                    </div>
                 </div>
                 <div id="objects" class="col-xs-12">
                     <h2>7. Objetos</h2>
-                    <p th:utext="'Para esta guía el usuario '+${guia.user.username}+' ha optado por los siguientes objetos:'"></p>
-                    <div class="col-xs-2 logo-title">
+                    <th:block th:if="${not #lists.isEmpty(guia.guideItems)}">
+                        <p th:utext="'Para esta guía el usuario '+${guia.user.username}+' ha optado por los siguientes objetos:'"></p>
+                    </th:block>
 
-                    </div>
+                </div>
+                <div class="col-xs-12" id="obj-container">
+                    <th:block th:if="${#lists.isEmpty(guia.guideItems)}">
+                        <p>
+                            El usuario aún no ha introducido objetos en esta guia.
+                        </p>
+                    </th:block>
+
+                    <th:block th:each="guideItem : ${guia.guideItems}">
+                        <div class="col-xs-4  obj">
+                            <img class="lazy pointer "
+                                 data-toggle="tooltip" data-html="true"
+                                 width="90px" height="90px"
+                                 th:src="${guideItem.itemIcon}"
+                                 th:title="'<strong><big>'+${guideItem.itemNameEs}+'</big></strong><br>'+${guideItem.itemDescEs}">
+                        </div>
+                    </th:block>
                 </div>
             </div>
     </main>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
 <div th:replace="fragments/scripts :: scripts"></div>
+<script type="text/javascript" src="http:/js/scroll.js"></script>
 <script type="text/javascript">
     $('[data-toggle="tooltip"]').tooltip();
 </script>
