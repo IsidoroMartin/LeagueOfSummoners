@@ -77,8 +77,8 @@ public class GuidesServices implements IServicesGuides, Serializable {
 	 * @return la guía o null
 	 */
 	@Override
-	public GuideDTO findByIdGuide(Long idGuide) {
-		return this.guidesDAO.findByIdGuide(idGuide);
+	public GuideDTO findByIdGuide(Long idGuide, boolean full) {
+		return this.guidesDAO.findByIdGuide(idGuide, full);
 	}
 
 	/**

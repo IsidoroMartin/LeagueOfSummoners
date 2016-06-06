@@ -93,7 +93,7 @@ public class GuidesController {
     @RequestMapping(value = {VIEW_GUIDE_HTML_PATH, VIEW_GUIDE_PATH}, method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView viewguide(ModelMap model, @RequestParam(value = "idGuide") Long idGuide, HttpSession session) {
-        GuideDTO guia = serviceGuides.findByIdGuide(idGuide);
+        GuideDTO guia = serviceGuides.findByIdGuide(idGuide,true);
         ChampionDTO champ = guia.getChampion();
         champ.setSplashArtUri(LeagueAccessAPI.RIOT_API_SPLASH_ART +
                 RiotUtils.determineSpecialChampionNames(RiotUtils.normalizeChampion(champ.getChampionName())) + "_1.jpg");

@@ -27,10 +27,13 @@ var champions = $('.champion');
 // Llama a filter champions en el listener change
 var filtrosMobile = $("#filtros-mobile select").change(filterChampions);
 
+var divHolder = $("div.holder");
+
 /**
  * Filtra los campeones.
  */
 function filterChampions() {
+
 	var inputValue = $("#campo-busqueda").val();
 	campeonesFiltrados = filterChampionsByName(inputValue);
 	var type = (this != undefined && this.nodeName == "SELECT") ? getSelectedSelectType()
@@ -41,7 +44,7 @@ function filterChampions() {
 	if (html == "")
 		html = "<div class='alert alert-warning fade in'>No existen campeones con estas caracteristicas</div>";
 	$('#champions').hide().html(html).fadeIn(500);
-	$("div.holder").jPages({
+	divHolder.jPages({
 		containerID : "champions"
 	});
 }
@@ -94,9 +97,11 @@ function filterChampionsByType(listaFiltrada, type) {
  */
 function buildHtmlChampions(listaChampsFiltrada) {
 	var html = "";
+	var length = listaChampsFiltrada.length;
 	$(listaChampsFiltrada)
 			.each(
 					function(index, championImg) {
+						var classReady = (length - 1 == index) ? "ready" : "";
 						var champName = championImg.attr("title");
 						html += "<div class=\"champion\">";
 						html += '<div class="col-xs-6 col-md-2 img-separation">';
@@ -106,9 +111,9 @@ function buildHtmlChampions(listaChampsFiltrada) {
 						html += "<span>" + champName + "<\/span>";
 						html += "<\/div>";
 						html += "<div class=\"panel-body\">";
-						html += "<img alt='"
-								+ champName
-								+ "' class=\"img-responsive lazy\" name=\"champion\" data-original=\""
+						html += "<img alt='" + champName
+								+ "' class=\"img-responsive lazy " + classReady
+								+ "\" name=\"champion\" data-original=\""
 								+ championImg.attr("data-original")
 								+ "\" data-type=\"Mago\"" + " src=\""
 								+ championImg.attr("src") + "\" title=\""

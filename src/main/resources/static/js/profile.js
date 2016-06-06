@@ -160,6 +160,7 @@ $('.deleteGuide').click(function(event) {
                     url: href,
                     type: 'DELETE',
                     success: function(result) {
+                    	console.log(result);
                         if (result.valid) {
                             tr.hide('slow', function() {
                                 tr.remove();
@@ -171,7 +172,6 @@ $('.deleteGuide').click(function(event) {
                         resolve();
                     }
                 });
-
             });
         },
         allowOutsideClick: false

@@ -49,7 +49,7 @@ public interface IServicesGuides {
 	 * @param idGuide
 	 * @return la guía o null
 	 */
-	GuideDTO findByIdGuide(Long idGuide);
+	GuideDTO findByIdGuide(Long idGuide, boolean full);
 
 	/**
 	 * Busca la guía por id campeón

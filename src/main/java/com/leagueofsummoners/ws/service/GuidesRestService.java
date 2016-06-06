@@ -57,7 +57,7 @@ public class GuidesRestService {
 			UserDTO user = (UserDTO) session.getAttribute(SessionAtts.SESSION_GET_USER_LOGGED);
 			this.serviceGuides.deleteByIdGuide(guideId, user.getIdUser());
 		}
-		return new GenericJsonValidator(this.serviceGuides.findByIdGuide(guideId) == null);
+		return new GenericJsonValidator(this.serviceGuides.findByIdGuide(guideId, false) == null);
 	}
 
 }
