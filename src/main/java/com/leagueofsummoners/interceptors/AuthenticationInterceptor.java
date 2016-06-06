@@ -49,7 +49,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 		}
 
 		if(null == user){
-			httpServletResponse.sendRedirect("/login?error_message=Ingrese sus credenciales para tener acceso");
+			httpServletResponse.sendRedirect("/forbidden");
 			return false;
 		}
 

@@ -1097,3 +1097,38 @@ img[class*=mark], img[class*=seal], img[class*=glyph], img[class*=quint] {
 .pagination a {
     cursor: pointer;
 }
+
+#error404-main {
+    background-image: url("../img/error404.jpg");
+    background-size: 100% 100%;
+    width: 73%;
+    min-height: 800px;
+    color: whitesmoke;
+}
+
+#error500-main {
+    background-image: url("../img/error500.jpg");
+    background-size: 100% 100%;
+    width: 73%;
+    min-height: 800px;
+    color: whitesmoke;
+}
+
+#forbidden-main {
+    background-image: url("../img/forbidden.png");
+    background-size: 100% 100%;
+    width: 73%;
+    min-height: 800px;
+    color: whitesmoke;
+}
+
+.subir {
+    display: none;
+    padding: 20px;
+    background: rgba(28, 26, 52, 1);
+    color: #fff;
+    cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
