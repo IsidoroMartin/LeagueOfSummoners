@@ -1115,7 +1115,7 @@ img[class*=mark], img[class*=seal], img[class*=glyph], img[class*=quint] {
 }
 
 #forbidden-main {
-    background-image: url("../img/forbidden.png");
+    background-image: url("../img/forbidden.jpg");
     background-size: 100% 100%;
     width: 73%;
     min-height: 800px;

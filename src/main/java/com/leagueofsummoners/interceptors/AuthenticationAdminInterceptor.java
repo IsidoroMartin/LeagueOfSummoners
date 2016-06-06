@@ -5,6 +5,7 @@ import com.leagueofsummoners.security.annotations.LoginAdminRequired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.util.UriUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,7 +52,7 @@ public class AuthenticationAdminInterceptor extends HandlerInterceptorAdapter {
 		if (null != user && user.isAdmin()) {
 			return true;
 		} else {
-			httpServletResponse.sendRedirect("/login?error_message=No tiene permisos para visualziar esta pagina.");
+			httpServletResponse.sendRedirect("/forbidden?url=" + UriUtils.encode("/login?error_message=No tiene permisos para visualizar esta pagina.", "UTF8"));
 			return false;
 		}
 	}
