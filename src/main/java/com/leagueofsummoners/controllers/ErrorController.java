@@ -3,6 +3,9 @@ package com.leagueofsummoners.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 
@@ -44,7 +47,9 @@ public class ErrorController {
     }
 
     @RequestMapping(value = {"forbidden"})
-    public String forbidden(ModelMap model, HttpSession session) {
-        return "forbidden";
+    @ResponseBody
+    public ModelAndView forbidden(ModelMap model, @RequestParam(value = "url") String url) {
+        model.addAttribute("url", url);
+        return new ModelAndView("forbidden");
     }
 }

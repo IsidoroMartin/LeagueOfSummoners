@@ -5,6 +5,7 @@ import com.leagueofsummoners.security.annotations.LoginRequired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.util.UriUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,7 +50,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 		}
 
 		if(null == user){
-			httpServletResponse.sendRedirect("/forbidden");
+			httpServletResponse.sendRedirect("/forbidden?url=" + UriUtils.encode("/login?error_message=Ingrese sus credenciales para tener acceso", "UTF8"));
 			return false;
 		}
 

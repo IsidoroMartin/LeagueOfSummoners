@@ -66,7 +66,7 @@ public class LeagueofsummonersApplication extends SpringBootServletInitializer {
         return new EmbeddedServletContainerCustomizer() {
             @Override
             public void customize(ConfigurableEmbeddedServletContainer container) {
-                container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404"), new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/500"));
+                container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404"), new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/500"), new ErrorPage(HttpStatus.BAD_REQUEST, "/forbidden?url=#"));
             }
         };
     }

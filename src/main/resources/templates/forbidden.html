@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
 <!--<div th:replace="fragments/prueba :: div"></div>-->
 <head>
-    <meta http-equiv="refresh" content="3;URL=/login?error_message=Ingrese sus credenciales para tener acceso">
+    <meta http-equiv="refresh" th:content="'4;URL='+${url}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <title>Forbidden ~ LOS</title>
