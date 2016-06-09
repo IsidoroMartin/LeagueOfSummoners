@@ -315,6 +315,11 @@ nav .container {
     opacity: 0.8;
 }
 
+div.panel-heading>span{
+	font-weight: bold;
+	font-size:18px;
+}
+
 .panel-body img {
     width: 100%;
 }
