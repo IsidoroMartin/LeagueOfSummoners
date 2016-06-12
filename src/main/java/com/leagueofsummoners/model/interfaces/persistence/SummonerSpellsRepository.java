@@ -3,7 +3,6 @@ package com.leagueofsummoners.model.interfaces.persistence;
 import com.leagueofsummoners.model.dto.SummonerSpellDTO;
 import org.springframework.data.repository.Repository;
 
-import java.util.List;
 
 /*
 Autores= Juan José Ramírez & Isidoro Martín

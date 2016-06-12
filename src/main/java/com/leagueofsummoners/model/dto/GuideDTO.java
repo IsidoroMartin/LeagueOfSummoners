@@ -3,8 +3,6 @@ package com.leagueofsummoners.model.dto;
 import javax.persistence.*;
 import javax.persistence.Column;
 
-import com.leagueofsummoners.model.dao.tables.TableNames;
-import com.mysema.query.sql.*;
 import lombok.Data;
 
 import static com.leagueofsummoners.model.dao.tables.TableNames.*;

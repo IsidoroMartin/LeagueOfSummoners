@@ -1,16 +1,11 @@
 package com.leagueofsummoners.model.interfaces.persistence;
 
 
-import com.leagueofsummoners.model.dao.tables.Querys;
-import com.leagueofsummoners.model.dto.GuideDTO;
-import com.leagueofsummoners.model.dto.GuideItemsDTO;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.Repository;
-import org.springframework.data.repository.query.Param;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
+
+import org.springframework.data.repository.Repository;
+
+import com.leagueofsummoners.model.dto.GuideItemsDTO;
 
 /*
 Autores= Juan José Ramírez & Isidoro Martín

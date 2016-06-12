@@ -1,11 +1,7 @@
 package com.leagueofsummoners.model.interfaces.services;
 
 
-import com.leagueofsummoners.model.dto.MatchDTO;
 import com.leagueofsummoners.model.dto.SummonerSpellDTO;
-import com.leagueofsummoners.model.dto.UserDTO;
-
-import java.util.List;
 
 /*
 Autores= Juan José Ramírez & Isidoro Martín
