@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       th:with="lang=${#locale.language}" th:lang="${lang}">
-<!--<div th:replace="fragments/prueba :: div"></div>-->
+<!-- Incluimos la etiqueta HEAD del documento con todos lo recursos incluidos comunes a todas las páginas-->
 <head
         th:replace="fragments/head :: head(title='Cookies ~ League of summoners')">
 </head>
 <body id="bootstrap-overrides">
-<!--<header th:replace="fragments/header :: header"></header>-->
+<!-- Incluimos menu en todas las páginas-->
 <div th:replace="fragments/menu :: menu"></div>
 <main class="container content champions-body">
 	<div class="row" id="banner">
@@ -105,7 +105,9 @@
 </main>
 
 
+<!-- Incluimos footer en todas las páginas-->
 <div th:replace="fragments/footer :: footer"></div>
+<!-- Incluimos los scripts comunes a todas las páginas-->
 <div th:replace="fragments/scripts :: scripts"></div>
 
 </body>

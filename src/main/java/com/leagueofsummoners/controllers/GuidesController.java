@@ -90,6 +90,14 @@ public class GuidesController {
         return new ModelAndView("guides");
     }
 
+    /**
+     * Método que redirige a la página de visualizar guía recibiendo como parámetro el id de la guia y cargando la informacion a visualizar necesaria
+     * @param model ModelMap
+     * @param idGuide Long
+     * @param session
+     * @return ModelAndView
+     */
+
     @RequestMapping(value = {VIEW_GUIDE_HTML_PATH, VIEW_GUIDE_PATH}, method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView viewguide(ModelMap model, @RequestParam(value = "idGuide") Long idGuide, HttpSession session) {

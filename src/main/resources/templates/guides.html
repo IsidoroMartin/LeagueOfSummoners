@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       th:with="lang=${#locale.language}" th:lang="${lang}">
-<head th:replace="fragments/head :: head(title='Guías ~ LOS')">
-</head>
+<!-- Incluimos la etiqueta HEAD del documento con todos lo recursos incluidos comunes a todas las páginas-->
+<head th:replace="fragments/head :: head(title='Guías ~ LOS')"></head>
 <body id="bootstrap-overrides">
+<!-- Incluimos menu en todas las páginas-->
 <div th:replace="fragments/menu :: menu"></div>
 <main id="guides-body">
     <div class="container content banner">
@@ -90,7 +91,9 @@
             <div class="holder text-center"></div>
     </div>
 </main>
+<!-- Incluimos footer en todas las páginas-->
 <div th:replace="fragments/footer :: footer"></div>
+<!-- Incluimos los scripts comunes a todas las páginas-->
 <div th:replace="fragments/scripts :: scripts"></div>
 <script th:inline="javascript">
     var champion_list = JSON

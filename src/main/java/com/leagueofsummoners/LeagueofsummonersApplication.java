@@ -75,6 +75,7 @@ public class LeagueofsummonersApplication extends SpringBootServletInitializer {
      * Este es el método encargado de iniciar la aplicación cuando se inicia desde un servidor
      * tomcat externo.
      */
+
      @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         LOGGER.info("Tomcat empieza por aqui");

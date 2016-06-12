@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
-<!--<div th:replace="fragments/prueba :: div"></div>-->
-<head th:replace="fragments/head :: head(title='Home ~ LOS')">
-</head>
+<!-- Incluimos la etiqueta HEAD del documento con todos lo recursos incluidos comunes a todas las páginas-->
+<head th:replace="fragments/head :: head(title='Home ~ LOS')"></head>
 <body id="bootstrap-overrides">
-<!--<header th:replace="fragments/header :: header"></header>-->
-
+<!-- Incluimos menu en todas las páginas-->
 <div th:replace="fragments/menu :: menu"></div>
-<!--<div th:replace="fragments/languageSelect :: locale"></div>-->
 <main>
     <section id="buscador-home" class="container fill-main">
         <header class="row">
@@ -59,7 +56,9 @@
         </div>
     </aside>
 </main>
+<!-- Incluimos footer en todas las páginas-->
 <div th:replace="fragments/footer :: footer"></div>
+<!-- Incluimos los scripts comunes a todas las páginas-->
 <div th:replace="fragments/scripts :: scripts"></div>
 <script type="text/javascript" src="http:/js/scroll.js"></script>
 	<script th:inline="javascript">

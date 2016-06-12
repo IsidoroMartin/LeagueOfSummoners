@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
-<!--<div th:replace="fragments/prueba :: div"></div>-->
+<!-- Incluimos la etiqueta HEAD del documento con todos lo recursos incluidos comunes a todas las páginas-->
 <head>
     <meta http-equiv="refresh" th:content="'4;URL='+${url}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
 </head>
 <body id="bootstrap-overrides">
+<!-- Incluimos menu en todas las páginas-->
 <div th:replace="fragments/menu :: menu"></div>
 <main class="container" id="forbidden-main">
     <div class="row">
@@ -22,7 +23,9 @@
         </div>
     </div>
 </main>
+<!-- Incluimos footer en todas las páginas-->
 <div th:replace="fragments/footer :: footer"></div>
+<!-- Incluimos los scripts comunes a todas las páginas-->
 <div th:replace="fragments/scripts :: scripts"></div>
 </body>
 </html>

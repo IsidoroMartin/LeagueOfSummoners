@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	th:with="lang=${#locale.language}" th:lang="${lang}">
-<head
-	th:replace="fragments/head :: head(title='Licencia ~ League of summoners')">
-</head>
+<!-- Incluimos la etiqueta HEAD del documento con todos lo recursos incluidos comunes a todas las páginas-->
+<head th:replace="fragments/head :: head(title='Licencia ~ League of summoners')"></head>
 <body id="bootstrap-overrides" style="margin:0px;">
 	<main class="container content" style="height:600px">
 	<div class="row" id="banner">
@@ -38,6 +37,8 @@
 	</div>
 	<input type="button" class="col-xs-offset-5" value="Cerrar" onclick="window.close()" id="licencia-btn">
 	</main>
+
+	<!-- Incluimos los scripts comunes a todas las páginas-->
 	<div th:replace="fragments/scripts :: scripts"></div>
 
 </body>
