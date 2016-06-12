@@ -2,6 +2,7 @@ package com.leagueofsummoners.model.utils;
 
 import com.leagueofsummoners.LeagueofsummonersApplication;
 import com.robrua.orianna.api.core.RiotAPI;
+import com.robrua.orianna.type.api.RateLimit;
 import com.robrua.orianna.type.core.common.Region;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -38,7 +39,10 @@ public class LeagueAccessAPI {
 
 	// public static String LEAGUE_OF_LEGENDS_KEY =
 	// "863dd8a4-3747-47cc-9628-72cbd46a826e";// Juanjo
-	public static String LEAGUE_OF_LEGENDS_KEY = "731bd096-290a-4e20-aae8-0c5ff78522a6";// Isi
+//	public static String LEAGUE_OF_LEGENDS_KEY = "731bd096-290a-4e20-aae8-0c5ff78522a6";// Isi
+
+	public static String LEAGUE_OF_LEGENDS_KEY = "151cc1f6-2b6c-4aee-903a-5ce2a8264129";// Isi
+	
 
 	/**
 	 * Riot API Urls
@@ -63,6 +67,7 @@ public class LeagueAccessAPI {
 	public static void initRIOTAPI() {
 		LeagueofsummonersApplication.LOGGER.debug("La riot key que se está utilizando es: " + LEAGUE_OF_LEGENDS_KEY);
 		RiotAPI.setRegion(Region.EUW);
+		RiotAPI.setRateLimit(new RateLimit(500, 10), new RateLimit(30000 , 600));
 		RiotAPI.setAPIKey(LEAGUE_OF_LEGENDS_KEY);
 	}
 

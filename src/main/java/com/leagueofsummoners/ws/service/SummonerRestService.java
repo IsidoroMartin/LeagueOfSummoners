@@ -59,7 +59,7 @@ public class SummonerRestService {
 			user = (UserDTO) session.getAttribute(SessionAtts.SESSION_GET_USER_LOGGED);
 			matchs = this.servicesSummoner.getLatestMatchesFromDB(user);
 			if (isUpdating != null && isUpdating || matchs.isEmpty()) {
-				matchs = this.servicesSummoner.getLatestMatchesSync(user, 5);
+				matchs = this.servicesSummoner.getLatestMatchesSync(user, 10);
 			}
 		} catch (Exception e) {
 			log.error("Se ha producido un error en: " + this.getClass().getName());
